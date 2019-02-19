@@ -1,6 +1,10 @@
 # The OrbitDB Tutorial
 
-> Intro Text, write last
+In this chapter you will create the backbone of a full application using OrbitDB in both the browser and on the command line. For the sake of keeping things focused, we will exclude any HTML or CSS from this tutorial and focus only on the Javascript code.
+
+## What kind of app are we building?
+
+OrbitDB is used all over the world
 
 ## Chapter 1: Getting Started
 
