@@ -1,12 +1,15 @@
 # The OrbitDB Tutorial
 
-## The App
+> Intro Text, write last
 
 ## Chapter 1: Getting Started
+
+> Intro Text
 
 ### Instantiating IPFS and OrbitDB
 
 * Resolves #[367](https://github.com/orbitdb/orbit-db/issues/367)
+
 ### Creating a Database
 
 * Resolves #[366](https://github.com/orbitdb/orbit-db/issues/366)
