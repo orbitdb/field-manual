@@ -8,6 +8,46 @@
 
 ### Instantiating IPFS and OrbitDB
 
+## Install
+
+Install [orbit-db](https://github.com/orbitdb/orbit-db) and [ipfs](https://www.npmjs.com/package/ipfs) from npm:
+
+```
+npm install orbit-db ipfs
+```
+
+## Setup
+
+Require OrbitDB and IPFS in your program and create the instances:
+
+```javascript
+const IPFS = require('ipfs')
+const OrbitDB = require('orbit-db')
+
+// OrbitDB uses Pubsub which is an experimental feature
+// and need to be turned on manually.
+// Note that these options need to be passed to IPFS in
+// all examples in this document even if not specified so.
+const ipfsOptions = {
+  EXPERIMENTAL: {
+    pubsub: true
+  }
+}
+
+// Create IPFS instance
+const ipfs = new IPFS(ipfsOptions)
+
+ipfs.on('ready', () => {
+  // Create OrbitDB instance
+  const orbitdb = new OrbitDB(ipfs)
+})
+
+Instantiate IPFS in Offline mode with empty swarm array to be added later.
+
+A note about "offline" vs "online" in peer to peer.
+
+Instantiating ORbitDB
+
 * Resolves #[367](https://github.com/orbitdb/orbit-db/issues/367)
 
 ### Creating a Database
