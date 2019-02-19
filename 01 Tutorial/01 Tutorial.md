@@ -41,6 +41,7 @@ ipfs.on('ready', () => {
   // Create OrbitDB instance
   const orbitdb = new OrbitDB(ipfs)
 })
+```
 
 Instantiate IPFS in Offline mode with empty swarm array to be added later.
 
