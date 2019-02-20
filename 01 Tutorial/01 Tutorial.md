@@ -2,9 +2,20 @@
 
 In this chapter you will create the backbone of a full application using OrbitDB in both the browser and on the command line. For the sake of keeping things focused, we will exclude any HTML or CSS from this tutorial and focus only on the Javascript code.
 
-## What kind of app are we building?
+## What will we build?
 
-OrbitDB is used all over the world
+The app we will build will be for musicians. There will be a repository of royalty-free sheet music, and it will display piece of sheet music at random on a per-instrument basis. Users can also submit music and share music between other users and groups of users.
+
+This app will be local-first, offline-first, and peer-to-peer in its connectivity. There will be a few databases:
+
+1. The "global" starter database of royalty free pieces for all to use (read only)
+2. The user database of pieces they can upload - private
+
+The working title is **New Piece, Please!**
+
+### Why this app?
+
+OrbitDB is already used all over the world, and it's important that in our tutorials and discussions reflect that by not picking focii that inadvertently exclude people. Music is one of the few features and fields of study that all cultures on earth share. There are other topics: finance, politics, maybe religion, but there are other apps to focus on those. Ours will make it easier for musicians to practice.
 
 ## Chapter 1: Getting Started
 
