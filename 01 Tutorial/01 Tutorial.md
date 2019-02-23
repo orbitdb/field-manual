@@ -63,16 +63,17 @@ const OrbitDB = require('orbit-db')
 ### In the Browser
 
 There are a few different places you can get browser packages for ipfs and orbitdb, for the
-purposes of this tutorial, we recommend using unpkg or jsdelivr for ipfs, and getting orbitdb
-from the `/dist` folder of the master branch at github, [here]().
+purposes of this tutorial, we recommend using unpkg or jsdelivr for both. The example below uses unpkg.
 
 ```html
- <script src="https://unpkg.com/ipfs/dist/index.min.js"></script>
+<script src="https://unpkg.com/ipfs/dist/index.min.js"></script>
+<script src="https://www.unpkg.com/orbit-db@0.19.9/src/OrbitDB.js"></script>
 ```
 
 ## Creating IPFS and OrbitDB instances
 
-Let's start with the followin code. We'll try to keep the code in bite sized chunks
+Let's start with the followin code. We'll try to keep the code in bite sized chunks. We are also going to start "offline",
+purposefully not connecting to any other peers until we absolutely need to.
 
 ```javascript
 let orbitdb
@@ -87,20 +88,37 @@ let ipfs = new Ipfs({
 });
 
 ipfs.on("error", (e) => { throw new Error(e) })
-ipfs.on("ready", (e) => {
-  orbitdb = new OrbitDB(ipfs)
-})
+ipfs.on("ready", (e) => { orbitdb = new OrbitDB(ipfs) })
 ```
-
-### What Just Happened?
-
-Instantiate IPFS in Offline mode with empty swarm array to be added later.
-
-A note about "offline" vs "online" in peer to peer.
 
 * Resolves #[367](https://github.com/orbitdb/orbit-db/issues/367)
 
+### What Just Happened?
+
+Starting with the `new Ipfs` line, your code creates a new IPFS node. Note the default settings:
+
+* `preload: { enabled: false }` disables the use of so-called "pre-load" IPFS nodes. These nodes exist to help load balance the global network and prevent DDoS. However, these nodes can go down and cause errors. Since we are only working offline for now., we include this line to disable them.
+* `XPERIMENTAL: { pubsub: true }` enables IPFS pubsub, which is a method of communicating between nodes and is required for OrbitDB usage, despite whether or not we are connected to other peers.
+* `config: { Bootstrap: [], Addresses: { Swarm: [] }}` sets both our bootstrap peers list (peers that are loaded on instantiation) and swarm peers list (peers that can connect and disconnect at any time to empty. We will populate these later.
+* `ipfs.on("error", (e) => { throw new Error(e) })` implements extremely basic error handling for if something happens during node creation
+* `ipfs.on("ready", (e) => { orbitdb = new OrbitDB(ipfs) })` instantiates OrbitDB on top of the IPFS node, when it is ready.
+
+By running the code above, you have created a new IPFS node that works locally and is not connected to any peers.
+You have also loaded a new orbitdb object into memory, ready to create databases and manage data.
+
+So, what exactly happened?
+
+### In node.js
+
+
+### In the browser
+
+
+
+
+
 ## Creating a Database
+
 
 * Resolves #[366](https://github.com/orbitdb/orbit-db/issues/366)
 * Resolves #[502](https://github.com/orbitdb/orbit-db/issues/502)
