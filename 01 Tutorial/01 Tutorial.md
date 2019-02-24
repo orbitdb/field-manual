@@ -1,17 +1,18 @@
 # The OrbitDB Tutorial
 
-> Or, "how to build a p2p music practice app in a weekend"
+> An imperative, isomorphic romp through creating a peer-to-peer music application.
 
 ## Introduction
+
+OrbitDB works in both node.js and in the browser, and this tutorial will not focus on one or the other, so stay on your toes.
 
 ### Requirements
 
 Do you have a **computer** with a **command line**, a **web browser**, and **node.js** installed? If not, get those set up. 
 
-OrbitDB works in both node.js and in the browser, and this tutorial will not focus on one or the other, so stay on your toes.
-
 ### Conventions
 
+Read in order, don't skip browser or node.js sections.
 TODO: Description of conventions used in the tutorial.
 
 ### What are we building?
@@ -106,14 +107,14 @@ ipfs.on("ready", () => {
 })
 ```
 
-* Resolves #[367](https://github.com/orbitdb/orbit-db/issues/367)
+You see the output, something called a "multihash", like `QmPSicLtjhsVifwJftnxncFs4EwYTBEjKUzWweh1nAA87B`. For now, just know that this is the identifier of your node. Multihashes are explained in more detail in the **Part 2: Peer-to-Peer**
 
 ### What Just Happened?
 
 Starting with the `new Ipfs` line, your code creates a new IPFS node. Note the default settings:
 
 * `preload: { enabled: false }` disables the use of so-called "pre-load" IPFS nodes. These nodes exist to help load balance the global network and prevent DDoS. However, these nodes can go down and cause errors. Since we are only working offline for now., we include this line to disable them.
-* `repo: './ipfs'` designates the path of the repo in node.js only. In the browser, you can actually remove this line. The default setting is a folder called `.jsipfs` in your home directory.
+* `repo: './ipfs'` designates the path of the repo in node.js only. In the browser, you can actually remove this line. The default setting is a folder called `.jsipfs` in your home directory. You will see why we choose this acute location for the folder later.
 * `XPERIMENTAL: { pubsub: true }` enables IPFS pubsub, which is a method of communicating between nodes and is required for OrbitDB usage, despite whether or not we are connected to other peers.
 * `config: { Bootstrap: [], Addresses: { Swarm: [] }}` sets both our bootstrap peers list (peers that are loaded on instantiation) and swarm peers list (peers that can connect and disconnect at any time to empty. We will populate these later.
 * `ipfs.on("error", (e) => { throw new Error(e) })` implements extremely basic error handling for if something happens during node creation
@@ -124,19 +125,32 @@ You have also loaded a new orbitdb object into memory, ready to create databases
 
 *You are now ready to use OrbitDB!*
 
+* Resolves #[367](https://github.com/orbitdb/orbit-db/issues/367)
+
 ### What else happened in node.js?
 
-When the above code is run in node.js, an `orbitdb` folder is created inside 
+When you ran the code in node.js, you created two folders in your project structure: `'orbitdb/` and `ipfs/`. 
 
+```bash
+$ # slashes added to ls output for effect
+$ ls orbitdb/
+QmNrPunxswb2Chmv295GeCvK9FDusWaTr1ZrYhvWV9AtGM/
 
+$ ls ipfs/
+blocks/  config  datastore/  datastore_spec  keys/  version
+```
+
+Focusing your attention on the IPFS folder, you will see that the subfolder has the same ID as orbitdb. This is purposeful, as this initial folder contains metadata that OrbitDB will need to operate.
+
+The `ipfs/` folder contains all of your IPFS data. Explaining this in depth is outside of the scope of this tutorial, and the curious can find out more [here](#). 
 
 ### What else happened in the browser?
 
-IPFS content is handled
+In the browser IPFS content is handled inside of IndexedDB, a persistent storage mechanism for browsers
 
-### A note about LevelDB
+Note since you have not explicitly defined a database in the broser, no IndexedDB databases have been created for OrbitDB yet.
 
-In both the browser and 
+**Caution!** iOS and Android have been known to purge IndexedDB if storage space needs to be created inside of your phone. We recommend creating robust backup mechanisms at the application layer.
 
 ## Creating a Database
 
