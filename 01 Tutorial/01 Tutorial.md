@@ -1,34 +1,41 @@
 # The OrbitDB Tutorial
 
-In this chapter you will create the backbone of a full application using OrbitDB in both the
-browser and on the command line. For the sake of keeping things focused, we will exclude any
-HTML or CSS from this tutorial and focus only on the Javascript code.
+> Or, "how to build a p2p music practice app in a weekend"
 
-## Intro: What will we build?
+## Before we start
+
+Do you a *computer* with a *command line*, a *web browser*, and *node.js* installed? If not, get those set up. This tutorial will not focus on one or the other, but instead expect you to be able to successfully nagivate back and forth.
+
+## What are we building?
 
 The app we will build will be for musicians. There will be a repository of royalty-free sheet
 music, and it will display piece of sheet music at random on a per-instrument basis. Users can
 also submit music and share music between other users and groups of users.
 
+You will now use OrbitDB to create a full app that contains:
 This app will be local-first, offline-first, and peer-to-peer in its connectivity. There will
 be a few databases:
-
+* A database of royalty-free sheet music for your instrument
 1. The "global" starter database of royalty free pieces for all to use (read only)
 2. The user database of pieces they can upload - private
 
-The working title is **New Piece, Please!**
+You will write JavaScript Code create the backbone of a full application using OrbitDB in both the
+browser and on the command line. For the sake of keeping things focused, we will exclude any
+HTML or CSS from this tutorial and focus only on the Javascript code.
 
-### Why this app?
+### Why a music app?
 
 OrbitDB is already used all over the world, and it's important that in our tutorials and
 discussions reflect that by not picking focii that inadvertently exclude people. Music is
 one of the few features and fields of study that all cultures on earth share. There are
 other topics: finance, politics, maybe religion, but there are other apps to focus on those.
-Ours will make it easier for musicians to practice.
+Ours will make it easier for musicians all over the world to find sheet music to practice with.
 
-## Chapter 1: Getting Started
+The working title is **New Piece, Please!**
 
-> Intro Text
+## Chapter 1: The Basics
+
+The basics of OrbitDB are creating databases, choosing data types, and addi
 
 ### Instantiating IPFS and OrbitDB
 
@@ -108,12 +115,10 @@ You have also loaded a new orbitdb object into memory, ready to create databases
 
 *You are now ready to use OrbitDB!*
 
-What else happened? It now depends on your environment.
-
-### In node.js
+### What else happened in node.js?
 
 
-### In the browser
+### What else happened in the browser?
 
 
 
@@ -135,6 +140,7 @@ What else happened? It now depends on your environment.
 
 ##  Reading and Writing Data
 
+> Potentially split out to chapter 2?
 
 * Resolves #[365](https://github.com/orbitdb/orbit-db/issues/365) 
 * Resolves #[438](https://github.com/orbitdb/orbit-db/issues/438)
@@ -143,7 +149,7 @@ What else happened? It now depends on your environment.
 * Resolves #[430](https://github.com/orbitdb/orbit-db/issues/430)
 
 
-## Chapter 3: Peer-to-Peer Replication
+## Chapter 2: Peer-to-Peer
 
 ### Replication Overview
 
@@ -165,7 +171,7 @@ What else happened? It now depends on your environment.
 
 * Resolves #[496](https://github.com/orbitdb/orbit-db/issues/496)
 
-## Chapter 4: Identity and Permissions
+## Chapter 3: Identity and Permissions
 
 ### Access Control
 ### Identity Management
