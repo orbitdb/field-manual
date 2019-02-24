@@ -106,7 +106,9 @@ Starting with the `new Ipfs` line, your code creates a new IPFS node. Note the d
 By running the code above, you have created a new IPFS node that works locally and is not connected to any peers.
 You have also loaded a new orbitdb object into memory, ready to create databases and manage data.
 
-So, what exactly happened?
+*You are now ready to use OrbitDB!*
+
+What else happened? It now depends on your environment.
 
 ### In node.js
 
