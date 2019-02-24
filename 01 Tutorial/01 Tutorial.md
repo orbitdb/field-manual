@@ -2,11 +2,19 @@
 
 > Or, "how to build a p2p music practice app in a weekend"
 
-## Before we start
+## Introduction
 
-Do you have a *computer* with a *command line*, a *web browser*, and *node.js* installed? If not, get those set up. This tutorial will not focus on one or the other, but instead expect you to be able to successfully nagivate back and forth.
+### Requirements
 
-## What are we building?
+Do you have a **computer** with a **command line**, a **web browser**, and **node.js** installed? If not, get those set up. 
+
+OrbitDB works in both node.js and in the browser, and this tutorial will not focus on one or the other, so stay on your toes.
+
+### Conventions
+
+TODO: Description of conventions used in the tutorial.
+
+### What are we building?
 
 The app we will build will be for musicians. There will be a repository of royalty-free sheet
 music, and it will display piece of sheet music at random on a per-instrument basis. Users can
@@ -37,56 +45,53 @@ The working title is **New Piece, Please!**
 
 The basics of OrbitDB are creating databases, choosing data types, and addi
 
-### Instantiating IPFS and OrbitDB
-
-#### Install
-
-Install [orbit-db](https://github.com/orbitdb/orbit-db) and [ipfs](https://www.npmjs.com/package/ipfs) from npm:
-
-```
-npm install orbit-db ipfs
-```
-
-## Setup
+### Installing and Instantiating OrbitDB
 
 Require OrbitDB and IPFS in your program and create the instances:
 
-### In Node.js
+#### Installation in Node.js
 
 To use these modules in node.js, first create your project directory and use npm to install
 `orbitdb` and its dependency `ipfs`
 
+From the command line:
 ```bash
 $ npm install orbitdb ipfs
 ```
 
-Then, in your script, require the modules:
+Then, in a script called `server.js`, require the modules:
 
 ```javascript
+// server.js
+
 const Ipfs = require('ipfs')
 const OrbitDB = require('orbit-db')
 ```
 
-### In the Browser
+#### Installation in the Browser
 
-There are a few different places you can get browser packages for ipfs and orbitdb, for the
-purposes of this tutorial, we recommend using unpkg or jsdelivr for both. The example below uses unpkg.
+There are a few different places you can get browser packages for ipfs and orbitdb. These are detailed in Part 3 of this book. For the purposes of this tutorial, we recommend using unpkg for both.
+
+Simply include these at the top of your `index.html` file:
 
 ```html
 <script src="https://unpkg.com/ipfs/dist/index.min.js"></script>
-<script src="https://www.unpkg.com/orbit-db@0.19.9/src/OrbitDB.js"></script>
+<script src="https://www.unpkg.com/orbit-db/src/OrbitDB.js"></script>
 ```
 
-## Creating IPFS and OrbitDB instances
+### Creating IPFS and OrbitDB instances
 
-Let's start with the followin code. We'll try to keep the code in bite sized chunks. We are also going to start "offline",
+Let's start with the following code. We'll try to keep the code in bite sized chunks. We are also going to start "offline",
 purposefully not connecting to any other peers until we absolutely need to.
+
+OrbitDB's syntax is almost always identical between the browser and in node.js, so this code will work in both places:
 
 ```javascript
 let orbitdb
 
 let ipfs = new Ipfs({
   preload: { enabled: false },
+  repo: "./ipfs",
   EXPERIMENTAL: { pubsub: true },
   config: {
     Bootstrap: [],
@@ -95,7 +100,10 @@ let ipfs = new Ipfs({
 });
 
 ipfs.on("error", (e) => { throw new Error(e) })
-ipfs.on("ready", (e) => { orbitdb = new OrbitDB(ipfs) })
+ipfs.on("ready", () => {
+  orbitdb = new OrbitDB(ipfs)
+  console.log(orbitdb.id)
+})
 ```
 
 * Resolves #[367](https://github.com/orbitdb/orbit-db/issues/367)
@@ -105,6 +113,7 @@ ipfs.on("ready", (e) => { orbitdb = new OrbitDB(ipfs) })
 Starting with the `new Ipfs` line, your code creates a new IPFS node. Note the default settings:
 
 * `preload: { enabled: false }` disables the use of so-called "pre-load" IPFS nodes. These nodes exist to help load balance the global network and prevent DDoS. However, these nodes can go down and cause errors. Since we are only working offline for now., we include this line to disable them.
+* `repo: './ipfs'` designates the path of the repo in node.js only. In the browser, you can actually remove this line. The default setting is a folder called `.jsipfs` in your home directory.
 * `XPERIMENTAL: { pubsub: true }` enables IPFS pubsub, which is a method of communicating between nodes and is required for OrbitDB usage, despite whether or not we are connected to other peers.
 * `config: { Bootstrap: [], Addresses: { Swarm: [] }}` sets both our bootstrap peers list (peers that are loaded on instantiation) and swarm peers list (peers that can connect and disconnect at any time to empty. We will populate these later.
 * `ipfs.on("error", (e) => { throw new Error(e) })` implements extremely basic error handling for if something happens during node creation
@@ -117,12 +126,17 @@ You have also loaded a new orbitdb object into memory, ready to create databases
 
 ### What else happened in node.js?
 
+When the above code is run in node.js, an `orbitdb` folder is created inside 
+
+
 
 ### What else happened in the browser?
 
+IPFS content is handled
 
+### A note about LevelDB
 
-
+In both the browser and 
 
 ## Creating a Database
 
