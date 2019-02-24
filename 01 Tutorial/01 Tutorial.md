@@ -1,6 +1,6 @@
 # The OrbitDB Tutorial
 
-> An imperative, isomorphic romp where you create a peer-to-peer music application.
+> WELCOME to an interactive, imperative, and isomorphic adventure of peer-to-peer, distributed, decentralized proportions
 
 **Requirements**: A *computer* with a *web browser*, *command line*, and *node.js* installed? 
 
@@ -10,9 +10,9 @@
 * The general format will oscillate between writing and reading code, and *What Just Happened* sections that explain in depth what happens on a technical level when the code is run.
 * OrbitDB works in both node.js and in the browser, and this tutorial will not focus on one or the other. Stay on your toes.
 
-### What am I building?
+### What will I build?
 
-You'll build, step by step, an app that provides royalty-free sheet music on demand for musicians.
+You will build, step by step, an app that provides royalty-free sheet music on demand for musicians, based on their instrument. 
 
 There will be a repository of royalty-free sheet music, and it will display piece of sheet music at random on a per-instrument basis. Users can also submit music and share music between other users and groups of users.
 
@@ -30,10 +30,8 @@ HTML or CSS from this tutorial and focus only on the Javascript code.
 ### Why a music app?
 
 OrbitDB is already used all over the world, and it's important that in our tutorials and
-discussions reflect that by not picking focii that inadvertently exclude people. Music is
-one of the few features and fields of study that all cultures on earth share. There are
-other topics: finance, politics, maybe religion, but there are other apps to focus on those.
-Ours will make it easier for musicians all over the world to find sheet music to practice with.
+discussions reflect that by choosing . Music is one of the few features and fields of study
+that all cultures on earth share. There are other topics: finance, politics, maybe religion, but there are other apps to focus on those. Ours will make it easier for musicians all over the world to find sheet music to practice with.
 
 The working title is **New Piece, Please!** Read on and build it.
 
