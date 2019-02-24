@@ -4,7 +4,7 @@
 
 ## Before we start
 
-Do you a *computer* with a *command line*, a *web browser*, and *node.js* installed? If not, get those set up. This tutorial will not focus on one or the other, but instead expect you to be able to successfully nagivate back and forth.
+Do you have a *computer* with a *command line*, a *web browser*, and *node.js* installed? If not, get those set up. This tutorial will not focus on one or the other, but instead expect you to be able to successfully nagivate back and forth.
 
 ## What are we building?
 
