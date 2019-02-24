@@ -2,21 +2,19 @@
 
 > An imperative, isomorphic romp where you create a peer-to-peer music application.
 
-It's time for you to get some hands-on experience using OrbitDB.
-OrbitDB works in both node.js and in the browser, and this tutorial will not focus on one or the other, so stay on your toes.
-
-**Requirements**: You **computer** with a **web browser**, **command line**, and **node.js** installed? 
+**Requirements**: A *computer* with a *web browser*, *command line*, and *node.js* installed? 
 
 **Conventions**
 
-Read in order, don't skip browser or node.js sections.
-TODO: Description of conventions used in the tutorial.
+* Try to read the tutorial in order - concepts are introduced purposfully over time
+* The general format will oscillate between writing and reading code, and *What Just Happened* sections that explain in depth what happens on a technical level when the code is run.
+* OrbitDB works in both node.js and in the browser, and this tutorial will not focus on one or the other. Stay on your toes.
 
-### What are we building?
+### What am I building?
 
-The app we will build will be for musicians. There will be a repository of royalty-free sheet
-music, and it will display piece of sheet music at random on a per-instrument basis. Users can
-also submit music and share music between other users and groups of users.
+You'll build, step by step, an app that provides royalty-free sheet music on demand for musicians.
+
+There will be a repository of royalty-free sheet music, and it will display piece of sheet music at random on a per-instrument basis. Users can also submit music and share music between other users and groups of users.
 
 You will now use OrbitDB to create a full app that contains:
 This app will be local-first, offline-first, and peer-to-peer in its connectivity. There will
@@ -37,11 +35,13 @@ one of the few features and fields of study that all cultures on earth share. Th
 other topics: finance, politics, maybe religion, but there are other apps to focus on those.
 Ours will make it easier for musicians all over the world to find sheet music to practice with.
 
-The working title is **New Piece, Please!**
+The working title is **New Piece, Please!** Read on and build it.
 
 ## Chapter 1: The Basics
 
-The basics of OrbitDB are creating databases, choosing data types, and addi
+The basics of OrbitDB include creating databases, choosing data types, and reading and writing data.
+
+Finally, since all of these activities can happen offline and locally, without being connected to any peers at all, these steps will all take place offline. 
 
 ### Installing and Instantiating OrbitDB
 
