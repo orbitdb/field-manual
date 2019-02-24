@@ -1,16 +1,13 @@
 # The OrbitDB Tutorial
 
-> An imperative, isomorphic romp through creating a peer-to-peer music application.
+> An imperative, isomorphic romp where you create a peer-to-peer music application.
 
-## Introduction
-
+It's time for you to get some hands-on experience using OrbitDB.
 OrbitDB works in both node.js and in the browser, and this tutorial will not focus on one or the other, so stay on your toes.
 
-### Requirements
+**Requirements**: You **computer** with a **web browser**, **command line**, and **node.js** installed? 
 
-Do you have a **computer** with a **command line**, a **web browser**, and **node.js** installed? If not, get those set up. 
-
-### Conventions
+**Conventions**
 
 Read in order, don't skip browser or node.js sections.
 TODO: Description of conventions used in the tutorial.
