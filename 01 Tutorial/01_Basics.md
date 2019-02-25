@@ -6,19 +6,18 @@ _Note:_ Please see the [README](./README.md) before beginning this chapter.
 
 ## Instantiating OrbitDB
 
-Start by installing OrbitDB and its dependency, IPFS. The process is different between the browser and node.js, so we cover 
-both here.
+You will need to get the code for OrbitDB and its dependency, IPFS, and make it available to your project. The process is 
+different between the browser and node.js, so we cover both here.
 
 ### Installation in Node.js
 
-Choose a project directory and `cd` to there from your command line:
+Choose a project directory and `cd` to there from your command line. Then run the following command.
 
-From the command line:
 ```bash
 $ npm install orbitdb ipfs
 ```
 
-Then, in your script, require the modules:
+Then require the modules in your script.
 
 ```javascript
 const Ipfs = require('ipfs')
@@ -35,7 +34,7 @@ OrbitDB. Simply include these at the top of your `index.html` file:
 <script src="https://www.unpkg.com/orbit-db/src/OrbitDB.js"></script>
 ```
 
-There are other ways to get this code, including building it yourself. We detail these in Part 3. 
+> **Note:** There are other ways to get this code, including building it yourself. We detail these in Part 3. 
 
 ## Standing up IPFS and OrbitDB
 
@@ -120,7 +119,7 @@ In the browser IPFS content is handled inside of IndexedDB, a persistent storage
 
 Note since you have not explicitly defined a database in the broser, no IndexedDB databases have been created for OrbitDB yet.
 
-**Caution!** iOS and Android have been known to purge IndexedDB if storage space needs to be created inside of your phone. 
+> **Caution!** iOS and Android have been known to purge IndexedDB if storage space needs to be created inside of your phone. 
 We recommend creating robust backup mechanisms at the application layer.
 
 ## Creating a Database
@@ -176,7 +175,7 @@ Your code created a new database, of type "docstore", writable only by you.
 * `pieces = await orbitdb.docstore('pieces', options)` is the magic line that creates the database. Once this line is 
 completed, the database is open and can be acted upon.
 
-**Caution!** A note about identity: Your public key is not your identity. We repeat, *your public key is not your identity*. 
+> **Caution!** A note about identity: Your public key is not your identity. We repeat, *your public key is not your identity*. 
 Though, it is often used as such for convenience's sake, and the lack of better alternatives. So, in the early parts of this 
 tutorial we say "writable only to you" when we really mean "writable only by an OrbitDB instance on top of an IPFS node that 
 has the correct id, which we are assuming is controlled by you."
