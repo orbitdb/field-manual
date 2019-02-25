@@ -21,6 +21,8 @@ const resultContent = await node.dag.get(result)
 Running this code should give you something like the following output. Hold steady, it's overwhelming but it will make sense 
 after we explain what happened.
 
+For more information see Part 3.
+
 ```json
 {
   "op":"PUT",
