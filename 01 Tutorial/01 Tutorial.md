@@ -9,8 +9,10 @@
 * Try to read the tutorial in order - concepts are introduced purposfully over time
 * The general format will oscillate between writing and reading code, and *What Just Happened* sections that explain in depth what happens on a technical level when the code is run.
 * OrbitDB works in both node.js and in the browser, and this tutorial will not focus on one or the other. Stay on your toes.
+* This tutorial is not only OS-agnostic, editor-agnostic, it's also folder-structure agnostic. All of the code examples are designed to work if applied in order, regardless of which js file they are in. Thus folder and file names for code are avoided.
+* One exception to the above - the ipfs and orbitdb folder analysis.
 
-### What will I build?
+> What will I build?
 
 You will build, step by step, an app that provides royalty-free sheet music on demand for musicians, based on their instrument. 
 
@@ -27,13 +29,11 @@ You will write JavaScript Code create the backbone of a full application using O
 browser and on the command line. For the sake of keeping things focused, we will exclude any
 HTML or CSS from this tutorial and focus only on the Javascript code.
 
-### Why a music app?
+> Why a music app?
 
 OrbitDB is already used all over the world, and it's important that in our tutorials and
 discussions reflect that by choosing . Music is one of the few features and fields of study
 that all cultures on earth share. There are other topics: finance, politics, maybe religion, but there are other apps to focus on those. Ours will make it easier for musicians all over the world to find sheet music to practice with.
-
-The working title is **New Piece, Please!** Read on and build it.
 
 ## Chapter 1: The Basics
 
@@ -104,7 +104,7 @@ ipfs.on("ready", () => {
 
 You see the output, something called a "multihash", like `QmPSicLtjhsVifwJftnxncFs4EwYTBEjKUzWweh1nAA87B`. For now, just know that this is the identifier of your node. Multihashes are explained in more detail in the **Part 2: Peer-to-Peer**
 
-### What Just Happened?
+### What just happened?
 
 Starting with the `new Ipfs` line, your code creates a new IPFS node. Note the default settings:
 
@@ -135,7 +135,7 @@ $ ls ipfs/
 blocks/  config  datastore/  datastore_spec  keys/  version
 ```
 
-Focusing your attention on the IPFS folder, you will see that the subfolder has the same ID as orbitdb. This is purposeful, as this initial folder contains metadata that OrbitDB will need to operate.
+Focusing your attention on the IPFS folder, you will see that the subfolder has the same ID as orbitdb. This is purposeful, as this initial folder contains metadata that OrbitDB will need to operate. For now let's not go into detail
 
 The `ipfs/` folder contains all of your IPFS data. Explaining this in depth is outside of the scope of this tutorial, and the curious can find out more [here](#). 
 
@@ -143,11 +143,42 @@ The `ipfs/` folder contains all of your IPFS data. Explaining this in depth is o
 
 In the browser IPFS content is handled inside of IndexedDB, a persistent storage mechanism for browsers
 
+![alt browser whatever](../images/ipfs_browser.png)
+
 Note since you have not explicitly defined a database in the broser, no IndexedDB databases have been created for OrbitDB yet.
 
 **Caution!** iOS and Android have been known to purge IndexedDB if storage space needs to be created inside of your phone. We recommend creating robust backup mechanisms at the application layer.
 
 ## Creating a Database
+
+Now you will create a local database that only you can read.
+
+Remember the code snippet from above, starting and ending with:
+
+```javascript
+let orbitdb
+
+/* ... */
+
+ipfs.on("ready", () => {
+  orbitdb = new OrbitDB(ipfs)
+  console.log(orbitdb.id)
+})
+```
+
+Expand that to the following:
+
+```javascript
+let orbitdb, localDb
+
+/* ... */
+
+ipfs.on("ready", await () => {
+  orbitdb = new OrbitDB(ipfs)
+  localDb = 
+})
+```
+
 
 
 * Resolves #[366](https://github.com/orbitdb/orbit-db/issues/366)
