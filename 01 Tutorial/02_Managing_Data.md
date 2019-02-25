@@ -1,5 +1,12 @@
+**Note:** Please complete Chapter 1 before reading. 
 
-##  Reading and Writing Data
+# Chapter 2 - Managing Data
+
+## Reading data
+
+## On Loading
+
+## Storing Media Files
 
 > Potentially split out to chapter 2?
 
