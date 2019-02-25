@@ -2,7 +2,7 @@
 
 > The basics of OrbitDB include _installing IPFS and OrbitDB_, _creating databases_, and understanding  _data types_, 
 
-_Note:_ Please be sure you've read the Tutorial introduction before beginning this chapter.
+_Note:_ Please see the [README](./README.md) before beginning this chapter.
 
 ### Instantiating OrbitDB
 
