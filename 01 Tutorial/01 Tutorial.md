@@ -10,9 +10,9 @@ Do you have a *computer* with a *web browser*, *command line*, and *node.js* ins
 * You will switch between writing and reading code, and *What Just Happened* sections that explain in depth what happens on a technical level when the code is run.
 * OrbitDB works in both node.js and in the browser, and this tutorial will not focus on one or the other. Stay on your toes.
 * This tutorial is not only OS-agnostic and editor-agnostic, it's also folder structure agnostic. All of the code examples are designed to work if applied in order, regardless of which js file they are in. Thus folder and file names for code are avoided.
-* One exception to the above - the ipfs and orbitdb folder analysis.
+* `async` and `await` are used prominently. Feel free to replace those with explicit `Promise` objects if you're feeling daring.
 
-> What will I build?
+**What will I build?**
 
 You will build an app that provides royalty-free sheet music on-demand for musicians, based on their instrument. 
 
@@ -26,7 +26,7 @@ You will write JavaScript and create the backbone of a full application using Or
 browser and on the command line. For the sake of keeping things focused, we will exclude any
 HTML or CSS from this tutorial and focus only on the Javascript code.
 
-> Why a music app?
+**Why a music app?**
 
 OrbitDB is already used all over the world, and this tutorial music reflect that. There are other many topics we could
 have chosen that touch the vast majority of humans on earth: finance, politics, climate, religion. However, those are
@@ -98,8 +98,8 @@ let ipfs = new Ipfs({
 });
 
 ipfs.on("error", (e) => { throw new Error(e) })
-ipfs.on("ready", () => {
-  orbitdb = new OrbitDB(ipfs)
+ipfs.on("ready", async () => {
+  orbitdb = await OrbitDB.createInstance(ipfs)
   console.log(orbitdb.id)
 })
 ```
@@ -206,51 +206,3 @@ See for more https://github.com/orbitdb/orbit-db/blob/525978e0a916a8b027e9ea73d8
 * Resolves #[400](https://github.com/orbitdb/orbit-db/issues/400)
 * Resolves #[318](https://github.com/orbitdb/orbit-db/issues/318)
 * Resolves #[503](https://github.com/orbitdb/orbit-db/issues/503)
-
-##  Reading and Writing Data
-
-> Potentially split out to chapter 2?
-
-* Resolves #[365](https://github.com/orbitdb/orbit-db/issues/365) 
-* Resolves #[438](https://github.com/orbitdb/orbit-db/issues/438)
-* Resolves #[381](https://github.com/orbitdb/orbit-db/issues/381)
-* Resolves #[242](https://github.com/orbitdb/orbit-db/issues/242)
-* Resolves #[430](https://github.com/orbitdb/orbit-db/issues/430)
-
-
-## Chapter 2: Peer-to-Peer
-
-### Replication Overview
-
-* Resolves #[463](https://github.com/orbitdb/orbit-db/issues/463)
-* Resolves #[468](https://github.com/orbitdb/orbit-db/issues/468)
-* Resolves #[471](https://github.com/orbitdb/orbit-db/issues/471)
-* Resolves #[498](https://github.com/orbitdb/orbit-db/issues/498)
-* Resolves #[519](https://github.com/orbitdb/orbit-db/issues/519)
-* Resolves #[296](https://github.com/orbitdb/orbit-db/issues/296)
-* Resolves #[264](https://github.com/orbitdb/orbit-db/issues/264)
-* Resolves #[460](https://github.com/orbitdb/orbit-db/issues/460)
-* Resolves #[484](https://github.com/orbitdb/orbit-db/issues/484)
-* Resolves #[474](https://github.com/orbitdb/orbit-db/issues/474)
-* Resolves #[505](https://github.com/orbitdb/orbit-db/issues/505)
-
-### Replicating in the Browser
-### Replicating in Node.js
-### Replication between Browser and Node.js
-
-* Resolves #[496](https://github.com/orbitdb/orbit-db/issues/496)
-
-## Chapter 3: Identity and Permissions
-
-### Access Control
-### Identity Management
-### Security Disclosures
-
-* Resolves: #[397](https://github.com/orbitdb/orbit-db/issues/397)
-* Resolves: #[222](https://github.com/orbitdb/orbit-db/issues/222)
-* Resolves: #[327](https://github.com/orbitdb/orbit-db/issues/327) 
-* Resolves: #[357](https://github.com/orbitdb/orbit-db/issues/357)
-* Resolves: #[475](https://github.com/orbitdb/orbit-db/issues/475)
-* Resolves: #[380](https://github.com/orbitdb/orbit-db/issues/380)
-* Resolves: #[458](https://github.com/orbitdb/orbit-db/issues/458)
-* Resolves: #[467](https://github.com/orbitdb/orbit-db/issues/467)
