@@ -41,4 +41,4 @@ world to find sheet music to practice with.
 * This tutorial is not only OS-agnostic and editor-agnostic, it's also folder structure agnostic. All of the code examples are designed to work if applied in order, regardless of which js file they are in. Thus folder and file names for code are avoided.
 * `async` and `await` are used prominently. Feel free to replace those with explicit `Promise` objects if you're feeling daring.
 
-Ready? Let's start with [Chapter 1: The Basics]("./01 The Basics.md")
+Ready? Let's start with [Chapter 1: The Basics](./01 The Basics.md)
