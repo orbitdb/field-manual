@@ -218,3 +218,15 @@ still stored in IPFS.
 This shows you one of OrbitDB's core strenths - the ability to manage a lot of complexity between its own internals and tht of IPFS, providing a clear and clean API to manage the data that matters to you.
 
 Read on to [Chapter 2: Reading and Writing Data](#) to learn how to do exactly that.
+
+
+## Key Takeaways of this Chapter
+
+If nothing else, you should understand that:
+
+* OrbitDB is a distributed database layer which stores its raw data in IPFS
+* Both IPFS and OrbitDB work offline and online
+* OrbitDB instances have an _ID_ which is the same as the underling IPFS node's ID.
+* OrbitDB instances create databases, which have unique _addresses_
+* Basic access rights to OrbitDB databases are managed using access control lists (or ACLs), based on the ID of the IPFS node performing the requests on the database
+* OrbitDB database addresses are hashes of the database's ACL, its type, and its name.
