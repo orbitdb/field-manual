@@ -166,7 +166,14 @@ See for more info: https://github.com/orbitdb/orbit-db/blob/525978e0a916a8b027e9
 * Resolves #[366](https://github.com/orbitdb/orbit-db/issues/366)
 * Resolves #[502](https://github.com/orbitdb/orbit-db/issues/502)
 
-#### Wait, but what's `docstore`?
+
+#### What else happened in node.js?
+
+
+#### What else happened in the browser?
+
+
+### Wait, but what's `docstore`?
 
 A docstore is one of many data stores that you can utilize when creating database. An OrbitDB store is essentially an API and Schema that provides access and functionality for specific use cases. Currently, you have the following stores available to you:
 
