@@ -159,11 +159,20 @@ node.on("ready", async () => {
 })
 ```
 
-You will see something like the following as an output: `/orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces`. This is the id, or **address** of this database.
+You will see something like the following as an output: `/orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces`. This is the id, or **address** (technically a multiaddress) of this database. It's important for you to _know_ this, but also to understand what it is.
+
+The first bit, `/orbitdb`, is the protocol. It tells you that this address is an OrbitDB address. The last bit, `pieces` is simply the name you provided.
+
+It's the second, or middle, part `zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3` that is the most interesting. This value comes from the combining three pieces of data, and then hashing them:
+1. The **access control list** of the database
+2. The **type** of the database
+3. The **name** of the database
+
+> *Note:* Misunderstanding OrbitDB addressing can lead to some very unexpected - sometimes hilarious, sometimes disastrous outcomes. Read more in Part 2 to learn more.
 
 ### What just happened?
 
-Your code created a new database, of type "docstore", writable only by you.
+Your code created a local OrbitDB database, of type "docstore", writable only by you.
 
 * The `options` defines the paramaters for the database we are about to create.
   * `accessController: { write: [orbitdb.identity.publicKey] }` defines the ACL, or "Access Control List". In this instance 
@@ -197,9 +206,7 @@ $ ls orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces/
 000003.log  CURRENT  LOCK  LOG  MANIFEST-000002
 ```
 
-Two subfolders, one being the original folder you saw when you instantiated OrbitDB, and now another that has the same address as your database.
-
-> More on this later.
+You don't need to understand this fully for now, just know that it happened. Two subfolders, one being the original folder you saw when you instantiated OrbitDB, and now another that has the same address as your database.
 
 #### What else happened in the browser?
 
@@ -208,11 +215,6 @@ still stored in IPFS.
 
 ![An image showing the IPFS and OrbitDB IndexedDB databases in Firefox](../images/ipfs_browser_2.png)
 
-## Addressing
+This shows you one of OrbitDB's core strenths - the ability to manage a lot of complexity between its own internals and tht of IPFS, providing a clear and clean API to manage the data that matters to you.
 
-### A quick anecdote about Orbit Chat
-
-As a proof of concept of OrbitDB, we often encourage people to run an instance of [Orbit Chat](#) locally. Due to people not 
-understanding exactly how peer to peer works, 
-
-On a final note to this chapter, it's important that you understand how OrbitDB addresses are created, and how they work. 
+Read on to [Chapter 2: Reading and Writing Data](#) to learn how to do exactly that.
