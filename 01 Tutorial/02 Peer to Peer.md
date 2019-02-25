@@ -1,0 +1,21 @@
+## Chapter 2: Peer-to-Peer
+
+### Replication Overview
+
+* Resolves #[463](https://github.com/orbitdb/orbit-db/issues/463)
+* Resolves #[468](https://github.com/orbitdb/orbit-db/issues/468)
+* Resolves #[471](https://github.com/orbitdb/orbit-db/issues/471)
+* Resolves #[498](https://github.com/orbitdb/orbit-db/issues/498)
+* Resolves #[519](https://github.com/orbitdb/orbit-db/issues/519)
+* Resolves #[296](https://github.com/orbitdb/orbit-db/issues/296)
+* Resolves #[264](https://github.com/orbitdb/orbit-db/issues/264)
+* Resolves #[460](https://github.com/orbitdb/orbit-db/issues/460)
+* Resolves #[484](https://github.com/orbitdb/orbit-db/issues/484)
+* Resolves #[474](https://github.com/orbitdb/orbit-db/issues/474)
+* Resolves #[505](https://github.com/orbitdb/orbit-db/issues/505)
+
+### Replicating in the Browser
+### Replicating in Node.js
+### Replication between Browser and Node.js
+
+* Resolves #[496](https://github.com/orbitdb/orbit-db/issues/496)
