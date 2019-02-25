@@ -185,6 +185,8 @@ A docstore is one of many data stores that you can utilize when creating databas
 - **[docs](https://github.com/orbitdb/orbit-db/blob/master/API.md#orbitdbdocsnameaddress-options)**: a document database to which JSON documents can be stored and indexed by a specified key. Useful for building search indices or version controlling documents and data.
 - **[counter](https://github.com/orbitdb/orbit-db/blob/master/API.md#orbitdbcounternameaddress)**: Useful for counting events separate from log/feed data.
 
+You can also make your own stores. This is covered in Part 3 of this book.
+
 * Resolves #[481](https://github.com/orbitdb/orbit-db/issues/481)
 * Resolves #[480](https://github.com/orbitdb/orbit-db/issues/480)
 * Resolves #[400](https://github.com/orbitdb/orbit-db/issues/400)
