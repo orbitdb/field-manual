@@ -4,14 +4,14 @@
 
 _Note:_ Please see the [README](./README.md) before beginning this chapter.
 
-### Instantiating OrbitDB
+## Instantiating OrbitDB
 
 Require OrbitDB and IPFS in your program and create the instances:
 
 Since all of these activities can happen offline and locally, without being connected to any peers at all, these
 steps will all take place offline.
 
-#### Installation in Node.js
+### Installation in Node.js
 
 To use these modules in node.js, first create your project directory and use npm to install
 `orbitdb` and its dependency `ipfs`
@@ -30,7 +30,7 @@ const Ipfs = require('ipfs')
 const OrbitDB = require('orbit-db')
 ```
 
-#### Installation in the Browser
+### Installation in the Browser
 
 There are a few different places you can get browser packages for ipfs and orbitdb. These are detailed in Part 3 of this book. For the purposes of this tutorial, we recommend using unpkg for both.
 
@@ -41,7 +41,7 @@ Simply include these at the top of your `index.html` file:
 <script src="https://www.unpkg.com/orbit-db/src/OrbitDB.js"></script>
 ```
 
-### Creating IPFS and OrbitDB instances
+## Creating IPFS and OrbitDB instances
 
 Let's start with the following code. We'll try to keep the code in bite sized chunks. We are also going to start "offline",
 purposefully not connecting to any other peers until we absolutely need to.
@@ -70,7 +70,7 @@ ipfs.on("ready", async () => {
 
 You see the output, something called a "multihash", like `QmPSicLtjhsVifwJftnxncFs4EwYTBEjKUzWweh1nAA87B`. For now, just know that this is the identifier of your node. Multihashes are explained in more detail in the **Part 2: Peer-to-Peer**
 
-#### What just happened?
+### What just happened?
 
 Starting with the `new Ipfs` line, your code creates a new IPFS node. Note the default settings:
 
@@ -88,7 +88,7 @@ You have also loaded a new orbitdb object into memory, ready to create databases
 
 * Resolves #[367](https://github.com/orbitdb/orbit-db/issues/367)
 
-##### What else happened in node.js?
+#### What else happened in node.js?
 
 When you ran the code in node.js, you created two folders in your project structure: `'orbitdb/` and `ipfs/`. 
 
@@ -105,7 +105,7 @@ Focusing your attention on the IPFS folder, you will see that the subfolder has 
 
 The `ipfs/` folder contains all of your IPFS data. Explaining this in depth is outside of the scope of this tutorial, and the curious can find out more [here](#). 
 
-##### What else happened in the browser?
+#### What else happened in the browser?
 
 In the browser IPFS content is handled inside of IndexedDB, a persistent storage mechanism for browsers
 
@@ -143,27 +143,47 @@ node.on("ready", async () => {
   orbitdb = await OrbitDB.createInstance(node)
 
   const options = {
-    indexBy: "hash",
-    accessController: {
-      write: [orbitdb.identity.publicKey]
-    }
+    accessController: { write: [orbitdb.identity.publicKey] }
+    indexBy: "hash"
   }
   
   pieces = await orbitdb.docstore('pieces', options)
+  await pieces.load()
+  
+  pieces = piecesDb.get('all')
   console.log(pieces)
 })
 ```
 
-Run this code and you will see on object containing information about the new database you just created
+Run this code and you will see the output of a simple empty array, `[]`. Not much to look at, but a lot of important things happened under the hood that we should cover before you start populating your personal repository of sheet music.
 
-See for more https://github.com/orbitdb/orbit-db/blob/525978e0a916a8b027e9ea73d8736acb2f0bc6b4/src/OrbitDB.js#L106
+### What just happened?
 
-### What Just Happened?
+Your code created a new database, of type "docstore", writable only by you.
+
+* The `options` defines the paramaters for the database we are about to create.
+  * `accessController: { write: [orbitdb.identity.publicKey] }`
+  * `indexBy: "hash"`
+* `pieces = await orbitdb.docstore('pieces', options)`
+* `await pieces.load()`
+* `pieces = piecesDb.get('all')`
+
+**Caution!** A note about identity: Your public key is not your identity. We repeat, *your public key is not your identity*. Though, it is often used as such for convenience's sake, and the lack of better alternatives. So, in the early parts of this tutorial we say "writable only to you" when we really mean "writable only by an OrbitDB instance on top of an IPFS node that has the correct id, which we are assuming is controlled by you."
+
+See for more info: https://github.com/orbitdb/orbit-db/blob/525978e0a916a8b027e9ea73d8736acb2f0bc6b4/src/OrbitDB.js#L106
 
 * Resolves #[366](https://github.com/orbitdb/orbit-db/issues/366)
 * Resolves #[502](https://github.com/orbitdb/orbit-db/issues/502)
 
-#### Understanding Data Types
+#### Wait, but what's `docstore`?
+
+A docstore is one of many data stores that you can utilize when creating database. An OrbitDB store is essentially an API and Schema that provides access and functionality for specific use cases. Currently, you have the following stores available to you:
+
+- **[log](https://github.com/orbitdb/orbit-db/blob/master/API.md#orbitdblognameaddress)**: an immutable (append-only) log with traversable history. Useful for *"latest N"* use cases or as a message queue.
+- **[feed](https://github.com/orbitdb/orbit-db/blob/master/API.md#orbitdbfeednameaddress)**: a mutable log with traversable history. Entries can be added and removed. Useful for *"shopping cart"* type of use cases, or for example as a feed of blog posts or "tweets".
+- **[keyvalue](https://github.com/orbitdb/orbit-db/blob/master/API.md#orbitdbkeyvaluenameaddress)**: a key-value database just like your favourite key-value database.
+- **[docs](https://github.com/orbitdb/orbit-db/blob/master/API.md#orbitdbdocsnameaddress-options)**: a document database to which JSON documents can be stored and indexed by a specified key. Useful for building search indices or version controlling documents and data.
+- **[counter](https://github.com/orbitdb/orbit-db/blob/master/API.md#orbitdbcounternameaddress)**: Useful for counting events separate from log/feed data.
 
 * Resolves #[481](https://github.com/orbitdb/orbit-db/issues/481)
 * Resolves #[480](https://github.com/orbitdb/orbit-db/issues/480)
