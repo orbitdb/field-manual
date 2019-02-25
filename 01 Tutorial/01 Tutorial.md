@@ -106,7 +106,7 @@ ipfs.on("ready", () => {
 
 You see the output, something called a "multihash", like `QmPSicLtjhsVifwJftnxncFs4EwYTBEjKUzWweh1nAA87B`. For now, just know that this is the identifier of your node. Multihashes are explained in more detail in the **Part 2: Peer-to-Peer**
 
-### What just happened?
+#### What just happened?
 
 Starting with the `new Ipfs` line, your code creates a new IPFS node. Note the default settings:
 
@@ -124,7 +124,7 @@ You have also loaded a new orbitdb object into memory, ready to create databases
 
 * Resolves #[367](https://github.com/orbitdb/orbit-db/issues/367)
 
-### What else happened in node.js?
+##### What else happened in node.js?
 
 When you ran the code in node.js, you created two folders in your project structure: `'orbitdb/` and `ipfs/`. 
 
@@ -141,7 +141,7 @@ Focusing your attention on the IPFS folder, you will see that the subfolder has 
 
 The `ipfs/` folder contains all of your IPFS data. Explaining this in depth is outside of the scope of this tutorial, and the curious can find out more [here](#). 
 
-### What else happened in the browser?
+##### What else happened in the browser?
 
 In the browser IPFS content is handled inside of IndexedDB, a persistent storage mechanism for browsers
 
@@ -153,7 +153,7 @@ Note since you have not explicitly defined a database in the broser, no IndexedD
 
 ## Creating a Database
 
-Now you will create a local database that only you can read.
+Now you will create a local database that *only you8 can read.
 
 Remember the code snippet from above, starting and ending with:
 
@@ -171,22 +171,35 @@ ipfs.on("ready", () => {
 Expand that to the following:
 
 ```javascript
-let orbitdb, localDb
+let orbitdb, pieces
 
 /* ... */
 
-ipfs.on("ready", await () => {
-  orbitdb = new OrbitDB(ipfs)
-  localDb = 
+node.on("ready", async () => {
+  orbitdb = await OrbitDB.createInstance(node)
+
+  const options = {
+    indexBy: "hash",
+    accessController: {
+      write: [orbitdb.identity.publicKey]
+    }
+  }
+  
+  pieces = await orbitdb.docstore('pieces', options)
+  console.log(pieces)
 })
 ```
 
+Run this code and you will see on object containing information about the new database you just created
 
+See for more https://github.com/orbitdb/orbit-db/blob/525978e0a916a8b027e9ea73d8736acb2f0bc6b4/src/OrbitDB.js#L106
+
+### What Just Happened?
 
 * Resolves #[366](https://github.com/orbitdb/orbit-db/issues/366)
 * Resolves #[502](https://github.com/orbitdb/orbit-db/issues/502)
 
-### Choosing a data type
+### Data Types
 
 * Resolves #[481](https://github.com/orbitdb/orbit-db/issues/481)
 * Resolves #[480](https://github.com/orbitdb/orbit-db/issues/480)
