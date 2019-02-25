@@ -1,8 +1,10 @@
-# The OrbitDB Tutorial
+# Tutorial Part 1 - Laying the Foundation
 
-> WELCOME to an interactive and isomorphic adventure of distributed and decentralized proportions!
+> The basics of OrbitDB include _installing IPFS and OrbitDB_, _creating a new IPFS node_, _creating databases_, and understanding  _data types_, 
 
-Do you have a *computer* with a *web browser*, *command line*, and *node.js* installed? If so, read on.
+Welcome! Do you have a *computer* with a *web browser*, *command line*, and *node.js* installed? Great, read on.
+
+You can start a new OrbitDB project in either the browser or the command line.
 
 **Conventions**
 
@@ -38,12 +40,11 @@ world to find sheet music to practice with.
 
 ## Chapter 1: The Basics
 
-The basics of OrbitDB include creating databases, choosing data types, and reading and writing data.
 
 Finally, since all of these activities can happen offline and locally, without being connected to any peers at all, these
 steps will all take place offline.
 
-### Installing and Instantiating OrbitDB
+### Instantiating OrbitDB
 
 Require OrbitDB and IPFS in your program and create the instances:
 
