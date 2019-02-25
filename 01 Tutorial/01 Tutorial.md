@@ -206,13 +206,3 @@ See for more https://github.com/orbitdb/orbit-db/blob/525978e0a916a8b027e9ea73d8
 * Resolves #[400](https://github.com/orbitdb/orbit-db/issues/400)
 * Resolves #[318](https://github.com/orbitdb/orbit-db/issues/318)
 * Resolves #[503](https://github.com/orbitdb/orbit-db/issues/503)
-
-##  Reading and Writing Data
-
-> Potentially split out to chapter 2?
-
-* Resolves #[365](https://github.com/orbitdb/orbit-db/issues/365) 
-* Resolves #[438](https://github.com/orbitdb/orbit-db/issues/438)
-* Resolves #[381](https://github.com/orbitdb/orbit-db/issues/381)
-* Resolves #[242](https://github.com/orbitdb/orbit-db/issues/242)
-* Resolves #[430](https://github.com/orbitdb/orbit-db/issues/430)
