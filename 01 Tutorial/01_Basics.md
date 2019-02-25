@@ -34,6 +34,8 @@ OrbitDB. Simply include these at the top of your `index.html` file:
 <script src="https://www.unpkg.com/orbit-db/src/OrbitDB.js"></script>
 ```
 
+You will now have global `Ipfs` and `OrbitDB` objects available to you.
+
 > **Note:** There are other ways to get this code, including building it yourself. We detail these in Part 3. 
 
 ## Standing up IPFS and OrbitDB
@@ -105,11 +107,9 @@ $ ls ipfs/
 blocks/  config  datastore/  datastore_spec  keys/  version
 ```
 
-Focusing your attention on the IPFS folder, you will see that the subfolder has the same ID as orbitdb. This is purposeful, 
-as this initial folder contains metadata that OrbitDB will need to operate. For now let's not go into detail
+The code will always create the `orbitdb/` folder as a sibling to the location specified in the `repo` paramater of the IPFS constructor options. Looking inside of the `orbitdb/` folder, you will see that the subfolder has the same ID as orbitdb, as well as the IPFS node. This is purposeful, as this initial folder contains metadata that OrbitDB will need to operate. See Part 3 for detailed information about this.
 
-The `ipfs/` folder contains all of your IPFS data. Explaining this in depth is outside of the scope of this tutorial, and 
-the curious can find out more [here](#). 
+> *Note:* The `ipfs/` folder contains all of your IPFS data. Explaining this in depth is outside of the scope of this tutorial, and  the curious can find out more [here](#). 
 
 #### What else happened in the browser?
 
@@ -124,7 +124,7 @@ We recommend creating robust backup mechanisms at the application layer.
 
 ## Creating a Database
 
-Now you will create a local database that *only you8 can read.
+Now, you will create a local database that *only you* can read.
 
 Remember the code snippet from above, starting and ending with:
 
@@ -142,7 +142,7 @@ node.on("ready", async () => {
 Expand that to the following, and then run the code:
 
 ```javascript
-let orbitdb, pieces
+let orbitdb, pieces, piecesDb
 
 /* ... */
 
@@ -150,12 +150,12 @@ node.on("ready", async () => {
   orbitdb = await OrbitDB.createInstance(node)
 
   const options = {
-    accessController: { write: [orbitdb.identity.publicKey] }
+    accessController: { write: [orbitdb.identity.publicKey] },
     indexBy: "hash"
   }
   
-  pieces = await orbitdb.docstore('pieces', options)
-  await pieces.load()
+  piecesDb = await orbitdb.docstore('pieces', options)
+  await piecesDb.load()
   
   pieces = piecesDb.get('all')
   console.log(pieces.address)
@@ -187,8 +187,16 @@ See for more info: https://github.com/orbitdb/orbit-db/blob/525978e0a916a8b027e9
 
 #### What else happened in node.js?
 
+You will see some activity inside your project's `orbitdb/` folder. This is good.
+
+```bash
+$ 
+```
 
 #### What else happened in the browser?
+
+Similarly, a new IndexedDB database was created to hold your OrbitDB-specific info, apart from the data itself which are 
+still stored in IPFS.
 
 ![An image showing the IPFS and OrbitDB IndexedDB databases in Firefox](../images/ipfs_browser_2.png)
 
