@@ -9,19 +9,18 @@
 Now that you have a database set up, adding content to it is fairly easy. Run the following code to add some sheet music to the repository.
 
 ```javascript
-const result = await piecesDb.put({
+const hash = await piecesDb.put({
   _id: Date.now(),
   url: ,
   instrument: formData.get("instrument")
 })
                                                 
-const resultContent = await node.dag.get(result)
+const content = await node.dag.get(hash)
+console.log(content.value.payload)
 ```
 
 Running this code should give you something like the following output. Hold steady, it's overwhelming but it will make sense 
-after we explain what happened.
-
-For more information see Part 3.
+after we explain what happened. For more information see Part 3.
 
 ```json
 {
@@ -34,6 +33,13 @@ For more information see Part 3.
   }
 }
 ```
+
+### What just happened?
+
+* `piecesDb.put({ ... })` is the primary. This call returns a _mutlihash_, which is the hash of the content added to IPFS. 
+* `node.dag.get` is a function that takes a Content ID (CID) and returns content. 
+
+> **Note:** "dag" is code for DAG, or Directed Acyclic Graph. More on this in Part 4
 
 ## Storing Media Files
 
