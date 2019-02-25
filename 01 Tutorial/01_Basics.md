@@ -155,14 +155,11 @@ node.on("ready", async () => {
   }
   
   piecesDb = await orbitdb.docstore('pieces', options)
-  await piecesDb.load()
-  
-  pieces = piecesDb.get('all')
-  console.log(pieces.address)
+  console.log(piecesDb.id)
 })
 ```
 
-You will see the output of a simple empty array, `[]`. We understand this may not be immediately impressive, but a lot of important things quietly happened.
+You will see something like the following as an output: `/orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces`. This is the id, or **address** of this database.
 
 ### What just happened?
 
@@ -212,3 +209,10 @@ still stored in IPFS.
 ![An image showing the IPFS and OrbitDB IndexedDB databases in Firefox](../images/ipfs_browser_2.png)
 
 ## Addressing
+
+### A quick anecdote about Orbit Chat
+
+As a proof of concept of OrbitDB, we often encourage people to run an instance of [Orbit Chat](#) locally. Due to people not 
+understanding exactly how peer to peer works, 
+
+On a final note to this chapter, it's important that you understand how OrbitDB addresses are created, and how they work. 
