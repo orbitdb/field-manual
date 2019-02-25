@@ -1,6 +1,6 @@
 _Note:_ Please see the [README](./README.md) before beginning this chapter.
 
-# Tutorial Chapter 1 - Laying the Foundation
+# Chapter 1 - Laying the Foundation
 
 > The basics of OrbitDB include undertanding how to _install OrbitDB (and IPFS)_, _create a new databases_, and how _addressing_ works. 
 
@@ -116,7 +116,7 @@ the curious can find out more [here](#).
 
 In the browser IPFS content is handled inside of IndexedDB, a persistent storage mechanism for browsers
 
-![alt browser whatever](../images/ipfs_browser.png)
+![An image showing the IPFS IndexedDB databases in Firefox](../images/ipfs_browser.png)
 
 Note since you have not explicitly defined a database in the broser, no IndexedDB databases have been created for OrbitDB yet.
 
@@ -190,6 +190,8 @@ See for more info: https://github.com/orbitdb/orbit-db/blob/525978e0a916a8b027e9
 
 
 #### What else happened in the browser?
+
+![An image showing the IPFS and OrbitDB IndexedDB databases in Firefox](../images/ipfs_browser_2.png)
 
 ## Addressing
 
