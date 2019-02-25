@@ -190,8 +190,19 @@ See for more info: https://github.com/orbitdb/orbit-db/blob/525978e0a916a8b027e9
 You will see some activity inside your project's `orbitdb/` folder. This is good.
 
 ```bash
-$ 
+$ ls orbitdb/
+QmNrPunxswb2Chmv295GeCvK9FDusWaTr1ZrYhvWV9AtGM/  zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/
+
+$ ls orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/
+pieces/
+
+$ ls orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces/
+000003.log  CURRENT  LOCK  LOG  MANIFEST-000002
 ```
+
+Two subfolders, one being the original folder you saw when you instantiated OrbitDB, and now another that has the same address as your database.
+
+> More on this later.
 
 #### What else happened in the browser?
 
@@ -201,5 +212,3 @@ still stored in IPFS.
 ![An image showing the IPFS and OrbitDB IndexedDB databases in Firefox](../images/ipfs_browser_2.png)
 
 ## Addressing
-
-This section isn't necessarily a hands-on part of the tutorial, but it's incredibly important 
