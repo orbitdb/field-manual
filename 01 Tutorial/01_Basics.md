@@ -1,4 +1,4 @@
-> **Note:** Please see the [README](./README.md) before beginning this chapter.
+*Note:* Please see the [README](./README.md) before beginning this chapter.
 
 # Chapter 1 - Laying the Foundation
 
