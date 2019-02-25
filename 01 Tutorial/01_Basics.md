@@ -2,56 +2,47 @@
 
 > The basics of OrbitDB include _installing IPFS and OrbitDB_, _creating databases_, and understanding  _data types_, 
 
-_Note:_ Please see the [README](./README.md) before beginning this chapter.
+_Note:_ Please see the [README](./README.md) before beginning this chapter. This chapter will work offline and not require any internet connectivity or connections to peers.
 
 ## Instantiating OrbitDB
 
-Require OrbitDB and IPFS in your program and create the instances:
-
-Since all of these activities can happen offline and locally, without being connected to any peers at all, these
-steps will all take place offline.
+Start by installing OrbitDB and its dependency, IPFS. The process is different between the browser and node.js, so we cover both here. 
 
 ### Installation in Node.js
 
-To use these modules in node.js, first create your project directory and use npm to install
-`orbitdb` and its dependency `ipfs`
+Choose a project directory and `cd` to there from your command line:
 
 From the command line:
 ```bash
 $ npm install orbitdb ipfs
 ```
 
-Then, in a script called `server.js`, require the modules:
+Then, in your script, require the modules:
 
 ```javascript
-// server.js
-
 const Ipfs = require('ipfs')
 const OrbitDB = require('orbit-db')
 ```
 
 ### Installation in the Browser
 
-There are a few different places you can get browser packages for ipfs and orbitdb. These are detailed in Part 3 of this book. For the purposes of this tutorial, we recommend using unpkg for both.
-
-Simply include these at the top of your `index.html` file:
+For the purposes of this tutorial, we recommend using unpkg for obtaining pre-built, minified versions of both IPFS and OrbitDB. Simply include these at the top of your `index.html` file:
 
 ```html
 <script src="https://unpkg.com/ipfs/dist/index.min.js"></script>
 <script src="https://www.unpkg.com/orbit-db/src/OrbitDB.js"></script>
 ```
 
-## Creating IPFS and OrbitDB instances
+There are other ways to get this code, including building it yourself. We detail these in Part 3. 
 
-Let's start with the following code. We'll try to keep the code in bite sized chunks. We are also going to start "offline",
-purposefully not connecting to any other peers until we absolutely need to.
+## Standing up IPFS and OrbitDB
 
-OrbitDB's syntax is almost always identical between the browser and in node.js, so this code will work in both places:
+OrbitDB requires a running IPFS node to operate, so you will create one here and notify OrbitDB about it. by running the following code: 
 
 ```javascript
 let orbitdb
 
-let ipfs = new Ipfs({
+let node = new Ipfs({
   preload: { enabled: false },
   repo: "./ipfs",
   EXPERIMENTAL: { pubsub: true },
@@ -61,14 +52,14 @@ let ipfs = new Ipfs({
   }
 });
 
-ipfs.on("error", (e) => { throw new Error(e) })
-ipfs.on("ready", async () => {
-  orbitdb = await OrbitDB.createInstance(ipfs)
+node.on("error", (e) => { throw new Error(e) })
+node.on("ready", async () => {
+  orbitdb = await OrbitDB.createInstance(node)
   console.log(orbitdb.id)
 })
 ```
 
-You see the output, something called a "multihash", like `QmPSicLtjhsVifwJftnxncFs4EwYTBEjKUzWweh1nAA87B`. For now, just know that this is the identifier of your node. Multihashes are explained in more detail in the **Part 2: Peer-to-Peer**
+In the output you will see something called a "multihash", like `QmPSicLtjhsVifwJftnxncFs4EwYTBEjKUzWweh1nAA87B`. For now, just know that this is the identifier of your IPFS node. Multihashes are explained in more detail in the **Part 2: Peer-to-Peer**
 
 ### What just happened?
 
@@ -78,8 +69,8 @@ Starting with the `new Ipfs` line, your code creates a new IPFS node. Note the d
 * `repo: './ipfs'` designates the path of the repo in node.js only. In the browser, you can actually remove this line. The default setting is a folder called `.jsipfs` in your home directory. You will see why we choose this acute location for the folder later.
 * `XPERIMENTAL: { pubsub: true }` enables IPFS pubsub, which is a method of communicating between nodes and is required for OrbitDB usage, despite whether or not we are connected to other peers.
 * `config: { Bootstrap: [], Addresses: { Swarm: [] }}` sets both our bootstrap peers list (peers that are loaded on instantiation) and swarm peers list (peers that can connect and disconnect at any time to empty. We will populate these later.
-* `ipfs.on("error", (e) => { throw new Error(e) })` implements extremely basic error handling for if something happens during node creation
-* `ipfs.on("ready", (e) => { orbitdb = new OrbitDB(ipfs) })` instantiates OrbitDB on top of the IPFS node, when it is ready.
+* `node.on("error", (e) => { throw new Error(e) })` implements extremely basic error handling for if something happens during node creation
+* `node.on("ready", (e) => { orbitdb = new OrbitDB(node) })` instantiates OrbitDB on top of the IPFS node, when it is ready.
 
 By running the code above, you have created a new IPFS node that works locally and is not connected to any peers.
 You have also loaded a new orbitdb object into memory, ready to create databases and manage data.
@@ -126,8 +117,8 @@ let orbitdb
 
 /* ... */
 
-ipfs.on("ready", () => {
-  orbitdb = new OrbitDB(ipfs)
+node.on("ready", async () => {
+  orbitdb = new OrbitDB.createInstance(node)
   console.log(orbitdb.id)
 })
 ```
@@ -155,7 +146,7 @@ node.on("ready", async () => {
 })
 ```
 
-Run this code and you will see the output of a simple empty array, `[]`. Not much to look at, but a lot of important things happened under the hood that we should cover before you start populating your personal repository of sheet music.
+Run this code and you will see the output of a simple empty array, `[]`. Perhaps it's not immediately impressive, but a lot of important things quietly happened that we should cover.
 
 ### What just happened?
 
@@ -185,7 +176,7 @@ A docstore is one of many data stores that you can utilize when creating databas
 - **[docs](https://github.com/orbitdb/orbit-db/blob/master/API.md#orbitdbdocsnameaddress-options)**: a document database to which JSON documents can be stored and indexed by a specified key. Useful for building search indices or version controlling documents and data.
 - **[counter](https://github.com/orbitdb/orbit-db/blob/master/API.md#orbitdbcounternameaddress)**: Useful for counting events separate from log/feed data.
 
-You can also make your own stores. This is covered in Part 3 of this book.
+In addition to these provided, you can also easily make your own stores. This process is covered in Part 3 of this book.
 
 * Resolves #[481](https://github.com/orbitdb/orbit-db/issues/481)
 * Resolves #[480](https://github.com/orbitdb/orbit-db/issues/480)
