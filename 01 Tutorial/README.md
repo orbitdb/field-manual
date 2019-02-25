@@ -9,37 +9,6 @@
 * A modern web browser (Firefox, Chrome, Edge, etc)
 * Node.js installed
 
-### Installing OrbitDB
-
-#### Installation in Node.js
-
-To use these modules in node.js, first create your project directory and use npm to install
-`orbitdb` and its dependency `ipfs`
-
-From the command line:
-```bash
-$ npm install orbitdb ipfs
-```
-
-Then, in a script called `server.js`, require the modules:
-
-```javascript
-// server.js
-
-const Ipfs = require('ipfs')
-const OrbitDB = require('orbit-db')
-```
-
-#### Installation in the Browser
-
-There are a few different places you can get browser packages for ipfs and orbitdb. These are detailed in Part 3 of this book. For the purposes of this tutorial, we recommend using unpkg for both.
-
-Simply include these at the top of your `index.html` file:
-
-```html
-<script src="https://unpkg.com/ipfs/dist/index.min.js"></script>
-<script src="https://www.unpkg.com/orbit-db/src/OrbitDB.js"></script>
-```
 ## Conventions
 
 * Read this tutorial in order, the learning builds on itself other over time.
