@@ -9,17 +9,6 @@
 * A modern web browser (Firefox, Chrome, Edge, etc)
 * Node.js installed
 
-## Conventions
-
-* Read this tutorial in order, the learning builds on itself other over time.
-* You will switch between writing and reading code, and *What Just Happened* sections that explain in depth what happens on a technical level when the code is run.
-* OrbitDB works in both node.js and in the browser, and this tutorial will not focus on one or the other. Stay on your toes.
-* This tutorial is not only OS-agnostic and editor-agnostic, it's also folder structure agnostic. All of the code examples are designed to work if applied in order, regardless of which js file they are in. Thus folder and file names for code are avoided.
-* `async` and `await` are used prominently. Feel free to replace those with explicit `Promise` objects if you're feeling daring.
-
-
-You can start a new OrbitDB project in either the browser or the command line.
-
 ## What will I build?
 
 You will build an app that provides royalty-free sheet music on-demand for musicians, based on their instrument. 
@@ -43,3 +32,13 @@ generally contentious and complicated.
 We believe that **music** is a uniquely universal cultural feature - something that we more humans than any other topic
 share, enjoy, or at least appreciate. Your participation in this tutorial will make it easier for musicians all over the
 world to find sheet music to practice with.
+
+## Conventions
+
+* Read this tutorial in order, the learning builds on itself other over time.
+* You will switch between writing and reading code, and *What Just Happened* sections that explain in depth what happens on a technical level when the code is run.
+* OrbitDB works in both node.js and in the browser, and this tutorial will not focus on one or the other. Stay on your toes.
+* This tutorial is not only OS-agnostic and editor-agnostic, it's also folder structure agnostic. All of the code examples are designed to work if applied in order, regardless of which js file they are in. Thus folder and file names for code are avoided.
+* `async` and `await` are used prominently. Feel free to replace those with explicit `Promise` objects if you're feeling daring.
+
+Ready? Let's start with [Chapter 1: The Basics](./01 The Basics.md)
