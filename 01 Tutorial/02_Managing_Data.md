@@ -4,6 +4,51 @@
 
 > Managing data in OrbitDB involves _x_, _y_, and _z_.
 
+## Getting Started
+
+To start, you'll do a couple of things to enhance our current code and tidy up.
+
+Return to your `ready` event handler from earlier:
+
+```javascript
+node.on("ready", async () => {
+  orbitdb = await OrbitDB.createInstance(node)
+
+  const options = {
+    accessController: { write: [orbitdb.identity.publicKey] },
+    indexBy: "hash"
+  }
+  
+  piecesDb = await orbitdb.docstore('pieces', options)
+  console.log(piecesDb.id)
+})
+```
+
+Now, you'll change it to:
+
+```javascript
+node.on("ready", async () => {
+  orbitdb = await OrbitDB.createInstance(node)
+
+  const options = {
+    accessController: { write: [orbitdb.identity.publicKey] },
+    indexBy: "hash"
+  }
+  piecesDb = await orbitdb.docstore('pieces', options)
+  await piecesDb.load()
+
+  pieces = piecesDb.get('all')
+  console.log(pieces)
+})$                                                   
+```
+
+Now you will see an empty array `[]` for an output. While not very impressive, it's still an important milestone.
+
+### What just happened?
+
+* `await piecesDb.load()`
+* `pieces = piecesDb.get('all')`
+
 ## Adding data to our database
 
 Now that you have a database set up, adding content to it is fairly easy. Run the following code to add some sheet music to the repository.
