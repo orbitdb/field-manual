@@ -1,16 +1,15 @@
-# Tutorial Part 1 - Laying the Foundation
+# Tutorial Chapter 1 - Laying the Foundation
 
-> The basics of OrbitDB include _installing IPFS and OrbitDB_, _creating a new IPFS node_, _creating databases_, and understanding  _data types_, 
+> The basics of OrbitDB include _installing IPFS and OrbitDB_, _creating databases_, and understanding  _data types_, 
 
-## Chapter 1: The Basics
-
-
-Finally, since all of these activities can happen offline and locally, without being connected to any peers at all, these
-steps will all take place offline.
+_Note:_ Please be sure you've read the Tutorial introduction before beginning this chapter.
 
 ### Instantiating OrbitDB
 
 Require OrbitDB and IPFS in your program and create the instances:
+
+Since all of these activities can happen offline and locally, without being connected to any peers at all, these
+steps will all take place offline.
 
 #### Installation in Node.js
 
@@ -164,7 +163,7 @@ See for more https://github.com/orbitdb/orbit-db/blob/525978e0a916a8b027e9ea73d8
 * Resolves #[366](https://github.com/orbitdb/orbit-db/issues/366)
 * Resolves #[502](https://github.com/orbitdb/orbit-db/issues/502)
 
-### Data Types
+#### Understanding Data Types
 
 * Resolves #[481](https://github.com/orbitdb/orbit-db/issues/481)
 * Resolves #[480](https://github.com/orbitdb/orbit-db/issues/480)
