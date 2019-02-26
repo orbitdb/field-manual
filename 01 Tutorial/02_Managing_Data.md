@@ -120,6 +120,14 @@ Luckily, with content addressing in IPFS, this becomes rather easy, and predicta
 
 ## Schema design, or "How I learned to stop worrying and love nested databases"
 
+### Adding a practice counter to each piece 
+
+### Wrapping it all inside of a user database
+
+### What just happened?
+
+You just nested multiple databases inside of your pieces database, and then nested ALL of that inside a user database, connected by their addresses.
+
 * Resolves #[365](https://github.com/orbitdb/orbit-db/issues/365) 
 * Resolves #[438](https://github.com/orbitdb/orbit-db/issues/438)
 * Resolves #[381](https://github.com/orbitdb/orbit-db/issues/381)
