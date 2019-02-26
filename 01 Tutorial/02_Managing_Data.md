@@ -16,6 +16,8 @@ At your disposal you have:
 - **[docs](https://github.com/orbitdb/orbit-db/blob/master/API.md#orbitdbdocsnameaddress-options)**: a document database to which JSON documents can be stored and indexed by a specified key. Useful for building search indices or version controlling documents and data.
 - **[counter](https://github.com/orbitdb/orbit-db/blob/master/API.md#orbitdbcounternameaddress)**: Useful for counting events separate from log/feed data.
 
+Each OrbitDB store has its own specific API methods to create, delete, retreieve and update data. In general, you can expect to always have something like a `get` and something like a `put`.
+
 ## Getting Started
 
 To start, you'll do a couple of things to enhance our current code and tidy up.
@@ -104,9 +106,45 @@ after we explain what happened. For more information see Part 3.
 * `piecesDb.put({ ... })` is the primary. This call returns a _mutlihash_, which is the hash of the content added to IPFS. 
 * `node.dag.get(hash)` is a function that takes a Content ID (CID) and returns content. 
 
-> **Note:** "dag" is code for DAG, or Directed Acyclic Graph. More on this in Part 4
+> **Note:** "dag" is code for the acronym DAG, which stands for Directed Acyclic Graph. This is a data structure that is, or is at least closely related to Blockchain. More on this in Part 4
 
 ## Reading data
+
+Once you've added data, now you can query it. OrbitDB gives you a number of ways to do this. You will learn a couple ways to do it here, and we will cover the lower-level techniques in Part 3.
+
+Each store is going to have its own specific API, but generally `get` and `put` will be available.
+
+Run this code to get 
+
+```javascript
+const singlePiece = pieces.get('Qmz...')
+console.log(singlePiece)
+```
+
+You'll see this output:
+
+```json
+{ }
+```
+
+Pulling a random score from the database is a great way to see this in action. Run this code:
+
+```javascript
+
+const pieces = pieces.get('all')
+const randomPiece = pieces[items.length * Math.random() | 0]
+console.log(randomPiece)
+```
+
+You'll see a similar output to above but with a random piece from the database.
+
+> **Note:** You're probably wondering about if you have a large database of millions of documents, and the implications of loading them all into memory. It's a valid concern, and you should move on to Part 4 of this book once you're done with the tutorial
+
+### What Just Happened
+
+You queried the database of scores you created earlier in the chapter, retrieving by hash and also randomly.
+
+* pieces.get('Qmz...') is really all you need to remember here. Keep in mind that each OrbitDB store has
 
 ## Storing Media Files
 
