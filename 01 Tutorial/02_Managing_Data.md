@@ -1,4 +1,4 @@
-**Note:** Please complete Chapter 1 before reading. 
+**Note:** Please complete [Chapter 1 - Laying the Foundation](./01_Basics) first. 
 
 # Chapter 2 - Managing Data
 
