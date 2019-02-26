@@ -16,7 +16,9 @@ At your disposal you have:
 - **[docs](https://github.com/orbitdb/orbit-db/blob/master/API.md#orbitdbdocsnameaddress-options)**: a document database to which JSON documents can be stored and indexed by a specified key. Useful for building search indices or version controlling documents and data.
 - **[counter](https://github.com/orbitdb/orbit-db/blob/master/API.md#orbitdbcounternameaddress)**: Useful for counting events separate from log/feed data.
 
-Each OrbitDB store has its own specific API methods to create, delete, retreieve and update data. In general, you can expect to always have something like a `get` and something like a `put`.
+Each OrbitDB store has its own specific API methods to create, delete, retreieve and update data. In general, you can expect to always have something like a `get` and something like a `put`. 
+
+Also, users of OrbitDB can write their own stores if it suits them. This is an advanced topic and is covered in Part 3 of this book.
 
 ## Getting Started
 
@@ -175,6 +177,8 @@ You just nested multiple databases inside of your pieces database, and then nest
 
 ## Key Takeaways
 
+* OrbitDB supports many schemas and APIs for interacting with data. This functionality is managed in what are called **stores**.
+* OrbitDB comes with a handful of stores, and you can write your own.
 * Always `load()` your data before querying your database. You will be sad otherwise
 * While you technically _can_ store encoded media directly in a database, media files are best stored in OrbitDB
 * 
