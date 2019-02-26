@@ -2,7 +2,7 @@
 
 # Chapter 2 - Managing Data
 
-> Managing data in OrbitDB involves _choosing the appropriate data stores_, _loading databases into memory_, _putting data_ and _getting data_.
+> Managing data in OrbitDB involves _choosing the appropriate data stores_, _loading databases into memory_, _putting data_ and _getting data_. We also touch upon _schema design_ using nested databases.
 
 ## Choosing a Data Store
 
@@ -24,23 +24,7 @@ Also, users of OrbitDB can write their own stores if it suits them. This is an a
 
 To start, you'll do a couple of things to enhance our current code and tidy up.
 
-Return to your `ready` event handler from earlier:
-
-```javascript
-node.on("ready", async () => {
-  orbitdb = await OrbitDB.createInstance(node)
-
-  const options = {
-    accessController: { write: [orbitdb.identity.publicKey] },
-    indexBy: "hash"
-  }
-  
-  piecesDb = await orbitdb.docstore('pieces', options)
-  console.log(piecesDb.id)
-})
-```
-
-Now, you'll change it to:
+Update your `ipfs.on("ready"...` handler from earlier and then run this code:
 
 ```javascript
 node.on("ready", async () => {
@@ -52,20 +36,14 @@ node.on("ready", async () => {
   }
   piecesDb = await orbitdb.docstore('pieces', options)
   await piecesDb.load()
-
-  pieces = piecesDb.get('all')
-  console.log(pieces)
 })$                                                   
 ```
 
-Now you will see an empty array `[]` for an output. While not very impressive, it's still an important milestone.
-
 ### What just happened?
 
-* `await piecesDb.load()` is a function that will need to be called whenever we want the latest and greatest snapshot of data in the database. `load()` retrieves all of the values in the data
-* `pieces = piecesDb.get('all')`
+* `await piecesDb.load()` is a function that will need to be called whenever we want the latest and greatest snapshot of data in the database. `load()` retrieves all of the values via their _content addresses_ and loads the content into memory
 
-> **Note:** about memory usage
+> **Note:** You're probably wondering about if you have a large database of millions of documents, and the implications of loading them all into memory. It's a valid concern, and you should move on to Part 4 of this book once you're done with the tutorial.
 
 ## Adding data to our database
 
@@ -140,13 +118,14 @@ console.log(randomPiece)
 
 You'll see a similar output to above but with a random piece from the database.
 
-> **Note:** You're probably wondering about if you have a large database of millions of documents, and the implications of loading them all into memory. It's a valid concern, and you should move on to Part 4 of this book once you're done with the tutorial
-
 ### What Just Happened
 
 You queried the database of scores you created earlier in the chapter, retrieving by hash and also randomly.
 
-* pieces.get('Qmz...') is really all you need to remember here. Keep in mind that each OrbitDB store has
+* `pieces.get('Qmz...')` is a simple function that takes an index value (in this case a hash) and returns the content of that database record.
+* `pieces = piecesDb.get('all')` is the same function, but in this case we use get method that uses a special keyword "all" to return all of the pieces
+
+> **Note:** The OrbitDB docstore is surprisingly powerful. You can read more about how to use it in its [documentation].
 
 ## Storing Media Files
 
@@ -157,6 +136,18 @@ Luckily, with content addressing in IPFS, this becomes rather easy, and predicta
 1. Add the file to IPFS, which will return the _multihash_ of the file
 2. Store said multihash in OrbitDB 
 3. When it comes time to display the media, use native IPFS functionality to retrieve it from the hash
+
+### Creating File Buffers
+
+#### In the browser
+
+#### In Node.js
+
+### Storing Media
+
+Run the following code to see it in action.
+
+### What just happened
 
 ## Schema design, or "How I learned to stop worrying and love nested databases"
 
