@@ -2,7 +2,7 @@
 
 # Chapter 2 - Managing Data
 
-> Managing data in OrbitDB involves _x_, _y_, and _z_.
+> Managing data in OrbitDB involves _understanding data stores_, _loading databases into memory_, _putting data_ and _getting data_.
 
 ## Getting Started
 
