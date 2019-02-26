@@ -168,13 +168,6 @@ Luckily, with content addressing in IPFS, this becomes rather easy, and predicta
 
 You just nested multiple databases inside of your pieces database, and then nested ALL of that inside a user database, connected by their addresses.
 
-* Resolves #[365](https://github.com/orbitdb/orbit-db/issues/365) 
-* Resolves #[438](https://github.com/orbitdb/orbit-db/issues/438)
-* Resolves #[381](https://github.com/orbitdb/orbit-db/issues/381)
-* Resolves #[242](https://github.com/orbitdb/orbit-db/issues/242)
-* Resolves #[430](https://github.com/orbitdb/orbit-db/issues/430)
-
-
 ## Key Takeaways
 
 * OrbitDB supports many schemas and APIs for interacting with data. This functionality is managed in what are called **stores**.
@@ -182,3 +175,9 @@ You just nested multiple databases inside of your pieces database, and then nest
 * Always `load()` your data before querying your database. You will be sad otherwise
 * While you technically _can_ store encoded media directly in a database, media files are best stored in OrbitDB
 * 
+
+* Resolves #[365](https://github.com/orbitdb/orbit-db/issues/365) 
+* Resolves #[438](https://github.com/orbitdb/orbit-db/issues/438)
+* Resolves #[381](https://github.com/orbitdb/orbit-db/issues/381)
+* Resolves #[242](https://github.com/orbitdb/orbit-db/issues/242)
+* Resolves #[430](https://github.com/orbitdb/orbit-db/issues/430)
