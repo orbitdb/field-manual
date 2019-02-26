@@ -102,7 +102,7 @@ after we explain what happened. For more information see Part 3.
 
 ## Reading data
 
-## On Loading
+## Schema design, or "How I learned to stop worrying and love nested databases"
 
 * Resolves #[365](https://github.com/orbitdb/orbit-db/issues/365) 
 * Resolves #[438](https://github.com/orbitdb/orbit-db/issues/438)
