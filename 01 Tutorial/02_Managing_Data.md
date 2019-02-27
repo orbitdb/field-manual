@@ -22,7 +22,7 @@ Also, users of OrbitDB can write their own stores if it suits them. This is an a
 
 ## Getting Started
 
-To start, you'll do a couple of things to enhance our current code and tidy up.
+To start, you'll do a couple of things to enhance our current code and tidy up. We will also scaffold out some functions to be filled in later.
 
 Update your `ipfs.on("ready"...` handler from earlier and then run this code:
 
@@ -36,7 +36,11 @@ node.on("ready", async () => {
   }
   piecesDb = await orbitdb.docstore('pieces', options)
   await piecesDb.load()
-})$                                                   
+})
+
+function putPiece(object) { }
+function deletePiece(hash) { }
+function getPiece(hash) { }
 ```
 
 ### What just happened?
