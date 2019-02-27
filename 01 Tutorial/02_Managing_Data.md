@@ -128,11 +128,30 @@ You queried the database of scores you created earlier in the chapter, retrievin
 > **Note:** The OrbitDB docstore is surprisingly powerful. You can read more about how to use it in its [documentation].
 
 
-## Updating Data
+## Updating and deleting data
 
+Each store will ahve its own method of doing so, but in the docstore you can update records by using the `put` method and the ID of the index you want to update:
 
-## Deleting Data
+For example if you realize you'd rather practice a piece on a Harpsichord instead of a piano:
 
+```javascript
+await piecesDb.put({
+  hash: "Qm...",
+  instrument: "Piano"
+})
+```
+
+In the docstore, deleting a record is easy, and done so via the index:
+
+```javascript
+piecesDb.del("Qm.....")
+```
+
+### What just happened?
+
+You may be thinking something like this: "Wait, if OrbitDB is built upon IPFS and IPFS is immutable, then how are we updating or deleting records?" Great question
+
+TODO: Explanation
 
 ## Storing Media Files
 
