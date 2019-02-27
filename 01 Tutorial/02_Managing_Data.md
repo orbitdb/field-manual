@@ -54,7 +54,7 @@ We have uploaded and pinned a few piano scores to IPFS, and will provide the has
 ```javascript
 const hash = await piecesDb.put({
   hash: "",
-  instrument: formData.get("instrument")
+  instrument: "Piano"
 })
 
 // repeat with these hashes if you want:
@@ -97,7 +97,7 @@ Each store is going to have its own specific API, but generally `get` and `put` 
 Run this code to get 
 
 ```javascript
-const singlePiece = pieces.get('Qmz...')
+const singlePiece = pieces.get('Qmz...')[0]
 console.log(singlePiece)
 ```
 
@@ -111,7 +111,7 @@ Pulling a random score from the database is a great way to see this in action. R
 
 ```javascript
 
-const pieces = pieces.get('')
+const pieces = piecesDb.query((piece) => piece.instrument === formData.get('instrument'))
 const randomPiece = pieces[items.length * Math.random() | 0]
 console.log(randomPiece)
 ```
@@ -137,7 +137,20 @@ Luckily, with content addressing in IPFS, this becomes rather easy, and predicta
 2. Store said multihash in OrbitDB 
 3. When it comes time to display the media, use native IPFS functionality to retrieve it from the hash
 
-### Creating File Buffers
+### Adding Content to IPFS
+
+Assuming you have a `file.pdf` you want to add to IPFS, you have several options. You'll be free to chose whichever one works for you.
+
+#### On the command line with go-ipfs or js-ipfs
+
+After following the installation instructions to install [go-ipfs]() or [js-ipfs]() globally, run the following command:
+ 
+```bash
+$ ipfs add file.pdf # sometimes jsipfs add file.pdf
+Qm.....
+```
+
+You can then use that hash in the same manner as above to add it to the database of pieces.
 
 #### In the browser
 
