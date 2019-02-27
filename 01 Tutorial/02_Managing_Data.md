@@ -1,4 +1,4 @@
-**Note:** Please complete [Chapter 1 - Laying the Foundation](./01_Basics) first. 
+**Note:** Please complete [Chapter 1 - Laying the Foundation](./01_Basics.md) first. 
 
 # Chapter 2 - Managing Data
 
@@ -111,7 +111,7 @@ Pulling a random score from the database is a great way to see this in action. R
 
 ```javascript
 
-const pieces = pieces.get('all')
+const pieces = pieces.get('')
 const randomPiece = pieces[items.length * Math.random() | 0]
 console.log(randomPiece)
 ```
@@ -122,8 +122,8 @@ You'll see a similar output to above but with a random piece from the database.
 
 You queried the database of scores you created earlier in the chapter, retrieving by hash and also randomly.
 
-* `pieces.get('Qmz...')` is a simple function that takes an index value (in this case a hash) and returns the content of that database record.
-* `pieces = piecesDb.get('all')` is the same function, but in this case we use get method that uses a special keyword "all" to return all of the pieces
+* `pieces.get('Qmz...')` is a simple function that performs a full-text search on your database based on a string that you pass. It will return an array of records that match.
+* `pieces = piecesDb.get('')` is the same function, but in this case we pass an empty string to return all records.
 
 > **Note:** The OrbitDB docstore is surprisingly powerful. You can read more about how to use it in its [documentation].
 
