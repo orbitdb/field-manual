@@ -53,18 +53,26 @@ We have uploaded and pinned a few piano scores to IPFS, and will provide the has
 
 ```javascript
 const hash = await piecesDb.put({
-  hash: "",
+  hash: "QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ", // Metroid - Ending Theme.pdf
   instrument: "Piano"
 })
 
-// repeat with these hashes if you want:
-// Qmz...........
-// Qmz...........
-// Qmz...........
-// Qmz...........
-
 const content = await node.dag.get(hash)
 console.log(content.value.payload)
+
+/*
+Add these, too:
+- QmRn99VSCVdC693F6H4zeS7Dz3UmaiBiSYDf6zCEYrWynq sample-music/Metroid - Escape Theme.pdf
+- QmdzDacgJ9EQF9Z8G3L1fzFwiEu255Nm5WiCey9ntrDPSL sample-music/Metroid - Game Start.pdf
+- QmcFUvG75QTMok9jrteJzBUXeoamJsuRseNuDRupDhFwA2 sample-music/Metroid - Item Found.pdf
+- QmTjszMGLb5gKWAhFZbo8b5LbhCGJkgS8SeeEYq3P54Vih sample-music/Metroid - Kraids Hideout.pdf
+- QmNfQhx3WvJRLMnKP5SucMRXEPy9YQ3V1q9dDWNC6QYMS3 sample-music/Metroid - Norfair.pdf
+- QmQS4QNi8DCceGzKjfmbBhLTRExNboQ8opUd988SLEtZpW sample-music/Metroid - Ridleys Hideout.pdf
+- QmcJPfExkBAZe8AVGfYHR7Wx4EW1Btjd5MXX8EnHCkrq54 sample-music/Metroid - Silence.pdf
+- Qmb1iNM1cXW6e11srUvS9iBiGX4Aw5dycGGGDPTobYfFBr sample-music/Metroid - Title Theme.pdf
+- QmYPpj6XVNPPYgwvN4iVaxZLHy982TPkSAxBf2rzGHDach sample-music/Metroid - Tourian.pdf
+- QmefKrBYeL58qyVAaJoGHXXEgYgsJrxo763gRRqzYHdL6o sample-music/Metroid - Zebetite.pdf
+*/
 ```
 
 Running this code should give you something like the following output. Hold steady, it's overwhelming but it will make sense 
