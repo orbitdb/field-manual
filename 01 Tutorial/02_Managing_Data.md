@@ -14,7 +14,7 @@
 
 To start, you'll do a couple of things to enhance our current code and tidy up. We will also scaffold out some functions to be filled in later.
 
-Update your `NewPiecePlease class` handler from earlier and then run this code:
+Update your `NewPiecePlease class` handler, adding **one line** at the bottom of the IPFS `ready` handler. and then run this code:
 
 ```javascript
 class NewPiecePlease {
@@ -39,13 +39,13 @@ class NewPiecePlease {
       }
 
       this.piecesDb = await this.orbitdb.docstore('pieces', options)
-      await this.piecesDb.load()
+      await this.piecesDb.load()  // It's only this line that changed!! Blink and you'll miss it
     });
   }
 
-  getPiece(instrument) { }
-  addNewPiece(hash) { }
+  async addNewPiece() { }
   deletePiece(hash) { }
+  getPiece(query) { }
 }
 
 ```
@@ -61,30 +61,30 @@ After you instantiated the database,
 
 Now that you have a database set up, adding content to it is fairly easy. Run the following code to add some sheet music to the repository.
 
-We have uploaded and pinned a few piano scores to IPFS, and will provide the hashes. We hope you like Metroid. You can add these hashes to your database by writing and using the `addNewPiece` function.
+We have uploaded and pinned a few piano scores to IPFS, and will provide the hashes. You can add these hashes to your database by fleshing out and using the `addNewPiece` function.
+
+> **Note:** We hope you like the original Metroid game, or at least the music from it!
 
 ```javascript
-const hash = await piecesDb.put({
-  hash: "QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ", // Metroid - Ending Theme.pdf
-  instrument: "Piano"
-})
+async addNewPiece(hash, instrument = "Piano") {
+  const hash = await piecesDb.put({ hash, instrument })
+  return hash
+}
+```
 
+### What just happened?
+
+* `piecesDb.put({ ... })` is the primary. This call returns a _mutlihash_, which is the hash of the content added to IPFS. 
+* `node.dag.get(hash)` is a function that takes a Content ID (CID) and returns content. 
+
+> **Note:** "dag" is code for the acronym DAG, which stands for Directed Acyclic Graph. This is a data structure that is, or is at least closely related to Blockchain. More on this in Part 4
+
+In your application code, node.js or browser, you cna use this function like so, utilizing the detault value for the `instrument` argument.
+
+```javascript
+const newPieceHash = NPP.addNewPiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ""
 const content = await node.dag.get(hash)
 console.log(content.value.payload)
-
-/*
-Add these, too:
-- QmRn99VSCVdC693F6H4zeS7Dz3UmaiBiSYDf6zCEYrWynq sample-music/Metroid - Escape Theme.pdf
-- QmdzDacgJ9EQF9Z8G3L1fzFwiEu255Nm5WiCey9ntrDPSL sample-music/Metroid - Game Start.pdf
-- QmcFUvG75QTMok9jrteJzBUXeoamJsuRseNuDRupDhFwA2 sample-music/Metroid - Item Found.pdf
-- QmTjszMGLb5gKWAhFZbo8b5LbhCGJkgS8SeeEYq3P54Vih sample-music/Metroid - Kraids Hideout.pdf
-- QmNfQhx3WvJRLMnKP5SucMRXEPy9YQ3V1q9dDWNC6QYMS3 sample-music/Metroid - Norfair.pdf
-- QmQS4QNi8DCceGzKjfmbBhLTRExNboQ8opUd988SLEtZpW sample-music/Metroid - Ridleys Hideout.pdf
-- QmcJPfExkBAZe8AVGfYHR7Wx4EW1Btjd5MXX8EnHCkrq54 sample-music/Metroid - Silence.pdf
-- Qmb1iNM1cXW6e11srUvS9iBiGX4Aw5dycGGGDPTobYfFBr sample-music/Metroid - Title Theme.pdf
-- QmYPpj6XVNPPYgwvN4iVaxZLHy982TPkSAxBf2rzGHDach sample-music/Metroid - Tourian.pdf
-- QmefKrBYeL58qyVAaJoGHXXEgYgsJrxo763gRRqzYHdL6o sample-music/Metroid - Zebetite.pdf
-*/
 ```
 
 Running this code should give you something like the following output. Hold steady, it's overwhelming but it will make sense 
@@ -101,13 +101,23 @@ after we explain what happened. For more information see Part 3.
 }
 ```
 
-### What just happened?
+This an entry from OrbitDB's **OPLOG**. All data are stored in OrbitDB as a log, and then the schema for display and use is calculated on write. You can see the operation is specified here as a `PUT`, and then stored as a key/value pair.
 
-* `piecesDb.put({ ... })` is the primary. This call returns a _mutlihash_, which is the hash of the content added to IPFS. 
-* `node.dag.get(hash)` is a function that takes a Content ID (CID) and returns content. 
+Repeat this process to add more hashes from the NES Metroid soundtrack:
 
-> **Note:** "dag" is code for the acronym DAG, which stands for Directed Acyclic Graph. This is a data structure that is, or is at least closely related to Blockchain. More on this in Part 4
-
+```
+QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ | Metroid - Ending Theme.pdf
+QmRn99VSCVdC693F6H4zeS7Dz3UmaiBiSYDf6zCEYrWynq | Metroid - Escape Theme.pdf
+QmdzDacgJ9EQF9Z8G3L1fzFwiEu255Nm5WiCey9ntrDPSL | Metroid - Game Start.pdf
+QmcFUvG75QTMok9jrteJzBUXeoamJsuRseNuDRupDhFwA2 | Metroid - Item Found.pdf
+QmTjszMGLb5gKWAhFZbo8b5LbhCGJkgS8SeeEYq3P54Vih | Metroid - Kraids Hideout.pdf
+QmNfQhx3WvJRLMnKP5SucMRXEPy9YQ3V1q9dDWNC6QYMS3 | Metroid - Norfair.pdf
+QmQS4QNi8DCceGzKjfmbBhLTRExNboQ8opUd988SLEtZpW | Metroid - Ridleys Hideout.pdf
+QmcJPfExkBAZe8AVGfYHR7Wx4EW1Btjd5MXX8EnHCkrq54 | Metroid - Silence.pdf
+Qmb1iNM1cXW6e11srUvS9iBiGX4Aw5dycGGGDPTobYfFBr | Metroid - Title Theme.pdf
+QmYPpj6XVNPPYgwvN4iVaxZLHy982TPkSAxBf2rzGHDach | Metroid - Tourian.pdf
+QmefKrBYeL58qyVAaJoGHXXEgYgsJrxo763gRRqzYHdL6o | Metroid - Zebetite.pdf
+```
 ## Reading data
 
 Once you've added data, now you can query it. OrbitDB gives you a number of ways to do this. You will learn a couple ways to do it here, and we will cover the lower-level techniques in Part 3.
