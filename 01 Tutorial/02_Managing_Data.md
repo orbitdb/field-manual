@@ -152,15 +152,26 @@ Qm.....
 
 You can then use that hash in the same manner as above to add it to the database of pieces.
 
-#### In the browser
-
 #### In Node.js
 
-### Storing Media
+In Node.JS, adding a file from the filesystem can be accomplished like so:
 
-Run the following code to see it in action.
+```javascript
+var IPFS = require('ipfs')
+var ipfs = new IPFS(/* insert appropriate options here for your local IPFS installation */)
 
-### What just happened
+ipfs.addFromFs("./file.pdf").then(console.log)
+```
+
+#### In the browser
+
+Unfortunately we don't have a one-line trick to upload a file to IPFS, but if you have a HTML file input with an ID of "fileUpload", you can do the following:
+
+```javascript
+var fileInput = document.getElementById("fileUpload")
+```
+
+### What just happened?
 
 ## Schema design, or "How I learned to stop worrying and love nested databases"
 
@@ -178,7 +189,9 @@ You just nested multiple databases inside of your pieces database, and then nest
 * OrbitDB comes with a handful of stores, and you can write your own.
 * Always `load()` your data before querying your database. You will be sad otherwise
 * While you technically _can_ store encoded media directly in a database, media files are best stored in OrbitDB
-* 
+* OrbitDB's addressing schema gives you a great deal of flexibility in schema design, even allowing for nested structures
+
+<p></p>
 
 * Resolves #[365](https://github.com/orbitdb/orbit-db/issues/365) 
 * Resolves #[438](https://github.com/orbitdb/orbit-db/issues/438)
