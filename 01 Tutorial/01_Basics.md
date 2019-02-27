@@ -47,23 +47,25 @@ OrbitDB requires a running IPFS node to operate, so you will create one here and
 following code.
 
 ```javascript
-let orbitdb
+class NewPiecePlease() {
+  constructor(IPFS, OrbitDB) {
+    let node = new IPFS({
+      preload: { enabled: false },
+      repo: "./ipfs",
+      EXPERIMENTAL: { pubsub: true },
+      config: {
+        Bootstrap: [],
+        Addresses: { Swarm: [] }
+      }
+    });
 
-let node = new Ipfs({
-  preload: { enabled: false },
-  repo: "./ipfs",
-  EXPERIMENTAL: { pubsub: true },
-  config: {
-    Bootstrap: [],
-    Addresses: { Swarm: [] }
+    node.on("error", (e) => { throw new Error(e) })
+    node.on("ready", async () => {
+      orbitdb = await OrbitDB.createInstance(node)
+      console.log(orbitdb.id)
+    })
   }
-});
-
-node.on("error", (e) => { throw new Error(e) })
-node.on("ready", async () => {
-  orbitdb = await OrbitDB.createInstance(node)
-  console.log(orbitdb.id)
-})
+}
 ```
 
 In the output you will see something called a "multihash", like `QmPSicLtjhsVifwJftnxncFs4EwYTBEjKUzWweh1nAA87B`. For now, 
