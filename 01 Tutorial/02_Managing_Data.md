@@ -67,22 +67,15 @@ We have uploaded and pinned a few piano scores to IPFS, and will provide the has
 
 ```javascript
 async addNewPiece(hash, instrument = "Piano") {
-  const hash = await piecesDb.put({ hash, instrument })
-  return hash
+  const cid = await piecesDb.put({ hash, instrument })
+  return cid
 }
 ```
 
-### What just happened?
-
-* `piecesDb.put({ ... })` is the primary. This call returns a _mutlihash_, which is the hash of the content added to IPFS. 
-* `node.dag.get(hash)` is a function that takes a Content ID (CID) and returns content. 
-
-> **Note:** "dag" is code for the acronym DAG, which stands for Directed Acyclic Graph. This is a data structure that is, or is at least closely related to Blockchain. More on this in Part 4
-
-In your application code, node.js or browser, you cna use this function like so, utilizing the detault value for the `instrument` argument.
+Then, in your application code, node.js or browser, you cna use this function like so, utilizing the detault value for the `instrument` argument.
 
 ```javascript
-const newPieceHash = NPP.addNewPiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ""
+const newPieceHash = NPP.addNewPiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ")
 const content = await node.dag.get(hash)
 console.log(content.value.payload)
 ```
@@ -100,10 +93,16 @@ after we explain what happened. For more information see Part 3.
   }
 }
 ```
+### What just happened?
 
-This an entry from OrbitDB's **OPLOG**. All data are stored in OrbitDB as a log, and then the schema for display and use is calculated on write. You can see the operation is specified here as a `PUT`, and then stored as a key/value pair.
+* `piecesDb.put({ ... })` is the primary. This call returns a _mutlihash_, which is the hash of the content added to IPFS. 
+* `node.dag.get(hash)` is a function that takes a Content ID (CID) and returns content. 
 
-Repeat this process to add more hashes from the NES Metroid soundtrack:
+> **Note:** "dag" is code for the acronym DAG, which stands for Directed Acyclic Graph. This is a data structure that is, or is at least closely related to Blockchain. More on this in Part 4
+
+* `"op": "PUT"`is a notable part of the output. At the core of OrbitDB databases is the **OPLOG**, where all data are stored as a log of operations, which are then calculated into the appropriate schema for application use. The operation is specified here as a `PUT`, and then the `key`/`value` pair is your data.
+
+You can repeat this process to add more hashes from the NES Metroid soundtrack:
 
 ```
 QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ | Metroid - Ending Theme.pdf
