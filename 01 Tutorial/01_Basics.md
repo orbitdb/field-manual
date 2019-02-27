@@ -217,7 +217,7 @@ still stored in IPFS.
 
 This shows you one of OrbitDB's core strenths - the ability to manage a lot of complexity between its own internals and tht of IPFS, providing a clear and clean API to manage the data that matters to you.
 
-Read on to [Chapter 2: Reading and Writing Data](#) to learn how to do exactly that.
+Read on to [Chapter 2: Managine Data](./02_Managing_Data.md) to learn how to do exactly that.
 
 
 ## Key Takeaways of this Chapter
