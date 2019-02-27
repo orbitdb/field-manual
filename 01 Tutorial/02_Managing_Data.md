@@ -52,7 +52,8 @@ class NewPiecePlease {
 
 ### What just happened?
 
-After you instantiated the database, 
+After you instantiated the database, you loaded its contents into memory for use. It's empty for now, but not for long! Loading the database at this point after instantiation will save you trouble later.
+
 * `await piecesDb.load()` is a function that will need to be called whenever we want the latest and greatest snapshot of data in the database. `load()` retrieves all of the values via their _content addresses_ and loads the content into memory
 
 > **Note:** You're probably wondering about if you have a large database of millions of documents, and the implications of loading them all into memory. It's a valid concern, and you should move on to Part 4 of this book once you're done with the tutorial.
@@ -98,7 +99,7 @@ after we explain what happened. For more information see Part 3.
 * `piecesDb.put({ ... })` is the primary. This call returns a _mutlihash_, which is the hash of the content added to IPFS. 
 * `node.dag.get(hash)` is a function that takes a Content ID (CID) and returns content. 
 
-> **Note:** "dag" is code for the acronym DAG, which stands for Directed Acyclic Graph. This is a data structure that is, or is at least closely related to Blockchain. More on this in Part 4
+> **Note:** "dag" in the code refers to the acronym DAG, which stands for Directed Acyclic Graph. This is a data structure that is, or is at least closely related to Blockchain. More on this in Part 4
 
 * `"op": "PUT"`is a notable part of the output. At the core of OrbitDB databases is the **OPLOG**, where all data are stored as a log of operations, which are then calculated into the appropriate schema for application use. The operation is specified here as a `PUT`, and then the `key`/`value` pair is your data.
 
@@ -119,11 +120,9 @@ QmefKrBYeL58qyVAaJoGHXXEgYgsJrxo763gRRqzYHdL6o | Metroid - Zebetite.pdf
 ```
 ## Reading data
 
-Once you've added data, now you can query it. OrbitDB gives you a number of ways to do this. You will learn a couple ways to do it here, and we will cover the lower-level techniques in Part 3.
+You've added data to your local database, and now you'll can query it. OrbitDB gives you a number of ways to do this, mostly based on which _store_ you picked.
 
-Each store is going to have its own specific API, but generally `get` and `put` will be available.
-
-Run this code to get 
+We gave you a `docstore` earlier, so you can flesh out the simple `getPiece` function like so:
 
 ```javascript
 const singlePiece = pieces.get('Qmz...')[0]
