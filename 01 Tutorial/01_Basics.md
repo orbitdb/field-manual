@@ -4,6 +4,11 @@
 
 > The basics of OrbitDB include  _installing OrbitDB (and IPFS)_, _setting up a new isomorphic project_, _creating databases_, and how _understanding how to choose data stores_. 
 
+- [Installing the requirements: IPFS and OrbitDB](#installing-the-requirements-ipfs-and-orbitdb)
+- [Instantiating IPFS and OrbitDB](#instantiating-ipfs-and-orbitdb)
+- [Creating a Database](#creating-a-database)
+- [Choosing a data store](#choosing-a-data-store)
+
 ## Installing the requirements: IPFS and OrbitDB
 
 You will need to get the code for OrbitDB and its dependency, IPFS, and make it available to your project. The process is 
@@ -73,7 +78,7 @@ const NPP = require('./newpieceplease')
 
 From here on out, we will ignore these isometric bookends and concentrate wholly on the `NewPiecePlease` class.
 
-## Standing up IPFS and OrbitDB
+## Instantiating IPFS and OrbitDB
 
 We have designed Chapters 1 and 2 of the tutorial to work work offline, not requiring any internet connectivity or 
 connections to peers. 
