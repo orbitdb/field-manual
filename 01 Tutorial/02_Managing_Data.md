@@ -2,7 +2,7 @@
 
 # Chapter 2 - Managing Data
 
-> Managing data in OrbitDB involves _choosing the appropriate data stores_, _loading databases into memory_, _putting data_ and _getting data_. We also touch upon _schema design_ using nested databases.
+> Managing data in OrbitDB involves _choosing the appropriate data stores_, _loading databases into memory_, and _creating, updating, reading, and deleting data_.
 
 ## Choosing a Data Store
 
@@ -127,6 +127,13 @@ You queried the database of scores you created earlier in the chapter, retrievin
 
 > **Note:** The OrbitDB docstore is surprisingly powerful. You can read more about how to use it in its [documentation].
 
+
+## Updating Data
+
+
+## Deleting Data
+
+
 ## Storing Media Files
 
 We are often asked if it is possible to store media files like pictures or audio directly inside OrbitDB. Our answer is that you should treat this like any other database system and store the _address_ of the 
@@ -173,23 +180,14 @@ var fileInput = document.getElementById("fileUpload")
 
 ### What just happened?
 
-## Schema design, or "How I learned to stop worrying and love nested databases"
-
-### Adding a practice counter to each piece 
-
-### Wrapping it all inside of a user database
-
-### What just happened?
-
-You just nested multiple databases inside of your pieces database, and then nested ALL of that inside a user database, connected by their addresses.
 
 ## Key Takeaways
 
 * OrbitDB supports many schemas and APIs for interacting with data. This functionality is managed in what are called **stores**.
 * OrbitDB comes with a handful of stores, and you can write your own.
-* Always `load()` your data before querying your database. You will be sad otherwise
-* While you technically _can_ store encoded media directly in a database, media files are best stored in OrbitDB
-* OrbitDB's addressing schema gives you a great deal of flexibility in schema design, even allowing for nested structures
+* Each store will have its own API, but you will generally have at least a `get` and a `put`
+* Call `load()` periodically to make sure you have the latest entries from the database
+* While you technically _can_ store encoded media directly in a database, media files are best stored in OrbitDB as IPFS hashes
 
 <p></p>
 
