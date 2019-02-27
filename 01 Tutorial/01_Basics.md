@@ -2,41 +2,76 @@
 
 # Chapter 1 - Laying the Foundation
 
-> The basics of OrbitDB include undertanding how to _install OrbitDB (and IPFS)_, _create a new databases_, and how _addressing_ works. 
+> The basics of OrbitDB include  _installing OrbitDB (and IPFS)_, _setting up a new isomorphic project_, _creating databases_, and how _understanding how to choose data stores_. 
 
-## Instantiating OrbitDB
+## Installing the requirements: IPFS and OrbitDB
 
 You will need to get the code for OrbitDB and its dependency, IPFS, and make it available to your project. The process is 
 different between the browser and node.js, so we cover both here.
 
-### Installation in Node.js
+### In node.js
 
 Choose a project directory and `cd` to there from your command line. Then run the following command.
 
 ```bash
+$ npm init
+... enter commands to create package.json ...
+
 $ npm install orbitdb ipfs
 ```
 
-Then require the modules in your script.
+This will create a `package.json`, `package.lock`, and `node_modules` folder.
 
-```javascript
-const Ipfs = require('ipfs')
-const OrbitDB = require('orbit-db')
-```
+### In the Browser
 
-### Installation in the Browser
-
-For the purposes of this tutorial, we recommend using unpkg for obtaining pre-built, minified versions of both IPFS and 
-OrbitDB. Simply include these at the top of your `index.html` file:
+For this tutorial, we recommend using unpkg for obtaining pre-built, minified versions of both IPFS and OrbitDB. Simply include these at the top of your `index.html` file:
 
 ```html
 <script src="https://unpkg.com/ipfs/dist/index.min.js"></script>
 <script src="https://www.unpkg.com/orbit-db/src/OrbitDB.js"></script>
 ```
 
-You will now have global `Ipfs` and `OrbitDB` objects available to you.
+You will now have global `Ipfs` and `OrbitDB` objects available to you. You will see how we'll use these later.
 
-> **Note:** There are other ways to get this code, including building it yourself. We detail these in Part 3. 
+> **Note:** Both OrbitDB and js-ipfs are open source, which give you the ability to build and even contribute to the code. This will be covered in detail these in Part 3. 
+
+## Creating the isomorphic frame for our app
+
+Since OrbitDB works in the browser and node.js, we're going to want to make our app as _isomorphic_ as possoble. This means we want the same code to run in the browser as runs in JS. This is good news for the tutorial, as it means we can keep our code to **strictly** things that pertain to our app, and then apply bindings in node.js and 
+
+Luckily, you will have the luxury of using the same language, JavaScript, for both node.js and browser environments. Create a new file called `newpieceplease.js` and put this code in there:
+
+```javascript
+try {
+  const Ipfs = require('ipfs')
+  const OrbitDB = require('orbit-db')
+} catch(e) {}
+
+class NewPiecePlease() {
+  constructor(IPFS, OrbitDB) { }
+}
+
+try {
+  module.exports = exports = new NewPiecePlease(IPFS, OrbitDB)
+} catch (e) {
+  window.NPP = new NewPiecePlease(window.Ipfs, window.OrbitDB)
+}
+```
+
+### What just happened?
+
+Using some key JavaScript features, you have created the shell for our application that runs in both node.js and the browser. It defines a new class called `NewPiecePlease`, with a constructor that takes two arguments
+
+1. `IPFS` for the `js-ipfs` constructor
+2. `OrbitDB` for the `orbit-db` constructor
+
+In the browser, you can include this file in a script tag and have an `NPP` object at your disposal. In node.js, you can simply call something like:
+
+```javascript
+const NPP = require('./newpieceplease')
+```
+
+From here on out, we will ignore these isometric bookends and concentrate wholly on the `NewPiecePlease` class.
 
 ## Standing up IPFS and OrbitDB
 
@@ -44,7 +79,9 @@ We have designed Chapters 1 and 2 of the tutorial to work work offline, not requ
 connections to peers. 
 
 OrbitDB requires a running IPFS node to operate, so you will create one here and notify OrbitDB about it. by running the 
-following code.
+following code. It's a lot but it constitutes the frame for an _isomorphic_ JavaScript app, that is, one that runs in both the browser and in node.js with the same code.
+
+
 
 ```javascript
 class NewPiecePlease() {
@@ -73,7 +110,7 @@ just know that this is the identifier of your IPFS node. We explain multihashes 
 
 ### What just happened?
 
-Starting with the `new Ipfs` line, your code creates a new IPFS node. Note the default settings:
+Start with the `new Ipfs` line. This code creates a new IPFS node. Note the default settings:
 
 * `preload: { enabled: false }` disables the use of so-called "pre-load" IPFS nodes. These nodes exist to help load balance 
 the global network and prevent DDoS. However, these nodes can go down and cause errors. Since we are only working offline 
@@ -128,26 +165,9 @@ We recommend creating robust backup mechanisms at the application layer.
 
 Now, you will create a local database that *only you* can read.
 
-Remember the code snippet from above, starting and ending with:
+Inside of the `NewPiecePlease` constructor, Expand the IPFS `ready` event handler to the following, and then run the code:
 
 ```javascript
-let orbitdb
-
-/* ... */
-
-node.on("ready", async () => {
-  orbitdb = new OrbitDB.createInstance(node)
-  console.log(orbitdb.id)
-})
-```
-
-Expand that to the following, and then run the code:
-
-```javascript
-let orbitdb, pieces, piecesDb
-
-/* ... */
-
 node.on("ready", async () => {
   orbitdb = await OrbitDB.createInstance(node)
 
@@ -161,7 +181,7 @@ node.on("ready", async () => {
 })
 ```
 
-You will see something like the following as an output: `/orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces`. This is the id, or **address** (technically a multiaddress) of this database. It's important for you to _know_ this, but also to understand what it is.
+You will see something like the following as an output: `/orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces`. This is the id, or **address** (technically a multiaddress) of this database. It's important for you to not only _know_ this, but also to understand what it is.
 
 The first bit, `/orbitdb`, is the protocol. It tells you that this address is an OrbitDB address. The last bit, `pieces` is simply the name you provided.
 
@@ -183,10 +203,7 @@ Your code created a local OrbitDB database, of type "docstore", writable only by
 * `pieces = await orbitdb.docstore('pieces', options)` is the magic line that creates the database. Once this line is 
 completed, the database is open and can be acted upon.
 
-> **Caution!** A note about identity: Your public key is not your identity. We repeat, *your public key is not your identity*. 
-Though, it is often used as such for convenience's sake, and the lack of better alternatives. So, in the early parts of this 
-tutorial we say "writable only to you" when we really mean "writable only by an OrbitDB instance on top of an IPFS node that 
-has the correct id, which we are assuming is controlled by you."
+> **Caution!** A note about identity: Your public key is not your identity. We repeat, *your public key is not your identity*.  Though, it is often used as such for convenience's sake, and the lack of better alternatives. So, in the early parts of this  tutorial we say "writable only to you" when we really mean "writable only by an OrbitDB instance on top of an IPFS node that has the correct id, which we are assuming is controlled by you."
 
 See for more info: https://github.com/orbitdb/orbit-db/blob/525978e0a916a8b027e9ea73d8736acb2f0bc6b4/src/OrbitDB.js#L106
 
@@ -235,8 +252,6 @@ Each OrbitDB store has its own specific API methods to create, delete, retreieve
 
 Also, users of OrbitDB can write their own stores if it suits them. This is an advanced topic and is covered in Part 3 of this book.
 
-Read on to [Chapter 2: Managing Data](./02_Managing_Data.md).
-
 ## Key Takeaways of this Chapter
 
 If nothing else, you should understand that:
@@ -247,3 +262,5 @@ If nothing else, you should understand that:
 * OrbitDB instances create databases, which have unique _addresses_
 * Basic access rights to OrbitDB databases are managed using access control lists (or ACLs), based on the ID of the IPFS node performing the requests on the database
 * OrbitDB database addresses are hashes of the database's ACL, its type, and its name.
+
+Now that you've laid the groudnwork, we're going to start working with data! Onward, then, to [Chapter 2: Managing Data](./02_Managing_Data.md).
