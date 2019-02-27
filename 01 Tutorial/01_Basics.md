@@ -131,8 +131,6 @@ You have also loaded a new `orbitdb` object into memory, ready to create databas
 
 *You are now ready to use OrbitDB!*
 
-* Resolves #[367](https://github.com/orbitdb/orbit-db/issues/367)
-
 #### What else happened in node.js?
 
 When you ran the code in node.js, you created two folders in your project structure: `'orbitdb/` and `ipfs/`. 
@@ -207,9 +205,6 @@ completed, the database is open and can be acted upon.
 
 See for more info: https://github.com/orbitdb/orbit-db/blob/525978e0a916a8b027e9ea73d8736acb2f0bc6b4/src/OrbitDB.js#L106
 
-* Resolves #[366](https://github.com/orbitdb/orbit-db/issues/366)
-* Resolves #[502](https://github.com/orbitdb/orbit-db/issues/502)
-
 #### What else happened in node.js?
 
 You will see some activity inside your project's `orbitdb/` folder. This is good.
@@ -262,5 +257,11 @@ If nothing else, you should understand that:
 * OrbitDB instances create databases, which have unique _addresses_
 * Basic access rights to OrbitDB databases are managed using access control lists (or ACLs), based on the ID of the IPFS node performing the requests on the database
 * OrbitDB database addresses are hashes of the database's ACL, its type, and its name.
+* Since OrbitDB and IPFS are written in JavaScript, it is possible to build isomorphic applications that run in the browser and in node.js 
 
-Now that you've laid the groudnwork, we're going to start working with data! Onward, then, to [Chapter 2: Managing Data](./02_Managing_Data.md).
+Now that you've laid the groudnwork, you'll learn how to work with data! Onward, then, to [Chapter 2: Managing Data](./02_Managing_Data.md).
+
+* Resolves #[367](https://github.com/orbitdb/orbit-db/issues/367)
+* Resolves #[366](https://github.com/orbitdb/orbit-db/issues/366)
+* Resolves #[502](https://github.com/orbitdb/orbit-db/issues/502)
+
