@@ -1,6 +1,6 @@
 # The OrbitDB Tutorial
 
-> An interactive, imperative adventure of peer-to-peer, decentralized, and distributed proportions
+> An interactive, imperative and isometric JavaScript adventure of peer-to-peer, decentralized, and distributed proportions
 
 ## Requirements
 
