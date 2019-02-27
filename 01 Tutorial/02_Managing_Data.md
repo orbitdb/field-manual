@@ -45,7 +45,9 @@ class NewPiecePlease {
 
   async addNewPiece() { }
   deletePiece(hash) { }
-  getPiece(query) { }
+  getAllPieces() {}
+  getPiecesByInstrument(query) { }
+  getPieceByHash(hash) { }
 }
 
 ```
@@ -87,21 +89,20 @@ after we explain what happened. For more information see Part 3.
 ```json
 {
   "op":"PUT",
-  "key":1551137682387,
-  "value":  {
-    "address":"12345",
+  "key":"QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ",
+  "value": {
+    "hash":"QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ",
     "instrument":"Accordion"
   }
 }
 ```
 ### What just happened?
 
-* `piecesDb.put({ ... })` is the primary. This call returns a _mutlihash_, which is the hash of the content added to IPFS. 
+* `piecesDb.put({ ... })` is the most important line here. This call takes an object to sture and returns a _mutlihash_, which is the hash of the content added to IPFS. 
 * `node.dag.get(hash)` is a function that takes a Content ID (CID) and returns content. 
+* `"op": "PUT"`is a notable part of the output. At the core of OrbitDB databases is the **OPLOG**, where all data are stored as a log of operations, which are then calculated into the appropriate schema for application use. The operation is specified here as a `PUT`, and then the `key`/`value` pair is your data.
 
 > **Note:** "dag" in the code refers to the acronym DAG, which stands for Directed Acyclic Graph. This is a data structure that is, or is at least closely related to Blockchain. More on this in Part 4
-
-* `"op": "PUT"`is a notable part of the output. At the core of OrbitDB databases is the **OPLOG**, where all data are stored as a log of operations, which are then calculated into the appropriate schema for application use. The operation is specified here as a `PUT`, and then the `key`/`value` pair is your data.
 
 You can repeat this process to add more hashes from the NES Metroid soundtrack:
 
@@ -118,54 +119,81 @@ Qmb1iNM1cXW6e11srUvS9iBiGX4Aw5dycGGGDPTobYfFBr | Metroid - Title Theme.pdf
 QmYPpj6XVNPPYgwvN4iVaxZLHy982TPkSAxBf2rzGHDach | Metroid - Tourian.pdf
 QmefKrBYeL58qyVAaJoGHXXEgYgsJrxo763gRRqzYHdL6o | Metroid - Zebetite.pdf
 ```
+
+These are all stored in the global IPFS network so you can find any piece by visiting a public gateway such as `ipfs.io` and adding the IPFS multiaddress to the end of the URL like so: https://ipfs.io/ipfs/QmYPpj6XVNPPYgwvN4iVaxZLHy982TPkSAxBf2rzGHDach
+
 ## Reading data
 
 You've added data to your local database, and now you'll can query it. OrbitDB gives you a number of ways to do this, mostly based on which _store_ you picked.
 
-We gave you a `docstore` earlier, so you can flesh out the simple `getPiece` function like so:
+We gave you a `docstore` earlier, so you can flesh out the all of thet simple `get*****` functions like so:
 
 ```javascript
-const singlePiece = pieces.get('Qmz...')[0]
-console.log(singlePiece)
+getAllPieces() {
+  const pieces = this.piecesDb.get('')
+  return pieces
+}
+
+getPieceByHash(hash) {
+  const singlePiece = this.piecesDb.get(hash)[0]
+  return singlePiece
+}
 ```
 
-You'll see this output:
-
-```json
-{ }
-```
-
-Pulling a random score from the database is a great way to see this in action. Run this code:
+`docstore` also provides the more puwerful `query` function, which we can abstract to write a `getPiecesByInstrument` function:
 
 ```javascript
+getByInstrument(instrument) {
+  return this.piecesDb.query((piece) => piece.instrument === instrument)
+}
+```
 
-const pieces = piecesDb.query((piece) => piece.instrument === formData.get('instrument'))
+In your application code, you can use these functions it like so:
+
+```javascript
+pieces = NPP.getAllPieces()
+pleces.forEach((piece) => { /* do something */ })
+
+piece = NPP.getPieceByHash('QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ')
+console.log(piece)
+```
+
+Pulling a random score from the database is a great way to find random music to practice. Run this code:
+
+```javascript
+const pieces = NPP.getPieceByInstrument("Piano")
 const randomPiece = pieces[items.length * Math.random() | 0]
 console.log(randomPiece)
 ```
 
-You'll see a similar output to above but with a random piece from the database.
+Both `console.log` calls above will return something like this.
 
-### What Just Happened
+```json
+{
+  "hash":"QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ",
+  "instrument":"Accordion"
+}
+```
+
+### What just happened?
 
 You queried the database of scores you created earlier in the chapter, retrieving by hash and also randomly.
 
-* `pieces.get('Qmz...')` is a simple function that performs a full-text search on your database based on a string that you pass. It will return an array of records that match.
-* `pieces = piecesDb.get('')` is the same function, but in this case we pass an empty string to return all records.
+* `pieces.get(hash)` is a simple function that performs a partial string search on your database indexes. It will return an array of records that match. As you can see in your `getAllPieces` function, you can pass an empty string to return all pieces.
+* `return this.piecesDb.query((piece) => piece.instrument === instrument)` queries the database, returning. It's most analagous to JavaScripts `Array.filter` method.
 
-> **Note:** The OrbitDB docstore is surprisingly powerful. You can read more about how to use it in its [documentation].
-
+> **Note:** The OrbitDB docstore is surprisingly powerful. You can read more about how to use it in its [documentation](https://github.com/orbitdb/orbit-db-docstore).
 
 ## Updating and deleting data
 
-Each store will ahve its own method of doing so, but in the docstore you can update records by using the `put` method and the ID of the index you want to update:
+Each store will have its own method of doing so, but in the docstore you can update records by using the `put` method and the ID of the index you want to update:
 
 For example if you realize you'd rather practice a piece on a Harpsichord instead of a piano:
 
 ```javascript
 await piecesDb.put({
   hash: "Qm...",
-  instrument: "Piano"
+  instrument: "Harpsichord"
 })
 ```
 
