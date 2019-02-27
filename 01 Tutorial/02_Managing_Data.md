@@ -14,23 +14,40 @@
 
 To start, you'll do a couple of things to enhance our current code and tidy up. We will also scaffold out some functions to be filled in later.
 
-Update your `ipfs.on("ready"...` handler from earlier and then run this code:
+Update your `NewPiecePlease class` handler from earlier and then run this code:
 
 ```javascript
-node.on("ready", async () => {
-  orbitdb = await OrbitDB.createInstance(node)
+class NewPiecePlease {
+  constructor (IPFS, OrbitDB) {
+    this.node = new IPFS({
+      preload: { enabled: false },
+      EXPERIMENTAL: { pubsub: true },
+      repo: "./ipfs",
+      config: { 
+        Bootstrap: [],
+        Addresses: { Swarm: [] }
+      }
+    });
 
-  const options = {
-    accessController: { write: [orbitdb.identity.publicKey] },
-    indexBy: "hash"
+    this.node.on("error", (e) => console.error)
+    this.node.on("ready", async () => {
+      this.orbitdb = await OrbitDB.createInstance(this.node)
+
+      const options = {
+        accessController: { write: [this.orbitdb.identity.publicKey] },
+        indexBy: 'hash'
+      }
+
+      this.piecesDb = await this.orbitdb.docstore('pieces', options)
+      await this.piecesDb.load()
+    });
   }
-  piecesDb = await orbitdb.docstore('pieces', options)
-  await piecesDb.load()
-})
 
-function putPiece(object) { }
-function deletePiece(hash) { }
-function getPiece(hash) { }
+  getPiece(instrument) { }
+  addNewPiece(hash) { }
+  deletePiece(hash) { }
+}
+
 ```
 
 ### What just happened?
@@ -44,7 +61,7 @@ After you instantiated the database,
 
 Now that you have a database set up, adding content to it is fairly easy. Run the following code to add some sheet music to the repository.
 
-We have uploaded and pinned a few piano scores to IPFS, and will provide the hashes here:
+We have uploaded and pinned a few piano scores to IPFS, and will provide the hashes. We hope you like Metroid. You can add these hashes to your database by writing and using the `addNewPiece` function.
 
 ```javascript
 const hash = await piecesDb.put({
