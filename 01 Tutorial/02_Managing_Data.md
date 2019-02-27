@@ -4,7 +4,6 @@
 
 > Managing data in OrbitDB involves  _loading databases into memory_, and then _creating_, _updating_, _reading_, and _deleting data_.
 
-- [Choosing a data store](#choosing-a-data-store)
 - [Loading the database](#loading-the-database)
 - [Adding data](#adding-data)
 - [Reading data](#reading-data)
