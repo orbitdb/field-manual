@@ -4,7 +4,14 @@
 
 > Managing data in OrbitDB involves _choosing the appropriate data stores_, _loading databases into memory_, and _creating, updating, reading, and deleting data_.
 
-## Choosing a Data Store
+- [Choosing a data store](#)
+- [Loading the database](#)
+- [Adding data](#)
+- [Reading data](#)
+- [Updating and deleting data](#)
+- [Storing media files](#)
+
+## Choosing a data store
 
 OrbitDB organizes its functionality by separating different data management concerns, schemas and APIs into **stores**. We chose a `docstore` for you in the last chapter, but after this tutorial it will be your job to determine the right store for the job.
 
@@ -20,7 +27,7 @@ Each OrbitDB store has its own specific API methods to create, delete, retreieve
 
 Also, users of OrbitDB can write their own stores if it suits them. This is an advanced topic and is covered in Part 3 of this book.
 
-## Getting Started
+## Loading the database
 
 To start, you'll do a couple of things to enhance our current code and tidy up. We will also scaffold out some functions to be filled in later.
 
@@ -45,11 +52,12 @@ function getPiece(hash) { }
 
 ### What just happened?
 
+After you instantiated the database, 
 * `await piecesDb.load()` is a function that will need to be called whenever we want the latest and greatest snapshot of data in the database. `load()` retrieves all of the values via their _content addresses_ and loads the content into memory
 
 > **Note:** You're probably wondering about if you have a large database of millions of documents, and the implications of loading them all into memory. It's a valid concern, and you should move on to Part 4 of this book once you're done with the tutorial.
 
-## Adding data to our database
+## Adding data
 
 Now that you have a database set up, adding content to it is fairly easy. Run the following code to add some sheet music to the repository.
 
