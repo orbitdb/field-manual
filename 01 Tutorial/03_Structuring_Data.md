@@ -11,9 +11,7 @@
 
 ## Adding a practice counter to each piece
 
-Your users may want to keep track of their practice, at minimum how many times they practiced a piece. You'll enable that functionality for them.
-
-You'll remember in the previous chapter we duplicated some code between `addNewPiece` and `updatePieceByHash`. You can now take advantage of this by creating a new OrbitDB `counter` store for each piece, and creating a few new functions inside the `NewPiecePlease` class to interact with the counters.
+Your users may want to keep track of their practice, at minimum how many times they practiced a piece. You'll enable that functionality for them by creating a new OrbitDB `counter` store for each piece, and creating a few new functions inside the `NewPiecePlease` class to interact with the counters.
 
 > **Note:**  The nesting approach detailed here is but one of many, and you are free to organize your data as you see fit. This is a powerful feature of OrbitDB and we are excited to see how people tackle this problem in the future!
 
@@ -122,7 +120,7 @@ You created and used two new functions to both read the value of, and increment 
 
 Pieces of music to practice with are great to have, but moving forward you will want to allow users to further express themselves via a username and profile. This will also help prepare you for allowing users to connect to each other in the next chapter.
 
-You will create a new database for users, from which your `piecesDb` will be referenced. 
+You will create a new database for users, from which your `piecesDb` will be referenced. You can create this database in the `ready` event handler of IPFS, alongside where you declared `piecesDb`.
 
 ```javascript
 ```
