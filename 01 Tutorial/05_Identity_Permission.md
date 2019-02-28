@@ -1,4 +1,6 @@
-## Chapter 3: Identity and Permissions
+**Note:** Please complete [Chapter 4 - Peer to Peer](./04_P2P.md) first. 
+
+## Chapter 5: Identity and Permissions
 
 ### Access Control
 ### Identity Management
@@ -12,3 +14,7 @@
 * Resolves: #[380](https://github.com/orbitdb/orbit-db/issues/380)
 * Resolves: #[458](https://github.com/orbitdb/orbit-db/issues/458)
 * Resolves: #[467](https://github.com/orbitdb/orbit-db/issues/467)
+
+## Conclusion
+
+The end!
