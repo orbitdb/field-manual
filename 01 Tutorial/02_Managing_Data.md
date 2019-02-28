@@ -179,7 +179,7 @@ You queried the database of scores you created earlier in the chapter, retrievin
 * `pieces.get(hash)` is a simple function that performs a partial string search on your database indexes. It will return an array of records that match. As you can see in your `getAllPieces` function, you can pass an empty string to return all pieces.
 * `return this.piecesDb.query((piece) => piece.instrument === instrument)` queries the database, returning. It's most analagous to JavaScripts `Array.filter` method.
 
-> **Note:** The OrbitDB docstore is surprisingly powerful. You can read more about how to use it in its [documentation](https://github.com/orbitdb/orbit-db-docstore).
+> **Note:** Generally speaking, `get` functions do not return promises since the calculation of database state happens at the time of a _write_. This is a trade-off to allow for ease of use and performance based on the assumption that writes are _generally_ less frequent than reads.
 
 ## Updating and deleting data
 
@@ -244,17 +244,15 @@ Luckily, with content addressing in IPFS, this becomes rather easy, and predicta
 2. Store said multihash in OrbitDB 
 3. When it comes time to display the media, use native IPFS functionality to retrieve it from the hash
 
-### Adding Content to IPFS
+To see this in action, [download the "Tourian" PDF](https://ipfs.io/ipfs/QmYPpj6XVNPPYgwvN4iVaxZLHy982TPkSAxBf2rzGHDach) to your local file system for use in the next examples
 
-Assuming you have a `file.pdf` you want to add to IPFS, you have several options. You'll be free to chose whichever one works for you.
+#### On the command line with the go-ipfs or js-ipfs daemon
 
-#### On the command line with go-ipfs or js-ipfs
-
-After following the installation instructions to install [go-ipfs]() or [js-ipfs]() globally, run the following command:
+After following the installation instructions to install [go-ipfs]() or [js-ipfs]() globally, you can run the following command:
  
 ```bash
-$ ipfs add file.pdf # sometimes jsipfs add file.pdf
-Qm.....
+$ ipfs add file.pdf
+QmYPpj6XVNPPYgwvN4iVaxZLHy982TPkSAxBf2rzGHDach
 ```
 
 You can then use that hash in the same manner as above to add it to the database of pieces.
@@ -280,14 +278,21 @@ var fileInput = document.getElementById("fileUpload")
 
 ### What just happened?
 
+You added some potentially very large media files to IPFS, and then stored the 40-byte addresses in OrbitDB for retrieval and use. You are now able to leverage the benefits of both IPFS and 
 
-## Key Takeaways
+> **Note:** IPFS nodes run _inside_ the browser, so if you're adding lots of files via the above method, keep an eye on your IndexedDB usage, since that's where IPFS is storing the blocks. 
 
-* OrbitDB supports many schemas and APIs for interacting with data. This functionality is managed in what are called **stores**.
-* OrbitDB comes with a handful of stores, and you can write your own.
-* Each store will have its own API, but you will generally have at least a `get` and a `put`
-* Call `load()` periodically to make sure you have the latest entries from the database
+## Key takeaways of this chapter
+
+If nothing else you should understand that:
+
+* Calling `load()` periodically ensures you have the latest entries from the database
+* Generally speaking, a `put` or `delete` will return a Promise (or require `await`), and a `get` will return the value(s) immediately.
+* Updating the database is equivalent to adding a new entry to its OPLOG.
+* The OPLOG is calculated to give the current _state_ of the database, which is the view you generally interact with
+* OPLOGS are flexible, particularly if you're writing your own stores. `docstore` primarily utilizes the `PUT` and `DEL` opcodes
 * While you technically _can_ store encoded media directly in a database, media files are best stored in OrbitDB as IPFS hashes
+* Keep an eye on IndexedDB size and limitations when adding content to IPFS via the browser.
 
 <p></p>
 
