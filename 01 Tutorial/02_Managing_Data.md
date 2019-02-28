@@ -44,10 +44,11 @@ class NewPiecePlease {
   }
 
   async addNewPiece() { }
-  deletePiece(hash) { }
+  async deletePieceByHash() { }
   getAllPieces() {}
-  getPiecesByInstrument(query) { }
-  getPieceByHash(hash) { }
+  getPiecesByInstrument() { }
+  getPieceByHash() { }
+  await updatePieceByHash()
 }
 
 ```
@@ -79,7 +80,7 @@ Then, in your application code, node.js or browser, you cna use this function li
 
 ```javascript
 const newPieceHash = NPP.addNewPiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ")
-const content = await node.dag.get(hash)
+const content = await NPP.node.dag.get(hash)
 console.log(content.value.payload)
 ```
 
@@ -126,7 +127,7 @@ These are all stored in the global IPFS network so you can find any piece by vis
 
 You've added data to your local database, and now you'll can query it. OrbitDB gives you a number of ways to do this, mostly based on which _store_ you picked.
 
-We gave you a `docstore` earlier, so you can flesh out the all of thet simple `get*****` functions like so:
+We gave you a `docstore` earlier, so you can flesh out the all of thet simple `get*****` functions like so. `docstore` also provides the more puwerful `query` function, which we can abstract to write a `getPiecesByInstrument` function:
 
 ```javascript
 getAllPieces() {
@@ -138,11 +139,7 @@ getPieceByHash(hash) {
   const singlePiece = this.piecesDb.get(hash)[0]
   return singlePiece
 }
-```
 
-`docstore` also provides the more puwerful `query` function, which we can abstract to write a `getPiecesByInstrument` function:
-
-```javascript
 getByInstrument(instrument) {
   return this.piecesDb.query((piece) => piece.instrument === instrument)
 }
@@ -186,28 +183,48 @@ You queried the database of scores you created earlier in the chapter, retrievin
 
 ## Updating and deleting data
 
-Each store will have its own method of doing so, but in the docstore you can update records by using the `put` method and the ID of the index you want to update:
+You'll next want to provide your users with the ability to update and delete their pieces. For example if you realize you'd rather practice a piece on a harpsichord instead of a piano, or if they want to stop practicing a certain piece.
 
-For example if you realize you'd rather practice a piece on a Harpsichord instead of a piano:
+Again, each OrbitDB store may have slightly different methods for this. In the `docstore` you can update records by again using the `put` method and the ID of the index you want to update.
+
+It's OK that you're essentially duplicating 
 
 ```javascript
-await piecesDb.put({
-  hash: "Qm...",
-  instrument: "Harpsichord"
-})
+updatePieceByHash(hash, instrument = "Piano") {
+  const cid = await this.piecesDb.put({ hash: hash, instrument: instrument })
+  return cid
+}
 ```
 
-In the docstore, deleting a record is easy, and done so via the index:
+Deleting a record by hash is also easy
 
 ```javascript
-piecesDb.del("Qm.....")
+async deletePieceByHash(hash) {
+  const cid = await this.piecesDb.del(hash)
+  return cid
+}
+```
+
+In your application code, you can run these new functions and see the opcodes that return to get a sense of what's going on.
+
+```javascript
+const cid = await NPP.updatePiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ", "Harpsichord")
+// do stuff with the cid as above
+
+const cid = await NPP.deletePieceByHash("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ")
+const content = await NPP.node.dag.get(hash)
+console.log(content.value.payload)
+```
+
+While the opcode for PUT will be the same, the opcode for `deletePieceByHash` is not:
+
+```json
 ```
 
 ### What just happened?
 
-You may be thinking something like this: "Wait, if OrbitDB is built upon IPFS and IPFS is immutable, then how are we updating or deleting records?" Great question
+You may be thinking something like this: "Wait, if OrbitDB is built upon IPFS and IPFS is immutable, then how are we updating or deleting records?" Great question, and the answer lies in the opcodes.
 
-TODO: Explanation
 
 ## Storing Media Files
 
