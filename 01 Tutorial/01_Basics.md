@@ -8,6 +8,7 @@
 - [Instantiating IPFS and OrbitDB](#instantiating-ipfs-and-orbitdb)
 - [Creating a Database](#creating-a-database)
 - [Choosing a data store](#choosing-a-data-store)
+- [Key Takeaways](#key-takeaways)
 
 ## Installing the requirements: IPFS and OrbitDB
 
@@ -252,9 +253,7 @@ Each OrbitDB store has its own specific API methods to create, delete, retreieve
 
 Also, users of OrbitDB can write their own stores if it suits them. This is an advanced topic and is covered in Part 3 of this book.
 
-## Key Takeaways of this Chapter
-
-If nothing else, you should understand that:
+## Key Takeaways
 
 * OrbitDB is a distributed database layer which stores its raw data in IPFS
 * Both IPFS and OrbitDB work offline and online
