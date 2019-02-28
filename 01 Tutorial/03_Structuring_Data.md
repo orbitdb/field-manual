@@ -1,4 +1,4 @@
-**Note:** Please complete [Chapter 2 - Managing Data](./01_Managing_Data.md) first. 
+**Note:** Please complete [Chapter 2 - Managing Data](./02_Managing_Data.md) first. 
 
 # Chapter 3 - Structuring your data
 
