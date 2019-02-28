@@ -294,7 +294,7 @@ If nothing else you should understand that:
 * While you technically _can_ store encoded media directly in a database, media files are best stored in OrbitDB as IPFS hashes
 * Keep an eye on IndexedDB size and limitations when adding content to IPFS via the browser.
 
-<p></p>
+Of course, in the vast majority of apps you create, you won't just be interacting with one database or one type of data. We've got you covered in [Chapter 3: Structuring Data](03_Structuring_Data.md)
 
 * Resolves #[365](https://github.com/orbitdb/orbit-db/issues/365) 
 * Resolves #[438](https://github.com/orbitdb/orbit-db/issues/438)
