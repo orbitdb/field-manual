@@ -262,7 +262,10 @@ If nothing else, you should understand that:
 * OrbitDB instances create databases, which have unique _addresses_
 * Basic access rights to OrbitDB databases are managed using access control lists (or ACLs), based on the ID of the IPFS node performing the requests on the database
 * OrbitDB database addresses are hashes of the database's ACL, its type, and its name.
-* Since OrbitDB and IPFS are written in JavaScript, it is possible to build isomorphic applications that run in the browser and in node.js 
+* Since OrbitDB and IPFS are written in JavaScript, it is possible to build isomorphic applications that run in the browser  and in node.js 
+* OrbitDB manages needed flexibility of schema and API design in functionality called **stores**.
+* OrbitDB comes with a handful of stores, and you can write your own.
+* Each store will have its own API, but you will generally have at least a `get` and a `put`
 
 Now that you've laid the groudnwork, you'll learn how to work with data! Onward, then, to [Chapter 2: Managing Data](./02_Managing_Data.md).
 
