@@ -5,7 +5,7 @@
 > Or, How I learned to stop worrying and learned to love _nested databases_
 
 - [Adding a practice counter to each piece](#)
-- [Adding a higher-level user database])(#)
+- [Adding a higher-level user database](#)
 
 > **Note:**  The nesting approach detailed here is but one of many, and you are free to organize your data as you see fit. This is a powerful feature of OrbitDB and we are excited to see how people tackle this problem in the future!
 
@@ -41,9 +41,14 @@ Pieces of music to practice with are great to have, but moving forward you will 
 
 You will create a new database for users, from which your `piecesDb` will be referenced. 
 
+```javascript
+```
+
 ## Key Takeaways
 
-* OrbitDB is extremely flexible when it comes to generating complex and linked data structures 
-* 
+* The distributed applications of the future will be complex and require data structures to mirror and manage that complexity.
+* Luckily, OrbitDB is extremely flexible when it comes to generating complex and linked data structures 
+* You can nest a database within another, and you can create new databases to next your existing databases within.
+* _Nesting_ databases is a powerful approach, but it is one of many. **Do not** feel limited. **Do** share novel approaches with the community.
 
-You are now ready for prime time - continue to [Chapter 4: Peer to Peer])[04_P2P.md] to connect this app to the global IPFS network, and to other users! 
+And with this, you are now ready to connect to the outside world. Continue to [Chapter 4: Peer to Peer])[04_P2P.md] to join your app to the global IPFS network, and to other users! 
