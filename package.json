@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "markdownlint -c markdownlint.json *.md 0*/*.md",
-    "build": "rm -rf dist; mkdir dist; cat README.md */*.md > dist/Book.md; pandoc -o dist/Book.tex dist/Book.md; pandoc -o dist/Book.pdf dist/Book.tex"
+    "build": "rm -rf dist; mkdir dist; pandoc -o dist/Book.pdf COVER.md */*.md"
   },
   "author": "",
   "license": "ISC",
