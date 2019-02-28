@@ -188,16 +188,16 @@ You'll next want to provide your users with the ability to update and delete the
 
 Again, each OrbitDB store may have slightly different methods for this. In the `docstore` you can update records by again using the `put` method and the ID of the index you want to update.
 
-It's OK that you're essentially duplicating 
-
 ```javascript
-updatePieceByHash(hash, instrument = "Piano") {
-  const cid = await this.piecesDb.put({ hash: hash, instrument: instrument })
+async updatePieceByHash(hash, instrument = "Piano") {
+  var piece = await this.getPieceByHash(hash)
+  piece.instrument = instrument
+  const cid = await this.piecesDb.put(piece)
   return cid
 }
 ```
 
-Deleting a record by hash is also easy
+Deleting a record by hash is also easy:
 
 ```javascript
 async deletePieceByHash(hash) {
