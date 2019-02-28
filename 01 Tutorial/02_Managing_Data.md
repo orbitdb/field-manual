@@ -9,6 +9,7 @@
 - [Reading data](#reading-data)
 - [Updating and deleting data](#updating-and-deleting-data)
 - [Storing media files](#storing-media-files)
+- [Key Takeaways](#key-takeaways)
 
 ## Loading the database
 
@@ -282,9 +283,7 @@ You added some potentially very large media files to IPFS, and then stored the 4
 
 > **Note:** IPFS nodes run _inside_ the browser, so if you're adding lots of files via the above method, keep an eye on your IndexedDB usage, since that's where IPFS is storing the blocks. 
 
-## Key takeaways of this chapter
-
-If nothing else you should understand that:
+## Key Takeaways
 
 * Calling `load()` periodically ensures you have the latest entries from the database
 * Generally speaking, a `put` or `delete` will return a Promise (or require `await`), and a `get` will return the value(s) immediately.
