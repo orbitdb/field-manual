@@ -1,0 +1,12 @@
+{
+  "name": "orbitdb-field-manual",
+  "version": "1.0.0",
+  "description": "Readme TBD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf dist; mkdir dist; cat *.md */*.md > dist/Book.md; pandoc -o dist/Book.tex dist/Book.md; pandoc -o dist/Book.pdf dist/Book.tex"
+  },
+  "author": "",
+  "license": "ISC"
+}
