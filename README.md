@@ -24,13 +24,10 @@ This is a living document, and PRs are accepted! If you feel like you want to ad
 
 ### Building
 
-THe process is straightforward. 
+The build process is straightforward.
 
 1. Make your edits
-2. Run the following command to populate the `dist` folder
-```bash
-$ npm run build
-```
+2. `npm run build` to populate the `dist` folder
 3. Manually audit the `dist` output to ensure no errors were made
 4. Create your PR!
 
