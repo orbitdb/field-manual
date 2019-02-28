@@ -2,7 +2,7 @@
 
 # Chapter 3 - Structuring your data
 
-> Or, How I learned to stop worrying and learned to love _nested databases_
+> or, "How you learned to stop worrying and love _nested databases_."
 
 - [Adding a practice counter to each piece](#)
 - [Adding a higher-level user database](#)
