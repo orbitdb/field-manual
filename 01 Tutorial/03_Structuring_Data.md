@@ -7,7 +7,7 @@
 - [Adding a practice counter to each piece](#)
 - [Utilizing your practice counter](#)
 - [Adding a higher-level user database](#)
-- [Updating your user profile(#)
+- [Updating your user profile](#)
 
 ## Adding a practice counter to each piece
 
@@ -71,14 +71,52 @@ it with `counter.` to get around this limitation.
 Now, add a few functions to `NewPiecePlease` that utilize the counters when necessary
 
 ```javascript
-getPracticeCount(piece) {
+async getPracticeCount(piece) {
+  const counter = await this.orbitdb.counter(piece.counter)
+  await counter.load()
+  return counter.value
 }
 
-incrementPracticeCounter(piece) {
+async incrementPracticeCounter(piece) {
+  const counter = await this.orbitdb.counter(piece.counter)
+  const cid = await counter.inc()
+  return cid
+}
+```
+
+These can be used in your application code like so:
+
+```javascript
+const piece = NPP.getPieceByHash("QmdzDacgJ9EQF9Z8G3L1fzFwiEu255Nm5WiCey9ntrDPSL")
+const cid = await NPP.incrementPracticeCounter(piece)
+const content = await NPP.node.dag.get(cid)
+console.log(content.value.payload)
+```
+
+That will `console.log` out something like:
+
+```json
+{
+  "op":"COUNTER",
+  "key":null,
+  "value": {
+    "id":"042985dafe18ba45c7f1a57db.........02ae4b5e4aa3eb36bc5e67198c2d2",
+    "counters": {
+      "042985dafe18ba45c7f1a57db.........02ae4b5e4aa3eb36bc5e67198c2d2":3
+    }
+  }
 }
 ```
 
 ### What just happened?
+
+You created and used two new functions to both read the value of, and increment a `counter`, another type of OrbitDB store.
+
+* `await this.orbitdb.counter(piece.counter)` is a new way of using `this.orbitdb.counter`, by passing in an existing database address. This will _open_ the existing database instead of creating it
+* `counter.load()` is called once in `getPracticeCount`, loading the latest database entries into memory for display
+* `await counter.inc()` increments the counter, like calling `counter++` would on an integer variable
+* `"op":"COUNTER"` is a new operation that you havent seen yet - remember, you can create stores with any operations you want. More on this in Part 3.
+* `"counters": { "042985dafe18ba45c7f1a57db.........02ae4b5e4aa3eb36bc5e67198c2d2": 3 }` is the value returned, the long value is an id based on your node's public key
 
 ## Adding a higher-level database for user data
 
