@@ -1,6 +1,6 @@
 **Note:** Please complete [Chapter 2 - Managing Data](./01_Managing_Data.md) first. 
 
-# Chapter 2 - Structuring your data
+# Chapter 3 - Structuring your data
 
 > Or, How I learned to stop worrying and learned to love _nested databases_
 
