@@ -125,6 +125,10 @@ You will create a new database for users, from which your `piecesDb` will be ref
 ```javascript
 ```
 
+### What just happened?
+
+You created a database to store anything and everything that might pertain to a user, and then linked the `piecesDb` to that, nested inside.
+
 ## Key Takeaways
 
 * The distributed applications of the future will be complex and require data structures to mirror and manage that complexity.
