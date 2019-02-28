@@ -133,4 +133,4 @@ You will create a new database for users, from which your `piecesDb` will be ref
 * You can nest a database within another, and you can create new databases to next your existing databases within.
 * _Nesting_ databases is a powerful approach, but it is one of many. **Do not** feel limited. **Do** share novel approaches with the community.
 
-And with this, you are now ready to connect to the outside world. Continue to [Chapter 4: Peer to Peer])[04_P2P.md] to join your app to the global IPFS network, and to other users! 
+And with this, you are now ready to connect to the outside world. Continue to [Chapter 4: Peer to Peer](04_P2P.md) to join your app to the global IPFS network, and to other users! 
