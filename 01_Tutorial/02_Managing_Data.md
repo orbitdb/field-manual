@@ -1,8 +1,8 @@
-**Note:** Please complete [Chapter 1 - Laying the Foundation](./01_Basics.md) first. 
-
 # Chapter 2 - Managing Data
 
 > Managing data in OrbitDB involves  _loading databases into memory_, and then _creating_, _updating_, _reading_, and _deleting data_.
+
+> **Note:** Please complete [Chapter 1 - Laying the Foundation](./01_Basics.md) first.
 
 - [Loading the database](#loading-the-database)
 - [Adding data](#adding-data)
@@ -24,7 +24,7 @@ class NewPiecePlease {
       preload: { enabled: false },
       EXPERIMENTAL: { pubsub: true },
       repo: "./ipfs",
-      config: { 
+      config: {
         Bootstrap: [],
         Addresses: { Swarm: [] }
       }
@@ -58,7 +58,7 @@ class NewPiecePlease {
 
 After you instantiated the database, you loaded its contents into memory for use. It's empty for now, but not for long! Loading the database at this point after instantiation will save you trouble later.
 
-* `await piecesDb.load()` is a function that will need to be called whenever we want the latest and greatest snapshot of data in the database. `load()` retrieves all of the values via their _content addresses_ and loads the content into memory
+- `await piecesDb.load()` is a function that will need to be called whenever we want the latest and greatest snapshot of data in the database. `load()` retrieves all of the values via their _content addresses_ and loads the content into memory
 
 > **Note:** You're probably wondering about if you have a large database of millions of documents, and the implications of loading them all into memory. It's a valid concern, and you should move on to Part 4 of this book once you're done with the tutorial.
 
@@ -85,7 +85,7 @@ const content = await NPP.node.dag.get(cid)
 console.log(content.value.payload)
 ```
 
-Running this code should give you something like the following output. Hold steady, it's overwhelming but it will make sense 
+Running this code should give you something like the following output. Hold steady, it's overwhelming but it will make sense
 after we explain what happened. For more information see Part 3.
 
 ```json
@@ -98,17 +98,18 @@ after we explain what happened. For more information see Part 3.
   }
 }
 ```
+
 ### What just happened?
 
-* `piecesDb.put({ ... })` is the most important line here. This call takes an object to sture and returns a _mutlihash_, which is the hash of the content added to IPFS. 
-* `node.dag.get(hash)` is a function that takes a Content ID (CID) and returns content. 
-* `"op": "PUT"`is a notable part of the output. At the core of OrbitDB databases is the **OPLOG**, where all data are stored as a log of operations, which are then calculated into the appropriate schema for application use. The operation is specified here as a `PUT`, and then the `key`/`value` pair is your data.
+- `piecesDb.put({ ... })` is the most important line here. This call takes an object to sture and returns a _mutlihash_, which is the hash of the content added to IPFS.
+- `node.dag.get(hash)` is a function that takes a Content ID (CID) and returns content.
+- `"op": "PUT"`is a notable part of the output. At the core of OrbitDB databases is the **OPLOG**, where all data are stored as a log of operations, which are then calculated into the appropriate schema for application use. The operation is specified here as a `PUT`, and then the `key`/`value` pair is your data.
 
 > **Note:** "dag" in the code refers to the acronym DAG, which stands for Directed Acyclic Graph. This is a data structure that is, or is at least closely related to Blockchain. More on this in Part 4
 
 You can repeat this process to add more hashes from the NES Metroid soundtrack:
 
-```
+```plain
 QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ | Metroid - Ending Theme.pdf
 QmRn99VSCVdC693F6H4zeS7Dz3UmaiBiSYDf6zCEYrWynq | Metroid - Escape Theme.pdf
 QmdzDacgJ9EQF9Z8G3L1fzFwiEu255Nm5WiCey9ntrDPSL | Metroid - Game Start.pdf
@@ -122,7 +123,7 @@ QmYPpj6XVNPPYgwvN4iVaxZLHy982TPkSAxBf2rzGHDach | Metroid - Tourian.pdf
 QmefKrBYeL58qyVAaJoGHXXEgYgsJrxo763gRRqzYHdL6o | Metroid - Zebetite.pdf
 ```
 
-These are all stored in the global IPFS network so you can find any piece by visiting a public gateway such as `ipfs.io` and adding the IPFS multiaddress to the end of the URL like so: https://ipfs.io/ipfs/QmYPpj6XVNPPYgwvN4iVaxZLHy982TPkSAxBf2rzGHDach
+These are all stored in the global IPFS network so you can find any piece by visiting a public gateway such as `ipfs.io` and adding the IPFS multiaddress to the end of the URL like so: [https://ipfs.io/ipfs/QmYPpj6XVNPPYgwvN4iVaxZLHy982TPkSAxBf2rzGHDach](https://ipfs.io/ipfs/QmYPpj6XVNPPYgwvN4iVaxZLHy982TPkSAxBf2rzGHDach)
 
 ## Reading data
 
@@ -177,8 +178,8 @@ Both `console.log` calls above will return something like this.
 
 You queried the database of scores you created earlier in the chapter, retrieving by hash and also randomly.
 
-* `pieces.get(hash)` is a simple function that performs a partial string search on your database indexes. It will return an array of records that match. As you can see in your `getAllPieces` function, you can pass an empty string to return all pieces.
-* `return this.piecesDb.query((piece) => piece.instrument === instrument)` queries the database, returning. It's most analagous to JavaScripts `Array.filter` method.
+- `pieces.get(hash)` is a simple function that performs a partial string search on your database indexes. It will return an array of records that match. As you can see in your `getAllPieces` function, you can pass an empty string to return all pieces.
+- `return this.piecesDb.query((piece) => piece.instrument === instrument)` queries the database, returning. It's most analagous to JavaScripts `Array.filter` method.
 
 > **Note:** Generally speaking, `get` functions do not return promises since the calculation of database state happens at the time of a _write_. This is a trade-off to allow for ease of use and performance based on the assumption that writes are _generally_ less frequent than reads.
 
@@ -231,26 +232,28 @@ While the opcode for PUT will be the same, the opcode for `deletePieceByHash` is
 
 You may be thinking something like this: "Wait, if OrbitDB is built upon IPFS and IPFS is immutable, then how are we updating or deleting records?" Great question, and the answer lies in the opcodes  Let's step through the code so we can get to that.
 
-* `this.piecesDb.put` is nothing new, we're just using it to perform an update instead of an insert
-* `this.piecesDb.del` is a simple function that takes a hash, deletes the record, and returns a CID
-* `"op": "DEL"` is another opcode, `DEL` for DELETE. This log entry effectively removes this key from your records and also removes the content from your local IPFS
+- `this.piecesDb.put` is nothing new, we're just using it to perform an update instead of an insert
+- `this.piecesDb.del` is a simple function that takes a hash, deletes the record, and returns a CID
+- `"op": "DEL"` is another opcode, `DEL` for DELETE. This log entry effectively removes this key from your records and also removes the content from your local IPFS
 
 ## Storing Media Files
 
-We are often asked if it is possible to store media files like pictures or audio directly inside OrbitDB. Our answer is that you should treat this like any other database system and store the _address_ of the 
+We are often asked if it is possible to store media files like pictures or audio directly inside OrbitDB. Our answer is that you should treat this like any other database system and store the _address_ of the
 
 Luckily, with content addressing in IPFS, this becomes rather easy, and predictable from a schema design standpoint. The overall pattern in:
 
 1. Add the file to IPFS, which will return the _multihash_ of the file
-2. Store said multihash in OrbitDB 
+2. Store said multihash in OrbitDB
 3. When it comes time to display the media, use native IPFS functionality to retrieve it from the hash
+
+### Adding content to IPFS
 
 To see this in action, [download the "Tourian" PDF](https://ipfs.io/ipfs/QmYPpj6XVNPPYgwvN4iVaxZLHy982TPkSAxBf2rzGHDach) to your local file system for use in the next examples
 
 #### On the command line with the go-ipfs or js-ipfs daemon
 
-After following the installation instructions to install [go-ipfs]() or [js-ipfs]() globally, you can run the following command:
- 
+After following the installation instructions to install [go-ipfs](https://github.com/ipfs/go-ipfs) or [js-ipfs](https://github.com/ipfs/js-ipfs) globally, you can run the following command:
+
 ```bash
 $ ipfs add file.pdf
 QmYPpj6XVNPPYgwvN4iVaxZLHy982TPkSAxBf2rzGHDach
@@ -279,24 +282,24 @@ var fileInput = document.getElementById("fileUpload")
 
 ### What just happened?
 
-You added some potentially very large media files to IPFS, and then stored the 40-byte addresses in OrbitDB for retrieval and use. You are now able to leverage the benefits of both IPFS and 
+You added some potentially very large media files to IPFS, and then stored the 40-byte addresses in OrbitDB for retrieval and use. You are now able to leverage the benefits of both IPFS and
 
-> **Note:** IPFS nodes run _inside_ the browser, so if you're adding lots of files via the above method, keep an eye on your IndexedDB usage, since that's where IPFS is storing the blocks. 
+> **Note:** IPFS nodes run _inside_ the browser, so if you're adding lots of files via the above method, keep an eye on your IndexedDB usage, since that's where IPFS is storing the blocks.
 
 ## Key Takeaways
 
-* Calling `load()` periodically ensures you have the latest entries from the database
-* Generally speaking, a `put` or `delete` will return a Promise (or require `await`), and a `get` will return the value(s) immediately.
-* Updating the database is equivalent to adding a new entry to its OPLOG.
-* The OPLOG is calculated to give the current _state_ of the database, which is the view you generally interact with
-* OPLOGS are flexible, particularly if you're writing your own stores. `docstore` primarily utilizes the `PUT` and `DEL` opcodes
-* While you technically _can_ store encoded media directly in a database, media files are best stored in OrbitDB as IPFS hashes
-* Keep an eye on IndexedDB size and limitations when adding content to IPFS via the browser.
+- Calling `load()` periodically ensures you have the latest entries from the database
+- Generally speaking, a `put` or `delete` will return a Promise (or require `await`), and a `get` will return the value(s) immediately.
+- Updating the database is equivalent to adding a new entry to its OPLOG.
+- The OPLOG is calculated to give the current _state_ of the database, which is the view you generally interact with
+- OPLOGS are flexible, particularly if you're writing your own stores. `docstore` primarily utilizes the `PUT` and `DEL` opcodes
+- While you technically _can_ store encoded media directly in a database, media files are best stored in OrbitDB as IPFS hashes
+- Keep an eye on IndexedDB size and limitations when adding content to IPFS via the browser.
 
 Of course, in the vast majority of apps you create, you won't just be interacting with one database or one type of data. We've got you covered in [Chapter 3: Structuring Data](03_Structuring_Data.md)
 
-* Resolves #[365](https://github.com/orbitdb/orbit-db/issues/365) 
-* Resolves #[438](https://github.com/orbitdb/orbit-db/issues/438)
-* Resolves #[381](https://github.com/orbitdb/orbit-db/issues/381)
-* Resolves #[242](https://github.com/orbitdb/orbit-db/issues/242)
-* Resolves #[430](https://github.com/orbitdb/orbit-db/issues/430)
+- Resolves #[365](https://github.com/orbitdb/orbit-db/issues/365)
+- Resolves #[438](https://github.com/orbitdb/orbit-db/issues/438)
+- Resolves #[381](https://github.com/orbitdb/orbit-db/issues/381)
+- Resolves #[242](https://github.com/orbitdb/orbit-db/issues/242)
+- Resolves #[430](https://github.com/orbitdb/orbit-db/issues/430)

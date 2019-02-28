@@ -1,0 +1,10 @@
+{
+  "line-length": false,
+  "no-trailing-punctuation": false,
+  "no-duplicate-heading": false,
+  "no-inline-html": {
+    "allowed_elements": [
+      "a"
+    ]
+  }
+}

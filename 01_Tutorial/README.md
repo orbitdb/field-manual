@@ -11,11 +11,12 @@
 
 ## What will I build?
 
-You will build an app that provides royalty-free sheet music on-demand for musicians, based on their instrument. 
+You will build an app that provides royalty-free sheet music on-demand for musicians, based on their instrument.
 
 You will access a global catalog of royalty-free sheet music. Then, given an instrument name as input (Violin, Saxophone, Marimba) you it will display piece of sheet music at random. Futhermore, you will give the users the ability to submit their own music and share it with connected peers.
 
 You will use OrbitDB as the backbone for this, creating a few databases:
+
 1. The "global" starter database of royalty free pieces for all to use (read only)
 2. The user database of pieces they can upload - private
 
