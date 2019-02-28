@@ -7,8 +7,6 @@
 - [Adding a practice counter to each piece](#)
 - [Adding a higher-level user database](#)
 
-> **Note:**  The nesting approach detailed here is but one of many, and you are free to organize your data as you see fit. This is a powerful feature of OrbitDB and we are excited to see how people tackle this problem in the future!
-
 ## Adding a practice counter to each piece
 
 Your users may want to keep track of their practice, at minimum how many times they practiced a piece. You'll enable that functionality for them.
@@ -35,6 +33,8 @@ You changed your code to add a new database of type `counter` for each entry add
 * `this.orbitdb.counter` creates a new counter type with `options` that provide a write ACL for your IPFS node
 * `this.piecesDb.put` is modified to store the _address_ of this new database for later retrieval similar to the way you  stored media addresses in a previous chapter.
 
+> **Note:**  The nesting approach detailed here is but one of many, and you are free to organize your data as you see fit. This is a powerful feature of OrbitDB and we are excited to see how people tackle this problem in the future!
+
 ## Adding a higher-level database for user data
 
 Pieces of music to practice with are great to have, but moving forward you will want to allow users to further express themselves via a username and profile. This will also help prepare you for allowing users to connect to each other in the next chapter.
@@ -47,7 +47,8 @@ You will create a new database for users, from which your `piecesDb` will be ref
 ## Key Takeaways
 
 * The distributed applications of the future will be complex and require data structures to mirror and manage that complexity.
-* Luckily, OrbitDB is extremely flexible when it comes to generating complex and linked data structures 
+* Luckily, OrbitDB is extremely flexible when it comes to generating complex and linked data structures
+* These structures can contain any combination of OrbitDB stores - you are not limited to just one.
 * You can nest a database within another, and you can create new databases to next your existing databases within.
 * _Nesting_ databases is a powerful approach, but it is one of many. **Do not** feel limited. **Do** share novel approaches with the community.
 
