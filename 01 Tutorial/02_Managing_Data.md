@@ -79,8 +79,8 @@ async addNewPiece(hash, instrument = "Piano") {
 Then, in your application code, node.js or browser, you cna use this function like so, utilizing the detault value for the `instrument` argument.
 
 ```javascript
-const newPieceHash = NPP.addNewPiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ")
-const content = await NPP.node.dag.get(hash)
+const cid = NPP.addNewPiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ")
+const content = await NPP.node.dag.get(cid)
 console.log(content.value.payload)
 ```
 
@@ -212,19 +212,27 @@ const cid = await NPP.updatePiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEm
 // do stuff with the cid as above
 
 const cid = await NPP.deletePieceByHash("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ")
-const content = await NPP.node.dag.get(hash)
+const content = await NPP.node.dag.get(cid)
 console.log(content.value.payload)
 ```
 
 While the opcode for PUT will be the same, the opcode for `deletePieceByHash` is not:
 
 ```json
+{
+  "op":"DEL",
+  "key":"QmdzDacgJ9EQF9Z8G3L1fzFwiEu255Nm5WiCey9ntrDPSL",
+  "value":null
+}
 ```
 
 ### What just happened?
 
-You may be thinking something like this: "Wait, if OrbitDB is built upon IPFS and IPFS is immutable, then how are we updating or deleting records?" Great question, and the answer lies in the opcodes.
+You may be thinking something like this: "Wait, if OrbitDB is built upon IPFS and IPFS is immutable, then how are we updating or deleting records?" Great question, and the answer lies in the opcodes  Let's step through the code so we can get to that.
 
+* `this.piecesDb.put` is nothing new, we're just using it to perform an update instead of an insert
+* `this.piecesDb.del` is a simple function that takes a hash, deletes the record, and returns a CID
+* `"op": "DEL"` is another opcode, `DEL` for DELETE. This log entry effectively removes this key from your records and also removes the content from your local IPFS
 
 ## Storing Media Files
 
