@@ -1,5 +1,18 @@
 ---
 title: The OrbitDB Field Manual
+abstract:
+  Straight from the creators of OrbitDB. Contains an end-to-end tutorial, an in-depth look at
+  OrbitDB's underlying architecture, and even some philsophical musings about decentralization
+  and the distributed industry.
+subject:
+  Subject!
+author:
+  - Mark Robert Henderson
+  - Samuli Pöyhtäri
+  - Vesa-Ville Piiroinen
+  - Juuso Räsänen
+  - Shams Methnani
+  - Richard Littauer
 toc: true
 geometry: margin=2.5cm
 urlcolor: blue

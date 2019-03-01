@@ -1,1 +1,3 @@
-# The Architecture of OrbitDB
+# Part 3: The Architecture of OrbitDB
+
+## Introduction

@@ -1,1 +1,3 @@
-# Thinking Peer to Peer
+# Part 2: Thinking Peer to Peer
+
+## Introduction

@@ -1041,15 +1041,21 @@ The end!
 
 \pagebreak
 
-# Thinking Peer to Peer
+# Part 2: Thinking Peer to Peer
+
+## Introduction
 
 \pagebreak
 
-# The Architecture of OrbitDB
+# Part 3: The Architecture of OrbitDB
+
+## Introduction
 
 \pagebreak
 
-# What Next?
+# Part 4: What Next?
+
+## Introduction
 
 \pagebreak
 
