@@ -15,7 +15,7 @@ Currently, The OrbitDB Field Manual is available for download in the following f
 TODO:
 
 - [ ] Other download options (mobi, epub, etc)
-- [ ] Hard copy purchase options?
+- [ ] [Print on demand](https://github.com/aphelionz/orbitdb-field-manual/issues/3)
 
 ## Table of Contents
 
