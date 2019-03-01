@@ -1,4 +1,4 @@
-# Chapter 2 - Managing Data
+## Chapter 2 - Managing Data
 
 > Managing data in OrbitDB involves  _loading databases into memory_, and then _creating_, _updating_, _reading_, and _deleting data_.
 
@@ -11,7 +11,7 @@
 - [Storing media files](#storing-media-files)
 - [Key Takeaways](#key-takeaways)
 
-## Loading the database
+### Loading the database
 
 To start, you'll do a couple of things to enhance our current code and tidy up. We will also scaffold out some functions to be filled in later.
 
@@ -54,7 +54,7 @@ class NewPiecePlease {
 
 ```
 
-### What just happened?
+#### What just happened?
 
 After you instantiated the database, you loaded its contents into memory for use. It's empty for now, but not for long! Loading the database at this point after instantiation will save you trouble later.
 
@@ -62,7 +62,7 @@ After you instantiated the database, you loaded its contents into memory for use
 
 > **Note:** You're probably wondering about if you have a large database of millions of documents, and the implications of loading them all into memory. It's a valid concern, and you should move on to Part 4 of this book once you're done with the tutorial.
 
-## Adding data
+### Adding data
 
 Now that you have a database set up, adding content to it is fairly easy. Run the following code to add some sheet music to the repository.
 
@@ -99,7 +99,7 @@ after we explain what happened. For more information see Part 3.
 }
 ```
 
-### What just happened?
+#### What just happened?
 
 - `piecesDb.put({ ... })` is the most important line here. This call takes an object to sture and returns a _mutlihash_, which is the hash of the content added to IPFS.
 - `node.dag.get(hash)` is a function that takes a Content ID (CID) and returns content.
@@ -125,7 +125,7 @@ QmefKrBYeL58qyVAaJoGHXXEgYgsJrxo763gRRqzYHdL6o | Metroid - Zebetite.pdf
 
 These are all stored in the global IPFS network so you can find any piece by visiting a public gateway such as `ipfs.io` and adding the IPFS multiaddress to the end of the URL like so: [https://ipfs.io/ipfs/QmYPpj6XVNPPYgwvN4iVaxZLHy982TPkSAxBf2rzGHDach](https://ipfs.io/ipfs/QmYPpj6XVNPPYgwvN4iVaxZLHy982TPkSAxBf2rzGHDach)
 
-## Reading data
+### Reading data
 
 You've added data to your local database, and now you'll can query it. OrbitDB gives you a number of ways to do this, mostly based on which _store_ you picked.
 
@@ -174,7 +174,7 @@ Both `console.log` calls above will return something like this.
 }
 ```
 
-### What just happened?
+#### What just happened?
 
 You queried the database of scores you created earlier in the chapter, retrieving by hash and also randomly.
 
@@ -183,7 +183,7 @@ You queried the database of scores you created earlier in the chapter, retrievin
 
 > **Note:** Generally speaking, `get` functions do not return promises since the calculation of database state happens at the time of a _write_. This is a trade-off to allow for ease of use and performance based on the assumption that writes are _generally_ less frequent than reads.
 
-## Updating and deleting data
+### Updating and deleting data
 
 You'll next want to provide your users with the ability to update and delete their pieces. For example if you realize you'd rather practice a piece on a harpsichord instead of a piano, or if they want to stop practicing a certain piece.
 
@@ -228,7 +228,7 @@ While the opcode for PUT will be the same, the opcode for `deletePieceByHash` is
 }
 ```
 
-### What just happened?
+#### What just happened?
 
 You may be thinking something like this: "Wait, if OrbitDB is built upon IPFS and IPFS is immutable, then how are we updating or deleting records?" Great question, and the answer lies in the opcodes  Let's step through the code so we can get to that.
 
@@ -236,7 +236,7 @@ You may be thinking something like this: "Wait, if OrbitDB is built upon IPFS an
 - `this.piecesDb.del` is a simple function that takes a hash, deletes the record, and returns a CID
 - `"op": "DEL"` is another opcode, `DEL` for DELETE. This log entry effectively removes this key from your records and also removes the content from your local IPFS
 
-## Storing Media Files
+### Storing Media Files
 
 We are often asked if it is possible to store media files like pictures or audio directly inside OrbitDB. Our answer is that you should treat this like any other database system and store the _address_ of the
 
@@ -246,11 +246,11 @@ Luckily, with content addressing in IPFS, this becomes rather easy, and predicta
 2. Store said multihash in OrbitDB
 3. When it comes time to display the media, use native IPFS functionality to retrieve it from the hash
 
-### Adding content to IPFS
+#### Adding content to IPFS
 
 To see this in action, [download the "Tourian" PDF](https://ipfs.io/ipfs/QmYPpj6XVNPPYgwvN4iVaxZLHy982TPkSAxBf2rzGHDach) to your local file system for use in the next examples
 
-#### On the command line with the go-ipfs or js-ipfs daemon
+##### On the command line with the go-ipfs or js-ipfs daemon
 
 After following the installation instructions to install [go-ipfs](https://github.com/ipfs/go-ipfs) or [js-ipfs](https://github.com/ipfs/js-ipfs) globally, you can run the following command:
 
@@ -261,7 +261,7 @@ QmYPpj6XVNPPYgwvN4iVaxZLHy982TPkSAxBf2rzGHDach
 
 You can then use that hash in the same manner as above to add it to the database of pieces.
 
-#### In Node.js
+##### In Node.js
 
 In Node.JS, adding a file from the filesystem can be accomplished like so:
 
@@ -272,7 +272,7 @@ var ipfs = new IPFS(/* insert appropriate options here for your local IPFS insta
 ipfs.addFromFs("./file.pdf").then(console.log)
 ```
 
-#### In the browser
+##### In the browser
 
 Unfortunately we don't have a one-line trick to upload a file to IPFS, but if you have a HTML file input with an ID of "fileUpload", you can do the following:
 
@@ -280,13 +280,13 @@ Unfortunately we don't have a one-line trick to upload a file to IPFS, but if yo
 var fileInput = document.getElementById("fileUpload")
 ```
 
-### What just happened?
+#### What just happened?
 
 You added some potentially very large media files to IPFS, and then stored the 40-byte addresses in OrbitDB for retrieval and use. You are now able to leverage the benefits of both IPFS and
 
 > **Note:** IPFS nodes run _inside_ the browser, so if you're adding lots of files via the above method, keep an eye on your IndexedDB usage, since that's where IPFS is storing the blocks.
 
-## Key Takeaways
+### Key Takeaways
 
 - Calling `load()` periodically ensures you have the latest entries from the database
 - Generally speaking, a `put` or `delete` will return a Promise (or require `await`), and a `get` will return the value(s) immediately.

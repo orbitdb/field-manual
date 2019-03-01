@@ -1,15 +1,17 @@
-# The OrbitDB Tutorial
+# Part 1: The OrbitDB Tutorial
 
 > An interactive, imperative and isometric JavaScript adventure of peer-to-peer, decentralized, and distributed proportions
 
-## Requirements
+## Introduction
+
+### Requirements
 
 * A computer
 * A command line (unix/linux based or windows command prompt)
 * A modern web browser (Firefox, Chrome, Edge, etc)
 * Node.js installed
 
-## What will I build?
+### What will I build?
 
 You will build an app that provides royalty-free sheet music on-demand for musicians, based on their instrument.
 
@@ -34,7 +36,7 @@ We believe that **music** is a uniquely universal cultural feature - something t
 share, enjoy, or at least appreciate. Your participation in this tutorial will make it easier for musicians all over the
 world to find sheet music to practice with.
 
-## Conventions
+### Conventions
 
 * Read this tutorial in order, the learning builds on itself other over time.
 * You will switch between writing and reading code, and *What Just Happened* sections that explain in depth what happens on a technical level when the code is run.

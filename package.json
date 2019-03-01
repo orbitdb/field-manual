@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "markdownlint -c markdownlint.json *.md 0*/*.md",
-    "build": "rm -rf dist; mkdir dist; pandoc -o dist/Book.pdf COVER.md */*.md"
+    "lint": "markdownlint -c markdownlint.json *.md */*.md",
+    "build": "make build"
   },
   "author": "",
   "license": "ISC",

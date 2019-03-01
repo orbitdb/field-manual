@@ -1,4 +1,4 @@
-# Chapter 3 - Structuring your data
+## Chapter 3 - Structuring your data
 
 > or, "How you learned to stop worrying and love _nested databases_."
 
@@ -9,7 +9,7 @@
 - [Adding a higher-level user database](#adding-a-higher-level-user-database)
 - [Updating your user profile](#updating-your-user-profile)
 
-## Adding a practice counter to each piece
+### Adding a practice counter to each piece
 
 Your users may want to keep track of their practice, at minimum how many times they practiced a piece. You'll enable that functionality for them by creating a new OrbitDB `counter` store for each piece, and creating a few new functions inside the `NewPiecePlease` class to interact with the counters.
 
@@ -51,7 +51,7 @@ Which will then output something like:
 }
 ```
 
-### What just happened?
+#### What just happened?
 
 You changed your code to add a new database of type `counter` for each new entry added to the database.
 
@@ -64,7 +64,7 @@ You changed your code to add a new database of type `counter` for each new entry
 > **Note:** There is a limit of 40 characters on the names of the databases, and multihashes are over this limit at 46. We still need unique names for each of the databases created to generate unique addresses, so we trim down the hash and prepend
 it with `counter.` to get around this limitation.
 
-## Utilizing the practice counter
+### Utilizing the practice counter
 
 Now, add a few functions to `NewPiecePlease` that utilize the counters when necessary
 
@@ -106,7 +106,7 @@ That will `console.log` out something like:
 }
 ```
 
-### What just happened?
+#### What just happened?
 
 You created and used two new functions to both read the value of, and increment a `counter`, another type of OrbitDB store.
 
@@ -116,7 +116,7 @@ You created and used two new functions to both read the value of, and increment 
 - `"op":"COUNTER"` is a new operation that you havent seen yet - remember, you can create stores with any operations you want. More on this in Part 3.
 - `"counters": { "042985dafe18ba45c7f1a57db.........02ae4b5e4aa3eb36bc5e67198c2d2": 3 }` is the value returned, the long value is an id based on your node's public key
 
-## Adding a higher-level database for user data
+### Adding a higher-level database for user data
 
 Pieces of music to practice with are great to have, but moving forward you will want to allow users to further express themselves via a username and profile. This will also help prepare you for allowing users to connect to each other in the next chapter.
 
@@ -125,11 +125,11 @@ You will create a new database for users, from which your `piecesDb` will be ref
 ```javascript
 ```
 
-### What just happened?
+#### What just happened?
 
 You created a database to store anything and everything that might pertain to a user, and then linked the `piecesDb` to that, nested inside.
 
-## Key Takeaways
+### Key Takeaways
 
 - The distributed applications of the future will be complex and require data structures to mirror and manage that complexity.
 - Luckily, OrbitDB is extremely flexible when it comes to generating complex and linked data structures

@@ -1,4 +1,4 @@
-# Chapter 1 - Laying the Foundation
+## Chapter 1 - Laying the Foundation
 
 > The basics of OrbitDB include  _installing OrbitDB (and IPFS)_, _setting up a new isomorphic project_, _creating databases_, and how _understanding how to choose data stores_.
 
@@ -10,12 +10,12 @@
 - [Choosing a data store](#choosing-a-data-store)
 - [Key Takeaways](#key-takeaways)
 
-## Installing the requirements: IPFS and OrbitDB
+### Installing the requirements: IPFS and OrbitDB
 
 You will need to get the code for OrbitDB and its dependency, IPFS, and make it available to your project. The process is
 different between the browser and node.js, so we cover both here.
 
-### In node.js
+#### In node.js
 
 Choose a project directory and `cd` to there from your command line. Then run the following command.
 
@@ -28,7 +28,7 @@ $ npm install orbitdb ipfs
 
 This will create a `package.json`, `package.lock`, and `node_modules` folder.
 
-### In the Browser
+#### In the Browser
 
 For this tutorial, we recommend using unpkg for obtaining pre-built, minified versions of both IPFS and OrbitDB. Simply include these at the top of your `index.html` file:
 
@@ -41,7 +41,7 @@ You will now have global `Ipfs` and `OrbitDB` objects available to you. You will
 
 > **Note:** Both OrbitDB and js-ipfs are open source, which give you the ability to build and even contribute to the code. This will be covered in detail these in Part 3.
 
-## Creating the isomorphic frame for our app
+### Creating the isomorphic frame for our app
 
 Since OrbitDB works in the browser and node.js, we're going to want to make our app as _isomorphic_ as possoble. This means we want the same code to run in the browser as runs in JS. This is good news for the tutorial, as it means we can keep our code to **strictly** things that pertain to our app, and then apply bindings in node.js and
 
@@ -64,7 +64,7 @@ try {
 }
 ```
 
-### What just happened?
+#### What just happened?
 
 Using some key JavaScript features, you have created the shell for our application that runs in both node.js and the browser. It defines a new class called `NewPiecePlease`, with a constructor that takes two arguments
 
@@ -79,7 +79,7 @@ const NPP = require('./newpieceplease')
 
 From here on out, we will ignore these isometric bookends and concentrate wholly on the `NewPiecePlease` class.
 
-## Instantiating IPFS and OrbitDB
+### Instantiating IPFS and OrbitDB
 
 We have designed Chapters 1 and 2 of the tutorial to work work offline, not requiring any internet connectivity or
 connections to peers.
@@ -112,7 +112,7 @@ class NewPiecePlease() {
 In the output you will see something called a "multihash", like `QmPSicLtjhsVifwJftnxncFs4EwYTBEjKUzWweh1nAA87B`. For now,
 just know that this is the identifier of your IPFS node. We explain multihashes in more detail in **Part 2: Peer-to-Peer**
 
-### What just happened?
+#### What just happened?
 
 Start with the `new Ipfs` line. This code creates a new IPFS node. Note the default settings:
 
@@ -135,7 +135,7 @@ You have also loaded a new `orbitdb` object into memory, ready to create databas
 
 *You are now ready to use OrbitDB!*
 
-#### What else happened in node.js?
+##### What else happened in node.js?
 
 When you ran the code in node.js, you created two folders in your project structure: `'orbitdb/` and `ipfs/`.
 
@@ -152,7 +152,7 @@ The code will always create the `orbitdb/` folder as a sibling to the location s
 
 > *Note:* The `ipfs/` folder contains all of your IPFS data. Explaining this in depth is outside of the scope of this tutorial, and  the curious can find out more [here](https://ipfs.io).
 
-#### What else happened in the browser?
+##### What else happened in the browser?
 
 In the browser IPFS content is handled inside of IndexedDB, a persistent storage mechanism for browsers
 
@@ -163,7 +163,7 @@ Note since you have not explicitly defined a database in the broser, no IndexedD
 > **Caution!** iOS and Android have been known to purge IndexedDB if storage space needs to be created inside of your phone.
 We recommend creating robust backup mechanisms at the application layer
 
-## Creating a Database
+### Creating a Database
 
 Now, you will create a local database that *only you* can read.
 
@@ -195,7 +195,7 @@ It's the second, or middle, part `zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQ
 
 > *Note:* Misunderstanding OrbitDB addressing can lead to some very unexpected - sometimes hilarious, sometimes disastrous outcomes. Read more in Part 2 to learn more.
 
-### What just happened?
+#### What just happened?
 
 Your code created a local OrbitDB database, of type "docstore", writable only by you.
 
@@ -210,7 +210,7 @@ completed, the database is open and can be acted upon.
 
 See for more info: [link](https://github.com/orbitdb/orbit-db/blob/525978e0a916a8b027e9ea73d8736acb2f0bc6b4/src/OrbitDB.js#L106)
 
-#### What else happened in node.js?
+##### What else happened in node.js?
 
 You will see some activity inside your project's `orbitdb/` folder. This is good.
 
@@ -227,7 +227,7 @@ $ ls orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces/
 
 You don't need to understand this fully for now, just know that it happened. Two subfolders, one being the original folder you saw when you instantiated OrbitDB, and now another that has the same address as your database.
 
-#### What else happened in the browser?
+##### What else happened in the browser?
 
 Similarly, a new IndexedDB database was created to hold your OrbitDB-specific info, apart from the data itself which are still stored in IPFS.
 
@@ -235,7 +235,7 @@ Similarly, a new IndexedDB database was created to hold your OrbitDB-specific in
 
 This shows you one of OrbitDB's core strenths - the ability to manage a lot of complexity between its own internals and tht of IPFS, providing a clear and clean API to manage the data that matters to you.
 
-## Choosing a data store
+### Choosing a data store
 
 OrbitDB organizes its functionality by separating different data management concerns, schemas and APIs into **stores**. We chose a `docstore` for you in the last chapter, but after this tutorial it will be your job to determine the right store for the job.
 
@@ -251,7 +251,7 @@ Each OrbitDB store has its own specific API methods to create, delete, retreieve
 
 Also, users of OrbitDB can write their own stores if it suits them. This is an advanced topic and is covered in Part 3 of this book.
 
-## Key Takeaways
+### Key Takeaways
 
 - OrbitDB is a distributed database layer which stores its raw data in IPFS
 - Both IPFS and OrbitDB work offline and online
