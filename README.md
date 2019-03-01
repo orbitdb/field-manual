@@ -45,10 +45,11 @@ If you feel like you want to add or improvate a section, please create a pull re
 
 The build process is straightforward.
 
-1. Make your edits
-2. `npm run build` to populate the `dist` folder
-3. Manually audit the `dist` output to ensure no errors were made
-4. Create your PR!
+1. Make your edits in the markdown files
+2. `npm run lint` to make sure your edits meet linting standards
+3. `npm run build` to populate the `dist` folder
+4. Manually audit the `dist` output to ensure no errors were made
+5. Create your PR!
 
 ## License
 
