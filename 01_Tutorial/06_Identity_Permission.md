@@ -1,6 +1,6 @@
-## Chapter 5: Identity and Permissions
+## Chapter 6: Identity and Permissions
 
-> **Note:** Please complete [Chapter 4 - Peer to Peer](./04_P2P.md) first.
+> **Note:** Please complete [Chapter 5 - Replication](./05_Replication.md) first.
 
 ### Access Control
 
