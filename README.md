@@ -46,7 +46,7 @@ This is a _living_, _community-based_ document. Pull Requests are welcome and ac
 
 ### Building
 
-Requires `[Pandoc](https://pandoc.org/)` to convert markdown to other formats.
+Requires [`Pandoc`](https://pandoc.org/)` to convert markdown to other formats.
 
 1. Make your edits in the markdown files
 2. `npm run lint` to make sure your edits meet linting standards
