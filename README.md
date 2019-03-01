@@ -4,7 +4,6 @@
 
 TODO: Long Description
 
-
 ## Usage
 
 You can download a copy of the book from this repository, either in the releases section or directly from the code.
@@ -13,8 +12,10 @@ Currently, The OrbitDB Field Manual is available for download in the following f
 
 - [PDF](./dist/Book.pdf)
 
-TODO: Other download options (mobi, epub, etc)
-TODO: Hard copy purchase options?
+TODO:
+
+- [ ] Other download options (mobi, epub, etc)
+- [ ] Hard copy purchase options?
 
 ## Table of Contents
 
