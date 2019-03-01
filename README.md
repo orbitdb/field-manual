@@ -21,9 +21,11 @@ TODO:
 
 This is a table of contents of the book
 - [Introduction](./00_Introduction)
-- [Part 2: Tutorial](./02_Tutorial)
-- [Part 3: Thinking Peer to Peer](./03_Thinking_Peer_to_Peer)
+- [Part 1: Tutorial](./01_Tutorial)
+- [Part 2: Thinking Peer to Peer](./02_Thinking_Peer_to_Peer)
+- [Part 3: The Architecture of OrbitDB](./03_The_Architecture_of_OrbitDB)
 - [Part 4: What comes next?](./04_What_next)
+- [Appendices](./05_Appendices)
 
 ## Maintainers
 
