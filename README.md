@@ -45,7 +45,7 @@ If you feel like you want to add or improvate a section, please create a pull re
 
 ### Building
 
-The build process is straightforward.
+Requires `[Pandoc](https://pandoc.org/)` to convert markdown to other formats.
 
 1. Make your edits in the markdown files
 2. `npm run lint` to make sure your edits meet linting standards
