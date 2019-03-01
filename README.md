@@ -21,11 +21,9 @@ Note: This is a table of contents of the book, not this readme.
 - [Part 4: What comes next?](./04_What_next)
 - [Appendices](./05_Appendices)
 
-## Usage
+## Getting the book
 
-You can download a copy of the book from this repository, either in the releases section or directly from the code.
-
-Currently, The OrbitDB Field Manual is available for download in the following "free as in freedom" formats:
+You can download a copy of the book for here, available for download in the following free formats:
 
 - [PDF](./dist/Book.pdf)
 - [EPUB](./dist/Book.epub)
