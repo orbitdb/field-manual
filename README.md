@@ -27,7 +27,7 @@ This is a table of contents of the book
 
 ## Maintainers
 
-Mark Henderson is the maintainer and lead author of the OrbitDB field manual. However, this work is built upon the input of many other people
+Mark Henderson (@aphelionz) is the maintainer and lead author of the OrbitDB field manual. However, this work is built upon the work and input of many other people
 
 - @haadcode
 - @shamb0t
