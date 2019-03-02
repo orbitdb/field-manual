@@ -1,6 +1,6 @@
 # The OrbitDB Field Manual
 
-> Straight from the creators of OrbitDB. Contains an end-to-end tutorial, an in-depth look at OrbitDB's underlying architecture, and even some philsophical musings about decentralization and the distributed industry.
+> An end-to-end tutorial, an in-depth look at OrbitDB's architecture, and even some philsophical musings about decentralization and the distributed industry. From the creators of OrbitDB.
 
 <p align="left">
   <img src="images/orbit_db_logo_color.jpg" width="256" />
@@ -21,22 +21,18 @@ Note: This is a table of contents of the book, not this readme.
 - [Part 4: What comes next?](./04_What_next)
 - [Appendices](./05_Appendices)
 
-## Usage
+## Getting the book
 
-You can download a copy of the book from this repository, either in the releases section or directly from the code.
-
-Currently, The OrbitDB Field Manual is available for download in the following formats:
+You can download a copy of the book for here, available for download in the following free formats:
 
 - [PDF](./dist/Book.pdf)
-
-TODO:
-
-- [ ] Other download options (mobi, epub, etc)
-- [ ] [Print on demand](https://github.com/aphelionz/orbitdb-field-manual/issues/3)
+- [EPUB](./dist/Book.epub)
+- [ODT](./dist/Book.odt)
+- [Jupyter Notebook (Tutorial Only)](./dist/Book.ipynb)
 
 ## Maintainers
 
-Mark Henderson (@aphelionz) is the maintainer and lead author of the OrbitDB field manual. However, this work is built upon the work and input of many other people
+Mark Henderson (@aphelionz) is the maintainer and lead author of the OrbitDB field manual. However, this work is built upon the work and input of many other people:
 
 - @haadcode
 - @shamb0t
@@ -46,13 +42,11 @@ Mark Henderson (@aphelionz) is the maintainer and lead author of the OrbitDB fie
 
 ## Contributing
 
-This is a _living_, _community-based_ document. PRs are accepted.
-
-If you feel like you want to add or improvate a section, please create a pull request and begin the discussion.
+This is a _living_, _community-based_ document. Pull Requests are welcome and accepted. If you feel like you want to add or improvate a section, please create a PR and begin the discussion.
 
 ### Building
 
-Requires `[Pandoc](https://pandoc.org/)` to convert markdown to other formats.
+Requires [`Pandoc`](https://pandoc.org/) to convert markdown to other formats.
 
 1. Make your edits in the markdown files
 2. `npm run lint` to make sure your edits meet linting standards
