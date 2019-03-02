@@ -58,6 +58,6 @@ Requires [`Pandoc`](https://pandoc.org/) to convert markdown to other formats.
 
 The OrbitDB Field Manual is released under the [Creative Commons Attribution-NonCommercial 4.0 International License](https://creativecommons.org/licenses/by-nc/4.0/)
 
-![CC BY-NC 4.0](./images/cc-by-nc.png)
-**Attribution-NonCommercial**
+![CC BY-NC 4.0](./images/cc-by-nc.png)<br />
+**Attribution-NonCommercial**<br />
 **CC BY-NC**
