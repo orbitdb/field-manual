@@ -7,7 +7,6 @@
 - [Adding a practice counter to each piece](#adding-a-practice-counter-to-each-piece)
 - [Utilizing your practice counter](#utilizing-your-practice-counter)
 - [Adding a higher-level user database](#adding-a-higher-level-user-database)
-- [Updating your user profile](#updating-your-user-profile)
 
 ### Adding a practice counter to each piece
 
@@ -55,14 +54,13 @@ Which will then output something like:
 
 You changed your code to add a new database of type `counter` for each new entry added to the database.
 
-- `const options = { accessController: { write: [this.orbitdb.identity.publicKey] }}` should be recognizable from Chapter 1. This sets options for the db, namely the `accessController` to give write access only to your node's ID, or public key. `
+- `const options = { accessController: { write: [this.orbitdb.identity.publicKey] }}` should be recognizable from Chapter 1. This sets options for the db, namely the `accessController` to give write access only to your node's ID, or public key.
 - `this.orbitdb.counter` creates a new counter type with `options` that provide a write ACL for your IPFS node
 - `const dbName = "counter." + hash.substr(20,20)` prepends `counter.` to the truncated database name. See the note below.
 - `this.piecesDb.put` is then modified to store the _address_ of this new database for later retrieval similar to the way you  stored media addresses in a previous chapter.
 - `"counter":"/orbitdb/zdpuAoM3yZEwsynUgeWPfizmWz5DEFPiQSvg5gUPu9VoGhxjS/counter.fzFwiEu255Nm5WiCey9n"` in the output now reflects this change by storing the _address_ of the new DB for later retrieval and updating.
 
-> **Note:** There is a limit of 40 characters on the names of the databases, and multihashes are over this limit at 46. We still need unique names for each of the databases created to generate unique addresses, so we trim down the hash and prepend
-it with `counter.` to get around this limitation.
+> **Note:** There is a limit of 40 characters on the names of the databases, and multihashes are over this limit at 46. We still need unique names for each of the databases created to generate unique addresses, so we trim down the hash and prepend it with `counter.` to get around this limitation.
 
 ### Utilizing the practice counter
 
@@ -122,12 +120,68 @@ Pieces of music to practice with are great to have, but moving forward you will 
 
 You will create a new database for users, from which your `piecesDb` will be referenced. You can create this database in the `ready` event handler of IPFS, alongside where you declared `piecesDb`.
 
+Update your `NewPiecePlease` constructor to look like this:
+
 ```javascript
+this.node.on("ready", async () => {
+  this.orbitdb = await OrbitDB.createInstance(this.node)
+  this.defaultOptions = { write: [this.orbitdb.identity.publicKey] }
+
+  const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
+  this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
+  await this.piecesDb.load()
+
+  this.userDb = await this.orbitdb.kvstore("user", this.defaultOptions)
+  await this.userDb.load()
+  await this.userDb.set('pieces', this.piecesDb.id)
+});
 ```
+
+Then add the following functions in your class:
+
+```javascript
+async deleteProfileField(key) {
+  const cid = await this.userDb.del(key)
+  return cid
+}
+
+getAllProfileFields() {
+  return NPP.userDb._index._index;
+}
+
+getProfileField(key) {
+  return this.userDb.get(key)
+}
+
+async updateProfileField(key, value) {
+  const cid = await this.userDb.set(key, value)
+  return cid
+}
+
+```
+
+In your application code, you can use them like this:
+
+```javascript
+await NPP.updateProfile("username", "aphelionz")
+
+var profileFields = NPP.getAllProfileFields();A
+// { "username": "aphelionz", "pieces": "/orbitdb/zdpu...../pieces" }
+
+await NPP.deleteProfileField("username")
+```
+
+We think you're getting the idea.
 
 #### What just happened?
 
 You created a database to store anything and everything that might pertain to a user, and then linked the `piecesDb` to that, nested inside.
+
+- `this.orbitdb.kvstore("user", this.defaultOptions)` creates a new OrbitDB of a type that allows you to manage a simple key value store.
+- `this.userDb.set('pieces', this.piecesDb.id)` is the function that the `kvstore` uses to set items. This is equivalent to something like the shorthand `user = {}; user.pieces = id`
+- `NPP.userDb._index._index` is a nice trick that works with any store to return the full index. We can use this in the absence of a function like `NPP.userDb.all()`
+- `this.userDb.del(key)` deletes the specified key and corresponding value from the store
+- `this.userDb.get(key)` retrieves the specified key and the corresponding value from the store
 
 ### Key Takeaways
 
