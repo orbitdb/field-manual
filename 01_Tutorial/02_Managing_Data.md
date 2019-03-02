@@ -274,17 +274,33 @@ ipfs.addFromFs("./file.pdf").then(console.log)
 
 ##### In the browser
 
-Unfortunately we don't have a one-line trick to upload a file to IPFS, but if you have a HTML file input with an ID of "fileUpload", you can do the following:
+If you have a HTML file input with an ID of "fileUpload", you can do something like the following to add content to IPFS:
 
 ```javascript
 var fileInput = document.getElementById("fileUpload")
+
+var file = fileInput.files[0]
+if (file) {
+  var reader = new FileReader();
+  reader.readAsBinaryString(file)
+
+  reader.onerror = (e) => console.error(e)
+  reader.onload = async function (evt) {
+    const contents = evt.target.result
+    const buffer = NPP.node.types.Buffer(contents)
+    const result = await NPP.node.add(buffer)
+    const cid = await NPP.addNewPiece(result[0].hash, instrument)
+  }
+}
 ```
+
+Note that there are still issues with swarming in the browser, so you may have trouble discovering content. Stay tuned for future `js-ipfs` releases to fix this.
 
 #### What just happened?
 
-You added some potentially very large media files to IPFS, and then stored the 40-byte addresses in OrbitDB for retrieval and use. You are now able to leverage the benefits of both IPFS and
+You added some potentially very large media files to IPFS, and then stored the 40-byte addresses in OrbitDB for retrieval and use. You are now able to leverage the benefits of both IPFS and OrbitDB in both the browser and node.js.
 
-> **Note:** IPFS nodes run _inside_ the browser, so if you're adding lots of files via the above method, keep an eye on your IndexedDB usage, since that's where IPFS is storing the blocks.
+> **Note:** IPFS nodes run _inside_ the browser, so if you're adding lots of files via the above method, keep an eye on your IndexedDB quotas, since that's where IPFS is storing the blocks.
 
 ### Key Takeaways
 
