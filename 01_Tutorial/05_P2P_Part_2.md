@@ -2,6 +2,13 @@
 
 > **Note:** Please complete [Chapter 4 - Peer to Peer](./04_P2P_Part_1.md) first.
 
+<div>
+  <h3>Table of Contents</h3>
+ 
+- [Connecting to another peer's database](#connecting-to-another-peers-database)
+
+</div>
+
 ### Connecting to another peer's database
 
 To share data between peers, you will need to know their OrbitDB address. Unforutately, simply connecting to a peer is not enough, since there's not an simple way to obtain databases address from a simply IPFS peer-to-peer connection. To remedy this, you'll write your OrbitDB address to IPFS. Then, you'll share the hash to peers you want to connect to. 
