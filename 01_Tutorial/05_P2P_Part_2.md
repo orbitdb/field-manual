@@ -5,3 +5,7 @@
 ### Connecting to another peer's database
 
 ### Replication vs. Duplication
+
+### Key Takeaways
+
+Continue to [Chapter 6](./06_Identity_Permissions) to learn about how you can vastly extend the identity and access control capabilities of OrbitDB
