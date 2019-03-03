@@ -315,4 +315,4 @@ await NPP.sendMessage(hash, data, callback)
 - Resolves #[505](https://github.com/orbitdb/orbit-db/issues/505)
 - Resolves #[496](https://github.com/orbitdb/orbit-db/issues/496)
 
-Now, move on to [Chapter 05 - Peer to Peer Part 2](./05_Replication.md)
+Now, move on to [Chapter 05 - Peer to Peer Part 2](./05_P2P_Part_2.md)
