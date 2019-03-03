@@ -20,8 +20,32 @@ It will be helpful to ensure you are connected to the peer first, via the steps 
 
 Create a function called `processMessage` and update `connectToOrbitDb` inside the `NewPiecePlease` class:
 
-```javascript
-async connectToOrbitDb(multiaddr) {
+```diff
+     <body>
+         <nav>
+-            <a href="#">Link 1</a>
+-            <a href="#">Link 2</a>
++            <h1>New Piece Please</h1>
++
++            <form id="getRandomByInstrumentForm">
++                <slot name="instrumentList"></slot>
++                <input type="submit" value="New Piece, Please!" />
++            </form>
++
++
++            <h3>User Profile</h3>
++            <dl id="profileList"></dl>
++
++
++            <form id="getByHashForm">
++                <h3>Get score by IPFS hash</h3>
++                <label>Get from hash: <input type="input" name="hash" /></label>
++                <input type="submit" value="New Piece, Please!" />
++            </form>
+         </nav>
+
+
++ async connectToOrbitDb(multiaddr) {
   try {
     var peerDb = await this.orbitdb.keyvalue(multiaddr)
     await peerDb.load()
