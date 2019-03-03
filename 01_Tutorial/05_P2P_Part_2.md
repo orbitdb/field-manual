@@ -6,6 +6,7 @@
   <h3>Table of Contents</h3>
  
 - [Connecting to another peer's database](#connecting-to-another-peers-database)
+- [Key takeaways](#key-takeaways)
 
 </div>
 
@@ -56,6 +57,6 @@ Inside your application code, you can use it like so:
 
 ### Replication vs. Duplication
 
-### Key Takeaways
+### Key takeaways
 
 Continue to [Chapter 6](./06_Identity_Permissions.md) to learn about how you can vastly extend the identity and access control capabilities of OrbitDB
