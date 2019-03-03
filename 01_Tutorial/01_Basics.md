@@ -2,13 +2,17 @@
 
 > The basics of OrbitDB include  _installing OrbitDB (and IPFS)_, _setting up a new isomorphic project_, _creating databases_, and how _understanding how to choose data stores_.
 
-> *Note:* Please see the [README](./README.md) before beginning this chapter.
+<div>
+  <h3>Table of Contents</h3>
+Please see the [README](./README.md) before beginning this chapter.
 
 - [Installing the requirements: IPFS and OrbitDB](#installing-the-requirements-ipfs-and-orbitdb)
 - [Instantiating IPFS and OrbitDB](#instantiating-ipfs-and-orbitdb)
 - [Creating a Database](#creating-a-database)
 - [Choosing a data store](#choosing-a-data-store)
 - [Key Takeaways](#key-takeaways)
+
+</div>
 
 ### Installing the requirements: IPFS and OrbitDB
 

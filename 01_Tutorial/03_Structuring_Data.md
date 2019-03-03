@@ -2,12 +2,16 @@
 
 > or, "How you learned to stop worrying and love _nested databases_."
 
-> **Note:** Please complete [Chapter 2 - Managing Data](./02_Managing_Data.md) first.
+<div>
+  <h3>Table of Contents</h3>
+Please complete [Chapter 2 - Managing Data](./02_Managing_Data.md) first.
 
 - [Adding a practice counter to each piece](#adding-a-practice-counter-to-each-piece)
 - [Utilizing your practice counter](#utilizing-your-practice-counter)
 - [Adding a higher-level user database](#adding-a-higher-level-user-database)
 - [Dealing with fixture data](#dealing-with-fixture-data)
+
+</div>
 
 ### Adding a practice counter to each piece
 

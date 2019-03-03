@@ -2,7 +2,9 @@
 
 > Managing data in OrbitDB involves  _loading databases into memory_, and then _creating_, _updating_, _reading_, and _deleting data_.
 
-> **Note:** Please complete [Chapter 1 - Laying the Foundation](./01_Basics.md) first.
+<div>
+  <h3>Table of Contents</h3>
+Please complete [Chapter 1 - Laying the Foundation](./01_Basics.md) first.
 
 - [Loading the database](#loading-the-database)
 - [Adding data](#adding-data)
@@ -10,6 +12,8 @@
 - [Updating and deleting data](#updating-and-deleting-data)
 - [Storing media files](#storing-media-files)
 - [Key Takeaways](#key-takeaways)
+
+</div>
 
 ### Loading the database
 
