@@ -4,7 +4,9 @@
 
 ### Connecting to another peer's database
 
-Once you're connected to the relevant peer, next you'll want to find their user database. You'll do so now by
+To share data between peers, you will need to know their OrbitDB address. Unforutately, simply connecting to a peer is not enough, since there's not an simple way to obtain databases address from a simply IPFS peer-to-peer connection. To remedy this, you'll write your OrbitDB address to IPFS. Then, you'll share the hash to peers you want to connect to. 
+
+It will be helpful to ensure you are connected to the peer first, via the steps in the previous chapter.
 
 Create a function called `connectToOrbitDb` inside the `NewPiecePlease` class:
 
