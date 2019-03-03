@@ -8,18 +8,38 @@ To share data between peers, you will need to know their OrbitDB address. Unforu
 
 It will be helpful to ensure you are connected to the peer first, via the steps in the previous chapter.
 
-Create a function called `connectToOrbitDb` inside the `NewPiecePlease` class:
+Create a function called `processMessage` and update `connectToOrbitDb` inside the `NewPiecePlease` class:
 
 ```javascript
-async connectToOrbitDb(multiaddr) {$                   
-  try {$                                               
+async connectToOrbitDb(multiaddr) {
+  try {
     var peerDb = await this.orbitdb.keyvalue(multiaddr)
-    console.log(peerDb)$                               
-  } catch (e) {$                                       
-    throw (e)$                                         
-    return false$                                      
-  }$                                                   
-}$                                                     
+    await peerDb.load()
+
+    var peers = Object.assign({}, this.userDb.get("peers"))
+    peers[peerDb.id] = peerDb._index._index
+    console.log(peers)
+  } catch (e) {
+    throw (e)
+  }
+}
+
+processMessage(msg) {
+  const parsedMsg = JSON.parse(msg.data.toString())
+  Object.keys(parsedMsg).forEach(async (key) => {
+    switch(key) {
+      case "userDb":
+        this.connectToOrbitDb(parsedMsg.userDb)
+        const peerDb = await this.orbitdb.keyvalue(parsedMsg.userDb)
+        this.sendMessage(peerDb.get("nodeId"), {
+          userDb: this.userDb.id
+        })
+        break;
+      default:
+        break;
+    }
+  })
+}
 ```
 
 Inside your application code, you can use it like so:
