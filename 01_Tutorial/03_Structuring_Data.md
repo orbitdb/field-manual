@@ -187,10 +187,63 @@ You created a database to store anything and everything that might pertain to a 
 ### Dealing with fixture data
 
 Fresh users to the app will need a strong onboarding experience, and you'll enable that for them now.
-You'll want to give people some data to start with, so the
+You'll want to give people some data to start with, and you'll want this process to work offline.
 
-- Import list of default instruments to select from
-- Random username
+Update your _init_ function to look like this, and add the `loadFixtureData` function in the `NewPiecePlease` class:
+
+```javascript
+async _init() {
+  const nodeId = await this.node.id()
+  this.orbitdb = await OrbitDB.createInstance(this.node)
+  this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
+
+  const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
+  this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
+  await this.piecesDb.load()
+
+  this.userDb = await this.orbitdb.kvstore("user", this.defaultOptions)
+  await this.userDb.load()
+
+  await this.loadFixtureData({
+    "username": Math.floor(Math.rand() * 1000000),
+    "peers": [],
+    "pieces": this.piecesDb.id,
+    "nodeId": nodeId.id
+  })
+
+  await this.node.pubsub.subscribe(nodeId.id, this.onmessage)
+  this.onready()
+}
+
+async loadFixtureData(fixtureData) {
+  const fixtureKeys = Object.keys(fixtureData)
+  await Promise.all(fixtureKeys.map(async(key) => {
+    if(!this.userDb.get(key)) await this.userDb.set(key, fixtureData[key])
+  }))
+}
+```
+
+Then, if you were to clear all local data and load the app from scratch, you'd see this:
+
+```javascript
+var profileFields = NPP.getAllProfileFields()
+console.log(profileFields)
+```
+
+You would see:
+
+```json
+{
+  "nodeId": "QmXG8yk8UJjMT6qtE2zSxzz3U7z5jSYRgVWLCUFqAVnByM",
+  "pieces": "/orbitdb/zdpuArXLduV6myTmAGR4WKv4T7yDDV7KvwkmBaU8faCdrKvw6/pieces",
+  "peers": [],
+  "username": 304532
+}
+```
+
+#### What just happened?
+
+You created simple fixture data and a function to load it into a fresh instantiaton of the app.
 
 ### Key Takeaways
 
@@ -199,5 +252,6 @@ You'll want to give people some data to start with, so the
 - These structures can contain any combination of OrbitDB stores - you are not limited to just one.
 - You can nest a database within another, and you can create new databases to next your existing databases within.
 - _Nesting_ databases is a powerful approach, but it is one of many. **Do not** feel limited. **Do** share novel approaches with the community.
+- Fixture data can be loaded easily, and locally, by simply including a basic set of values during app initialization
 
 And with this, you are now ready to connect to the outside world. Continue to [Chapter 4: Peer to Peer Part 1](04_P2P_Part_1.md) to join your app to the global IPFS network, and to other users!
