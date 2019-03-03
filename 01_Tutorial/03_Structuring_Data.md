@@ -7,6 +7,7 @@
 - [Adding a practice counter to each piece](#adding-a-practice-counter-to-each-piece)
 - [Utilizing your practice counter](#utilizing-your-practice-counter)
 - [Adding a higher-level user database](#adding-a-higher-level-user-database)
+- [Dealing with fixture data](#dealing-with-fixture-data)
 
 ### Adding a practice counter to each piece
 
@@ -182,6 +183,14 @@ You created a database to store anything and everything that might pertain to a 
 - `NPP.userDb._index._index` is a nice trick that works with any store to return the full index. We can use this in the absence of a function like `NPP.userDb.all()`
 - `this.userDb.del(key)` deletes the specified key and corresponding value from the store
 - `this.userDb.get(key)` retrieves the specified key and the corresponding value from the store
+
+### Dealing with fixture data
+
+Fresh users to the app will need a strong onboarding experience, and you'll enable that for them now.
+You'll want to give people some data to start with, so the
+
+- Import list of default instruments to select from
+- Random username
 
 ### Key Takeaways
 
