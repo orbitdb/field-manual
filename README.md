@@ -10,12 +10,14 @@
 
 TODO: Long Description
 
-## Table of Contents
+## What's in the book?
 
-Note: This is a table of contents of the book, not this readme.
+The book opens with **[an introduction](./00_Introduction)** that gives an overview of the promises and risks of the distributed space, and describes OrbitDB and its use cases at a high level.
 
-- [Introduction](./00_Introduction)
-- [Part 1: Tutorial](./01_Tutorial)
+Then, a fully **[hands-on tutorial](./01_Tutorial)** takes you through building an JavaScript application from scratch. You will work through installation and database creation, though managing and structuring your data, through networking, communication, and sharing data in a peer-to-peer fashion, and finally through managing distributed identity and access to the databases. By the end of the tutorial, you should have everything you need
+
+However, this is only the beginning of your journey. 
+
 - [Part 2: Thinking Peer to Peer](./02_Thinking_Peer_to_Peer)
 - [Part 3: The Architecture of OrbitDB](./03_The_Architecture_of_OrbitDB)
 - [Part 4: What comes next?](./04_What_next)
