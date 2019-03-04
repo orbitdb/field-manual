@@ -21,39 +21,30 @@ To start, you'll do a couple of things to enhance our current code and tidy up. 
 
 Update your `NewPiecePlease class` handler, adding **one line** at the bottom of the IPFS `ready` handler. and then run this code:
 
-```javascript
-class NewPiecePlease {
-  constructor (IPFS, OrbitDB) {
-    this.node = new IPFS({
-      preload: { enabled: false },
-      EXPERIMENTAL: { pubsub: true },
-      repo: "./ipfs",
-      config: {
-        Bootstrap: [],
-        Addresses: { Swarm: [] }
-      }
-    });
+```diff
+  _init() {
+    this.orbitdb = await OrbitDB.createInstance(this.node)
 
-    this.node.on("error", (e) => console.error)
-    this.node.on("ready", async () => {
-      this.orbitdb = await OrbitDB.createInstance(this.node)
+    const options = {
+      accessController: { write: [this.orbitdb.identity.publicKey] },
+      indexBy: 'hash'
+    }
 
-      const options = {
-        accessController: { write: [this.orbitdb.identity.publicKey] },
-        indexBy: 'hash'
-      }
-
-      this.piecesDb = await this.orbitdb.docstore('pieces', options)
-      await this.piecesDb.load()  // It's only this line that changed!! Blink and you'll miss it
-    });
+    this.piecesDb = await this.orbitdb.docstore('pieces', options)
++   await this.piecesDb.load()
   }
 
-  async addNewPiece() { }
-  async deletePieceByHash() { }
-  getAllPieces() {}
-  getPiecesByInstrument() { }
-  getPieceByHash() { }
-  await updatePieceByHash()
++ async addNewPiece(hash, instrument = "Piano") { }
++
++ async deletePieceByHash() { }
++
++ getAllPieces() {}
++
++ getPiecesByInstrument(instrument) { }
++
++ getPieceByHash(hash) { }
++
++ await updatePieceByHash(hash, instrument = "Piano")
 }
 
 ```
@@ -72,13 +63,16 @@ Now that you have a database set up, adding content to it is fairly easy. Run th
 
 We have uploaded and pinned a few piano scores to IPFS, and will provide the hashes. You can add these hashes to your database by fleshing out and using the `addNewPiece` function.
 
-> **Note:** We hope you like the original Metroid game, or at least the music from it!
+> **Note:** We hope you like the original Metroid NES game, or at least the music from it!
+
+Fill in your `addNewPiece` function now:
 
 ```javascript
-async addNewPiece(hash, instrument = "Piano") {
-  const cid = await piecesDb.put({ hash, instrument })
-  return cid
-}
+- async addNewPiece(hash, instrument = "Piano") { }
++ async addNewPiece(hash, instrument = "Piano") {
++   const cid = await piecesDb.put({ hash, instrument })
++   return cid
++ }
 ```
 
 Then, in your application code, node.js or browser, you cna use this function like so, utilizing the detault value for the `instrument` argument.
@@ -135,20 +129,27 @@ You've added data to your local database, and now you'll can query it. OrbitDB g
 
 We gave you a `docstore` earlier, so you can flesh out the all of thet simple `get*****` functions like so. `docstore` also provides the more puwerful `query` function, which we can abstract to write a `getPiecesByInstrument` function:
 
-```javascript
-getAllPieces() {
-  const pieces = this.piecesDb.get('')
-  return pieces
-}
+Fill in the following functions now:
 
-getPieceByHash(hash) {
-  const singlePiece = this.piecesDb.get(hash)[0]
-  return singlePiece
-}
+```diff
+- getAllPieces() {}
++ getAllPieces() {
++   const pieces = this.piecesDb.get('')
++   return pieces
++ }
 
-getByInstrument(instrument) {
-  return this.piecesDb.query((piece) => piece.instrument === instrument)
-}
+```diff
+- getPieceByHash(hash) { }
++ getPieceByHash(hash) {
++   const singlePiece = this.piecesDb.get(hash)[0]
++   return singlePiece
++ }
+
+```diff
+- getByInstrument(instrument) { }
++ getByInstrument(instrument) {
++   return this.piecesDb.query((piece) => piece.instrument === instrument)
++ }
 ```
 
 In your application code, you can use these functions it like so:
@@ -193,22 +194,24 @@ You'll next want to provide your users with the ability to update and delete the
 
 Again, each OrbitDB store may have slightly different methods for this. In the `docstore` you can update records by again using the `put` method and the ID of the index you want to update.
 
-```javascript
-async updatePieceByHash(hash, instrument = "Piano") {
-  var piece = await this.getPieceByHash(hash)
-  piece.instrument = instrument
-  const cid = await this.piecesDb.put(piece)
-  return cid
-}
+Fill in the `updatePieceByHash` and `deletePieceByHash` functions now:
+
+```diff
+- async updatePieceByHash(hash, instrument = "Piano") { }
++ async updatePieceByHash(hash, instrument = "Piano") {
++   var piece = await this.getPieceByHash(hash)
++   piece.instrument = instrument
++   const cid = await this.piecesDb.put(piece)
++   return cid
++ }
 ```
 
-Deleting a record by hash is also easy:
-
-```javascript
-async deletePieceByHash(hash) {
-  const cid = await this.piecesDb.del(hash)
-  return cid
-}
+```diff
+- async deletePieceByHash(hash) {
++ async deletePieceByHash(hash) {
++   const cid = await this.piecesDb.del(hash)
++   return cid
++ }
 ```
 
 In your application code, you can run these new functions and see the opcodes that return to get a sense of what's going on.
