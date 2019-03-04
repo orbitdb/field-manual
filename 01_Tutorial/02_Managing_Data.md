@@ -70,7 +70,16 @@ Fill in your `addNewPiece` function now:
 ```javascript
 - async addNewPiece(hash, instrument = "Piano") { }
 + async addNewPiece(hash, instrument = "Piano") {
-+   const cid = await piecesDb.put({ hash, instrument })
++   const existingPiece = this.pieces.get(hash)
++   if(existingPiece) {
++     await this.updatePieceByHash(hash, instrument)
++     return;
++   }
++
++   const cid = await piecesDb.put({
++     hash: hash,
++     instrument: instrument
++   })
 +   return cid
 + }
 ```
