@@ -77,18 +77,18 @@ You changed your code to add a new database of type `counter` for each new entry
 
 Now, add a few functions to `NewPiecePlease` that utilize the counters when necessary
 
-```javascript
-async getPracticeCount(piece) {
-  const counter = await this.orbitdb.counter(piece.counter)
-  await counter.load()
-  return counter.value
-}
+```diff
++ async getPracticeCount(piece) {
++   const counter = await this.orbitdb.counter(piece.counter)
++   await counter.load()
++   return counter.value
++ }
 
-async incrementPracticeCounter(piece) {
-  const counter = await this.orbitdb.counter(piece.counter)
-  const cid = await counter.inc()
-  return cid
-}
++ async incrementPracticeCounter(piece) {
++   const counter = await this.orbitdb.counter(piece.counter)
++   const cid = await counter.inc()
++   return cid
++ }
 ```
 
 These can be used in your application code like so:
@@ -129,46 +129,45 @@ You created and used two new functions to both read the value of, and increment 
 
 Pieces of music to practice with are great to have, but moving forward you will want to allow users to further express themselves via a username and profile. This will also help prepare you for allowing users to connect to each other in the next chapter.
 
-You will create a new database for users, from which your `piecesDb` will be referenced. You can create this database in the `ready` event handler of IPFS, alongside where you declared `piecesDb`.
+You will create a new database for users, from which your database of pieces will be referenced. You can create this database in the `ready` event handler of IPFS, alongside where you declared `this.pieces`.
 
-Update your `NewPiecePlease` constructor to look like this:
+Update your `_init` function to look like this:
 
-```javascript
-this.node.on("ready", async () => {
-  this.orbitdb = await OrbitDB.createInstance(this.node)
-  this.defaultOptions = { write: [this.orbitdb.identity.publicKey] }
+```diff
+  async _init() {
+    this.orbitdb = await OrbitDB.createInstance(this.node)
+    this.defaultOptions = { write: [this.orbitdb.identity.publicKey] }
 
-  const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
-  this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
-  await this.piecesDb.load()
+    const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
+    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
+    await this.pieces.load()
 
-  this.userDb = await this.orbitdb.kvstore("user", this.defaultOptions)
-  await this.userDb.load()
-  await this.userDb.set('pieces', this.piecesDb.id)
-});
++   this.userDb = await this.orbitdb.kvstore("user", this.defaultOptions)
++   await this.userDb.load()
++   await this.userDb.set('pieces', this.pieces.id)
+  });
 ```
 
 Then add the following functions in your class:
 
-```javascript
-async deleteProfileField(key) {
-  const cid = await this.userDb.del(key)
-  return cid
-}
+```diff
++ async deleteProfileField(key) {
++   const cid = await this.userDb.del(key)
++   return cid
++ }
 
-getAllProfileFields() {
-  return NPP.userDb._index._index;
-}
++ getAllProfileFields() {
++   return NPP.userDb._index._index;
++ }
 
-getProfileField(key) {
-  return this.userDb.get(key)
-}
++ getProfileField(key) {
++   return this.userDb.get(key)
++ }
 
-async updateProfileField(key, value) {
-  const cid = await this.userDb.set(key, value)
-  return cid
-}
-
++ async updateProfileField(key, value) {
++   const cid = await this.userDb.set(key, value)
++   return cid
++ }
 ```
 
 In your application code, you can use them like this:
@@ -196,41 +195,42 @@ You created a database to store anything and everything that might pertain to a 
 
 ### Dealing with fixture data
 
-Fresh users to the app will need a strong onboarding experience, and you'll enable that for them now.
-You'll want to give people some data to start with, and you'll want this process to work offline.
+Fresh users to the app will need a strong onboarding experience, and you'll enable that for them now by giving people some data to start with, and you'll want this process to work offline.
 
-Update your _init_ function to look like this, and add the `loadFixtureData` function in the `NewPiecePlease` class:
+First, create the `loadFixtureData` function inside the `NewPiecePlease` class:
 
-```javascript
-async _init() {
-  const nodeId = await this.node.id()
-  this.orbitdb = await OrbitDB.createInstance(this.node)
-  this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
+```diff
++ async loadFixtureData(fixtureData) {
++   const fixtureKeys = Object.keys(fixtureData)
++   await Promise.all(fixtureKeys.map(async(key) => {
++     if(!this.userDb.get(key)) await this.userDb.set(key, fixtureData[key])
++   }))
++ }
+```
 
-  const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
-  this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
-  await this.piecesDb.load()
+Then, Update your _init_ function to call `loadFixtureData` with some starter data:
 
-  this.userDb = await this.orbitdb.kvstore("user", this.defaultOptions)
-  await this.userDb.load()
+```diff
+  async _init() {
++   const nodeId = await this.node.id()
+    this.orbitdb = await OrbitDB.createInstance(this.node)
+    this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
 
-  await this.loadFixtureData({
-    "username": Math.floor(Math.rand() * 1000000),
-    "peers": [],
-    "pieces": this.piecesDb.id,
-    "nodeId": nodeId.id
-  })
+    const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
+    this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
+    await this.piecesDb.load()
 
-  await this.node.pubsub.subscribe(nodeId.id, this.onmessage)
-  this.onready()
-}
+    this.userDb = await this.orbitdb.kvstore("user", this.defaultOptions)
+    await this.userDb.load()
 
-async loadFixtureData(fixtureData) {
-  const fixtureKeys = Object.keys(fixtureData)
-  await Promise.all(fixtureKeys.map(async(key) => {
-    if(!this.userDb.get(key)) await this.userDb.set(key, fixtureData[key])
-  }))
-}
++   await this.loadFixtureData({
++     "username": Math.floor(Math.rand() * 1000000),
++     "pieces": this.piecesDb.id,
++     "nodeId": nodeId.id
++   })
+
+    this.onready()
+  }
 ```
 
 Then, if you were to clear all local data and load the app from scratch, you'd see this:
