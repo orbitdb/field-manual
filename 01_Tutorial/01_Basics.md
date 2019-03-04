@@ -189,13 +189,10 @@ Expand of your `_init` function to the following:
 ```diff
   async _init {
     this.orbitdb = await OrbitDB.createInstance(node)
-
-+     const options = {
-+       accessController: { write: [orbitdb.identity.publicKey] },
-+       indexBy: "hash"
-+     }
-
-+    this.pieces = await orbitdb.docstore('pieces', options)
++   this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
++     
++   const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
++   this.pieces = await orbitdb.docstore('pieces', options)
   }
 ```
 
