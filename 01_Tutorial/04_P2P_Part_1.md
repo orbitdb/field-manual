@@ -8,7 +8,8 @@
 Please complete [Chapter 3 - Structuring Data](./03_Structuring_Data.md) first.
 
 - [Connecting to the global IPFS network](#connecting-to-the-global-ipfs-network)
-- [Working with peers](#working-with-peers)
+- [Getting a list of connected peers](#getting-a-list-of-connected-peers)
+- [Manually connecting to peers](#manually-connecting-to-peers)
 - [Peer to peer communication via IPFS pubsub](#peer-to-peer-communication-via-IPFS-pubsub)
 
 </div>
@@ -19,46 +20,40 @@ You will now reconfigure your IPFS node to connect to the global network and beg
 
 #### Restoring default IPFS config values
 
-We started the tutorial offline to focus on OrbitDB's core concepts. Now you'll undo this and connect the app, properly, to the global IPFS network.
-
-First, remove two lines from the `NewPiecePlease` constructor:
-
-1. `preload: { enabled: false }`
-2. `config: {  Bootstrap: [], Addresses: { Swarm: [] } }`
-
-Then, add one line to leave you with something like this:
-
-```javascript
-class NewPiecePlease {
-  constructor (IPFS, OrbitDB) {
-    this.node = new IPFS({
-      relay: { enabled: true, hop: { enabled: true, active: true } },
-      EXPERIMENTAL: { pubsub: true },
-      repo: "./ipfs",
-    });
-
-    /* ... */
-  }
-}
-```
-
-But wait... ff you were to restart the app and run this command, you would see that you still have an empty array.
-
-```javascript
-await NPP.node.bootstrap.list()
-```
-
-```plain
-[]
-```
-
 > **Note:** Bootstrap peers are important because... TODO
+
+We purposefully started offline, but now we're going to want to get connected - 
 
 This is because bootstrap and swarm values are persisted in your IPFS config. This is located in the filesystem in the case of node.js and in IndexedB in the case of the browser. You should not manually edit these files.
 
+However, nothing will change yet when you run the app. What you _can_ do is run the you should see some messages in your console, something like:
+
 #### Restoring your default bootstrap peers
 
-However, nothing will change yet when you run the app. What you _can_ do is run the you should see some messages in your console, something like:
+We started the tutorial offline to focus on OrbitDB's core concepts. Now you'll undo this and connect the app, properly, to the global IPFS network.
+
+Update the `NewPiecePlease` constructor like so:
+
+```diff
+class NewPiecePlease {
+  constructor (IPFS, OrbitDB) {
+    this.node = new IPFS({
+-     preload: { enabled: false }
++     relay: { enabled: true, hop: { enabled: true, active: true } },
+      EXPERIMENTAL: { pubsub: true },
+      repo: "./ipfs",
+-     config: {  Bootstrap: [], Addresses: { Swarm: [] } }
+    });
+```
+
+Now, you can either delete your data, by deleting the `ipfs` and `orbitdb` folders in node.js, or by clearing your local data in the browser, or you can restore locally.
+
+If you don't want to blow away your data, then you can manually restore your bootstrap peers.
+
+```javascript
+await NPP.node.bootstrap.list()
+// outputs []
+```
 
 To restore the default peers, like the one generated in the previous chapters, run this command _once_ to restore your default bootstrap peers.
 
@@ -66,13 +61,11 @@ To restore the default peers, like the one generated in the previous chapters, r
 this.node.bootstrap.add(undefined, { default: true })
 ```
 
-Running the command below gives you a colorful array of bootstrap peers, ready to be connected to.
+Re-running `bootstrap.list` now gives you a colorful array of bootstrap peers, ready to be connected to.
 
 ```javascript
 await NPP.node.bootstrap.list()
-```
-
-```plain
+/* outputs:
 '/ip4/104.236.176.52/tcp/4001/ipfs/QmSoLnSGccFuZQJzRadHn95W2CrSFmZuTdDWP8HXaHca9z',
 '/ip4/104.131.131.82/tcp/4001/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ',
 '/ip4/104.236.179.241/tcp/4001/ipfs/QmSoLPppuBtQSGwKDZT2M73ULpjvfd3aZ6ha4oFGL1KrGM',
@@ -92,13 +85,21 @@ await NPP.node.bootstrap.list()
 '/ip6/2604:a880:1:20::1d9:6001/tcp/4001/ipfs/QmSoLju6m7xTh3DuokvT3886QRYqxAzb1kShaanJgW36yx',
 '/dns4/node0.preload.ipfs.io/tcp/443/wss/ipfs/QmZMxNdpMkewiVZLMRxaNxUeZpDUb34pWjZ1kZvsd16Zic',
 '/dns4/node1.preload.ipfs.io/tcp/443/wss/ipfs/Qmbut9Ywz9YEDrz8ySBSgWyJk41Uvm2QJPhwDJzJyGFsD6'
+*/
 ```
 
 #### Enabling the swarm
 
 Next, you will restore your default swarm addresses. These are adresses that your node announces itself to the world on.
 
-In node.js, run this command. In the browser, do not - leave the swarm array blank.
+Luckily, in the browser you don't have to do anything, the default is an empty array. You should already see something like this in your console:
+
+```plain
+Swarm listening on /p2p-circuit/ipfs/QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX
+Swarm listening on /p2p-circuit/p2p-websocket-star/ipfs/QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX
+```
+
+In node.js, run this command: 
 
 ```javascript
 NPP.node.config.set("Addresses.Swarm", ['/ip4/0.0.0.0/tcp/4002', '/ip4/127.0.0.1/tcp/4003/ws'], console.log)
@@ -122,59 +123,6 @@ Swarm listening on /p2p-circuit/ip4/172.17.0.1/tcp/4002/ipfs/QmXG8yk8UJjMT6qtE2z
 Swarm listening on /p2p-circuit/ip4/127.0.0.1/tcp/4003/ws/ipfs/QmXG8yk8UJjMT6qtE2zSxzz3U7z5jSYRgVWLCUFqAVnByM
 ```
 
-and in the browser you'll see something like:
-
-```plain
-Swarm listening on /p2p-circuit/ipfs/QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX
-Swarm listening on /p2p-circuit/p2p-websocket-star/ipfs/QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX
-```
-
-This is good, and it's OK that they're different. You're on the right track, and ready to work peer to peer connections into the application
-
-#### What just happened
-
-Before this, you were working offline. Now you're not. You've been connected to the global IPFS network and are ready for peer to-peer connections.
-
-- Removing `preload: { enabled: false }` enables connection to the bottom two nodes from the above bootstrap list.
-- Removing `config: {  Bootstrap: [], Addresses: { Swarm: [] } }` will prevent thie storing of empty arrays in your config files for the `Bootstrap` and `Addresses.Swarm` config keys
-- `this.node.bootstrap.add(undefined, { default: true })` restores the default list of bootstrap peers, as seen above
-- `NPP.node.config.set("Addresses.Swarm", ...` restores the default swarm addresses. You should have run this in node.js only
-- `relay: { enabled: true, hop: { enabled: true, active: true } }` sets up a your node as a "circut relay", which means that others will be able to "hop" through your node to connect to your peers, and your node will hop over others to do the same.
-
-> **Note:** If you experience 529 errors from the `preload.ipfs.io` servers in your console, rest assured that there is nothing wrong with your app. Those servers exist to strengthen the network and increase application performance but they are _not_ necessary. You can reinsert `preload: { enabled: false }` any time and still remain connected to the global IPFS network
-
-### Working with peers
-
-We realize we've been spending a lot of time in IPFS config and IPFS commands - it's understandable, since the IPFS features form the backbone of what we're doing with OrbitDB. However, let's get back to editing our `NewPieacePlease` class by creating some p2p functions:
-
-#### Getting a list of peers
-
-First, you'll create the `getPeers` function inside of the `NewPiecePlease` class.
-
-```javascript
-async getPeers() {
-  const peers = await this.node.swarm.peers()
-  return peers
-}
-```
-
-You can run this in your application code:
-
-```javascript
-const peers = await NPP.getPeers()
-console.log(peers.length)
-```
-
-This will console out a number close to `10`, which is the length of your bootstrap peers. This number will stay the same in the browser and increase in node.js due to the current swarming limitations of `js-ipfs`
-
-#### Connecting to peers
-
-Next, you'll allow your users to connect to other peers via their _multiaddresses_.
-
-There's a number of ways to model and test this during development - you could open up two browsers, or a public and private window in the same browser. Similarly, you could run one instance of the app in node.js and the other in the browser. You should be able to connect to all.
-
-In this book we will deal with the simplest possible scenario: two peers. They will be called simply **Peer1** and **Peer2**.
-
 You can get the addresses that your node is publishing on via the following command:
 
 ```javascript
@@ -184,26 +132,101 @@ console.log(id.addresses)
 
 You'll see a list of addresses your node is publishing on. Expect the browser to have only 2, and node.js to have more. Since we're dealing with both node.js and the browser, we will use the addresses starting with `p2p-circut`.
 
+#### What just happened?
+
+Before this, you were working offline. Now you're not. You've been connected to the global IPFS network and are ready for peer to-peer connections.
+
+- Removing `preload: { enabled: false }` enables connection to the bottom two nodes from the above bootstrap list.
+- Removing `config: {  Bootstrap: [], Addresses: { Swarm: [] } }` will prevent thie storing of empty arrays in your config files for the `Bootstrap` and `Addresses.Swarm` config keys
+- `this.node.bootstrap.add(undefined, { default: true })` restores the default list of bootstrap peers, as seen above
+- `NPP.node.config.set("Addresses.Swarm", ...` restores the default swarm addresses. You should have run this in node.js only
+- `relay: { enabled: true, hop: { enabled: true, active: true } }` sets up a your node as a "circut relay", which means that others will be able to "hop" through your node to connect to your peers, and your node will hop over others to do the same.
+
+We realize we've been spending a lot of time in IPFS config and IPFS commands - it's understandable, since the IPFS features form the backbone of what we're doing with OrbitDB. 
+
+> **Note:** If you experience 529 errors from the `preload.ipfs.io` servers in your console, rest assured that there is nothing wrong with your app. Those servers exist to strengthen the network and increase application performance but they are _not_ necessary. You can re-insert `preload: { enabled: false }` any time and still remain connected to the global IPFS network
+
+### Getting a list of connected peers
+
+First, create the `getIpfsPeers` function inside of the `NewPiecePlease` class.
+
+```javascript
++ async getIpfsPeers() {
++   const peers = await this.node.swarm.peers()
++   return peers
++ }
+```
+
+Then, in your application code:
+
+```javascript
+const peers = await NPP.getPeers()
+console.log(peers.length)
+// 8
+```
+
+Note that this number will increase over time as your swarm automatically grows.
+ 
+#### Connecting to peers
+
+Next, you'll allow your users to connect to other peers via their _multiaddresses_.
+
+> **Note:** There's a number of ways to model and test this during development - you could open up two browsers, or a public and private window in the same browser. Similarly, you could run one instance of the app in node.js and the other in the browser. You should be able to connect to all.
+
 You can now enable peer connection by adding this function to the `NewPiecePlease` class:
 
 ```javascript
-async connectToPeer(addr) {
-  async connectToPeer(multiaddr) {
-  try {
-    await this.node.swarm.connect(multiaddr)
-    return true
-  } catch(e) {
-    throw (e)
-    return false
-  }
-}
++ async connectToPeer(multiaddr) {
++   try {
++     await this.node.swarm.connect(multiaddr)
++   } catch(e) {
++     throw (e)
++   }
++ }
 ```
 
-Finally, connect to other peers like so:
+Then, update the `_init_` function to include an event handler for when a peer is connected:
+
+```diff
+  async _init() {
+    const nodeInfo = await this.node.id()
+    this.orbitdb = await OrbitDB.createInstance(this.node)
+    this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
+
+    const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
+    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
+    await this.pieces.load()
+
+    this.user = await this.orbitdb.kvstore("user", this.defaultOptions)
+    await this.user.load()
+
+    await this.loadFixtureData({
+      "username": Math.floor(Math.rand() * 1000000),
+      "pieces": this.pieces.id,
+      "nodeId": nodeInfo.id
+    })
+    
++   this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
+
+    if(this.onready) this.onready()
+  }
+```
+
+Finally, create the a simple, yet extensible, `peerConnected` function.
+
+```diff
++ async peerConnected(ipfsPeer) {
++   const ipfsId = ipfsPeer.id._idB58String;
++   if(this.onpeerconnect) this.onpeerconnect(ipfsPeer)
++ }
+``
+
+In your application code, implement these functions like so:
 
 ```javascript
-const success = NPP.connectToPeer("/p2p-circuit/ipfs/QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX")
-if(success) /* do stuff */
+NPP.onpeerconnected = console.log
+await NPP.connectToPeer("/p2p-circuit/ipfs/QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX")
+// some time later, outputs "QmZg8h94DAmWozqA8nqKttCFrFeaxRDSazHGCgc8fzkiJS"
 ```
 
 #### What just happened?
@@ -214,7 +237,7 @@ You created 2 functions: one that shows a list of peers and another that lets yo
 
 ### Peer to peer communication via IPFS pubsub
 
-The "pubsub" in IPFS pubsub is derived from "publish" and "subscribe" which is a common messaging model in distributed systems. You can leverage the underlying IPFS infrastructure to create a simple communication mechanism between the users of your app.
+The term "pubsub" derived from "publish" and "subscribe", and is a common messaging model in distributed systems. The idea here is that peers will "broadcast" messages to the entire network via a "topic", and other peers can subscribe to those topics and receive all the messages. You can leverage the underlying IPFS pubsub infrastructure to create a simple communication mechanism between the user nodes.
 
 #### Subscribing to "your" channel
 
@@ -222,69 +245,69 @@ First, you'll add some code to allow you to subscribe to a channel. Channels hav
 
 Update the `ready` handler in the `NewPiecePlease` constructor to look like the following:
 
-```javascript
-this.node.on("ready", async () => {
-  const nodeId = await this.node.id()
-  this.orbitdb = await OrbitDB.createInstance(this.node)
-  this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
+```diff
+  async _init() {
+    const nodeInfo = await this.node.id()
+    this.orbitdb = await OrbitDB.createInstance(this.node)
+    this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
 
-  const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
-  this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
-  await this.piecesDb.load()
+    const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
+    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
+    await this.pieces.load()
 
-  this.userDb = await this.orbitdb.kvstore("user", this.defaultOptions)
-  await this.userDb.load()
+    this.user = await this.orbitdb.kvstore("user", this.defaultOptions)
+    await this.user.load()
 
-  await this.userDb.set('pieces', this.piecesDb.id)
-  await this.userDb.set("nodeId", nodeId.id)
+    await this.loadFixtureData({
+      "username": Math.floor(Math.rand() * 1000000),
+      "pieces": this.pieces.id,
+      "nodeId": nodeInfo.id
+    })
+    
+    this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
++   await this.node.pubsub.subscribe(nodeInfo.id, this.handleMessageReceived.bind(this))
 
-  await this.node.pubsub.subscribe(nodeId.id, this.onmessage)
-  if (typeof this.onready === "function") this.onready()
-});
+    if(this.onready) this.onready()
+  }
+
 ```
 
 Then, add the `onmessage` and `sendMessage` function to `NewPiecePlease`
 
 ```javascript
-onmessage(msg) {
-  console.log(msg)
+handleMessageReceived(msg) {
+  if(this.onmessage) this.onmessage(msg)
 }
 ```
 
-This will output something like:
+Use this in your application:
 
-```json
+```javascript
+NPP.onmessage = console.log
+/* When receiving a message, it will output something like:
 {
   "from": "QmVQYfz7Ksimx8a4kqWJinX9BqoiYM5BQVyoCvotVDjj6P",
   "data": "<Buffer 64 61 74 61>",
   "seqno": "<Buffer 78 3e 6b 8c fd de 5d 7b 27 ab e4 e0 c9 72 4e c0 aa ee 94 20>",
   "topicIDs": [ "QmXG8yk8UJjMT6qtE2zSxzz3U7z5jSYRgVWLCUFqAVnByM" ]
 }
+*/
 ```
-
-What you do with the message output is yours once you override the `NPP.onmessage` function in your application code.
-
-```javascript
-NPP.onmessage = (msg) => {
-  console.log(msg.data.toString())
-}
-```
-
-Then, when a message is received, you'll receive the data in a much more human-readable format.
 
 #### Sending messages to peers
 
 Next you'll give your users the ability to send messages to each other via those pubsub topics.
 
-```javascript
-async sendMessage(topic, message, callback) {
-  try {
-    message = this.node.types.Buffer(message)
-    await this.node.pubsub.publish(topic, message)
-  } catch (e) {
-    callback(e)
-  }
-}
+```diff
++ async sendMessage(topic, message, callback) {
++   try {
++     const msgString = JSON.stringify(message)
++     const messageBuffer = this.node.types.Buffer(msgString)
++     await this.node.pubsub.publish(topic, messageBuffer)
++   } catch (e) {
++     throw (e)
++   }
++ }
 ```
 
 You can then utilize this function in your application code, and your user will see the output as defined above.
