@@ -46,27 +46,27 @@ You will now have global `Ipfs` and `OrbitDB` objects available to you. You will
 
 > **Note:** Both OrbitDB and js-ipfs are open source, which give you the ability to build and even contribute to the code. This will be covered in detail these in Part 3.
 
-### Creating the isomorphic frame for our app
+### Creating the isomorphic bookends
 
 Since OrbitDB works in the browser and node.js, we're going to want to make our app as _isomorphic_ as possoble. This means we want the same code to run in the browser as runs in JS. This is good news for the tutorial, as it means we can keep our code to **strictly** things that pertain to our app, and then apply bindings in node.js and
 
 Luckily, you will have the luxury of using the same language, JavaScript, for both node.js and browser environments. Create a new file called `newpieceplease.js` and put this code in there:
 
-```javascript
-try {
-  const Ipfs = require('ipfs')
-  const OrbitDB = require('orbit-db')
-} catch(e) {}
+```diff
++ try {
++   const Ipfs = require('ipfs')
++   const OrbitDB = require('orbit-db')
++ } catch(e) {}
 
-class NewPiecePlease() {
-  constructor(IPFS, OrbitDB) { }
-}
++ class NewPiecePlease() {
++   constructor(IPFS, OrbitDB) { }
++ }
 
-try {
-  module.exports = exports = new NewPiecePlease(IPFS, OrbitDB)
-} catch (e) {
-  window.NPP = new NewPiecePlease(window.Ipfs, window.OrbitDB)
-}
++ try {
++   module.exports = exports = new NewPiecePlease(IPFS, OrbitDB)
++ } catch (e) {
++   window.NPP = new NewPiecePlease(window.Ipfs, window.OrbitDB)
++ }
 ```
 
 #### What just happened?
