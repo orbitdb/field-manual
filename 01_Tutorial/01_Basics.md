@@ -91,25 +91,26 @@ connections to peers.
 OrbitDB requires a running IPFS node to operate, so you will create one here and notify OrbitDB about it. by running the
 following code. It's a lot but it constitutes the frame for an _isomorphic_ JavaScript app, that is, one that runs in both the browser and in node.js with the same code.
 
-```javascript
+```diff
 class NewPiecePlease() {
-  constructor(IPFS, OrbitDB) {
-    let node = new IPFS({
-      preload: { enabled: false },
-      repo: "./ipfs",
-      EXPERIMENTAL: { pubsub: true },
-      config: {
-        Bootstrap: [],
-        Addresses: { Swarm: [] }
-      }
-    });
+-   constructor(IPFS, OrbitDB) { }
++   constructor(IPFS, OrbitDB) {
++     let node = new IPFS({
++       preload: { enabled: false },
++       repo: "./ipfs",
++       EXPERIMENTAL: { pubsub: true },
++       config: {
++         Bootstrap: [],
++         Addresses: { Swarm: [] }
++       }
++     });
 
-    node.on("error", (e) => { throw new Error(e) })
-    node.on("ready", async () => {
-      orbitdb = await OrbitDB.createInstance(node)
-      console.log(orbitdb.id)
-    })
-  }
++     node.on("error", (e) => { throw new Error(e) })
++     node.on("ready", async () => {
++       orbitdb = await OrbitDB.createInstance(node)
++       console.log(orbitdb.id)
++     })
++   }
 }
 ```
 
