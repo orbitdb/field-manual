@@ -4,7 +4,8 @@
 
 <div>
   <h3>Table of Contents</h3>
-Please see the [README](./README.md) before beginning this chapter.
+  
+Please see the [Introduction](./00_Introduction.md) before beginning this chapter.
 
 - [Installing the requirements: IPFS and OrbitDB](#installing-the-requirements-ipfs-and-orbitdb)
 - [Instantiating IPFS and OrbitDB](#instantiating-ipfs-and-orbitdb)
@@ -104,13 +105,24 @@ class NewPiecePlease() {
 +         Addresses: { Swarm: [] }
 +       }
 +     });
-
-+     node.on("error", (e) => { throw new Error(e) })
-+     node.on("ready", async () => {
-+       orbitdb = await OrbitDB.createInstance(node)
-+       console.log(orbitdb.id)
-+     })
++
++     node.on("error", (e) => { throw (e) })
++     node.on("ready", this._init.bind(this)) 
 +   }
++
++   async _init() {
++     this.orbitdb = await OrbitDB.createInstance(node)
++
++     this.onready()
++   }
+}
+```
+
+This allows you to run something like the following in your application code:
+
+```javascript
+NPP.onready = () => {
+   console.log(NPP.orbitdb.id)
 }
 ```
 
@@ -172,20 +184,27 @@ We recommend creating robust backup mechanisms at the application layer
 
 Now, you will create a local database that *only you* can read.
 
-Inside of the `NewPiecePlease` constructor, Expand the IPFS `ready` event handler to the following, and then run the code:
+Expand of your `_init` function to the following:
+
+```diff
+  async _init {
+    this.orbitdb = await OrbitDB.createInstance(node)
+
++     const options = {
++       accessController: { write: [orbitdb.identity.publicKey] },
++       indexBy: "hash"
++     }
+
++    this.pieces = await orbitdb.docstore('pieces', options)
+  }
+```
+
+Then, in your application code, run this:
 
 ```javascript
-node.on("ready", async () => {
-  orbitdb = await OrbitDB.createInstance(node)
-
-  const options = {
-    accessController: { write: [orbitdb.identity.publicKey] },
-    indexBy: "hash"
-  }
-  
-  piecesDb = await orbitdb.docstore('pieces', options)
-  console.log(piecesDb.id)
-})
+NPP.onready = () => {
+   console.log(NPP.pieces.id)
+}
 ```
 
 You will see something like the following as an output: `/orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces`. This is the id, or **address** (technically a multiaddress) of this database. It's important for you to not only _know_ this, but also to understand what it is.
@@ -211,7 +230,7 @@ Your code created a local OrbitDB database, of type "docstore", writable only by
 - `pieces = await orbitdb.docstore('pieces', options)` is the magic line that creates the database. Once this line is
 completed, the database is open and can be acted upon.
 
-> **Caution!** A note about identity: Your public key is not your identity. We repeat, *your public key is not your identity*.  Though, it is often used as such for convenience's sake, and the lack of better alternatives. So, in the early parts of this  tutorial we say "writable only to you" when we really mean "writable only by an OrbitDB instance on top of an IPFS node that has the correct id, which we are assuming is controlled by you."
+> **Caution!** A note about identity: Your public key is not your identity. We repeat, *your public key is not your identity*.  That being said, it is often used as such for convenience's sake, and the lack of better alternatives. So, in the early parts of this  tutorial we say "writable only to you" when we really mean "writable only by an OrbitDB instance on top of an IPFS node that has the correct id, which we are assuming is controlled by you."
 
 See for more info: [link](https://github.com/orbitdb/orbit-db/blob/525978e0a916a8b027e9ea73d8736acb2f0bc6b4/src/OrbitDB.js#L106)
 
