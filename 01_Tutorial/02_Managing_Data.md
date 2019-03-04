@@ -146,6 +146,7 @@ Fill in the following functions now:
 +   const pieces = this.piecesDb.get('')
 +   return pieces
 + }
+```
 
 ```diff
 - getPieceByHash(hash) { }
@@ -153,6 +154,7 @@ Fill in the following functions now:
 +   const singlePiece = this.piecesDb.get(hash)[0]
 +   return singlePiece
 + }
+```
 
 ```diff
 - getByInstrument(instrument) { }
