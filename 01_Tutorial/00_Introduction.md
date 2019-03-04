@@ -9,24 +9,21 @@
 * A computer
 * A command line (unix/linux based or windows command prompt)
 * A modern web browser (Firefox, Chrome, Edge, etc)
-* Node.js installed
+* node.js (optional)
+
+### What will I learn?
+
+TODO: Description of tutorial chapters, after they are written
 
 ### What will I build?
 
-You will build an app that provides royalty-free sheet music on-demand for musicians, based on their instrument.
+If you're a musician like many of us are, you probably need form of _sheet music_ to practice. While any musician tends to spend hours practicing _alone_, the beauty of music is its ability to _connect_ musicians to play _together_ - duets, trios, quartets, septets, all the way up to orchestras.
 
-You will access a global catalog of royalty-free sheet music. Then, given an instrument name as input (Violin, Saxophone, Marimba) you it will display piece of sheet music at random. Futhermore, you will give the users the ability to submit their own music and share it with connected peers.
+These self-organizing clusters of musicians will always need better way to share common and necessary sheet music with each other. What better use case for a peer-to-peer application?
 
-You will use OrbitDB as the backbone for this, creating a few databases:
+Using OrbitDB as the backbone, you will build this application. It will allow people to import and maintain a local collection of their own sheet music in the form of PDF files. More importantly, they will be able to _share_ this music by letting them interface with _peers_, and search across multiple distribute databases at once for music. For fun, and for users who are just looking for something to-sight read, you will give them a magic "button" that, given an instrument, will display piece of sheet music at random from their collection.
 
-1. The "global" starter database of royalty free pieces for all to use (read only)
-2. The user database of pieces they can upload - private
-
-You will write JavaScript and create the backbone of a full application using OrbitDB in both the
-browser and on the command line. For the sake of keeping things focused, we will exclude any
-HTML or CSS from this tutorial and focus only on the Javascript code.
-
-### Why a music app?
+#### Why a music app?
 
 OrbitDB is already used all over the world, and this tutorial music reflect that. There are other many topics we could
 have chosen that touch the vast majority of humans on earth: finance, politics, climate, religion. However, those are
@@ -41,7 +38,13 @@ world to find sheet music to practice with.
 * Read this tutorial in order, the learning builds on itself other over time.
 * You will switch between writing and reading code, and *What Just Happened* sections that explain in depth what happens on a technical level when the code is run.
 * OrbitDB works in both node.js and in the browser, and this tutorial will not focus on one or the other. Stay on your toes.
-* This tutorial is not only OS-agnostic and editor-agnostic, it's also folder structure agnostic. All of the code examples are designed to work if applied in order, regardless of which js file they are in. Thus folder and file names for code are avoided.
+* This tutorial attempts to be as _agnostic_ as possible in terms of:
+  * Your operating system. Some command line commands are expressed as unix commands, but everything here should work on Windows as well.
+  * Your folder structure. All of the code here is written in a single file, `newpieceplease.js`
+  * Your editor. Use whatever you want.
+  * Your UI layer. You will see _examples_ of how the code will be used on the UI layer, be it command line or browser based, but you will not be building out the UI as part of the tutorial steps.
 * `async` and `await` are used prominently. Feel free to replace those with explicit `Promise` objects if you're feeling daring.
+* Steps that **you** should complete are represented and hightlighted as _diffs_. Example application code is represented as Javascript  
+* For the sake of keeping things focused, we will exclude any HTML or CSS from this tutorial and focus only on the Javascript code.
 
-Ready? Let's start with [Chapter 1: Laying the Foundation](./01_Basics.md)
+<strong>Ready? Let's start with [Chapter 1: Laying the Foundation](./01_Basics.md)**</strong>
