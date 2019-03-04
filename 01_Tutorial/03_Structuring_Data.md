@@ -4,6 +4,7 @@
 
 <div>
   <h3>Table of Contents</h3>
+
 Please complete [Chapter 2 - Managing Data](./02_Managing_Data.md) first.
 
 - [Adding a practice counter to each piece](#adding-a-practice-counter-to-each-piece)
@@ -23,14 +24,20 @@ Update the `addNewPiece` function to create a `counter` store every time a new p
 
 ```javascript
 async addNewPiece(hash, instrument = "Piano") {
-  const options = { accessController: { write: [this.orbitdb.identity.publicKey] }}
-  const dbName = "counter." + hash.substr(20,20)
-  const counterDb = await this.orbitdb.counter(dbName, options)
+  const existingPiece = this.pieces.get(hash)
+  if(existingPiece) {
+    await this.updatePieceByHash(hash, instrument)
+    return;
+  }
+
++ const options = { accessController: { write: [this.orbitdb.identity.publicKey] }}
++ const dbName = "counter." + hash.substr(20,20)
++ const counterDb = await this.orbitdb.counter(dbName, options)
 
   const cid = await this.piecesDb.put({
     hash: hash,
     instrument: instrument,
-    counter: counterDb.id
++   counter: counterDb.id
   })
 
   return cid
