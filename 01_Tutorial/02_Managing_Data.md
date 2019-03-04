@@ -4,6 +4,7 @@
 
 <div>
   <h3>Table of Contents</h3>
+
 Please complete [Chapter 1 - Laying the Foundation](./01_Basics.md) first.
 
 - [Loading the database](#loading-the-database)
