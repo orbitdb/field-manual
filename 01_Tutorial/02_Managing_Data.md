@@ -65,7 +65,7 @@ We have uploaded and pinned a few piano scores to IPFS, and will provide the has
 
 Fill in your `addNewPiece` function now:
 
-```javascript
+```diff
 - async addNewPiece(hash, instrument = "Piano") { }
 + async addNewPiece(hash, instrument = "Piano") {
 +   const existingPiece = this.pieces.get(hash)
