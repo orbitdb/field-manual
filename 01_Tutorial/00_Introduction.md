@@ -17,7 +17,7 @@ TODO: Description of tutorial chapters, after they are written
 
 ### What will I build?
 
-If you're a musician like many of us are, you probably need form of _sheet music_ to practice. While any musician tends to spend hours practicing _alone_, the beauty of music is its ability to _connect_ musicians to play _together_ - duets, trios, quartets, septets, all the way up to orchestras.
+If you're a musician like many of us are, you probably need form of sheet music to practice. While any musician tends to spend hours practicing alone, the beauty of music is its ability to _connect_ musicians to play together - duets, trios, quartets, septets, all the way up to orchestras.
 
 These self-organizing clusters of musicians will always need better way to share common and necessary sheet music with each other. What better use case for a peer-to-peer application?
 
