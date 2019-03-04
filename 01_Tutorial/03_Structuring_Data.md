@@ -30,9 +30,8 @@ async addNewPiece(hash, instrument = "Piano") {
     return;
   }
 
-+ const options = { accessController: { write: [this.orbitdb.identity.publicKey] }}
 + const dbName = "counter." + hash.substr(20,20)
-+ const counterDb = await this.orbitdb.counter(dbName, options)
++ const counterDb = await this.orbitdb.counter(dbName, this.defaultOptions)
 
   const cid = await this.piecesDb.put({
     hash: hash,
