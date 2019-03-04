@@ -22,7 +22,7 @@ Your users may want to keep track of their practice, at minimum how many times t
 
 Update the `addNewPiece` function to create a `counter` store every time a new piece is added to the database. You can utilize basic access control again to ensure that only a node with your IPFS node's ID can write to it.
 
-```javascript
+```diff
 async addNewPiece(hash, instrument = "Piano") {
   const existingPiece = this.pieces.get(hash)
   if(existingPiece) {
