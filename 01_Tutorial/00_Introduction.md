@@ -47,4 +47,4 @@ world to find sheet music to practice with.
 * Steps that **you** should complete are represented and hightlighted as _diffs_. Example application code is represented as Javascript  
 * For the sake of keeping things focused, we will exclude any HTML or CSS from this tutorial and focus only on the Javascript code.
 
-<strong>Ready? Let's start with [Chapter 1: Laying the Foundation](./01_Basics.md)**</strong>
+<strong>Ready? Let's start with [Chapter 1: Laying the Foundation](./01_Basics.md)</strong>
