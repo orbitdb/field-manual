@@ -36,8 +36,8 @@ world to find sheet music to practice with.
 ### Conventions
 
 * Read this tutorial in order, the learning builds on itself other over time.
-* You will switch between writing and reading code, and *What Just Happened* sections that explain in depth what happens on a technical level when the code is run.
-* OrbitDB works in both node.js and in the browser, and this tutorial will not focus on one or the other. Stay on your toes.
+* Type the examples in, don't copy and paste.
+* **What just happened?** sections are interspersed to that explain in depth what happens on a technical level
 * This tutorial attempts to be as _agnostic_ as possible in terms of:
   * Your operating system. Some command line commands are expressed as unix commands, but everything here should work on Windows as well.
   * Your folder structure. All of the code here is written in a single file, `newpieceplease.js`
