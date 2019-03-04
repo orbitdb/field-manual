@@ -25,12 +25,9 @@ Update your `NewPiecePlease class` handler, adding **one line** at the bottom of
 ```diff
   _init() {
     this.orbitdb = await OrbitDB.createInstance(this.node)
-
-    const options = {
-      accessController: { write: [this.orbitdb.identity.publicKey] },
-      indexBy: 'hash'
-    }
-
+    this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
+    
+    const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
     this.piecesDb = await this.orbitdb.docstore('pieces', options)
 +   await this.piecesDb.load()
   }
