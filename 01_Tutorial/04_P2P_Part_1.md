@@ -150,7 +150,7 @@ We realize we've been spending a lot of time in IPFS config and IPFS commands - 
 
 First, create the `getIpfsPeers` function inside of the `NewPiecePlease` class.
 
-```javascript
+```diff
 + async getIpfsPeers() {
 +   const peers = await this.node.swarm.peers()
 +   return peers
@@ -175,7 +175,7 @@ Next, you'll allow your users to connect to other peers via their _multiaddresse
 
 You can now enable peer connection by adding this function to the `NewPiecePlease` class:
 
-```javascript
+```diff
 + async connectToPeer(multiaddr) {
 +   try {
 +     await this.node.swarm.connect(multiaddr)
@@ -219,7 +219,7 @@ Finally, create the a simple, yet extensible, `peerConnected` function.
 +   const ipfsId = ipfsPeer.id._idB58String;
 +   if(this.onpeerconnect) this.onpeerconnect(ipfsPeer)
 + }
-``
+```
 
 In your application code, implement these functions like so:
 
