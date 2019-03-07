@@ -157,7 +157,7 @@ Then add the following functions in your class:
 + }
 
 + getAllProfileFields() {
-+   return NPP.user._index._index;
++   return NPP.user.all();
 + }
 
 + getProfileField(key) {
@@ -189,7 +189,7 @@ You created a database to store anything and everything that might pertain to a 
 
 - `this.orbitdb.kvstore("user", this.defaultOptions)` creates a new OrbitDB of a type that allows you to manage a simple key value store.
 - `this.user.set('pieces', this.pieces.id)` is the function that the `kvstore` uses to set items. This is equivalent to something like the shorthand `user = {}; user.pieces = id`
-- `NPP.user._index._index` is a nice trick that works with any store to return the full index. We can use this in the absence of a function like `NPP.user.all()`
+- `NPP.user.all()` returns all keys and values from a `keystore` database
 - `this.user.del(key)` deletes the specified key and corresponding value from the store
 - `this.user.get(key)` retrieves the specified key and the corresponding value from the store
 
