@@ -4,16 +4,26 @@
 
 ## Introduction
 
+In order to maximize accessibility this tutorial does not favor either node.js or the browser, since the same OrbitDB code runs on both. By following this tutorial step-by-step, your goal will be to build a _library_ in the form of a JavaScript class that empowers a UI developer (CLI or Web) to build out a fully-realized application.
+
 ### Requirements
 
-* A computer
-* A command line (unix/linux based or windows command prompt)
+* A computer with command line (unix/linux based or windows command prompt)
 * A modern web browser (Firefox, Chrome, Edge, etc)
 * node.js (optional)
 
 ### What will I learn?
 
-TODO: Description of tutorial chapters, after they are written
+In the following chapters you will learn the following topics.
+
+1. [Laying the Foundation](./01_Tutorial/01_Basics.md) covers installation and the basics of database creation.
+2. [Managing Data](./01_Tutorial/02_Managing_Data.md) introduces OrbitDB data stores and walks you through basic create, update, 
+3. [Structuring Data](./01_Tutorial/03_Structuring_Data.md) suggests some ways to strucutre multiple orbitdbs into a more robust schema, primary via nesting.
+4. [Peer-to-peer, Part 1 (IPFS](./01_Tutorial/04_P2P_Part_1.md) begins a large discussion of peer-to-peer networking and messaging, starting with the IPFS layer.
+5. [Peer-to-peer, Part 2 (OrbitDB](./01_Tutorial/04_P2P_Part_2.md) adds OrbitDB to the mix through database discovery, connection, and replication.
+6. [Identity and Permissions](./01_Tutorial/06_Identity_Permission.md) hardens the library via encryption and distributed identity.
+
+This tutorial is a work in progress, and individuals should feel encouraged to submit pull requests and provide feedback.
 
 ### What will I build?
 
@@ -21,7 +31,7 @@ If you're a musician like many of us are, you probably need form of sheet music 
 
 These self-organizing clusters of musicians will always need better way to share common and necessary sheet music with each other. What better use case for a peer-to-peer application?
 
-Using OrbitDB as the backbone, you will build this application. It will allow people to import and maintain a local collection of their own sheet music in the form of PDF files. More importantly, they will be able to _share_ this music by letting them interface with _peers_, and search across multiple distribute databases at once for music. For fun, and for users who are just looking for something to-sight read, you will give them a magic "button" that, given an instrument, will display piece of sheet music at random from their collection.
+Using OrbitDB as the backbone, you will build a JavaScript class that enables such an application. It will allow people to import and maintain a local collection of their own sheet music in the form of PDF files. More importantly, they will be able to _share_ this music by letting them interface with _peers_, and search across multiple distribute databases at once for music. For fun, and for users who are just looking for something to-sight read, you will give them a magic "button" that, given an instrument, will display piece of sheet music at random from their collection.
 
 #### Why a music app?
 
@@ -36,6 +46,7 @@ world to find sheet music to practice with.
 ### Conventions
 
 * Read this tutorial in order, the learning builds on itself other over time.
+* The UI Layer of this _suggested_, instead of built directly. The tutorial foucses on the building of a single Javascript class which encapsulates all the functionality needed to build the UI layer.
 * Type the examples in, don't copy and paste.
 * **What just happened?** sections are interspersed to that explain in depth what happens on a technical level
 * This tutorial attempts to be as _agnostic_ as possible in terms of:
