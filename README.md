@@ -14,20 +14,17 @@ The book opens with **[an introduction](./00_Introduction)** that gives an overv
 
 **[The tutorial](./01_Tutorial)** at the beginning takes you through building an JavaScript application from scratch. You will work through installation and database creation, though managing and structuring your data, through networking, communication, and sharing data in a peer-to-peer fashion, and finally through managing distributed identity and access to the databases. By the end of the tutorial, you should have everything you need
 
-The next part of the book, **[Thinking Peer to Peer](./02_Thinking_Peer_to_Peer)** involves _you_. It is a collection of essays that approach peer-to-peer engineering from a more intellectual and philsophical aspect. It is light on code and heavy on ideas. It is also open for community members to submit essays of their own for inclusing, pending an editorial review. 
+Next, **[Thinking Peer to Peer](./02_Thinking_Peer_to_Peer)** is a collection of essays that approach peer-to-peer engineering from a more intellectual and philsophical aspect. It is light on code and heavy on ideas. It is also open for community members to submit essays of their own for inclusing, pending an editorial review. 
 
-**[Part 3: The Architecture of OrbitDB](./03_The_Architecture_of_OrbitDB)** coveres in-depth, in a more reference style, how OrbitDB is structured and architected. It includes a description of `ipfs-log`, the core of OrbitDB, the data `stores` and finally into how the `orbit-db` library packages it all together into a single, cohesive package that works in both the browser and the command line.
+Then, **[The Architecture of OrbitDB](./03_The_Architecture_of_OrbitDB)** coveres in-depth, in a more reference style, how OrbitDB is structured and architected. It includes a description of `ipfs-log`, the core of OrbitDB, the data `stores` and finally into how the `orbit-db` library packages it all together into a single, cohesive package that works in both the browser and the command line.
 
-The closing part of the book, **[What comes next?](./04_What_next)** provides some guidance and suggestions into the next topics you explore. This will serve as a launch pad to further amplify your understanding of how our distributed future will be built.
+Finally, **[What comes next?](./04_What_next)** provides some guidance and suggestions into the next topics you explore. This will serve as a launch pad to further amplify your understanding of how our distributed future will be built.
 
 ## Getting the book
 
 You can download a copy of the book for here, available for download in the following free formats:
 
 - [PDF](./dist/Book.pdf)
-- [EPUB](./dist/Book.epub)
-- [ODT](./dist/Book.odt)
-- [Jupyter Notebook (Tutorial Only)](./dist/Book.ipynb)
 
 ## Maintainers
 
