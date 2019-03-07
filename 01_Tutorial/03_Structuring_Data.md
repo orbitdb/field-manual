@@ -265,4 +265,4 @@ You created simple fixture data and a function to load it into a fresh instantia
 - _Nesting_ databases is a powerful approach, but it is one of many. **Do not** feel limited. **Do** share novel approaches with the community.
 - Fixture data can be loaded easily, and locally, by simply including a basic set of values during app initialization
 
-And with this, you are now ready to connect to the outside world. Continue to [Chapter 4: Peer to Peer Part 1](04_P2P_Part_1.md) to join your app to the global IPFS network, and to other users!
+<strong>And with this, you are now ready to connect to the outside world. Continue to [Chapter 4: Peer to Peer Part 1](04_P2P_Part_1.md) to join your app to the global IPFS network, and to other users!</strong>
