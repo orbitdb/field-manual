@@ -91,15 +91,15 @@ You have many options to choose from in terms of, and while we are reticent to m
 - [Node.js crypto module](https://nodejs.org/api/crypto.html)
 - [Web Crypto Libraries](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API)
 
-### Distributed identity management
+Encrypting data will work great given a strong enough encryption method. If you picked correctly, you now have until the heat death of the universe until somebdoy guesses your encryption keys and brute forces your data open. The problem, then, becomes **key management**.
 
-Encrypting data will work great given a strong enough encryption method. If you picked correctly, you now have until the heat death of the universe until somebdoy guesses your encryption keys and brute forces your data open. The problem, then, becomes **key management**, which is tied to identity.
+### Smart Contract Authentication
 
 Distributed identity is still a hotly contested topic, and frankly an unsolved problem, in our industry. However, many organizations have recently lept ahead with solutions and there will be more to come. [Metamask] and its ties to the ethereum blockchain, are one.
 
 #### What just happeened?
 
-### Further Authorization
+### Creating your own authentication middleware
 
 #### What just happeened?
 
