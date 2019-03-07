@@ -320,7 +320,7 @@ You added some potentially very large media files to IPFS, and then stored the 4
 
 ### Key takeaways
 
-- Calling `load()` periodically ensures you have the latest entries from the database
+- Calling `load()` periodically ensures you have the latest entries from a local database available in memory
 - Generally speaking, a `put` or `delete` will return a Promise (or require `await`), and a `get` will return the value(s) immediately.
 - Updating the database is equivalent to adding a new entry to its OPLOG.
 - The OPLOG is calculated to give the current _state_ of the database, which is the view you generally interact with
