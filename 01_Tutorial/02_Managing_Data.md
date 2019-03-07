@@ -12,7 +12,7 @@ Please complete [Chapter 1 - Laying the Foundation](./01_Basics.md) first.
 - [Reading data](#reading-data)
 - [Updating and deleting data](#updating-and-deleting-data)
 - [Storing media files](#storing-media-files)
-- [Key Takeaways](#key-takeaways)
+- [Key takeaways](#key-takeaways)
 
 </div>
 
@@ -318,7 +318,7 @@ You added some potentially very large media files to IPFS, and then stored the 4
 
 > **Note:** IPFS nodes run _inside_ the browser, so if you're adding lots of files via the above method, keep an eye on your IndexedDB quotas, since that's where IPFS is storing the blocks.
 
-### Key Takeaways
+### Key takeaways
 
 - Calling `load()` periodically ensures you have the latest entries from the database
 - Generally speaking, a `put` or `delete` will return a Promise (or require `await`), and a `get` will return the value(s) immediately.
@@ -328,7 +328,7 @@ You added some potentially very large media files to IPFS, and then stored the 4
 - While you technically _can_ store encoded media directly in a database, media files are best stored in OrbitDB as IPFS hashes
 - Keep an eye on IndexedDB size and limitations when adding content to IPFS via the browser.
 
-Of course, in the vast majority of apps you create, you won't just be interacting with one database or one type of data. We've got you covered in [Chapter 3: Structuring Data](03_Structuring_Data.md)
+<strong>Of course, in the vast majority of apps you create, you won't just be interacting with one database or one type of data. We've got you covered in [Chapter 3: Structuring Data](03_Structuring_Data.md)</strong>
 
 - Resolves #[365](https://github.com/orbitdb/orbit-db/issues/365)
 - Resolves #[438](https://github.com/orbitdb/orbit-db/issues/438)
