@@ -176,7 +176,7 @@ Next, you'll allow your users to connect to other peers via their _multiaddresse
 You can now enable peer connection by adding this function to the `NewPiecePlease` class:
 
 ```diff
-+ async connectToPeer(multiaddr) {
++ async connectToPeer(multiaddr, protocol = "/p2p-circuit/ipfs") {
 +   try {
 +     await this.node.swarm.connect(multiaddr)
 +   } catch(e) {
@@ -212,10 +212,10 @@ Then, update the `_init_` function to include an event handler for when a peer i
   }
 ```
 
-Finally, create the a simple, yet extensible, `peerConnected` function.
+Finally, create the a simple, yet extensible, `handlePeerConnected` function.
 
 ```diff
-+ async peerConnected(ipfsPeer) {
++ async handlePeerConnected(ipfsPeer) {
 +   const ipfsId = ipfsPeer.id._idB58String;
 +   if(this.onpeerconnect) this.onpeerconnect(ipfsPeer)
 + }
@@ -224,7 +224,7 @@ Finally, create the a simple, yet extensible, `peerConnected` function.
 In your application code, implement these functions like so:
 
 ```javascript
-NPP.onpeerconnected = console.log
+NPP.onpeerconnect = console.log
 await NPP.connectToPeer("/p2p-circuit/ipfs/QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX")
 // some time later, outputs "QmZg8h94DAmWozqA8nqKttCFrFeaxRDSazHGCgc8fzkiJS"
 ```
