@@ -215,7 +215,7 @@ Then, update the `_init_` function to include an event handler for when a peer i
 Finally, create the a simple, yet extensible, `handlePeerConnected` function.
 
 ```diff
-+ async handlePeerConnected(ipfsPeer) {
++ handlePeerConnected(ipfsPeer) {
 +   const ipfsId = ipfsPeer.id._idB58String;
 +   if(this.onpeerconnect) this.onpeerconnect(ipfsPeer)
 + }
