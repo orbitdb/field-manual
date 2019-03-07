@@ -8,8 +8,8 @@
 Please complete [Chapter 5 - Peer to Peer Part 2 (OrbitDB)](./05_P2P_Part_2.md) first.
 
 - [On security](#on-security)
+- [Encryping and decrypting your data](#encrypting-and-decrypting-your-data)
 - [Distrbuted identity management](#distributed-identity-management)
-- [On security](#)
 - [On security](#)
 - [Key takaways](#)
 
@@ -30,22 +30,54 @@ Security is a vast topic. People can, and do, spend decades of their lives think
 
 ### Encryping and decrypting your data
 
-The first thing you'll do to mitigate implication #1 above is to encrypt the data locally, and store it in OrbitDB (and therefore IPFS) in its encrypted form.
+The first thing you'll do to mitigate implication #1 above is to encrypt the data locally, and store it in OrbitDB (and therefore IPFS) in its encrypted form. Your users might want to create some private profile fields, so you'll enable this functionality.
 
 OrbitDB is agnostic in terms of encryption to ensure maximum flexibility with your application layer. However, you can learn a simple method of reading and writing encrypted data to the stores, by creating a simple (and useless in terms of real security) pair of functions.
 
 ```diff
-encrypt(data) {
-}
++ encrypt(data) {
++   const stringified = JSON.stringify(data)
++   const reversed = stringified.split("").reverse().join("")
++   return
++ }
 
-decrypt(data) {
-}
++ decrypt(data) {
++   const unreversed = data.split("").reverse().join("")
++   const jsonEncoded = JSON.parse(jsonEncoded)
++   return jsonEncoded
++ }
 ```
 
 Then, for example, you could update the `getProfileFields` and `updateProfile` functions:
 
 ```diff
+- getProfileField(key) {
++ getProfileField(key, encrypted=false) {
+-    return this.user.get(key)
++    let data
++
++    if(encrypted) {
++      key = this.decrypt(key)
++      data = this.decrypt(data)
++    } else {
++      data = this.user.get(key)
++    }
++
++    return data
++ }
+
+- async updateProfileField(key, value) {
+- async updateProfileField(key, value, encrypted=true) {
++   if(encrypted) {
++     key = this.encrypt(key)
++     value = this.encrypt(value)
++   }
+    const cid = await this.user.set(key, value)
+    return cid
+}
 ```
+
+Of course, this ia a toy example and only reverses strings, but you can see how encryption can be used to protect your data and "hide it in plain sight," so to speak.
 
 #### What just happened?
 
