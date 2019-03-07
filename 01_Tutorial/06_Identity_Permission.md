@@ -26,15 +26,21 @@ This has the following implications:
 1. Everybody will still be able to read the data given a CID or content hash via a simple `ipfs.dag.get` or `ipfs.get` call.
 2. The ACL can never change, which means you can't add/revoke other write permissions, and if you lose access to your IPFS node, you can never write to it either.
 
-Security is a vast topic. People can, and do, spend decades of their lives thinking about and working on securirty in all it's numerous aspects. In our case, we will approach security from three perspectives: Identity, Authorization and Identification.
+Security is a vast topic. People can, and do, spend decades of their lives thinking about and working on securirty in all it's numerous aspects. For the purposes of this tutorial, we will approach security from three perspectives: Encryption, Identity, and Authorization.
+
+### Encryping and decrypting your data
+
+#### What just happened?
 
 ### Distributed identity management
 
 Distributed identity is still a hotly contested topic, and frankly an unsolved problem, in our industry. However, many organizations have recently lept ahead with solutions and there will be more to come. [Metamask] and its ties to the ethereum blockchain, are one.
 
-### Authorization
+#### What just happeened?
 
-### Identification
+### Further Authorization
+
+#### What just happeened?
 
 ### Key takeaways
 
