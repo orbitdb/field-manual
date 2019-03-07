@@ -165,6 +165,16 @@ You updated your code to send a message to connected peers after 2 seconds, and 
 
 > **Note:** If you're a security-minded person, this is probably giving you a panic attack. That's ok, these methods are for educational purposes only and are meant to enhance your understanding of how a system like this works. We will cover authorization and authentication in the next chapter.
 
+### Connecting automatically to peers via IPFS bootstrap
+
+
+#### What just happened?
+
+### Simple distributed queries
+
+#### What just happened?
+
+
 ### Key takeaways
 
 Continue to [Chapter 6](./06_Identity_Permissions.md) to learn about how you can vastly extend the identity and access control capabilities of OrbitDB
