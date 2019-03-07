@@ -90,9 +90,9 @@ First, update your `handlePeerConnected` function to call `sendMessage` we intro
 Then, register and add the `handleMessageReceived` function to the `NewPiecePlease` class
 
 ```diff
-async _init() {$                                                                      
-  const nodeInfo = await this.node.id()$                                              
-  this.orbitdb = await OrbitDB.createInstance(this.node)$                             
+async _init() {
+  const nodeInfo = await this.node.id()
+  this.orbitdb = await OrbitDB.createInstance(this.node)
   this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
 
   const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
@@ -161,16 +161,96 @@ You updated your code to send a message to connected peers after 2 seconds, and 
 - `this.sendMessage(ipfsId, { userDb: this.user.id })` utilizes the function you created previously to send a message to a peer via a topic named from their IPFS id
 - `this.node.pubsub.subscribe` registers an event handler that calls `this.handleMessageReceived`
 - `peerDb.events.on("replicated" ...` fires when the database has been loaded and the data has been retrieved from IPFS and is stored locally. It means, simply, that you have the data and it is ready to be used.
-- 
 
 > **Note:** If you're a security-minded person, this is probably giving you a panic attack. That's ok, these methods are for educational purposes only and are meant to enhance your understanding of how a system like this works. We will cover authorization and authentication in the next chapter.
 
-### Connecting automatically to peers via IPFS bootstrap
+### Connecting automatically to peers with discovered databases
 
+Peer discovery is great, but your users are going to want those peers to stick around so you can continue to use their data and receive new data as those peers add pieces. You'll make a couple minor modifications the above functions to enable that now. Also, peers is so technical sounding! Musicians might prefer something like "companions" instead.
+
+First, update your `_init` function to make a new "companions" database:
+
+```diff
+async _init() {
+  const nodeInfo = await this.node.id()
+  this.orbitdb = await OrbitDB.createInstance(this.node)
+  this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
+
+  const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
+  this.pieces = await this.orbitdb.docs('pieces', docStoreOptions)
+  await this.pieces.load()
+
+  this.user = await this.orbitdb.keyvalue("user", this.defaultOptions)
+  await this.user.load()
+  
++ this.companions = await this.orbitdb.keyvalue("companions", this.defaultOptions)
++ await this.companions.load()
+
+  await this.loadFixtureData({
+    "username": Math.floor(Math.random() * 1000000),
+    "pieces": this.pieces.id,
+    "nodeId": nodeInfo.id,
+  })
+
+  this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
+  await this.node.pubsub.subscribe(nodeInfo.id, this.handleMessageReceived.bind(this))
+
+  if(this.onready) this.onready()
+}
+```
+
+Next, create a `getCompanions()` abstraction for your application layer
+
+```diff
++ getCompanions() {
++   return this.companions.all()
++ }
+```
+
+Finally, update your `handleMessageReceived` function to add a discovered peer's user database to the `companions` register:
+
+```diff
+  async handleMessageReceived(msg) {
+    const parsedMsg = JSON.parse(msg.data.toString())
+    const msgKeys = Object.keys(parsedMsg)
+ 
+    switch(msgKeys[0]) {
+      case "userDb":
+        var peerDb = await this.orbitdb.open(parsedMsg.userDb)
+        peerDb.events.on("replicated", async () => {
+          if(peerDb.get("pieces")) {
++           await this.companions.set(peerDb.id, peerDb.all())
+            this.ondbdiscovered && this.ondbdiscovered(peerDb)
+          }
+        })
+        break;
+      default:
+        break;
+    }
+ 
+    if(this.onmessage) this.onmessage(msg)
+  }
+```
+
+In your application layer, you can test this functionality like so:
+
+```javascript
+NPP.ondbdiscovered = (db) => console.log(NPP.getCompanions())
+```
+
+As databases are discovered, you will be able to see a list of companions growing.
 
 #### What just happened?
 
+You created yet another database for your user's musical companions, and updated this database upon database discovery.
+
+- `await this.orbitdb.keyvalue("companions", this.defaultOptions)` creates a new keyvalue store called "companions"
+- `this.companions.all()` retrieves the full list of key/value pairs from the database
+- `this.companions.set(peerDb.id, peerDb.all())` adds a record to the companions database, with the database ID as the key, and the data as the value stored. Note that you can do nested keys and values inside a `keyvalue` store
+
 ### Simple distributed queries
+
+This may be the moment you've been waiting for - now we'll do a simple parallel distributed query on ALL the pieces in 
 
 #### What just happened?
 
