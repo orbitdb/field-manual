@@ -12,7 +12,7 @@
 
 The book opens with **[an introduction](./00_Introduction)** that gives an overview of the promises and risks of the distributed space, and describes OrbitDB and its use cases at a high level.
 
-**[The tutorial](./01_Tutorial)** at the beginning takes you through building an JavaScript application from scratch. You will work through installation and database creation, though managing and structuring your data, through networking, communication, and sharing data in a peer-to-peer fashion, and finally through managing distributed identity and access to the databases. By the end of the tutorial, you should have everything you need
+**[The tutorial](./01_Tutorial/00_Introduction.md)** at the beginning takes you through building an JavaScript application from scratch. You will work through installation and database creation, though managing and structuring your data, through networking, communication, and sharing data in a peer-to-peer fashion, and finally through managing distributed identity and access to the databases. By the end of the tutorial, you should have everything you need
 
 Next, **[Thinking Peer to Peer](./02_Thinking_Peer_to_Peer)** is a collection of essays that approach peer-to-peer engineering from a more intellectual and philsophical aspect. It is light on code and heavy on ideas. It is also open for community members to submit essays of their own for inclusing, pending an editorial review. 
 
