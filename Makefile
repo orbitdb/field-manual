@@ -8,10 +8,10 @@ tutorial: clean
 	pandoc -o dist/Book.ipynb metadata.yaml dist/Book.md;
 	rm -rf dist/Book.md
 
-build: clean tutorial
+build: clean
 	for f in */*.md; do (echo "\n\\pagebreak\n\n"; cat $$f) >> dist/Book.md; done;
-	pandoc --highlight-style=haddock -o dist/Book.pdf metadata.yaml dist/Book.md;
-	pandoc --highlight-style=zenburn -o dist/Book.epub metadata.yaml dist/Book.md;
-	pandoc --highlight-style=zenburn -o dist/Book.docx metadata.yaml dist/Book.md;
-	pandoc --highlight-style=zenburn -o dist/Book.odt metadata.yaml dist/Book.md;
+	cd dist; pandoc --highlight-style=breezedark -o Book.pdf ../metadata.yaml Book.md;
+	# pandoc --highlight-style=zenburn -o Book.epub metadata.yaml Book.md;
+	# pandoc --highlight-style=zenburn -o Book.docx metadata.yaml Book.md;
+	# pandoc --highlight-style=zenburn -o Book.odt metadata.yaml Book.md;
 	rm -f dist/Book.md

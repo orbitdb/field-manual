@@ -44,7 +44,9 @@ For this tutorial, we recommend using unpkg for obtaining pre-built, minified ve
 
 You will now have global `Ipfs` and `OrbitDB` objects available to you. You will see how we'll use these later.
 
-> **Note:** Both OrbitDB and js-ipfs are open source, which give you the ability to build and even contribute to the code. This will be covered in detail these in Part 3.
+|||
+| ------ | ---------------------------------------------------- |
+| ![NOTE](../images/note.svg) | Both OrbitDB and js-ipfs are open source, which give you the ability to build and even contribute to the code. This will be covered in detail these in Part 3. |
 
 ### Creating the isomorphic bookends
 
