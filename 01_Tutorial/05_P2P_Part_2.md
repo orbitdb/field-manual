@@ -310,4 +310,4 @@ For now it will return _all_ pieces, but for bonus points you can try incorporat
 
 TODO
 
-<strong>You're not done yet! [Chapter 6](./06_Identity_Permissions.md) to learn about how you can vastly extend the identity and access control capabilities of OrbitDB</strong>
+<strong>You're not done yet! [Chapter 6](./06_Identity_Permission.md) to learn about how you can vastly extend the identity and access control capabilities of OrbitDB</strong>
