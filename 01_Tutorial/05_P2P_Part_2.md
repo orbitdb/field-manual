@@ -7,7 +7,7 @@
 
 Please complete [Chapter 4 - Peer to Peer](./04_P2P_Part_1.md) first.
 
-- [Enabling debug logging](#enabling debug logging)
+- [Enabling debug logging](#enabling-debug-logging)
 - [Discovering Peer's Databases](#discovering-peers-databases)
 - [Connecting automatically to peers via IPFS bootstrap](#connecting-to-another-peers-database)
 - [Simple distributed queries](#simple-distributed-queries)
@@ -69,11 +69,11 @@ To share data between peers, you will need to know their OrbitDB address. Unforu
 
 In order to provide a proper user experience, you'll want to hide as much of the peer and database discovery as possible by using OrbitDB and IPFS internals to exchange database addresses and load data upon peer connection.
 
-The flow will be:
+The flow you'll create will be:
 1. User manually requests a connection to a user
 2. On a successful connection, both peers send messages containing their user information via a database address
-3. 
-4. 
+3. Peer user databases are loaded, replicated, and inspected for a `userDb` key
+4. On a successful discovery, user information is added to our local `companions` database
 
 First, update your `handlePeerConnected` function to call `sendMessage` we introduce a timeout here to give the peers a second or two to breathe once they are connected. You can later tune this, or remove it as you see fit and as future IPFS features provide greater network reliability and performance.
 
@@ -87,30 +87,7 @@ First, update your `handlePeerConnected` function to call `sendMessage` we intro
   }
 ```
 
-Then, add the `handleMessageReceived` function to the `NewPiecePlease` class
-
-```diff
-+ async handleMessageReceived(msg) {
-+   const parsedMsg = JSON.parse(msg.data.toString())
-+   const msgKeys = Object.keys(parsedMsg)
-+
-+   switch(msgKeys[0]) {
-+     case "userDb":
-+       var peerDb = await this.orbitdb.open(parsedMsg.userDb)
-+       peerDb.events.on("replicated", async () => {
-+         if(peerDb.get("pieces")) {
-+           await this.companions.set(peerDb.id, peerDb._index._index)
-+           this.ondbdiscovered && this.ondbdiscovered(peerDb)
-+         }
-+       })
-+       break;
-+     default:
-+       break;
-+   }
-+
-+   if(this.onmessage) this.onmessage(msg)
-+ }
-```
+Then, register and add the `handleMessageReceived` function to the `NewPiecePlease` class
 
 ```diff
 async _init() {$                                                                      
@@ -125,9 +102,6 @@ async _init() {$
   this.user = await this.orbitdb.keyvalue("user", this.defaultOptions)
   await this.user.load()
 
-  this.companions = await this.orbitdb.keyvalue("companions", this.defaultOptions)
-  await this.companions.load()
-
   await this.loadFixtureData({
     "username": Math.floor(Math.random() * 1000000),
     "pieces": this.pieces.id,
@@ -135,12 +109,59 @@ async _init() {$
   })
 
   this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
-  await this.node.pubsub.subscribe(nodeInfo.id, this.handleMessageReceived.bind(this))
++ await this.node.pubsub.subscribe(nodeInfo.id, this.handleMessageReceived.bind(this))
 
   if(this.onready) this.onready()
 }
 ```
+
+
+```diff
++ async handleMessageReceived(msg) {
++   const parsedMsg = JSON.parse(msg.data.toString())
++   const msgKeys = Object.keys(parsedMsg)
++
++   switch(msgKeys[0]) {
++     case "userDb":
++       var peerDb = await this.orbitdb.open(parsedMsg.userDb)
++       peerDb.events.on("replicated", async () => {
++         if(peerDb.get("pieces")) {
++           this.ondbdiscovered && this.ondbdiscovered(peerDb)
++         }
++       })
++       break;
++     default:
++       break;
++   }
++
++   if(this.onmessage) this.onmessage(msg)
++ }
+```
+
+In your application code you can use this functionality like so:
+
+```javascript
+// Connect to a peer that you know has a New Piece, Please! user database
+await NPP.connectToPeer("Qm.....")
+
+NPP.ondbdiscovered = (db) => console.log(db.all())
+/* outputs:
+{
+  "nodeId": "QmNdQgScpUFV19PxvUQ7mtibtmce8MYQkmN7PZ37HApprS",
+  "pieces": "/orbitdb/zdpuAppq7gD2XwmfxWZ3MzeucEKiMYonRUXVwSE76CLQ1LDxn/pieces",
+  "username": 875271
+}
+*/
+```
+
 #### What just happened?
+
+You updated your code to send a message to connected peers after 2 seconds, and then registered a handler function for this message that connects to and replicates another user's database.
+
+- `this.sendMessage(ipfsId, { userDb: this.user.id })` utilizes the function you created previously to send a message to a peer via a topic named from their IPFS id
+- `this.node.pubsub.subscribe` registers an event handler that calls `this.handleMessageReceived`
+- `peerDb.events.on("replicated" ...` fires when the database has been loaded and the data has been retrieved from IPFS and is stored locally. It means, simply, that you have the data and it is ready to be used.
+- 
 
 > **Note:** If you're a security-minded person, this is probably giving you a panic attack. That's ok, these methods are for educational purposes only and are meant to enhance your understanding of how a system like this works. We will cover authorization and authentication in the next chapter.
 
