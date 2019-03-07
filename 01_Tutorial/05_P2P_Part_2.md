@@ -195,6 +195,9 @@ async _init() {
   this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
   await this.node.pubsub.subscribe(nodeInfo.id, this.handleMessageReceived.bind(this))
 
++ this.companionConnectionInterval = setInterval(this.connectToCompanions.bind(this), 10000)
++ this.connectToCompanions()
+
   if(this.onready) this.onready()
 }
 ```
@@ -207,7 +210,7 @@ Next, create a `getCompanions()` abstraction for your application layer
 + }
 ```
 
-Finally, update your `handleMessageReceived` function to add a discovered peer's user database to the `companions` register:
+Then, update your `handleMessageReceived` function to add a discovered peer's user database to the `companions` register:
 
 ```diff
   async handleMessageReceived(msg) {
@@ -232,29 +235,79 @@ Finally, update your `handleMessageReceived` function to add a discovered peer's
   }
 ```
 
+Finally, create the `connectToCompanions` function:
+
+```diff
++ async connectToCompanions() {
++   var companionIds = Object.values(this.companions.all()).map(companion => companion.nodeId)
++   var connectedPeerIds = await this.getIpfsPeers()$
++   companionIds.map(async (companionId) => {
++     if (connectedPeerIds.indexOf(companionId) !== -1) return
++     try {
++       await this.connectToPeer(companionId)
++       this.oncompaniononline && this.oncompaniononline()
++     } catch (e) {
++       this.oncompanionnotfound && this.oncompanionnotfound()
++     }
++   })
++ }
+```
+
 In your application layer, you can test this functionality like so:
 
 ```javascript
-NPP.ondbdiscovered = (db) => console.log(NPP.getCompanions())
+NPP.oncompaniononline = console.log
+NPP.oncompanionnotfound = () => { throw(e) }
 ```
-
-As databases are discovered, you will be able to see a list of companions growing.
 
 #### What just happened?
 
-You created yet another database for your user's musical companions, and updated this database upon database discovery.
+You created yet another database for your user's musical companions, and updated this database upon database discovery. You can use this to create "online indicators" for all companions in your UI layer.
 
 - `await this.orbitdb.keyvalue("companions", this.defaultOptions)` creates a new keyvalue store called "companions"
 - `this.companions.all()` retrieves the full list of key/value pairs from the database
 - `this.companions.set(peerDb.id, peerDb.all())` adds a record to the companions database, with the database ID as the key, and the data as the value stored. Note that you can do nested keys and values inside a `keyvalue` store
+- The `companionIds.map` call will then call `this.connectToPeer(companionId)` in parallel for all registered companions in your database. If they are found `oncompaniononline` will fire. If not, `oncompanionnotfound` will fire next.
 
 ### Simple distributed queries
 
-This may be the moment you've been waiting for - now we'll do a simple parallel distributed query on ALL the pieces in 
+This may be the moment you've been waiting for - now you'll perform a simple parallel distributed query on across multiple peers, pooling all pleces together into one result.
+
+Create the following function, which combines much of the code you've written and knowledge you've obtained so far:
+
+```diff
++ async queryCatalog() {
++   const peerIndex = NPP.companions.all()
++   const dbAddrs = Object.keys(peerIndex).map(key => peerIndex[key].pieces)
++ 
++   const allPieces = await Promise.all(dbAddrs.map(async (addr) => {
++     const db = await this.orbitdb.open(addr)
++     await db.load()
++ 
++     return db.get('')
++   }))
++ 
++   return allPieces.reduce((flatPieces, pieces) => {
++     pieces.forEach(p => flatPieces.push(p))
++     return flatPieces
++   }, this.pieces.get(''))
++ }
+```
+
+You can now test this by creating a few different instances of the app (try both browser and node.js instances), connecting them via their peer IDs, discovering their databases, and running `NPP.queryCatalog()`. 
 
 #### What just happened?
 
+You performed your first distributed query using OrbitDB. We hope that by now the power of such a simple system, under 200 lines of code so far, can be used to create distributed applications.
+
+- `NPP.companions.all()` will return the current list of discovered companions
+- `this.orbitdb.open(addr)` will open the peer's database and `db.load` will load it into memory
+- `allPieces.reduce` will take an array of arrays and squash it into a flat array 
+
+For now it will return _all_ pieces, but for bonus points you can try incorporating the `docstore.query` function instaed of `docstore.get('')`.
 
 ### Key takeaways
 
-Continue to [Chapter 6](./06_Identity_Permissions.md) to learn about how you can vastly extend the identity and access control capabilities of OrbitDB
+TODO
+
+<strong>You're not done yet! [Chapter 6](./06_Identity_Permissions.md) to learn about how you can vastly extend the identity and access control capabilities of OrbitDB</strong>
