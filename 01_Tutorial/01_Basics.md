@@ -28,7 +28,7 @@ Choose a project directory and `cd` to there from your command line. Then run th
 $ npm init
 ... enter commands to create package.json ...
 
-$ npm install orbitdb ipfs
+$ npm install orbit-db ipfs
 ```
 
 This will create a `package.json`, `package.lock`, and `node_modules` folder.
@@ -111,7 +111,7 @@ class NewPiecePlease() {
 +   }
 +
 +   async _init() {
-+     this.orbitdb = await OrbitDB.createInstance(node)
++     this.orbitdb = await OrbitDB.createInstance(this.node)
 +
 +     this.onready()
 +   }
