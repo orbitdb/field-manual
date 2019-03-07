@@ -11,6 +11,7 @@ Please complete [Chapter 2 - Managing Data](./02_Managing_Data.md) first.
 - [Utilizing your practice counter](#utilizing-your-practice-counter)
 - [Adding a higher-level user database](#adding-a-higher-level-user-database)
 - [Dealing with fixture data](#dealing-with-fixture-data)
+- [Key takeaways](#key-takeaways)
 
 </div>
 
@@ -255,7 +256,7 @@ You would see:
 
 You created simple fixture data and a function to load it into a fresh instantiaton of the app.
 
-### Key Takeaways
+### Key takeaways
 
 - The distributed applications of the future will be complex and require data structures to mirror and manage that complexity.
 - Luckily, OrbitDB is extremely flexible when it comes to generating complex and linked data structures
