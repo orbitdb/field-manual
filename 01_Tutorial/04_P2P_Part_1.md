@@ -326,7 +326,9 @@ await NPP.sendMessage(hash, data, callback)
 
 ### Key Takeaways
 
-TODO
+- TODO
+
+<strong>Now, move on to [Chapter 05 - Peer to Peer Part 2](./05_P2P_Part_2.md)</strong>
 
 - Resolves #[463](https://github.com/orbitdb/orbit-db/issues/463)
 - Resolves #[468](https://github.com/orbitdb/orbit-db/issues/468)
@@ -340,5 +342,3 @@ TODO
 - Resolves #[474](https://github.com/orbitdb/orbit-db/issues/474)
 - Resolves #[505](https://github.com/orbitdb/orbit-db/issues/505)
 - Resolves #[496](https://github.com/orbitdb/orbit-db/issues/496)
-
-Now, move on to [Chapter 05 - Peer to Peer Part 2](./05_P2P_Part_2.md)
