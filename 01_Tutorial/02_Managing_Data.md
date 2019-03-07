@@ -18,7 +18,7 @@ Please complete [Chapter 1 - Laying the Foundation](./01_Basics.md) first.
 
 ### Loading the database
 
-Now you'll enable the ability for users to read, create, update, and delete thier sheet music from the catalog.
+The first thing your users will want is to make sure that when they load the app, their data is available. You'll do so easily by loading the database contents into memory.
 
 Update your `NewPiecePlease class` handler, adding **one line** at the bottom of the IPFS `ready` handler:
 
@@ -44,13 +44,10 @@ After you instantiated the database, you loaded its contents into memory for use
 
 ### Adding data
 
-Now that you have a database set up, adding content to it is fairly easy. Run the following code to add some sheet music to the repository.
+Next, your users will want to be able to add sheet music to their catalog. You'll use functions exposed from OrbitDB's `keyvalue` store now.
 
-We have uploaded and pinned a few piano scores to IPFS, and will provide the hashes. You can add these hashes to your database by fleshing out and using the `addNewPiece` function.
 
-> **Note:** We hope you like the original Metroid NES game, or at least the music from it!
-
-Fill in your `addNewPiece` function now:
+Add a function called `addNewPiece` function now:
 
 ```diff
 + async addNewPiece(hash, instrument = "Piano") {
@@ -68,7 +65,9 @@ Fill in your `addNewPiece` function now:
 + }
 ```
 
-Then, in your application code, node.js or browser, you cna use this function like so, utilizing the detault value for the `instrument` argument.
+We have uploaded and pinned a few piano scores to IPFS, and will provide the hashes. You can add these hashes to your database by fleshing out and using the `addNewPiece` function.
+
+In your application code, node.js or browser, you cna use this function like so, utilizing the detault value for the `instrument` argument.
 
 ```javascript
 const cid = NPP.addNewPiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ")
@@ -90,7 +89,11 @@ after we explain what happened. For more information see Part 3.
 }
 ```
 
+> **Note:** We hope you like the original Metroid NES game, or at least the music from it!
+
 #### What just happened?
+
+You wrote and tested a function that allows users to add new sheet music to the database.
 
 - `piecesDb.put({ ... })` is the most important line here. This call takes an object to sture and returns a _mutlihash_, which is the hash of the content added to IPFS.
 - `node.dag.get(hash)` is a function that takes a Content ID (CID) and returns content.
@@ -118,9 +121,9 @@ These are all stored in the global IPFS network so you can find any piece by vis
 
 ### Reading data
 
-You've added data to your local database, and now you'll can query it. OrbitDB gives you a number of ways to do this, mostly based on which _store_ you picked.
+Of course, your users will want to read their data after creating it, so you'll enable that functionality now. OrbitDB gives you a number of ways to do this, mostly based on which _store_ you picked.
 
-We gave you a `docstore` earlier, so you can flesh out the all of thet simple `get*****` functions like so. `docstore` also provides the more puwerful `query` function, which we can abstract to write a `getPiecesByInstrument` function:
+We gave you a `docstore` earlier, so you can write some simple `get*****` functions like so. `docstore` also provides the more puwerful `query` function, which we can abstract to write a `getPiecesByInstrument` function:
 
 Fill in the following functions now:
 
@@ -235,9 +238,9 @@ You may be thinking something like this: "Wait, if OrbitDB is built upon IPFS an
 
 ### Storing Media Files
 
-We are often asked if it is possible to store media files like pictures or audio directly inside OrbitDB. Our answer is that you should treat this like any other database system and store the _address_ of the
+Your users will probably not want to mess with content hashes, so you'll want to provide them the ability to add files directly to IPFS. This section shows how you'll be able to do this, and then store the _address_ of the file in OrbitDB.
 
-Luckily, with content addressing in IPFS, this becomes rather easy, and predictable from a schema design standpoint. The overall pattern in:
+The overall pattern is:
 
 1. Add the file to IPFS, which will return the _multihash_ of the file
 2. Store said multihash in OrbitDB
