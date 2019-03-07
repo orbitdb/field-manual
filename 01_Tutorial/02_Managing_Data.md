@@ -18,9 +18,9 @@ Please complete [Chapter 1 - Laying the Foundation](./01_Basics.md) first.
 
 ### Loading the database
 
-To start, you'll do a couple of things to enhance our current code and tidy up. We will also scaffold out some functions to be filled in later.
+Now you'll enable the ability for users to read, create, update, and delete thier sheet music from the catalog.
 
-Update your `NewPiecePlease class` handler, adding **one line** at the bottom of the IPFS `ready` handler. and then run this code:
+Update your `NewPiecePlease class` handler, adding **one line** at the bottom of the IPFS `ready` handler:
 
 ```diff
   _init() {
@@ -31,20 +31,7 @@ Update your `NewPiecePlease class` handler, adding **one line** at the bottom of
     this.piecesDb = await this.orbitdb.docstore('pieces', options)
 +   await this.piecesDb.load()
   }
-
-+ async addNewPiece(hash, instrument = "Piano") { }
-+
-+ async deletePieceByHash() { }
-+
-+ getAllPieces() {}
-+
-+ getPiecesByInstrument(instrument) { }
-+
-+ getPieceByHash(hash) { }
-+
-+ await updatePieceByHash(hash, instrument = "Piano")
 }
-
 ```
 
 #### What just happened?
@@ -66,7 +53,6 @@ We have uploaded and pinned a few piano scores to IPFS, and will provide the has
 Fill in your `addNewPiece` function now:
 
 ```diff
-- async addNewPiece(hash, instrument = "Piano") { }
 + async addNewPiece(hash, instrument = "Piano") {
 +   const existingPiece = this.pieces.get(hash)
 +   if(existingPiece) {
@@ -139,7 +125,6 @@ We gave you a `docstore` earlier, so you can flesh out the all of thet simple `g
 Fill in the following functions now:
 
 ```diff
-- getAllPieces() {}
 + getAllPieces() {
 +   const pieces = this.piecesDb.get('')
 +   return pieces
@@ -147,7 +132,6 @@ Fill in the following functions now:
 ```
 
 ```diff
-- getPieceByHash(hash) { }
 + getPieceByHash(hash) {
 +   const singlePiece = this.piecesDb.get(hash)[0]
 +   return singlePiece
@@ -155,7 +139,6 @@ Fill in the following functions now:
 ```
 
 ```diff
-- getByInstrument(instrument) { }
 + getByInstrument(instrument) {
 +   return this.piecesDb.query((piece) => piece.instrument === instrument)
 + }
@@ -206,7 +189,6 @@ Again, each OrbitDB store may have slightly different methods for this. In the `
 Fill in the `updatePieceByHash` and `deletePieceByHash` functions now:
 
 ```diff
-- async updatePieceByHash(hash, instrument = "Piano") { }
 + async updatePieceByHash(hash, instrument = "Piano") {
 +   var piece = await this.getPieceByHash(hash)
 +   piece.instrument = instrument
@@ -216,7 +198,6 @@ Fill in the `updatePieceByHash` and `deletePieceByHash` functions now:
 ```
 
 ```diff
-- async deletePieceByHash(hash) {
 + async deletePieceByHash(hash) {
 +   const cid = await this.piecesDb.del(hash)
 +   return cid
