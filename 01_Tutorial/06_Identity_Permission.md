@@ -1,9 +1,11 @@
 ## Chapter 6: Identity and Permissions
 
+> TODO: Description
+
 <div>
   <h3>Table of Contents</h3>
   
-> **Note:** Please complete [Chapter 5 - Peer to Peer Part 2 (OrbitDB)](./05_P2P_Part_2.md) first.
+Please complete [Chapter 5 - Peer to Peer Part 2 (OrbitDB)](./05_P2P_Part_2.md) first.
 
 - [On security](#on-security)
 - [Distrbuted identity management](#distributed-identity-management)
