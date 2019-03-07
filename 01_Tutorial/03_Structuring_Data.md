@@ -202,9 +202,9 @@ First, create the `loadFixtureData` function inside the `NewPiecePlease` class:
 ```diff
 + async loadFixtureData(fixtureData) {
 +   const fixtureKeys = Object.keys(fixtureData)
-+   await Promise.all(fixtureKeys.map(async(key) => {
-+     if(!this.userDb.get(key)) await this.userDb.set(key, fixtureData[key])
-+   }))
++   for (let i in fixtureKeys) {
++     let key = fixtureKeys[i]
++     if(!this.user.get(key)) await this.user.set(key, fixtureData[key])
 + }
 ```
 
