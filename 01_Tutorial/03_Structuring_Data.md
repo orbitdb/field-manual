@@ -128,9 +128,7 @@ You created and used two new functions to both read the value of, and increment 
 
 ### Adding a higher-level database for user data
 
-Pieces of music to practice with are great to have, but moving forward you will want to allow users to further express themselves via a username and profile. This will also help prepare you for allowing users to connect to each other in the next chapter.
-
-You will create a new database for users, from which your database of pieces will be referenced. You can create this database in the `ready` event handler of IPFS, alongside where you declared `this.pieces`.
+Pieces of music to practice with are great to have, but moving forward you will want to allow users to further express themselves via a username and profile.  You will create a new database for users, from which your database of pieces will be referenced. This will also help prepare you for allowing users to connect to each other in the next chapter.
 
 Update your `_init` function to look like this:
 
@@ -247,7 +245,6 @@ You would see:
 {
   "nodeId": "QmXG8yk8UJjMT6qtE2zSxzz3U7z5jSYRgVWLCUFqAVnByM",
   "pieces": "/orbitdb/zdpuArXLduV6myTmAGR4WKv4T7yDDV7KvwkmBaU8faCdrKvw6/pieces",
-  "peers": [],
   "username": 304532
 }
 ```
@@ -255,6 +252,8 @@ You would see:
 #### What just happened?
 
 You created simple fixture data and a function to load it into a fresh instantiaton of the app.
+
+- TODO
 
 ### Key takeaways
 
