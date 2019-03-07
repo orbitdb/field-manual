@@ -11,6 +11,7 @@ Please complete [Chapter 3 - Structuring Data](./03_Structuring_Data.md) first.
 - [Getting a list of connected peers](#getting-a-list-of-connected-peers)
 - [Manually connecting to peers](#manually-connecting-to-peers)
 - [Peer to peer communication via IPFS pubsub](#peer-to-peer-communication-via-IPFS-pubsub)
+- [Key takeaways](#key-takeaways)
 
 </div>
 
@@ -324,6 +325,8 @@ await NPP.sendMessage(hash, data, callback)
 > **Note:** These techniques presented for _educational purposes only_, with no consideration as to security or privacy. You should be encrypting and signing messages at the application level. More on this in Chapter 6 of the tutorial.
 
 ### Key Takeaways
+
+TODO
 
 - Resolves #[463](https://github.com/orbitdb/orbit-db/issues/463)
 - Resolves #[468](https://github.com/orbitdb/orbit-db/issues/468)
