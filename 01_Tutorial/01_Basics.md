@@ -11,7 +11,7 @@ Please see the [Introduction](./00_Introduction.md) before beginning this chapte
 - [Instantiating IPFS and OrbitDB](#instantiating-ipfs-and-orbitdb)
 - [Creating a Database](#creating-a-database)
 - [Choosing a data store](#choosing-a-data-store)
-- [Key Takeaways](#key-takeaways)
+- [Key takeaways](#key-takeaways)
 
 </div>
 
@@ -274,7 +274,7 @@ Each OrbitDB store has its own specific API methods to create, delete, retreieve
 
 Also, users of OrbitDB can write their own stores if it suits them. This is an advanced topic and is covered in Part 3 of this book.
 
-### Key Takeaways
+### Key takeaways
 
 - OrbitDB is a distributed database layer which stores its raw data in IPFS
 - Both IPFS and OrbitDB work offline and online
@@ -287,7 +287,7 @@ Also, users of OrbitDB can write their own stores if it suits them. This is an a
 - OrbitDB comes with a handful of stores, and you can write your own.
 - Each store will have its own API, but you will generally have at least a `get` and a `put`
 
-Now that you've laid the groudnwork, you'll learn how to work with data! Onward, then, to [Chapter 2: Managing Data](./02_Managing_Data.md).
+Now that you've laid the groundwork, you'll learn how to work with data! Onward, then, to [Chapter 2: Managing Data](./02_Managing_Data.md).
 
 - Resolves #[367](https://github.com/orbitdb/orbit-db/issues/367)
 - Resolves #[366](https://github.com/orbitdb/orbit-db/issues/366)
