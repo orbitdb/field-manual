@@ -1,9 +1,3 @@
-## IPFS, Merkle DAGs, and CRDTs
-
-### The IPFS Merkle DAG
-
-### CRDTs
-
 ## The `ipfs-log` package
 
 ### Basic `ipfs-log` commands
