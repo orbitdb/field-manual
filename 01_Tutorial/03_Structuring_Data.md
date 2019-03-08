@@ -204,6 +204,7 @@ First, create the `loadFixtureData` function inside the `NewPiecePlease` class:
 +   for (let i in fixtureKeys) {
 +     let key = fixtureKeys[i]
 +     if(!this.user.get(key)) await this.user.set(key, fixtureData[key])
++   }
 + }
 ```
 
@@ -211,7 +212,7 @@ Then, Update your _init_ function to call `loadFixtureData` with some starter da
 
 ```diff
   async _init() {
-+   const nodeId = await this.node.id()
++   const peerInfo = await this.node.id()
     this.orbitdb = await OrbitDB.createInstance(this.node)
     this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
 
@@ -225,7 +226,7 @@ Then, Update your _init_ function to call `loadFixtureData` with some starter da
 +   await this.loadFixtureData({
 +     "username": Math.floor(Math.rand() * 1000000),
 +     "pieces": this.pieces.id,
-+     "nodeId": nodeId.id
++     "nodeId": peerInfo.id
 +   })
 
     this.onready()
@@ -253,7 +254,10 @@ You would see:
 
 You created simple fixture data and a function to load it into a fresh instantiaton of the app.
 
-- TODO
+- `for (let i in fixtureKeys)` - this type of for loop is used to ensure that the writes happen serially, one after another.
+- `await this.user.set(key, fixtureData[key])` sets the user profile key to the fixture value, if the key does not exist
+- `await this.node.id()` is a slight misnomer, as it provides a more generalized `peerInfo` object.
+- `peerInfo.id` contains the ID string you want, the base58 hash of the IPFS id.
 
 ### Key takeaways
 
