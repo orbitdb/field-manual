@@ -309,6 +309,11 @@ For now it will return _all_ pieces, but for bonus points you can try incorporat
 
 ### Key takeaways
 
-- TODO
+- Debug logging can be enabled through a global `LOG` variable
+- You cannot discover a user's database address through their IPFS id
+- Database discovery, however, can be achieved by utilizing the IPFS pubsub
+- When a database is `replicated`, you reliably have access to the data you requested.
+- Automatic peer connection can be achieved programmatically based on the data in your database
+- Once you have a registry of databases with the same schema, you can write JavaScript functions to perform distributed, parallel queries 
 
 <strong>You're not done yet! [Chapter 6](./06_Identity_Permission.md) to learn about how you can vastly extend the identity and access control capabilities of OrbitDB</strong>
