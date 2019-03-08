@@ -19,7 +19,7 @@ Please complete [Chapter 5 - Peer to Peer Part 2 (OrbitDB)](./05_P2P_Part_2.md) 
 
 As we've stated before, security-minded people reading this tutorial, or even approaching the distributed industry as a whole, tend to think that this is a wild west full of cowboys who throw caution to the wind while they create systems with security holes you can run a stampede of cattle through.
 
-They're right. OrbitDB and IPFS are still _alpha software_, there have been security flaws discovered, reported, and disclosed and there. Even so far in our app, the databases you have created in this tutorial are only write-protected via a static ACL.
+They're right. OrbitDB and IPFS are _alpha software in an alpha industry_, there have been security flaws discovered, reported, and disclosed and there. Even so far in our app, the databases you have created in this tutorial are only write-protected via a static ACL.
 
 This has the following implications:
 
