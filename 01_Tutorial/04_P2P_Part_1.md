@@ -175,7 +175,7 @@ Create the `connectToPeer` function inside the `NewPiecePlease` class:
 ```diff
 + async connectToPeer(multiaddr, protocol = "/p2p-circuit/ipfs/") {
 +   try {
-+     await this.node.swarm.connect(multiaddr)
++     await this.node.swarm.connect(protocol + multiaddr)
 +   } catch(e) {
 +     throw (e)
 +   }
@@ -230,7 +230,11 @@ await NPP.connectToPeer("QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX")
 
 You created 2 functions: one that shows a list of peers and another that lets you connect to peers via their multiaddress.
 
-- TODO
+- `this.node.swarm.peers()` returns a an array of connected peers
+- `protocol = "/p2p-circuit/ipfs/"` is used as a default since this is a common protocol between browser and node.js
+- `this.node.swarm.connect(protocol + multiaddr)` connects to a peer via their a multiaddress that combines `protocol` and `multiaddr` into an address like `p2p-circuit/ipfs/Qm....`
+- `this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))` registers the `handlePeerConnected` function to be called whenever a peer connects to the application node.
+- `ipfsPeer.id._idB58String` is a nice, synchronous way to get the peer id.
 
 ### Peer to peer communication via IPFS pubsub
 
