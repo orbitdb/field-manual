@@ -13,3 +13,5 @@ Describes CRDTs and Merkle-Dags
 ### Counter
 ### Log
 ### Feed
+
+## Workshop: Creating Your Own Store
