@@ -53,7 +53,7 @@ Then, once you re-run the app, you should see a great deal of console info, abri
 [DEBUG] cache: load, database: /orbitdb/zdpuAz77YioswjyfnnqVDhjycEn4BKFhvxfipTH7y4LCnjvBz/pieces
 ```
 
-### What just happened?
+#### What just happened?
 
 You enabled debug logging in the app for orbitdb so you can get detailed information about what's going on when you run certain commands.
 
@@ -115,6 +115,7 @@ async _init() {
 }
 ```
 
+Finally, create the `handleMessageReceived` function:
 
 ```diff
 + async handleMessageReceived(msg) {
@@ -308,6 +309,6 @@ For now it will return _all_ pieces, but for bonus points you can try incorporat
 
 ### Key takeaways
 
-TODO
+- TODO
 
 <strong>You're not done yet! [Chapter 6](./06_Identity_Permission.md) to learn about how you can vastly extend the identity and access control capabilities of OrbitDB</strong>
