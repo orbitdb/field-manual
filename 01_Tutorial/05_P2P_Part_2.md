@@ -1,6 +1,6 @@
 ## Chapter 5: Peer-to-Peer Part 2 (OrbitDB)
 
-> TODO: Description
+> OrbitDB utilizes IPFS's underlying peer-to-peer laer to share data between peers. In this chapter you will learn methods for _discovering peers_, _connecting automatically to known peers_, and making _distributed queries_.
 
 <div>
   <h3>Table of Contents</h3>
