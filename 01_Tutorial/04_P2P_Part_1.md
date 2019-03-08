@@ -337,7 +337,12 @@ You enabled a simple message sending and receiving system which allows peer-to-p
 
 ### Key Takeaways
 
-- TODO
+- In order to do anything peer-to-peer, you'll need to be connected to the global IPFS network
+- If you started offline, the default configuration is restorable
+- Your node announces itself to the network via its _swarm_ addresses
+- Your node will connect to _bootstrap_ peers automatically, and you can manually connect to peers on command
+- Peer-to-peer communication is achieved through a "pubsub" model
+- In pubsub, users subscribe to, and broadcast messages to, "topics"
 
 <strong>Now, move on to [Chapter 05 - Peer to Peer Part 2](./05_P2P_Part_2.md)</strong>
 
