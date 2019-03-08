@@ -330,7 +330,8 @@ await NPP.sendMessage(hash, data, callback)
 
 You enabled a simple message sending and receiving system which allows peer-to-peer communication.
 
-- TODO
+- `this.node.types.Buffer(msgString)` encoded the message, after JSON stringification, into a Buffer object.
+- `this.node.pubsub.publish(topic, messageBuffer)` sends the encoded Buffer to the topic specified. In our case, this will be the IPFS id
 
 > **Note:** These techniques presented for _educational purposes only_, with no consideration as to security or privacy. You should be encrypting and signing messages at the application level. More on this in Chapter 6 of the tutorial.
 
