@@ -1,5 +1,9 @@
 # Part 4: What Next?
 
+## The mobile landscape
+
+### Progressive web apps
+
 * Resolves #[364](https://github.com/orbitdb/orbit-db/issues/364)
 * Resolves #[377](https://github.com/orbitdb/orbit-db/issues/377)
 * Resolves #[442](https://github.com/orbitdb/orbit-db/issues/442)
