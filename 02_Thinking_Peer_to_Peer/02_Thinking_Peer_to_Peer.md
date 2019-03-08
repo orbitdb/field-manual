@@ -1,5 +1,7 @@
 # Part 2: Thinking Peer to Peer
 
+## Swarm vs Server
+
 ## What this is NOT
 ### This is not Bittorrent
 ### This is not Git
