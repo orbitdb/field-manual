@@ -164,7 +164,7 @@ console.log(peers.length)
 
 Note that this number will increase over time as your swarm automatically grows, so check and update periodically.
  
-## Manually connecting to peers
+### Manually connecting to peers
 
 All users will be running their own IPFS nodes either in the browser or on node.js. They'll want to connect together, so you'll now allow your users to connect to other peers via their IPFS ids.
 
