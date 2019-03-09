@@ -31,7 +31,7 @@ If you're a musician like many of us are, you probably need form of sheet music 
 
 These self-organizing clusters of musicians will always need better way to share common and necessary sheet music with each other. What better use case for a peer-to-peer application?
 
-Using OrbitDB as the backbone, you will build a JavaScript class that enables such an application. It will allow people to import and maintain a local collection of their own sheet music in the form of PDF files. More importantly, they will be able to _share_ this music by letting them interface with _peers_, and search across multiple distribute databases at once for music. For fun, and for users who are just looking for something to-sight read, you will give them a magic "button" that, given an instrument, will display piece of sheet music at random from their collection.
+Using OrbitDB as the backbone, you will build a JavaScript class that enables such an application. It will allow people to import and maintain a local collection of their own sheet music in the form of PDF files. More importantly, they will be able to _share_ this music by letting them interface with _peers_, and search across multiple distribute databases at once for music. For fun, and for users who are just looking for something to sight-read, you will give them a magic "button" that, given an instrument, will display piece of sheet music at random from their collection.
 
 #### Why a music app?
 
@@ -39,14 +39,14 @@ OrbitDB is already used all over the world, and this tutorial music reflect that
 have chosen that touch the vast majority of humans on earth: finance, politics, climate, religion. However, those are
 generally contentious and complicated.
 
-We believe that **music** is a uniquely universal cultural feature - something that we more humans than any other topic
+We believe that **music** is a uniquely universal cultural feature - something that more humans than any other topic
 share, enjoy, or at least appreciate. Your participation in this tutorial will make it easier for musicians all over the
 world to find sheet music to practice with.
 
 ### Conventions
 
 * Read this tutorial in order, the learning builds on itself other over time.
-* The UI Layer of this _suggested_, instead of built directly. The tutorial foucses on the building of a single Javascript class which encapsulates all the functionality needed to build the UI layer.
+* The UI Layer of the app is _suggested_, instead of built directly. The tutorial focuses on the building of a single Javascript class which encapsulates all the functionality needed to build the UI layer.
 * Type the examples in, don't copy and paste.
 * **What just happened?** sections are interspersed to that explain in depth what happens on a technical level
 * This tutorial attempts to be as _agnostic_ as possible in terms of:
