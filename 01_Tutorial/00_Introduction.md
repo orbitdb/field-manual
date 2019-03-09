@@ -18,7 +18,7 @@ In the following chapters you will learn the following topics.
 
 1. [Laying the Foundation](./01_Tutorial/01_Basics.md) covers installation and the basics of database creation.
 2. [Managing Data](./01_Tutorial/02_Managing_Data.md) introduces OrbitDB data stores and walks you through basic create, update, 
-3. [Structuring Data](./01_Tutorial/03_Structuring_Data.md) suggests some ways to strucutre multiple orbitdbs into a more robust schema, primary via nesting.
+3. [Structuring Data](./01_Tutorial/03_Structuring_Data.md) suggests some ways to structure multiple orbitdbs into a more robust schema, primary via nesting.
 4. [Peer-to-peer, Part 1 (IPFS](./01_Tutorial/04_P2P_Part_1.md) begins a large discussion of peer-to-peer networking and messaging, starting with the IPFS layer.
 5. [Peer-to-peer, Part 2 (OrbitDB](./01_Tutorial/04_P2P_Part_2.md) adds OrbitDB to the mix through database discovery, connection, and replication.
 6. [Identity and Permissions](./01_Tutorial/06_Identity_Permission.md) hardens the library via encryption and distributed identity.
