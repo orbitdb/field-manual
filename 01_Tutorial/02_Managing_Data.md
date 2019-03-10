@@ -67,7 +67,7 @@ Add a function called `addNewPiece` function now:
 
 We have uploaded and pinned a few piano scores to IPFS, and will provide the hashes. You can add these hashes to your database by fleshing out and using the `addNewPiece` function.
 
-In your application code, node.js or browser, you cna use this function like so, utilizing the detault value for the `instrument` argument.
+In your application code, node.js or browser, you can use this function like so, utilizing the default value for the `instrument` argument.
 
 ```javascript
 const cid = NPP.addNewPiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ")
@@ -123,7 +123,7 @@ These are all stored in the global IPFS network so you can find any piece by vis
 
 Of course, your users will want to read their data after creating it, so you'll enable that functionality now. OrbitDB gives you a number of ways to do this, mostly based on which _store_ you picked.
 
-We gave you a `docstore` earlier, so you can write some simple `get*****` functions like so. `docstore` also provides the more puwerful `query` function, which we can abstract to write a `getPiecesByInstrument` function:
+We gave you a `docstore` earlier, so you can write some simple `get*****` functions like so. `docstore` also provides the more powerful `query` function, which we can abstract to write a `getPiecesByInstrument` function:
 
 Fill in the following functions now:
 
@@ -179,7 +179,7 @@ Both `console.log` calls above will return something like this.
 You queried the database of scores you created earlier in the chapter, retrieving by hash and also randomly.
 
 - `pieces.get(hash)` is a simple function that performs a partial string search on your database indexes. It will return an array of records that match. As you can see in your `getAllPieces` function, you can pass an empty string to return all pieces.
-- `return this.piecesDb.query((piece) => piece.instrument === instrument)` queries the database, returning. It's most analagous to JavaScripts `Array.filter` method.
+- `return this.piecesDb.query((piece) => piece.instrument === instrument)` queries the database, returning. It's most analogous to JavaScripts `Array.filter` method.
 
 > **Note:** Generally speaking, `get` functions do not return promises since the calculation of database state happens at the time of a _write_. This is a trade-off to allow for ease of use and performance based on the assumption that writes are _generally_ less frequent than reads.
 
