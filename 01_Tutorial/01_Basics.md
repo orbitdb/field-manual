@@ -1,6 +1,6 @@
 ## Chapter 1 - Laying the Foundation
 
-> The basics of OrbitDB include  _installing OrbitDB (and IPFS)_, _setting up a new isomorphic project_, _creating databases_, and how _understanding how to choose data stores_.
+> The basics of OrbitDB include  _installing OrbitDB (and IPFS)_, _setting up a new isomorphic project_, _creating databases_, and _understanding how to choose data stores_.
 
 <div>
   <h3>Table of Contents</h3>
@@ -52,7 +52,7 @@ You will now have global `Ipfs` and `OrbitDB` objects available to you. You will
 
 ### Creating the isomorphic bookends
 
-Since OrbitDB works in the browser and node.js, you're going to want to make the library as _isomorphic_ as possoble. This means we want the same code to run in the browser as runs in JS. Luckily, you will have the luxury of using the same language, JavaScript, for both node.js and browser environments. 
+Since OrbitDB works in the browser and node.js, you're going to want to make the library as _isomorphic_ as possible. This means we want the same code to run in the browser as runs in JS. Luckily, you will have the luxury of using the same language, JavaScript, for both node.js and browser environments. 
 
 Create a new file called `newpieceplease.js` and put this code in there:
 
@@ -145,7 +145,7 @@ for now, we include this line to disable them.
 - `repo: './ipfs'` designates the path of the repo in node.js only. In the browser, you can actually remove this line. The
 default setting is a folder called `.jsipfs` in your home directory. You will see why we choose this acute location for the
 folder later.
-- `XPERIMENTAL: { pubsub: true }` enables IPFS pubsub, which is a method of communicating between nodes and is required for OrbitDB usage, despite whether or not we are connected to other peers.
+- `EXPERIMENTAL: { pubsub: true }` enables IPFS pubsub, which is a method of communicating between nodes and is required for OrbitDB usage, despite whether or not we are connected to other peers.
 - `config: { Bootstrap: [], Addresses: { Swarm: [] }}` sets both our bootstrap peers list (peers that are loaded on
 instantiation) and swarm peers list (peers that can connect and disconnect at any time to empty. We will populate these
 later.
@@ -181,14 +181,14 @@ In the browser IPFS content is handled inside of IndexedDB, a persistent storage
 
 ![An image showing the IPFS IndexedDB databases in Firefox](../images/ipfs_browser.png)
 
-Note since you have not explicitly defined a database in the broser, no IndexedDB databases have been created for OrbitDB yet.
+Note since you have not explicitly defined a database in the browser, no IndexedDB databases have been created for OrbitDB yet.
 
 > **Caution!** iOS and Android have been known to purge IndexedDB if storage space needs to be created inside of your phone.
 We recommend creating robust backup mechanisms at the application layer
 
 ### Creating a Database
 
-Your users will want to create a catalog of musical pieces to practice. You will now create this database, and ensure that that *only that user* can write to it.
+Your users will want to create a catalog of musical pieces to practice. You will now create this database, and ensure that *only that user* can write to it.
 
 Expand of your `_init` function to the following:
 
@@ -219,13 +219,13 @@ You will see something like the following as an output: `/orbitdb/zdpuB3VvBJHqYC
   3. The **name** of the database
 3. The final part s the name you provided, which becomes part of the 
 
-> *Note:* Misunderstanding OrbitDB addressing can lead to some very unexpected - sometimes hilarious, sometimes disastrous outcomes. Read more in Part 2: Thinking Peer to Peer to learn more.
+> *Note:* Addresses that start with Qm… are typically CIDv0 content addresses, while addresses that start with zdpu…. are CIDv1. Misunderstanding OrbitDB addressing can lead to some very unexpected - sometimes hilarious, sometimes disastrous outcomes. Read more in Part 2: Thinking Peer to Peer to learn more.
 
 #### What just happened?
 
 Your code created a local OrbitDB database, of type "docstore", writable only by the user that created it.
 
-- The `options` defines the paramaters for the database we are about to create.
+- The `options` defines the parameters for the database we are about to create.
   - `accessController: { write: [orbitdb.identity.publicKey] }` defines the ACL, or "Access Control List". In this instance
   we are restricting `write` access to ONLY orbitdb instances identified by our particular `publicKey`
   - `indexBy: "hash"` is a docstore-specific option, which specifies which field to index our database by
@@ -257,13 +257,13 @@ Similarly, a new IndexedDB database was created to hold your OrbitDB-specific in
 
 ![An image showing the IPFS and OrbitDB IndexedDB databases in Firefox](../images/ipfs_browser_2.png)
 
-This shows you one of OrbitDB's core strenths - the ability to manage a lot of complexity between its own internals and those of IPFS, providing a clear and clean API to manage the data that matters to you.
+This shows you one of OrbitDB's core strengths - the ability to manage a lot of complexity between its own internals and those of IPFS, providing a clear and clean API to manage the data that matters to you.
 
 ### Choosing a data store
 
 OrbitDB organizes its functionality by separating different data management concerns, schemas and APIs into **stores**. We chose a `docstore` for you in the last chapter, but after this tutorial it will be your job to determine the right store for the job.
 
-Each OrbitDB store has its own specific API methods to create, delete, retreieve and update data. In general, you can expect to always have something like a `get` and something like a `put`.
+Each OrbitDB store has its own specific API methods to create, delete, retrieve and update data. In general, you can expect to always have something like a `get` and something like a `put`.
 
 You have the following choices:
 
