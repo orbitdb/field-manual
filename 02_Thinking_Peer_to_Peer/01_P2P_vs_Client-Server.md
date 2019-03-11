@@ -78,4 +78,16 @@ One final trade-off to using keypair encryption as a form of application securit
 
 ### Pubsub vs API Calls
 
-TODO
+As we move away from the traditional client-server model and towards a swarm of connected peers, we must think differently about the communication model. Traditionally, you would send messages via some sort of API - SOAP, REST, etc. The server would then process those requests, and disseminate information back out to the necessary clients.
+
+But now, we have e peer-to-peer swarm where certain clients may not be connected at the time of messaging, and different types of messages need to be sent. Using the pubsub model - short for "publish and subscribe" - is one way of solving this issue. Peers will be able to subscribe to "topics" and other peers will be able to broadcast on those same topics.
+
+Some examples:
+
+1. One peer might want to query the database of all connected peers. They could do so by broadcasting on a "query" topic and then listening for messages broadcast back on a "result" topic.
+2. One peer might be new to the swarm, and would want to announce themselves as online and available to interact with. They could broadcast on an "announce" topic, which would cause other peers to recognize them and connect
+3. Pubsub can also be used as a rudimentary chat protocol, allowing peers to broadcast messages to each other via their Node IDs or some other uniquely identifying value.
+
+The names of topics can be defined via unique IDs such as you did in the tutorial to minimize the amount of eavesdropping. These messages should be encrypted in transit, regardless.
+
+The libp2p infrastructure in IPFS allows direct 1-on-1 peer communication by allowing peers to define their own protocols. This is an advanced topic, and is covered in detail in the next chapter: **[1-on-1 Peer Communication using custom protocols](#)**
