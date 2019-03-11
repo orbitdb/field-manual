@@ -12,6 +12,6 @@ build: clean
 	for f in */*.md; do (echo "\n\\pagebreak\n\n"; cat $$f) >> dist/Book.md; done;
 	cd dist; pandoc --highlight-style=breezedark -o Book.pdf ../metadata.yaml Book.md;
 	# pandoc --highlight-style=zenburn -o Book.epub metadata.yaml Book.md;
-	# pandoc --highlight-style=zenburn -o Book.docx metadata.yaml Book.md;
+	cd dist; pandoc --highlight-style=zenburn -o Book.docx ../metadata.yaml Book.md;
 	# pandoc --highlight-style=zenburn -o Book.odt metadata.yaml Book.md;
 	rm -f dist/Book.md

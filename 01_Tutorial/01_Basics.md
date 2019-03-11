@@ -4,7 +4,7 @@
 
 <div>
   <h3>Table of Contents</h3>
-  
+
 Please see the [Introduction](./00_Introduction.md) before beginning this chapter.
 
 - [Installing the requirements: IPFS and OrbitDB](#installing-the-requirements-ipfs-and-orbitdb)
@@ -52,7 +52,7 @@ You will now have global `Ipfs` and `OrbitDB` objects available to you. You will
 
 ### Creating the isomorphic bookends
 
-Since OrbitDB works in the browser and node.js, you're going to want to make the library as _isomorphic_ as possible. This means we want the same code to run in the browser as runs in JS. Luckily, you will have the luxury of using the same language, JavaScript, for both node.js and browser environments. 
+Since OrbitDB works in the browser and node.js, you're going to want to make the library as _isomorphic_ as possible. This means we want the same code to run in the browser as runs in JS. Luckily, you will have the luxury of using the same language, JavaScript, for both node.js and browser environments.
 
 Create a new file called `newpieceplease.js` and put this code in there:
 
@@ -114,7 +114,7 @@ class NewPiecePlease() {
 +     });
 +
 +     node.on("error", (e) => { throw (e) })
-+     node.on("ready", this._init.bind(this)) 
++     node.on("ready", this._init.bind(this))
 +   }
 +
 +   async _init() {
@@ -196,7 +196,7 @@ Expand of your `_init` function to the following:
   async _init {
     this.orbitdb = await OrbitDB.createInstance(node)
 +   this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
-+     
++
 +   const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
 +   this.pieces = await orbitdb.docstore('pieces', options)
   }
@@ -210,14 +210,14 @@ NPP.onready = () => {
 }
 ```
 
-You will see something like the following as an output: `/orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces`. This is the id, or **address** (technically a multiaddress) of this database. It's important for you to not only _know_ this, but also to understand what it is: 
+You will see something like the following as an output: `/orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces`. This is the id, or **address** (technically a multiaddress) of this database. It's important for you to not only _know_ this, but also to understand what it is:
 
-1. The first bit, `/orbitdb.`, is the protocol. It tells you that this address is an OrbitDB address. The last bit, `pieces` is simply the name you provided.
-2. The second, or middle, part `zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3` that is the most interesting. This is the Content ID (CID) of the database manifest, which contains
-  1. The **access control list** of the database
-  2. The **type** of the database
-  3. The **name** of the database
-3. The final part s the name you provided, which becomes part of the 
+1. The first bit, `/orbitdb.`, is the protocol. It tells you that this address is an OrbitDB address.
+2. The second, or middle, part `zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3` that is the most interesting. This is the Content ID (CID) of the database manifest, which contains:
+    1. The **access control list** of the database
+    2. The **type** of the database
+    3. The **name** of the database
+3. The final part is the name you provided, in thise case `pieces`
 
 > *Note:* Addresses that start with Qm… are typically CIDv0 content addresses, while addresses that start with zdpu…. are CIDv1. Misunderstanding OrbitDB addressing can lead to some very unexpected - sometimes hilarious, sometimes disastrous outcomes. Read more in Part 2: Thinking Peer to Peer to learn more.
 

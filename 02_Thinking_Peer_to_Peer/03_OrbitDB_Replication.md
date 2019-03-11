@@ -4,7 +4,7 @@
 
 <div>
   <h3>Table of Contents</h3>
-  
+
 - [Replication, step-by-step](#replication-step-by-step)
 - [On "Sharding"](#on-sharding)
 
@@ -14,8 +14,8 @@
 
 In the tutorial, you learned how to enable debug logging and were able to see the steps of replication take place in your console output. Here, you will be able to dissect these logs and learn how OrbitDB shares data between peers reliably by sharing a minimal amount of data to start.
 
-To review, 
+To review,
 
 ### On "Sharding"
 
-There have been questions about how sharding is handled in such a peer-to-peer database system. 
+There have been questions about how sharding is handled in such a peer-to-peer database system.

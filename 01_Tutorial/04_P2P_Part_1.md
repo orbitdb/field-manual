@@ -96,7 +96,7 @@ Swarm listening on /p2p-circuit/ipfs/QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz
 Swarm listening on /p2p-circuit/p2p-websocket-star/ipfs/QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX
 ```
 
-In node.js, run this command: 
+In node.js, run this command:
 
 ```javascript
 NPP.node.config.set("Addresses.Swarm", ['/ip4/0.0.0.0/tcp/4002', '/ip4/127.0.0.1/tcp/4003/ws'], console.log)
@@ -137,7 +137,7 @@ Before this, you were working offline. Now you're not. You've been connected to 
 - `NPP.node.config.set("Addresses.Swarm", ...` restores the default swarm addresses. You should have run this in node.js only
 - `relay: { enabled: true, hop: { enabled: true, active: true } }` sets up a your node as a "circut relay", which means that others will be able to "hop" through your node to connect to your peers, and your node will hop over others to do the same.
 
-Again, you won't have to do either of these restorations if you're starting with a fresh IPFS repo. These instructions are just included to deepen your understanding of what's going on in the stack. We realize we've been spending a lot of time in IPFS config and IPFS commands - it's understandable, since the IPFS features form the backbone of what we're doing with OrbitDB. 
+Again, you won't have to do either of these restorations if you're starting with a fresh IPFS repo. These instructions are just included to deepen your understanding of what's going on in the stack. We realize we've been spending a lot of time in IPFS config and IPFS commands - it's understandable, since the IPFS features form the backbone of what we're doing with OrbitDB.
 
 > **Note:** If you experience 529 errors from the `preload.ipfs.io` servers in your console, rest assured that there is nothing wrong with your app. Those servers exist to strengthen the network and increase application performance but they are _not_ necessary. You can re-insert `preload: { enabled: false }` any time and still remain connected to the global IPFS network
 
@@ -163,7 +163,7 @@ console.log(peers.length)
 ```
 
 Note that this number will increase over time as your swarm automatically grows, so check and update periodically.
- 
+
 ### Manually connecting to peers
 
 All users will be running their own IPFS nodes either in the browser or on node.js. They'll want to connect together, so you'll now allow your users to connect to other peers via their IPFS ids.
@@ -202,7 +202,7 @@ Then, update the `_init_` function to include an event handler for when a peer i
       "pieces": this.pieces.id,
       "nodeId": nodeInfo.id
     })
-    
+
 +   this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
 
     if(this.onready) this.onready()
@@ -266,7 +266,7 @@ Update the `_init` function to look like the following:
       "pieces": this.pieces.id,
       "nodeId": nodeInfo.id
     })
-    
+
     this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
 +   await this.node.pubsub.subscribe(nodeInfo.id, this.handleMessageReceived.bind(this))
 

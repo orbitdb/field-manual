@@ -70,6 +70,7 @@ To share data between peers, you will need to know their OrbitDB address. Unforu
 In order to provide a proper user experience, you'll want to hide as much of the peer and database discovery as possible by using OrbitDB and IPFS internals to exchange database addresses and load data upon peer connection.
 
 The flow you'll create will be:
+
 1. User manually requests a connection to a user
 2. On a successful connection, both peers send messages containing their user information via a database address
 3. Peer user databases are loaded, replicated, and inspected for a `userDb` key
@@ -80,7 +81,7 @@ First, update your `handlePeerConnected` function to call `sendMessage` we intro
 ```diff
   handlePeerConnected(ipfsPeer) {
     const ipfsId = ipfsPeer.id._idB58String;
-+   setTimeout(async () => {$                          
++   setTimeout(async () => {
 +     await this.sendMessage(ipfsId, { userDb: this.user.id })
 +   }, 2000)$
     if(this.onpeerconnect) this.onpeerconnect(ipfsPeer)
@@ -217,7 +218,7 @@ Then, update your `handleMessageReceived` function to add a discovered peer's us
   async handleMessageReceived(msg) {
     const parsedMsg = JSON.parse(msg.data.toString())
     const msgKeys = Object.keys(parsedMsg)
- 
+
     switch(msgKeys[0]) {
       case "userDb":
         var peerDb = await this.orbitdb.open(parsedMsg.userDb)
@@ -231,7 +232,7 @@ Then, update your `handleMessageReceived` function to add a discovered peer's us
       default:
         break;
     }
- 
+
     if(this.onmessage) this.onmessage(msg)
   }
 ```
@@ -280,14 +281,14 @@ Create the following function, which combines much of the code you've written an
 + async queryCatalog() {
 +   const peerIndex = NPP.companions.all()
 +   const dbAddrs = Object.keys(peerIndex).map(key => peerIndex[key].pieces)
-+ 
++
 +   const allPieces = await Promise.all(dbAddrs.map(async (addr) => {
 +     const db = await this.orbitdb.open(addr)
 +     await db.load()
-+ 
++
 +     return db.get('')
 +   }))
-+ 
++
 +   return allPieces.reduce((flatPieces, pieces) => {
 +     pieces.forEach(p => flatPieces.push(p))
 +     return flatPieces
@@ -295,7 +296,7 @@ Create the following function, which combines much of the code you've written an
 + }
 ```
 
-You can now test this by creating a few different instances of the app (try both browser and node.js instances), connecting them via their peer IDs, discovering their databases, and running `NPP.queryCatalog()`. 
+You can now test this by creating a few different instances of the app (try both browser and node.js instances), connecting them via their peer IDs, discovering their databases, and running `NPP.queryCatalog()`.
 
 #### What just happened?
 
@@ -303,7 +304,7 @@ You performed your first distributed query using OrbitDB. We hope that by now th
 
 - `NPP.companions.all()` will return the current list of discovered companions
 - `this.orbitdb.open(addr)` will open the peer's database and `db.load` will load it into memory
-- `allPieces.reduce` will take an array of arrays and squash it into a flat array 
+- `allPieces.reduce` will take an array of arrays and squash it into a flat array
 
 For now it will return _all_ pieces, but for bonus points you can try incorporating the `docstore.query` function instaed of `docstore.get('')`.
 
@@ -314,6 +315,6 @@ For now it will return _all_ pieces, but for bonus points you can try incorporat
 - Database discovery, however, can be achieved by utilizing the IPFS pubsub
 - When a database is `replicated`, you reliably have access to the data you requested.
 - Automatic peer connection can be achieved programmatically based on the data in your database
-- Once you have a registry of databases with the same schema, you can write JavaScript functions to perform distributed, parallel queries 
+- Once you have a registry of databases with the same schema, you can write JavaScript functions to perform distributed, parallel queries
 
 <strong>You're not done yet! [Chapter 6](./06_Identity_Permission.md) to learn about how you can vastly extend the identity and access control capabilities of OrbitDB</strong>

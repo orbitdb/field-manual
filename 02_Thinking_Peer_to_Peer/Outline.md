@@ -1,7 +1,11 @@
 ## What this is NOT
+
 ### This is not Bittorrent
+
 ### This is not Git
+
 ### This is not Kazaa
+
 ### Comparison to Traditional Database Systems
 
 ### What this is

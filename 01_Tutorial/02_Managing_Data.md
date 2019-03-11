@@ -26,7 +26,7 @@ Update your `NewPiecePlease class` handler, adding **one line** at the bottom of
   _init() {
     this.orbitdb = await OrbitDB.createInstance(this.node)
     this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
-    
+
     const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
     this.piecesDb = await this.orbitdb.docstore('pieces', options)
 +   await this.piecesDb.load()
@@ -45,7 +45,6 @@ After you instantiated the database, you loaded its contents into memory for use
 ### Adding data
 
 Next, your users will want to be able to add sheet music to their catalog. You'll use functions exposed from OrbitDB's `keyvalue` store now.
-
 
 Add a function called `addNewPiece` function now:
 

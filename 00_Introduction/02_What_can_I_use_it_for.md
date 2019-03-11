@@ -1,24 +1,24 @@
 ## What can I use OrbitDB for?
 
-We believe that in our distributed future, any application that can be built using traditional models can be buiilt with a peer-to-peer architecture. If you disagree, view this as a challenge - it will require a lot of 
+We believe that in our distributed future, any application that can be built using traditional models can be buiilt with a peer-to-peer architecture. If you disagree, view this as a challenge - it will require a lot of
 
 OrbitDB excels in flexibly building complex distributed appplications.
 
 ### Who is already using OrbitDB?
 
-Perhaps the best way to answer your question of "What can I build with OrbitDB?" is by example. There are already several organizations using OrbitDB in the wild. 
+Perhaps the best way to answer your question of "What can I build with OrbitDB?" is by example. There are already several organizations using OrbitDB in the wild.
 
 If you're looking for ideas for your own app, maybe start here!
 
 | Project Name | Description |
-| ------------ | ------------| 
+| ------------ | ------------|
 | Colony | Decentralized organizations |
-| uPort / ConsenSys	3Box | 	A distributed database built using OrbitDB |
-| Origin Protocol |	Origin Messaging	A messaging protocol built using OrbitDB |
-| ChluNetwork |	Chlu |
-| Cluster Labs | 	IpfsCloud	File storage / sharing |
-| TallyLab |	Data capture / recording app, "tallying" |
-| Computes (Magic Leap) |	Computes	Decentralized Naming Service |
+| uPort / ConsenSys 3Box |  A distributed database built using OrbitDB |
+| Origin Protocol | Origin Messaging A messaging protocol built using OrbitDB |
+| ChluNetwork | Chlu |
+| Cluster Labs |  IpfsCloud File storage / sharing |
+| TallyLab | Data capture / recording app, "tallying" |
+| Computes (Magic Leap) | Computes Decentralized Naming Service |
 | DASH | Dash Evolution |
-| Blockstack | Graphite Docs	decentralized and encrypted replacement for Google G-Suite and Microsoft Office |
-| Protocol Labs |	Discussify	Discussion platform |
+| Blockstack | Graphite Docs decentralized and encrypted replacement for Google G-Suite and Microsoft Office |
+| Protocol Labs | Discussify Discussion platform |

@@ -14,7 +14,7 @@ The book opens with **[an introduction](./00_Introduction)** that gives an overv
 
 **[The tutorial](./01_Tutorial/00_Introduction.md)** at the beginning takes you through building an JavaScript application from scratch. You will work through installation and database creation, though managing and structuring your data, through networking, communication, and sharing data in a peer-to-peer fashion, and finally through managing distributed identity and access to the databases. By the end of the tutorial, you should have everything you need
 
-Next, **[Thinking Peer to Peer](./02_Thinking_Peer_to_Peer)** is a collection of essays that approach peer-to-peer engineering from a more intellectual and philsophical aspect. It is light on code and heavy on ideas. It is also open for community members to submit essays of their own for inclusing, pending an editorial review. 
+Next, **[Thinking Peer to Peer](./02_Thinking_Peer_to_Peer)** is a collection of essays that approach peer-to-peer engineering from a more intellectual and philsophical aspect. It is light on code and heavy on ideas. It is also open for community members to submit essays of their own for inclusing, pending an editorial review.
 
 Then, **[The Architecture of OrbitDB](./03_The_Architecture_of_OrbitDB)** coveres in-depth, in a more reference style, how OrbitDB is structured and architected. It includes a description of `ipfs-log`, the core of OrbitDB, the data `stores` and finally into how the `orbit-db` library packages it all together into a single, cohesive package that works in both the browser and the command line.
 
@@ -38,12 +38,12 @@ Mark Henderson (@aphelionz) is the maintainer and lead author of the OrbitDB fie
 
 ## Contributing
 
-This is a _living_, _community-based_ document, which means it is for and can include _you_. 
+This is a _living_, _community-based_ document, which means it is for and can include _you_.
 
 Anybody can:
 
 1. Give feedback on, or request modifications to, the tutorial
-2. Submit an essay for inclusion in the "Thinking Peer to Peer" section. 
+2. Submit an essay for inclusion in the "Thinking Peer to Peer" section.
 
 To do so, create a pull request, which are are welcome and accepted.
 

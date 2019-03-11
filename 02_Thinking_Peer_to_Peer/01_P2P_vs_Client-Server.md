@@ -25,7 +25,7 @@ Now, component by component, you can unlearn the traditional way of thinking, an
 
 ### Swarms vs Servers
 
-The first notion you should try to dismiss is that of the server, as they are no longer necessary to run peer-to-peer applications. Yes, applications like IPFS nodes run on servers, but it is designed to run in browsers or on regular desktop computers as well. 
+The first notion you should try to dismiss is that of the server, as they are no longer necessary to run peer-to-peer applications. Yes, applications like IPFS nodes run on servers, but it is designed to run in browsers or on regular desktop computers as well.
 
 In the peer-to-peer model, users start out alone and unconnected with their data only stored locally, but very quickly connect to other peers in the same network in a relatively indiscriminate fashion. There is no real "center" of such a network, and thus it forms a **swarm** of connected peers.
 
@@ -33,7 +33,7 @@ In the peer-to-peer model, users start out alone and unconnected with their data
 
 This approach has obvious pros and cons:
 
-- **Pro:** By default, applications will work offline and keep your data local and safe. 
+- **Pro:** By default, applications will work offline and keep your data local and safe.
 - **Con:** The peers in the network are "untrusted" and will be able to request your data if they know the content address
 - **Pro:** The network will be robust and self-healing
 - **Con:** If an offline peer that has data you need, you may not be able to access it unless it's replicated elsewhere
@@ -70,11 +70,11 @@ A prime solution to this problem of distributed security is the use of strong en
 
 - **Pro:** There are many types of encryption that are effectively impossible to crack via brute-force methods, meaning that it will take at least millions of years to guess the encryption key
 - **Con:** If the encryption keys are lost and cannot be recovered, so too is the encrypted data.
-- **Pro:** Systems that pass a large amount of encrypted data, particularly data encrypted via multiple different sets of keypairs, can create a large amount of "noise" making it very difficult for attackers to 
+- **Pro:** Systems that pass a large amount of encrypted data, particularly data encrypted via multiple different sets of keypairs, can create a large amount of "noise" making it very difficult for attackers to make heads or tails of what's going on in the system
 - **Con:** UX can be tricky, particularly for users new to the distributed space who don't have the same understanding of things like keys and encryption as the developers
 - **Pro:** Any encryption key leaks will only affect data encrypted with those keys, not the entire data set of the system
 
-One final trade-off to using keypair encryption as a form of application security is that it introduces the problems in key management, storage, and transfer. 
+One final trade-off to using keypair encryption as a form of application security is that it introduces the problems in key management, storage, and transfer.
 
 ### Pubsub vs API Calls
 
@@ -89,5 +89,3 @@ Some examples:
 3. Pubsub can also be used as a rudimentary chat protocol, allowing peers to broadcast messages to each other via their Node IDs or some other uniquely identifying value.
 
 The names of topics can be defined via unique IDs such as you did in the tutorial to minimize the amount of eavesdropping. These messages should be encrypted in transit, regardless.
-
-The libp2p infrastructure in IPFS allows direct 1-on-1 peer communication by allowing peers to define their own protocols. This is an advanced topic, and is covered in detail in the next chapter: **[1-on-1 Peer Communication using custom protocols](#)**

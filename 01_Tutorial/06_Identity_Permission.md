@@ -10,8 +10,6 @@ Please complete [Chapter 5 - Peer to Peer Part 2 (OrbitDB)](./05_P2P_Part_2.md) 
 - [On security](#on-security)
 - [Encryping and decrypting your data](#encrypting-and-decrypting-your-data)
 - [Distrbuted identity management](#distributed-identity-management)
-- [On security](#)
-- [Key takaways](#)
 
 </div>
 
@@ -105,11 +103,11 @@ Distributed identity is still a hotly contested topic, and frankly an unsolved p
 
 ### Key takeaways
 
-* Resolves: #[397](https://github.com/orbitdb/orbit-db/issues/397)
-* Resolves: #[222](https://github.com/orbitdb/orbit-db/issues/222)
-* Resolves: #[327](https://github.com/orbitdb/orbit-db/issues/327)
-* Resolves: #[357](https://github.com/orbitdb/orbit-db/issues/357)
-* Resolves: #[475](https://github.com/orbitdb/orbit-db/issues/475)
-* Resolves: #[380](https://github.com/orbitdb/orbit-db/issues/380)
-* Resolves: #[458](https://github.com/orbitdb/orbit-db/issues/458)
-* Resolves: #[467](https://github.com/orbitdb/orbit-db/issues/467)
+- Resolves: #[397](https://github.com/orbitdb/orbit-db/issues/397)
+- Resolves: #[222](https://github.com/orbitdb/orbit-db/issues/222)
+- Resolves: #[327](https://github.com/orbitdb/orbit-db/issues/327)
+- Resolves: #[357](https://github.com/orbitdb/orbit-db/issues/357)
+- Resolves: #[475](https://github.com/orbitdb/orbit-db/issues/475)
+- Resolves: #[380](https://github.com/orbitdb/orbit-db/issues/380)
+- Resolves: #[458](https://github.com/orbitdb/orbit-db/issues/458)
+- Resolves: #[467](https://github.com/orbitdb/orbit-db/issues/467)

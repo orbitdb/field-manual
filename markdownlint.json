@@ -1,12 +1,13 @@
 {
   "line-length": false,
+  "commands-show-output": false,
   "first-header-h1": false,
   "first-line-h1": false,
   "no-trailing-punctuation": false,
   "no-duplicate-heading": false,
   "no-inline-html": {
     "allowed_elements": [
-      "a", "p", "img", "br", "div", "h3"
+      "a", "p", "img", "br", "div", "h3", "strong"
     ]
   }
 }
