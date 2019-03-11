@@ -15,11 +15,9 @@
 
 ### Client-server architecture: a review
 
-In the traditional model, users run _clients_ that connect to a _server_, (or servers) which store and manage their data. Using the easiest example, a service like Facebook offers multiple clients - a website, mobile apps, SMS interfaces, etc. - that then make requests to their server farm, which queries and updates their data.
+In the traditional model, users run _clients_ that connect to a _servers_, which store and manage their data. Using the easiest example, users can run multiple Facebook clients - the website, mobile apps, SMS interfaces - that then make requests to Facebook servers, which queries and updates their data.
 
-<a title="Gnome-fs-client.svg: David Vignoni
-Gnome-fs-server.svg: David Vignoni
-derivative work: Calimo [LGPL (http://www.gnu.org/licenses/lgpl.html)], via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Client-server-model.svg"><img width="256" alt="Client-server-model" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Client-server-model.svg/256px-Client-server-model.svg.png"></a>
+![Client-server Model](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Server-based-network.svg/991px-Server-based-network.svg.png)
 
 Over recent years, this method has been proven problematic in terms of data management, data ownership, and data security. These three together can be singularly referred to as _data soveriegnity_, meaning the user who generated the data has control over who the data are sent to, what the data are used for, and how.
 
@@ -27,11 +25,11 @@ Now, component by component, you can unlearn the traditional way of thinking, an
 
 ### Swarms vs Servers
 
-The first notion you should try to dismiss is that of the server, as they are no longer necessary to run peer to peer applications. Yes, applications like IPFS nodes run on servers, but it is designed to run in browsers or on regular desktop computers as well. 
+The first notion you should try to dismiss is that of the server, as they are no longer necessary to run peer-to-peer applications. Yes, applications like IPFS nodes run on servers, but it is designed to run in browsers or on regular desktop computers as well. 
 
-In the peer-to-peer modeal, users start out alone and unconnected with their data only stored locally, but very quickly connect to other peers in the same network in a relatively indiscriminate fashion. There is no real "center" of such a network, and thus it forms a **swarm** of connected peers.
+In the peer-to-peer model, users start out alone and unconnected with their data only stored locally, but very quickly connect to other peers in the same network in a relatively indiscriminate fashion. There is no real "center" of such a network, and thus it forms a **swarm** of connected peers.
 
-TODO: Swarm image
+![Peer to peer swarm](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/P2P-network.svg/991px-P2P-network.svg.png)
 
 This approach has obvious pros and cons:
 
@@ -40,12 +38,11 @@ This approach has obvious pros and cons:
 - **Pro:** The network will be robust and self-healing
 - **Con:** If an offline peer that has data you need, you may not be able to access it unless it's replicated elsewhere
 - **Pro:** If there _is_ a data breach, the so-called blast radius will be contained since it will only affect singular or small groups of devices, not necessarily affecting every user of the application.
-
-You're going to see a lot more applications that run on localhost by default, that connect to other instances of the application running locally on other computers.
+- **Con:** There will be new, as-of-yet unimagined, vectors of attack to deceive and compromise data in these networks.
 
 #### On "Serverless"
 
-It's often claimed, and rightly so, that the popular term "serverless" is at best a misnomer, and at worst completely disingenuous. This term was coined to popularize the idea of writing code that can then be run, at a cost, on a "Function-as-a-Service" platform that all of the major cloud providers 
+It's often claimed, and rightly so, that the popular term "serverless" is at best a misnomer, and at worst completely disingenuous. This term was coined to popularize the idea of writing code that can then be run, at a cost, on a "Function-as-a-Service" platform that all of the major cloud providers run. However, the common criticism is that this is just "somebody else's server," and it's true.
 
 Peer-to-peer architectures _can be_ the true "serverless." It is possible, today, to create applications that share user data in a peer-to-peer fashion, avoiding middlemen and third parties, and relying on the surplus computational power. The reason the previous sentence is qualified is because there are some major challenges we will all be facing together in our distributed future:
 
@@ -53,13 +50,31 @@ Peer-to-peer architectures _can be_ the true "serverless." It is possible, today
 2. Payment Gateways
 3. API Relaying
 
+For now, you're going to see a lot more applications that run on `localhost` by default, that connect to other instances of the application running locally on other computers. There are currently traditional clients that already do this: Gitter, Slack, Discord, to name a few. These desktop apps run locally, but still connect to a server.
+
+Therefore, they are not true _peers._
+
 ### Peers vs Clients
 
-If there are no servers, then it would follow that there are no clients.
+If there are no servers, then it would follow that there are no clients. In the traditional model, the functionality of an application is split up between it's server and its client. Perhaps you've heard the terms _thin client, _business layer_, _front-end_, _back-end_. They all mean specific things but all hint at a core feature of client server - that there is some functionality that a user has access to, and some functionality they don't.
+
+The concept of a **peer** dismisses this notion, and when users run peer-to-peer applications, they are running the entire application code of the entire system locally. This is true of any true peer-to-peer application you are used to: Bittorrent, a Bitcoin wallet, even a program from previous generations like Kazaa. When you run any of those, you're running the system on your computer, and that's that. No additional code is required.
+
+While, functionality of the peer is the same across all instances of the application, the true power of a peer-to-peer system comes from its connection to, and iteraction with, other peers. A single bittorrent client is useless without other peers to connect to, just as Bitcoin wallet is useless without generating transactions and consensus with other peers and the underlying blockchain.
 
 ### Encryption vs Authorization
 
-TODO
+In a system where anybody can connect to anybody else, security becomes paramount. However, without a centralized server, traditional forms of security become impossible. If there are no central chokepoints to marshall data through, there is no place to authorize every user that wants access. Additionally, users often want as much privacy as possible - even demanding full anonymity (or at least pseudonymity) in many cases.
+
+A prime solution to this problem of distributed security is the use of strong encryption: both to encrypt the data _at rest_, meaning when it is stored on any device, and _in transit_, meaning when it is being transmitted from one device to another over an internet connection.
+
+- **Pro:** There are many types of encryption that are effectively impossible to crack via brute-force methods, meaning that it will take at least millions of years to guess the encryption key
+- **Con:** If the encryption keys are lost and cannot be recovered, so too is the encrypted data.
+- **Pro:** Systems that pass a large amount of encrypted data, particularly data encrypted via multiple different sets of keypairs, can create a large amount of "noise" making it very difficult for attackers to 
+- **Con:** UX can be tricky, particularly for users new to the distributed space who don't have the same understanding of things like keys and encryption as the developers
+- **Pro:** Any encryption key leaks will only affect data encrypted with those keys, not the entire data set of the system
+
+One final trade-off to using keypair encryption as a form of application security is that it introduces the problems in key management, storage, and transfer. 
 
 ### Pubsub vs API Calls
 
