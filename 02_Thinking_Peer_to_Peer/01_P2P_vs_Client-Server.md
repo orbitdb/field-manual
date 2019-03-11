@@ -1,6 +1,6 @@
 ## Peer-to-Peer vs Client-Server
 
-> The Internet's most ubiquitous model of content delivery requires that users run clients that connect to centralized servers. Peer-to-peer a drastically contrasting approach, and this chapter transitions client-server thinking to peer-to-peer, favoring _swarms over servers_, _peers over clients_, _encryption over authorization_, and _pubsub messaging over API calls_.
+> The Internet's most ubiquitous model of content delivery requires that users run clients that connect to centralized servers. Peer-to-peer is a drastically contrasting approach, and this chapter transitions client-server thinking to peer-to-peer, favoring _swarms over servers_, _peers over clients_, _encryption over authorization_, and _pubsub messaging over API calls_.
 
 <div>
   <h3>Table of Contents</h3>
