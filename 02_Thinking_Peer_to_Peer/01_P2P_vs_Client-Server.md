@@ -56,11 +56,11 @@ Therefore, they are not true _peers._
 
 ### Peers vs Clients
 
-If there are no servers, then it would follow that there are no clients. In the traditional model, the functionality of an application is split up between it's server and its client. Perhaps you've heard the terms _thin client, _business layer_, _front-end_, _back-end_. They all mean specific things but all hint at a core feature of client server - that there is some functionality that a user has access to, and some functionality they don't.
+If there are no servers, then it would follow that there are no clients. In the traditional model, the functionality of an application is split up between it's server and its client. Perhaps you've heard the terms _thin client_, _business layer_, _front-end_, _back-end_. They all mean specific things but all hint at a core feature of client server - that there is some functionality that a user has access to, and some functionality they don't.
 
-The concept of a **peer** dismisses this notion, and when users run peer-to-peer applications, they are running the entire application code of the entire system locally. This is true of any true peer-to-peer application you are used to: Bittorrent, a Bitcoin wallet, even a program from previous generations like Kazaa. When you run any of those, you're running the system on your computer, and that's that. No additional code is required.
+The concept of a **peer** dismisses this notion, and when users run peer-to-peer applications, they are running the entire application code of the entire system locally. This is true of any true peer-to-peer application you are used to: Bittorrent, a Bitcoin wallet, even a program from previous generations like Kazaa. When you run any of those, you're running the entire system on your computer, and that's that. No additional code is required.
 
-While, functionality of the peer is the same across all instances of the application, the true power of a peer-to-peer system comes from its connection to, and interaction with, other peers. A single bittorrent client is useless without other peers to connect to, just as Bitcoin wallet is useless without generating transactions and consensus with other peers and the underlying blockchain.
+While the functionality of the peer is the same across all instances of the application, the true power of a peer-to-peer system comes from its connection to, and interaction with, other peers. A single bittorrent client is useless without other peers to connect to, just as Bitcoin wallet is useless without generating transactions and consensus with other peers and the underlying blockchain.
 
 ### Encryption vs Authorization
 
