@@ -19,9 +19,9 @@ In the traditional model, users run _clients_ that connect to a _servers_, which
 
 ![Client-server Model](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Server-based-network.svg/991px-Server-based-network.svg.png)
 
-Over recent years, this method has been proven problematic in terms of data management, data ownership, and data security. These three together can be singularly referred to as _data soveriegnity_, meaning the user who generated the data has control over who the data are sent to, what the data are used for, and how.
+Over recent years, this method has been proven problematic in terms of data management, data ownership, and data security. These three together can be singularly referred to as _data sovereignty_, meaning the user who generated the data has control over who the data are sent to, what the data are used for, and how.
 
-Now, component by component, you can unlearn the traditional way of thinking, and learn how to conceptualizate how a peer-to-peer system might be architected and how it might behave.
+Now, component by component, you can unlearn the traditional way of thinking, and learn how to conceptualize how a peer-to-peer system might be architected and how it might behave.
 
 ### Swarms vs Servers
 
@@ -60,7 +60,7 @@ If there are no servers, then it would follow that there are no clients. In the 
 
 The concept of a **peer** dismisses this notion, and when users run peer-to-peer applications, they are running the entire application code of the entire system locally. This is true of any true peer-to-peer application you are used to: Bittorrent, a Bitcoin wallet, even a program from previous generations like Kazaa. When you run any of those, you're running the system on your computer, and that's that. No additional code is required.
 
-While, functionality of the peer is the same across all instances of the application, the true power of a peer-to-peer system comes from its connection to, and iteraction with, other peers. A single bittorrent client is useless without other peers to connect to, just as Bitcoin wallet is useless without generating transactions and consensus with other peers and the underlying blockchain.
+While, functionality of the peer is the same across all instances of the application, the true power of a peer-to-peer system comes from its connection to, and interaction with, other peers. A single bittorrent client is useless without other peers to connect to, just as Bitcoin wallet is useless without generating transactions and consensus with other peers and the underlying blockchain.
 
 ### Encryption vs Authorization
 
