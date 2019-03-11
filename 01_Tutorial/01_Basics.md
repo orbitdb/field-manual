@@ -9,7 +9,7 @@ Please see the [Introduction](./00_Introduction.md) before beginning this chapte
 
 - [Installing the requirements: IPFS and OrbitDB](#installing-the-requirements-ipfs-and-orbitdb)
 - [Instantiating IPFS and OrbitDB](#instantiating-ipfs-and-orbitdb)
-- [Creating a Database](#creating-a-database)
+- [Creating a database](#creating-a-database)
 - [Choosing a data store](#choosing-a-data-store)
 - [Key takeaways](#key-takeaways)
 
@@ -186,7 +186,7 @@ Note since you have not explicitly defined a database in the browser, no Indexed
 > **Caution!** iOS and Android have been known to purge IndexedDB if storage space needs to be created inside of your phone.
 We recommend creating robust backup mechanisms at the application layer
 
-### Creating a Database
+### Creating a database
 
 Your users will want to create a catalog of musical pieces to practice. You will now create this database, and ensure that *only that user* can write to it.
 
