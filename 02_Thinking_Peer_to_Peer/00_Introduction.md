@@ -1,3 +1,5 @@
+# Part 2: Thinking Peer to Peer
+
 ## Introduction
 
 Knowing the mechanics of how to create distrbuted applications is only the first step. In order to create truly successful applications that can transcend mere curiousities that only our industry appreciates, you will need a deep understanding of how peer-to-peer applications truly work, and how they 
