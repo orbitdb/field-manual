@@ -8,6 +8,7 @@
 - [Peers vs Clients](#peers-vs-clients)
 - [Swarms vs Servers](#swarms-vs-servers)
 - [Encryption vs Authorization](#encryption-vs-authorization)
+- [Pubsub vs API Calls](#pubsub-vs-api-calls)
 
 </div>
 
@@ -47,5 +48,9 @@ Peer-to-peer architectures _can be_ the true "serverless." It is possible, today
 3. API Relaying
 
 ### Encryption vs Authorization
+
+TODO
+
+### Pubsub vs API Calls
 
 TODO
