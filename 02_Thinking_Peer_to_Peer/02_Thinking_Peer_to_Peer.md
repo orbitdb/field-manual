@@ -4,8 +4,6 @@
 ### This is not Kazaa
 ### Comparison to Traditional Database Systems
 
-### On Sharding
-
 ### What this is
 
 * Resolves #[536](https://github.com/orbitdb/orbit-db/issues/536)
