@@ -4,6 +4,10 @@
 
 ### Storage
 
+#### Data persistence
+
+#### Data validation
+
 ### Computation
 
 ### Memory
