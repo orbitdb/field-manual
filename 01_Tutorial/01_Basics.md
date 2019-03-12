@@ -145,13 +145,13 @@ for now, we include this line to disable them.
 - `repo: './ipfs'` designates the path of the repo in node.js only. In the browser, you can actually remove this line. The
 default setting is a folder called `.jsipfs` in your home directory. You will see why we choose this acute location for the
 folder later.
-- `EXPERIMENTAL: { pubsub: true }` enables IPFS pubsub, which is a method of communicating between nodes and is required for OrbitDB usage, despite whether or not we are connected to other peers.
+- `EXPERIMENTAL: { pubsub: true }` enables IPFS pubsub, which is a method of communicating between nodes and **is required for OrbitDB usage**, despite whether or not we are connected to other peers.
 - `config: { Bootstrap: [], Addresses: { Swarm: [] }}` sets both our bootstrap peers list (peers that are loaded on
 instantiation) and swarm peers list (peers that can connect and disconnect at any time to empty. We will populate these
 later.
-- `node.on("error", (e) => { throw new Error(e) })` implements extremely basic error handling for if something happens
+- `node.on("error", (e) => { throw new Error(e) })` implements extremely basic error handling if something happens
 during node creation
-- `node.on("ready", (e) => { orbitdb = new OrbitDB(node) })` instantiates OrbitDB on top of the IPFS node, when it is ready.
+- `node.on("ready", (e) => { orbitdb = new OrbitDB(node) })` instantiates OrbitDB on top of the IPFS node when it is ready.
 
 By running the code above, you have created a new IPFS node that works locally and is not connected to any peers.
 You have also loaded a new `orbitdb` object into memory, ready to create databases and manage data.
@@ -171,7 +171,7 @@ $ ls ipfs/
 blocks/  config  datastore/  datastore_spec  keys/  version
 ```
 
-Looking inside of the `orbitdb/` folder, you will see that the subfolder has the same ID as orbitdb, as well as the IPFS node. This is purposeful, as this initial folder contains metadata that OrbitDB will need to operate. See Part 3 for detailed information about this.
+Looking inside the `orbitdb/` folder you will see that the subfolder has the same ID as orbitdb, as well as the IPFS node. This is purposeful, as this initial folder contains metadata that OrbitDB needs to operate. See Part 3 for detailed information about this.
 
 The `ipfs/` folder contains all of your IPFS data. Explaining this in depth is outside of the scope of this tutorial, and  the curious can find out more [here](https://ipfs.io).
 
@@ -210,22 +210,22 @@ NPP.onready = () => {
 }
 ```
 
-You will see something like the following as an output: `/orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces`. This is the id, or **address** (technically a multiaddress) of this database. It's important for you to not only _know_ this, but also to understand what it is:
+You will see something like the following as an output: `/orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces`. This is the id, or **address** (technically a multiaddress) of this database. It is important for you to not only _know_ this, but also to understand what it is:
 
 1. The first bit, `/orbitdb.`, is the protocol. It tells you that this address is an OrbitDB address.
 2. The second, or middle, part `zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3` that is the most interesting. This is the Content ID (CID) of the database manifest, which contains:
-    1. The **access control list** of the database
-    2. The **type** of the database
-    3. The **name** of the database
-3. The final part is the name you provided, in thise case `pieces`
+    - The **access control list** of the database
+    - The **type** of the database
+    - The **name** of the database
+3. The final part is the name you provided, in this case `pieces`, which becomes the final part of the multiaddress
 
 > *Note:* Addresses that start with Qm… are typically CIDv0 content addresses, while addresses that start with zdpu…. are CIDv1. Misunderstanding OrbitDB addressing can lead to some very unexpected - sometimes hilarious, sometimes disastrous outcomes. Read more in Part 2: Thinking Peer to Peer to learn more.
 
 #### What just happened?
 
-Your code created a local OrbitDB database, of type "docstore", writable only by the user that created it.
+Your code created a local OrbitDB database, of type "docstore", writable only by the user who created it.
 
-- The `options` defines the parameters for the database we are about to create.
+- `options` defines the parameters for the database we are about to create.
   - `accessController: { write: [orbitdb.identity.publicKey] }` defines the ACL, or "Access Control List". In this instance
   we are restricting `write` access to ONLY orbitdb instances identified by our particular `publicKey`
   - `indexBy: "hash"` is a docstore-specific option, which specifies which field to index our database by
@@ -249,7 +249,7 @@ $ ls orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces/
 000003.log  CURRENT  LOCK  LOG  MANIFEST-000002
 ```
 
-You don't need to understand this fully for now, just know that it happened. Two subfolders, one being the original folder you saw when you instantiated OrbitDB, and now another that has the same address as your database.
+You do not need to understand this fully for now, just know that it happened. Two subfolders, one being the original folder you saw when you instantiated OrbitDB, and now another that has the same address as your database.
 
 ##### What else happened in the browser?
 
@@ -281,8 +281,8 @@ Also, OrbitDB developers can write their own stores if it suits them. This is an
 
 - OrbitDB is a distributed database layer which stores its raw data in IPFS
 - Both IPFS and OrbitDB work offline and online
-- OrbitDB instances have an _ID_ which is the same as the underling IPFS node's ID.
-- OrbitDB instances create databases, which have unique _addresses_
+- OrbitDB instances have an _ID_ which is the same as the underlying IPFS node's ID.
+- OrbitDB instances create databases which have unique _addresses_
 - Basic access rights to OrbitDB databases are managed using access control lists (or ACLs), based on the ID of the IPFS node performing the requests on the database
 - OrbitDB database addresses are hashes of the database's ACL, its type, and its name.
 - Since OrbitDB and IPFS are written in JavaScript, it is possible to build isomorphic applications that run in the browser  and in node.js
@@ -290,7 +290,7 @@ Also, OrbitDB developers can write their own stores if it suits them. This is an
 - OrbitDB comes with a handful of stores, and you can write your own.
 - Each store will have its own API, but you will generally have at least a `get` and a `put`
 
-<strong>Now that you've laid the groundwork, you'll learn how to work with data! Onward, then, to [Chapter 2: Managing Data](./02_Managing_Data.md).</strong>
+<strong>Now that you haveve laid the groundwork, you will learn how to work with data! Onward then, to [Chapter 2: Managing Data](./02_Managing_Data.md).</strong>
 
 - Resolves #[367](https://github.com/orbitdb/orbit-db/issues/367)
 - Resolves #[366](https://github.com/orbitdb/orbit-db/issues/366)
