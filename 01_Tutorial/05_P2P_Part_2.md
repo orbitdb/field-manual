@@ -1,6 +1,6 @@
 ## Chapter 5: Peer-to-Peer Part 2 (OrbitDB)
 
-> OrbitDB utilizes IPFS's underlying peer-to-peer laer to share data between peers. In this chapter you will learn methods for _discovering peers_, _connecting automatically to known peers_, and making _distributed queries_.
+> OrbitDB utilizes IPFS's underlying peer-to-peer layer to share data between peers. In this chapter you will learn methods for _discovering peers_, _connecting automatically to known peers_, and making _distributed queries_.
 
 <div>
   <h3>Table of Contents</h3>
@@ -17,7 +17,7 @@ Please complete [Chapter 4 - Peer to Peer](./04_P2P_Part_1.md) first.
 
 ### Enabling debug logging
 
-There's a lot of moving parts in connecting to a peer's OrbitDB database, and you'll want a deeper look into what's going on as you start to work with connections.
+There's a lot of moving parts in connecting to a peer's OrbitDB database, and you will want a deeper look into what's going on as you start to work with connections.
 
 Throughout the OrbitDB / IPFS stack, logging is controlled via a global variable called `LOG` which uses string pattern matching to filter and display logs, e.g. `LOG="*"` will show all logs and be very noisy.
 
@@ -65,11 +65,11 @@ Much more information about what's going on internally is provided in Part 3 of 
 
 ### Discovering Peer's Databases
 
-To share data between peers, you will need to know their OrbitDB address. Unforutately, simply connecting to a peer is not enough, since there's not a simple way to obtain databases address from a simple IPFS peer-to-peer connection. To remedy this, you'll create a simple flow that exchanges user information via IPFS pubsub, and then use OrbitDB's loading and event system to load and display the data.
+To share data between peers, you will need to know their OrbitDB address. Unfortunately, simply connecting to a peer is not enough, since there's not a simple way to obtain databases address from a simple IPFS peer-to-peer connection. To remedy this, you will create a simple flow that exchanges user information via IPFS pubsub, and then use OrbitDB's loading and event system to load and display the data.
 
-In order to provide a proper user experience, you'll want to hide as much of the peer and database discovery as possible by using OrbitDB and IPFS internals to exchange database addresses and load data upon peer connection.
+In order to provide a proper user experience, you will want to hide as much of the peer and database discovery as possible by using OrbitDB and IPFS internals to exchange database addresses and load data upon peer connection.
 
-The flow you'll create will be:
+The flow you will create will be:
 
 1. User manually requests a connection to a user
 2. On a successful connection, both peers send messages containing their user information via a database address
@@ -168,7 +168,7 @@ You updated your code to send a message to connected peers after 2 seconds, and 
 
 ### Connecting automatically to peers with discovered databases
 
-Peer discovery is great, but your users are going to want those peers to stick around so you can continue to use their data and receive new data as those peers add pieces. You'll make a couple minor modifications the above functions to enable that now. Also, peers is so technical sounding! Musicians might prefer something like "companions" instead.
+Peer discovery is great, but your users are going to want those peers to stick around so you can continue to use their data and receive new data as those peers add pieces. You will make a couple minor modifications the above functions to enable that now. Also, peers is so technical sounding! Musicians might prefer something like "companions" instead.
 
 First, update your `_init` function to make a new "companions" database:
 
@@ -221,7 +221,7 @@ Then, update your `handleMessageReceived` function to add a discovered peer's us
 
     switch(msgKeys[0]) {
       case "userDb":
-        var peerDb = await this.orbitdb.open(parsedMsg.userDb)
+        const peerDb = await this.orbitdb.open(parsedMsg.userDb)
         peerDb.events.on("replicated", async () => {
           if(peerDb.get("pieces")) {
 +           await this.companions.set(peerDb.id, peerDb.all())
@@ -241,9 +241,9 @@ Finally, create the `connectToCompanions` function:
 
 ```diff
 + async connectToCompanions() {
-+   var companionIds = Object.values(this.companions.all()).map(companion => companion.nodeId)
-+   var connectedPeerIds = await this.getIpfsPeers()$
-+   companionIds.map(async (companionId) => {
++   const companionIds = Object.values(this.companions.all()).map(companion => companion.nodeId)
++   const connectedPeerIds = await this.getIpfsPeers()
++   companionIds.forEach(async (companionId) => {
 +     if (connectedPeerIds.indexOf(companionId) !== -1) return
 +     try {
 +       await this.connectToPeer(companionId)
@@ -269,11 +269,11 @@ You created yet another database for your user's musical companions, and updated
 - `await this.orbitdb.keyvalue("companions", this.defaultOptions)` creates a new keyvalue store called "companions"
 - `this.companions.all()` retrieves the full list of key/value pairs from the database
 - `this.companions.set(peerDb.id, peerDb.all())` adds a record to the companions database, with the database ID as the key, and the data as the value stored. Note that you can do nested keys and values inside a `keyvalue` store
-- The `companionIds.map` call will then call `this.connectToPeer(companionId)` in parallel for all registered companions in your database. If they are found `oncompaniononline` will fire. If not, `oncompanionnotfound` will fire next.
+- `companionIds.forEach` will then call `this.connectToPeer(companionId)` in parallel for all registered companions in your database. If they are found `oncompaniononline` will fire. If not, `oncompanionnotfound` will fire next.
 
 ### Simple distributed queries
 
-This may be the moment you've been waiting for - now you'll perform a simple parallel distributed query on across multiple peers, pooling all pleces together into one result.
+This may be the moment you've been waiting for - now you will perform a simple parallel distributed query on across multiple peers, pooling all pieces together into one result.
 
 Create the following function, which combines much of the code you've written and knowledge you've obtained so far:
 
@@ -306,7 +306,7 @@ You performed your first distributed query using OrbitDB. We hope that by now th
 - `this.orbitdb.open(addr)` will open the peer's database and `db.load` will load it into memory
 - `allPieces.reduce` will take an array of arrays and squash it into a flat array
 
-For now it will return _all_ pieces, but for bonus points you can try incorporating the `docstore.query` function instaed of `docstore.get('')`.
+For now it will return _all_ pieces, but for bonus points you can try incorporating the `docstore.query` function instead of `docstore.get('')`.
 
 ### Key takeaways
 
