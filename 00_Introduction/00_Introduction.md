@@ -15,7 +15,10 @@ Whether you are a front-end developer, a back-end developer, a user experience e
 
 ## Historical Context
 
+
 Distributed systems are nothing new, yet somehow advances in this space tend to "disrupt" more thoughougly than any VC-funded startup can ever hope to, with results that are often as tragic as they are profound.
+
+### The Birth of the Internet
 
 In the late 1960s, The Internet itself was developed as a decentralized system of computers capable of sustaining a nuclear attack. Individual computers became linked together via underground wire and a process known as "packet switching" was implemented to send data in disparate chunks which were expected to be re-assembled in order on the receiving end.
 
@@ -25,15 +28,23 @@ in 1991, the first World Wide Website went live, and what is now the most popula
 
 Nobody disputes that these technologies have transformed (and are still transforming) the world as we speak. However, 
 
+### Early Peer-to-Peer Applications
+
 TODO: Kleppman, etc
 
 TODO: 1999-2004 Napster, Kazaa, etc.
+
+### Enter the Blockchain
 
 The publication of the Bitcoin whitepaper in October 2008, started a new renaissance in our industry. Not only did it prove out a new technology in the blockchain, but it began a new way of thinking about distributed systems in general. In addition to giving rise to a new generation of financial applications with a high degree of speculative activity, Bitcoin's underlying (and beyond computationally expensive) _proof-of-work_ algorithm gave us distributed consensus.
 
 Thegave the industry a new focus and a new way of thinking about a critical finance. The fact that it was published by a mysterious figure, the so-called Satoshi Nakamoto, only served to mystify technologists and 
 
+### The Gig Economy
+
 TODO: The gig economy, distrbuted serfdom, 
+
+### The New Distributed Renaissance
 
 TODO: IPFS
 
