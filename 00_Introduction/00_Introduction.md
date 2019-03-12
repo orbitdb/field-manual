@@ -33,7 +33,3 @@ The publication of the Bitcoin whitepaper in October 2008, started a new renaiss
 Thegave the industry a new focus and a new way of thinking about a critical finance. The fact that it was published by a mysterious figure, the so-called Satoshi Nakamoto, only served to mystify technologists and 
 
 We would argue that cryptocurrency and blockchain technologies only laid the foundation of our distributed future. Projects like IPFS, which harness the power of directed acyclic graphs. TODO: Filecoin
-
-## Enter OrbitDB
-
-If IPFS is meant to be a shared hard drive t
