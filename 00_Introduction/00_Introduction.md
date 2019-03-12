@@ -15,7 +15,6 @@ Whether you are a front-end developer, a back-end developer, a user experience e
 
 ## Historical Context
 
-
 Distributed systems are nothing new, yet somehow advances in this space tend to "disrupt" more thoughougly than any VC-funded startup can ever hope to, with results that are often as tragic as they are profound.
 
 ### The Birth of the Internet
