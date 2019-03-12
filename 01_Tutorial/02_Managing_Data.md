@@ -1,6 +1,6 @@
 ## Chapter 2 - Managing Data
 
-> Managing data in OrbitDB involves  _loading databases into memory_, and then _creating_, _updating_, _reading_, and _deleting data_.
+> Managing data in OrbitDB involves  _loading databases into memory_ and then _creating_, _updating_, _reading_, and _deleting data_.
 
 <div>
   <h3>Table of Contents</h3>
@@ -18,7 +18,7 @@ Please complete [Chapter 1 - Laying the Foundation](./01_Basics.md) first.
 
 ### Loading the database
 
-The first thing your users will want is to make sure that when they load the app, their data is available. You'll do so easily by loading the database contents into memory.
+The first thing your users will want is to make sure that when they load the app, their data is available. You will do so easily by loading the database contents into memory.
 
 Update your `NewPiecePlease class` handler, adding **one line** at the bottom of the IPFS `ready` handler:
 
@@ -36,15 +36,15 @@ Update your `NewPiecePlease class` handler, adding **one line** at the bottom of
 
 #### What just happened?
 
-After you instantiated the database, you loaded its contents into memory for use. It's empty for now, but not for long! Loading the database at this point after instantiation will save you trouble later.
+After you instantiated the database you loaded its contents into memory for use. It is empty for now, but not for long! Loading the database at this point after instantiation will save you trouble later.
 
-- `await piecesDb.load()` is a function that will need to be called whenever we want the latest and greatest snapshot of data in the database. `load()` retrieves all of the values via their _content addresses_ and loads the content into memory
+- `await piecesDb.load()` is a function that will need to be called whenever we want the latest and greatest snapshot of data in the database. The `load` function retrieves all of the values via their _content addresses_ and loads the content into memory.
 
-> **Note:** You're probably wondering about if you have a large database of millions of documents, and the implications of loading them all into memory. It's a valid concern, and you should move on to Part 4 of this book once you're done with the tutorial.
+> **Note:** You are probably wondering about if you have a large database of millions of documents, and the implications of loading them all into memory. It is a valid concern, and you should move on to Part 4 of this book once you are done with the tutorial.
 
 ### Adding data
 
-Next, your users will want to be able to add sheet music to their catalog. You'll use functions exposed from OrbitDB's `keyvalue` store now.
+Next, your users will want to be able to add sheet music to their catalog. You will use functions exposed from OrbitDB's `keyvalue` store now.
 
 Add a function called `addNewPiece` function now:
 
@@ -74,8 +74,7 @@ const content = await NPP.node.dag.get(cid)
 console.log(content.value.payload)
 ```
 
-Running this code should give you something like the following output. Hold steady, it's overwhelming but it will make sense
-after we explain what happened. For more information see Part 3.
+Running this code should give you something like the following output. Hold steady, it'is overwhelming but it will make sense after we explain what happened. For more information see Part 3, The Architecture of OrbitDB.
 
 ```json
 {
@@ -94,11 +93,11 @@ after we explain what happened. For more information see Part 3.
 
 You wrote and tested a function that allows users to add new sheet music to the database.
 
-- `piecesDb.put({ ... })` is the most important line here. This call takes an object to sture and returns a _mutlihash_, which is the hash of the content added to IPFS.
-- `node.dag.get(hash)` is a function that takes a Content ID (CID) and returns content.
-- `"op": "PUT"`is a notable part of the output. At the core of OrbitDB databases is the **OPLOG**, where all data are stored as a log of operations, which are then calculated into the appropriate schema for application use. The operation is specified here as a `PUT`, and then the `key`/`value` pair is your data.
+- `piecesDb.put({ ... })` is the most important line here. This call takes an object to store and returns a _multihash_, which is the hash of the content added to IPFS.
+- `node.dag.get(hash)` is a function that takes a CID and returns content.
+- `"op": "PUT"` is a notable part of the output. At the core of OrbitDB databases is the **OPLOG**, where all data are stored as a log of operations, which are then calculated into the appropriate schema for application use. The operation is specified here as a `PUT`, and the `key`/`value` pair is your data.
 
-> **Note:** "dag" in the code refers to the acronym DAG, which stands for Directed Acyclic Graph. This is a data structure that is, or is at least closely related to Blockchain. More on this in Part 4
+> **Note:** "dag" in the code refers to the acronym DAG, which stands for Directed Acyclic Graph. This is a data structure that is closely related to blockchain.
 
 You can repeat this process to add more hashes from the NES Metroid soundtrack:
 
@@ -120,9 +119,9 @@ These are all stored in the global IPFS network so you can find any piece by vis
 
 ### Reading data
 
-Of course, your users will want to read their data after creating it, so you'll enable that functionality now. OrbitDB gives you a number of ways to do this, mostly based on which _store_ you picked.
+Of course, your users will want to read their data after creating it, so you will enable that functionality now. OrbitDB gives you a number of ways to do this, mostly based on which _store_ you picked.
 
-We gave you a `docstore` earlier, so you can write some simple `get*****` functions like so. `docstore` also provides the more powerful `query` function, which we can abstract to write a `getPiecesByInstrument` function:
+We gave you a `docstore` earlier, so you can write some simple `get*` functions like so. `docstore` also provides the more powerful `query` function, which we can abstract to write a `getPiecesByInstrument` function:
 
 Fill in the following functions now:
 
@@ -146,11 +145,11 @@ Fill in the following functions now:
 + }
 ```
 
-In your application code, you can use these functions it like so:
+In your application code, you can use these functions like so:
 
 ```javascript
 pieces = NPP.getAllPieces()
-pleces.forEach((piece) => { /* do something */ })
+pieces.forEach((piece) => { /* do something */ })
 
 piece = NPP.getPieceByHash('QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ')
 console.log(piece)
@@ -164,7 +163,7 @@ const randomPiece = pieces[items.length * Math.random() | 0]
 console.log(randomPiece)
 ```
 
-Both `console.log` calls above will return something like this.
+Both `console.log` calls above will return something like this:
 
 ```json
 {
@@ -184,7 +183,7 @@ You queried the database of scores you created earlier in the chapter, retrievin
 
 ### Updating and deleting data
 
-You'll next want to provide your users with the ability to update and delete their pieces. For example if you realize you'd rather practice a piece on a harpsichord instead of a piano, or if they want to stop practicing a certain piece.
+Next, you will want to provide your users with the ability to update and delete their pieces. For example, if you realize you would rather practice a piece on a harpsichord instead of a piano, or if they want to stop practicing a certain piece.
 
 Again, each OrbitDB store may have slightly different methods for this. In the `docstore` you can update records by again using the `put` method and the ID of the index you want to update.
 
@@ -192,7 +191,7 @@ Fill in the `updatePieceByHash` and `deletePieceByHash` functions now:
 
 ```diff
 + async updatePieceByHash(hash, instrument = "Piano") {
-+   var piece = await this.getPieceByHash(hash)
++   const piece = await this.getPieceByHash(hash)
 +   piece.instrument = instrument
 +   const cid = await this.piecesDb.put(piece)
 +   return cid
@@ -206,7 +205,7 @@ Fill in the `updatePieceByHash` and `deletePieceByHash` functions now:
 + }
 ```
 
-In your application code, you can run these new functions and see the opcodes that return to get a sense of what's going on.
+In your application code, you can run these new functions and see the opcodes that return to get a sense of what is going on.
 
 ```javascript
 const cid = await NPP.updatePiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ", "Harpsichord")
@@ -229,15 +228,15 @@ While the opcode for PUT will be the same, the opcode for `deletePieceByHash` is
 
 #### What just happened?
 
-You may be thinking something like this: "Wait, if OrbitDB is built upon IPFS and IPFS is immutable, then how are we updating or deleting records?" Great question, and the answer lies in the opcodes  Let's step through the code so we can get to that.
+You may be thinking something like this: "Wait, if OrbitDB is built upon IPFS and IPFS is immutable, then how are we updating or deleting records?" Great question, and the answer lies in the opcodes  Let us step through the code so we can get to that.
 
-- `this.piecesDb.put` is nothing new, we're just using it to perform an update instead of an insert
+- `this.piecesDb.put` is nothing new, we are just using it to perform an update instead of an insert
 - `this.piecesDb.del` is a simple function that takes a hash, deletes the record, and returns a CID
 - `"op": "DEL"` is another opcode, `DEL` for DELETE. This log entry effectively removes this key from your records and also removes the content from your local IPFS
 
 ### Storing Media Files
 
-Your users will probably not want to mess with content hashes, so you'll want to provide them the ability to add files directly to IPFS. This section shows how you'll be able to do this, and then store the _address_ of the file in OrbitDB.
+Your users will probably not want to mess with content hashes, so you will want to provide them the ability to add files directly to IPFS. This section shows how you will be able to do this, and then store the _address_ of the file in OrbitDB.
 
 The overall pattern is:
 
