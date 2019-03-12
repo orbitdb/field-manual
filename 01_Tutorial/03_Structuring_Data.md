@@ -17,7 +17,7 @@ Please complete [Chapter 2 - Managing Data](./02_Managing_Data.md) first.
 
 ### Adding a practice counter to each piece
 
-Your users may want to keep track of their practice, at minimum how many times they practiced a piece. You'll enable that functionality for them by creating a new OrbitDB `counter` store for each piece, and creating a few new functions inside the `NewPiecePlease` class to interact with the counters.
+Your users may want to keep track of their practice, at minimum how many times they practiced a piece. You will enable that functionality for them by creating a new OrbitDB `counter` store for each piece, and creating a few new functions inside the `NewPiecePlease` class to interact with the counters.
 
 > **Note:**  The nesting approach detailed here is but one of many, and you are free to organize your data as you see fit. This is a powerful feature of OrbitDB and we are excited to see how people tackle this problem in the future!
 
@@ -123,12 +123,12 @@ You created and used two new functions to both read the value of, and increment 
 - `await this.orbitdb.counter(piece.counter)` is a new way of using `this.orbitdb.counter`, by passing in an existing database address. This will _open_ the existing database instead of creating it
 - `counter.load()` is called once in `getPracticeCount`, loading the latest database entries into memory for display
 - `await counter.inc()` increments the counter, like calling `counter++` would on an integer variable
-- `"op":"COUNTER"` is a new operation that you havent seen yet - remember, you can create stores with any operations you want. More on this in Part 3.
+- `"op":"COUNTER"` is a new operation that you haven't seen yet - remember, you can create stores with any operations you want. More on this in Part 3.
 - `"counters": { "042985dafe18ba45c7f1a57db.........02ae4b5e4aa3eb36bc5e67198c2d2": 3 }` is the value returned, the long value is an id based on your node's public key
 
 ### Adding a higher-level database for user data
 
-Pieces of music to practice with are great to have, but moving forward you will want to allow users to further express themselves via a username and profile.  You will create a new database for users, from which your database of pieces will be referenced. This will also help prepare you for allowing users to connect to each other in the next chapter.
+Pieces of music to practice with are great to have, but moving forward you will want to allow users to further express themselves via a username and a profile.  You will create a new database for users, from which your database of pieces will be referenced. This will also help prepare you for allowing users to connect to each other in the next chapter.
 
 Update your `_init` function to look like this:
 
@@ -194,7 +194,7 @@ You created a database to store anything and everything that might pertain to a 
 
 ### Dealing with fixture data
 
-Fresh users to the app will need a strong onboarding experience, and you'll enable that for them now by giving people some data to start with, and you'll want this process to work offline.
+Fresh users to the app will need a strong onboarding experience, and you will enable that for them now by giving people some data to start with, and you will want this process to work offline.
 
 First, create the `loadFixtureData` function inside the `NewPiecePlease` class:
 
@@ -208,7 +208,7 @@ First, create the `loadFixtureData` function inside the `NewPiecePlease` class:
 + }
 ```
 
-Then, Update your _init_ function to call `loadFixtureData` with some starter data:
+Then, update your _init_ function to call `loadFixtureData` with some starter data:
 
 ```diff
   async _init() {
@@ -233,7 +233,7 @@ Then, Update your _init_ function to call `loadFixtureData` with some starter da
   }
 ```
 
-Then, if you were to clear all local data and load the app from scratch, you'd see this:
+Then, if you were to clear all local data and load the app from scratch, you would see this:
 
 ```javascript
 var profileFields = NPP.getAllProfileFields()
@@ -252,7 +252,7 @@ You would see:
 
 #### What just happened?
 
-You created simple fixture data and a function to load it into a fresh instantiaton of the app.
+You created simple fixture data and a function to load it into a fresh instantiation of the app.
 
 - `for (let i in fixtureKeys)` - this type of for loop is used to ensure that the writes happen serially, one after another.
 - `await this.user.set(key, fixtureData[key])` sets the user profile key to the fixture value, if the key does not exist
