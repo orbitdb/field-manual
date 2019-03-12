@@ -27,7 +27,7 @@ This tutorial is a work in progress, and individuals should feel encouraged to s
 
 ### What will I build?
 
-If you're a musician like many of us are, you probably need form of sheet music to practice. While any musician tends to spend hours practicing alone, the beauty of music is its ability to _connect_ musicians to play together - duets, trios, quartets, septets, all the way up to orchestras.
+If you are a musician like many of us are, you probably need form of sheet music to practice. While any musician tends to spend hours practicing alone, the beauty of music is its ability to _connect_ musicians to play together - duets, trios, quartets, septets, all the way up to orchestras.
 
 These self-organizing clusters of musicians will always need better ways to share common and necessary sheet music with each other. What better use case for a peer-to-peer application?
 
@@ -52,8 +52,8 @@ We believe that **music** is a uniquely universal cultural feature - something t
   * Your folder structure. All of the code here is written in a single file, `newpieceplease.js`
   * Your editor. Use whatever you want.
   * Your UI layer. You will see _examples_ of how the code will be used on the UI layer, be it command line or browser based, but you will not be building out the UI as part of the tutorial steps.
-* `async` and `await` are used prominently. Feel free to replace those with explicit `Promise` objects if you're feeling daring.
+* `async` and `await` are used prominently. Feel free to replace those with explicit `Promise` objects if you like.
 * Steps that **you** should complete are represented and highlighted as _diffs_. Example application code is represented as Javascript  
 * For the sake of keeping things focused, we will exclude any HTML or CSS from this tutorial and focus only on the Javascript code.
 
-<strong>Ready? Let's start with [Chapter 1: Laying the Foundation](./01_Basics.md)</strong>
+<strong>Ready? Start with [Chapter 1: Laying the Foundation](./01_Basics.md)</strong>
