@@ -17,7 +17,7 @@ Please complete [Chapter 3 - Structuring Data](./03_Structuring_Data.md) first.
 
 ### Connecting to the global IPFS network
 
-Your users can manage their local sheet music library, but music is a social, connected venture. The app should reflect that! You'll now reconfigure your IPFS node to connect to the global network and begin swarming with other peers.  This tutorial started offline to focus on OrbitDB's core concepts, and now you'll undo this and connect the app, properly, to the global IPFS network.
+Your users can manage their local sheet music library, but music is a social, connected venture. The app should reflect that! You will now reconfigure your IPFS node to connect to the global network and begin swarming with other peers.  This tutorial started offline to focus on OrbitDB's core concepts, and now you will undo this and connect the app, properly, to the global IPFS network.
 
 To do so, the `NewPiecePlease` constructor like so:
 
@@ -43,7 +43,7 @@ If you don't want to blow away your data, then you can manually restore the defa
 
 Bootstrap peers are peers that your node connects to automatically when it starts. IPFS supplies this list by default and is comprised of a decentralized set of public IPFS servers.
 
-However, since we purposefully started with an empty list of bootstrap peers and they won't be restored by simply removing the config values. This is because bootstrap and swarm values are persisted in your IPFS config. This is located in the filesystem in the case of node.js and in IndexedB in the case of the browser. You should not manually edit these files.
+However, since we purposefully started with an empty list of bootstrap peers and they won't be restored by simply removing the config values. This is because bootstrap and swarm values are persisted in your IPFS config. This is located in the filesystem in the case of node.js and in IndexedDB in the case of the browser. You should not manually edit these files.
 
 However, nothing will change yet when you run the app. To see this, run this command in a running application:
 
@@ -87,7 +87,7 @@ await NPP.node.bootstrap.list()
 
 #### Enabling the swarm
 
-Next, you will restore your default swarm addresses. These are adresses that your node announces itself to the world on.
+Next, you will restore your default swarm addresses. These are addresses that your node announces itself to the world on.
 
 Luckily, in the browser you don't have to do anything, the default is an empty array. You should already see something like this in your console:
 
@@ -102,7 +102,7 @@ In node.js, run this command:
 NPP.node.config.set("Addresses.Swarm", ['/ip4/0.0.0.0/tcp/4002', '/ip4/127.0.0.1/tcp/4003/ws'], console.log)
 ```
 
-Restart your app you'll see the console output confirming you're swarming. In node.js you'll see something like:
+After restarting your app you will see the console output confirming you're swarming. In node.js you will see something like:
 
 ```plain
 Swarm listening on /p2p-websocket-star/ipfs/QmXG8yk8UJjMT6qtE2zSxzz3U7z5jSYRgVWLCUFqAVnByM
@@ -125,17 +125,17 @@ const id = await NPP.node.id()
 console.log(id.addresses)
 ```
 
-You'll see a list of addresses your node is publishing on. Expect the browser to have only 2, and node.js to have more. Since we're dealing with both node.js and the browser, we'll focus on the addresses starting with `p2p-circut`.
+You will see a list of addresses your node is publishing on. Expect the browser to have only 2, and node.js to have more. Since we're dealing with both node.js and the browser, we'll focus on the addresses starting with `p2p-circuit`.
 
 #### What just happened?
 
 Before this, you were working offline. Now you're not. You've been connected to the global IPFS network and are ready for peer to-peer connections.
 
 - Removing `preload: { enabled: false }` enables connection to the bottom two nodes from the above bootstrap list.
-- Removing `config: {  Bootstrap: [], Addresses: { Swarm: [] } }` will prevent thie storing of empty arrays in your config files for the `Bootstrap` and `Addresses.Swarm` config keys
+- Removing `config: {  Bootstrap: [], Addresses: { Swarm: [] } }` will prevent the storing of empty arrays in your config files for the `Bootstrap` and `Addresses.Swarm` config keys
 - `this.node.bootstrap.add(undefined, { default: true })` restores the default list of bootstrap peers, as seen above
 - `NPP.node.config.set("Addresses.Swarm", ...` restores the default swarm addresses. You should have run this in node.js only
-- `relay: { enabled: true, hop: { enabled: true, active: true } }` sets up a your node as a "circut relay", which means that others will be able to "hop" through your node to connect to your peers, and your node will hop over others to do the same.
+- `relay: { enabled: true, hop: { enabled: true, active: true } }` sets up a your node as a "circuit relay", which means that others will be able to "hop" through your node to connect to your peers, and your node will hop over others to do the same.
 
 Again, you won't have to do either of these restorations if you're starting with a fresh IPFS repo. These instructions are just included to deepen your understanding of what's going on in the stack. We realize we've been spending a lot of time in IPFS config and IPFS commands - it's understandable, since the IPFS features form the backbone of what we're doing with OrbitDB.
 
@@ -143,7 +143,7 @@ Again, you won't have to do either of these restorations if you're starting with
 
 ### Getting a list of connected peers
 
-Your users will want to know which users they are connected to or at the very least how many peers. You'll enable that using a simple IPFS function.
+Your users will want to know which users they are connected to or at the very least how many peers. You will enable that using a simple IPFS function.
 
 Create the `getIpfsPeers` function inside of the `NewPiecePlease` class.
 
@@ -166,7 +166,7 @@ Note that this number will increase over time as your swarm automatically grows,
 
 ### Manually connecting to peers
 
-All users will be running their own IPFS nodes either in the browser or on node.js. They'll want to connect together, so you'll now allow your users to connect to other peers via their IPFS ids.
+All users will be running their own IPFS nodes either in the browser or on node.js. They'll want to connect together, so you will now allow your users to connect to other peers via their IPFS ids.
 
 There's a number of ways to model and test this during development - you could open up two browsers, or a public and private window in the same browser. Similarly, you could run one instance of the app in node.js and the other in the browser. You should be able to connect to any of them.
 
@@ -182,7 +182,7 @@ Create the `connectToPeer` function inside the `NewPiecePlease` class:
 + }
 ```
 
-Then, update the `_init_` function to include an event handler for when a peer is connected:
+Then, update the `_init` function to include an event handler for when a peer is connected:
 
 ```diff
   async _init() {
@@ -244,7 +244,7 @@ You can leverage this mechanism to create a simple communication mechanism betwe
 
 #### Subscribing to "your" channel
 
-Your users will need to be able to receive messages that are broadcast to them. You'll enable by having them subscribe to a topic named after their IPFS id.
+Your users will need to be able to receive messages that are broadcast to them. You will enable this by having them subscribe to a topic named after their IPFS id.
 
 Update the `_init` function to look like the following:
 
@@ -275,7 +275,7 @@ Update the `_init` function to look like the following:
 
 ```
 
-Then, add the `handleMessageRecieved` function to `NewPiecePlease`
+Then, add the `handleMessageReceived` function to `NewPiecePlease`
 
 ```javascript
 handleMessageReceived(msg) {
@@ -301,7 +301,7 @@ Messages are sent with the data as type `Buffer` and can contain any JSON-serial
 
 #### Sending messages to peers
 
-Now that the nodes are listening, they'll want to send messages to each other. You'll enable this to  give your users the ability to send messages to each other via the pubsub topics of their IPFS ids.
+Now that the nodes are listening, they'll want to send messages to each other. You will enable this to  give your users the ability to send messages to each other via the pubsub topics of their IPFS ids.
 
 Create the `sendMessage` function inside the `NewPiecePlease` class:
 
@@ -337,7 +337,7 @@ You enabled a simple message sending and receiving system which allows peer-to-p
 
 ### Key Takeaways
 
-- In order to do anything peer-to-peer, you'll need to be connected to the global IPFS network
+- In order to do anything peer-to-peer, you will need to be connected to the global IPFS network
 - If you started offline, the default configuration is restorable
 - Your node announces itself to the network via its _swarm_ addresses
 - Your node will connect to _bootstrap_ peers automatically, and you can manually connect to peers on command
