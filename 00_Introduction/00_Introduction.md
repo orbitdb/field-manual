@@ -3,7 +3,7 @@
 
 ## Welcome to Our Distributed Future
 
-If you are reading this book, you are likely interested in decentralization, distributed technology, or peer-to-peer networking. If you've been paying attention, the last few years preceding the writing of this text have been truly landmark in terms of privacy, data soverignty, and decentralized technologies.
+If you are reading this book, you are likely interested in decentralization, distributed technology, peer-to-peer architectures, or some combination of the three. If you're not, perhaps you should be! Anybody that has been paying attention during the last few years has seen some truly landmark events in terms of privacy, data soverignty, and decentralized technologies:
 
 - GDPR
 - Massive data breaches
