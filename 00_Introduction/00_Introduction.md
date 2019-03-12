@@ -6,9 +6,10 @@
 If you are reading this book, you are likely interested in decentralization, distributed technology, or peer-to-peer networking. If you've been paying attention, the last few years preceding the writing of this text have been truly landmark in terms of privacy, data soverignty, and decentralized technologies.
 
 - GDPR
-- 
+- Massive data breaches
+- Facebook, elections, etc.
 
-As you can see, there's a lot of work to be done - not just for members of our industry but for the general public. While this work isn't purely technical - people will require education and agency in decentralizing themselves and their data - this text will assume that you, the reader, are technical enough to implement the concepts put forward in this book.
+As you can see, there's a lot of work to be done - not just for members of our industry but for the general public. While this work isn't purely technical - consumers will require education and agency in decentralizing themselves and their data - this text will assume that you, the reader, are technical enough to implement the concepts put forward in this book.
 
 Whether you are a front-end developer, a back-end developer, a user experience expert, or even a technology writer or marketer, you will play a key role in advocating and implementing distributed applications in the 21st century. This means that you, yes _you_ are on the front-lines of decentralization, and _you_ be part of building our distributed future.
 
