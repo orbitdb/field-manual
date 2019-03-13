@@ -321,8 +321,8 @@ You can then utilize this function in your application code, and your user will 
 
 ```javascript
 let data // can be any JSON-serializable value
-var hash = "QmXG8yk8UJjMT6qtE2zSxzz3U7z5jSYRgVWLCUFqAVnByM";
-var callback = console.error
+const hash = "QmXG8yk8UJjMT6qtE2zSxzz3U7z5jSYRgVWLCUFqAVnByM";
+const callback = console.error
 await NPP.sendMessage(hash, data, callback)
 ```
 
@@ -333,7 +333,7 @@ You enabled a simple message sending and receiving system which allows peer-to-p
 - `this.node.types.Buffer(msgString)` encoded the message, after JSON stringification, into a Buffer object.
 - `this.node.pubsub.publish(topic, messageBuffer)` sends the encoded Buffer to the topic specified. In our case, this will be the IPFS id
 
-> **Note:** These techniques presented for _educational purposes only_, with no consideration as to security or privacy. You should be encrypting and signing messages at the application level. More on this in Chapter 6 of the tutorial.
+> **Note:** These techniques are presented for _educational purposes only_, with no consideration as to security or privacy. You should be encrypting and signing messages at the application level. More on this in Chapter 6 of the tutorial.
 
 ### Key Takeaways
 
