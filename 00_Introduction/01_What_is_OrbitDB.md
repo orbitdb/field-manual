@@ -1,4 +1,4 @@
-## Enter OrbitDB
+## What is OrbitDB?
 
 If _IPFS_ can be considered a distributed "hard drive" where all data are content-addressed and retrievable from a peer-to-peer swearm, it follows that _OrbitDB_ is distributed database engine. OrbitDB creates and manages mutable databases and provides an extremely simple interface, typically centered around simple `get` and `set` functions, to manage a large deal of complexity to store these databases in a distributed fashion on IPFS.
 
