@@ -25,8 +25,7 @@ By the late 1980s, academic works involving distributed consensus algorithms suc
 
 in 1991, the first World Wide Website went live, and what is now the most popular content and user interface layer for the internet was born. The web allowed anybody with the means to publish a website and link to other sites using their location-based addresses.
 
-Nobody disputes that these technologies have transformed (and are still transforming) the world as we speak. However, 
-
+Already you can see we have a distributed infrastructure, the seeds of distributed computation, and a hyperlinked data structure. This alone 
 ### Early Peer-to-Peer Applications
 
 TODO: Kleppman, etc
