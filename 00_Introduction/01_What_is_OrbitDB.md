@@ -18,4 +18,4 @@ OrbitDB is released under the MIT software license, which is an exceedingly perm
 
 ### OrbitDB is a tool for you, the developer, to build distributed applications
 
-Outside of an rereference implementation called [Orbit Chat](https://github.com/orbitdb/orbit-web), the OrbitDB team primiarily focuses on making OrbitDB more robust, reliable, and performant. Our mission is to enable you to build distributed applications that will break into the mainstream and allows your users true soverignty over their data. 
+Outside of a rereference implementation called [Orbit Chat](https://github.com/orbitdb/orbit-web), the OrbitDB team primiarily focuses on making OrbitDB more robust, reliable, and performant. Our mission is to enable you to build distributed applications that will break into the mainstream and allows your users true soverignty over their data. 
