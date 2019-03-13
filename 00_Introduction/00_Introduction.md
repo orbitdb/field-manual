@@ -2,7 +2,7 @@
 
 ## Centralized Power: The Present
 
-If you are reading this book, you are likely interested in decentralization, distributed technology, peer-to-peer architectures, or some combination of the three. If you're not, perhaps you should be! Anybody that has been paying attention during the last few years has seen some truly landmark events in terms of privacy, data soverignty, and decentralized technologies:
+Anybody that has been paying attention during the last few years has been a witness to some truly landmark events:
 
 - GDPR
 - Massive data breaches
