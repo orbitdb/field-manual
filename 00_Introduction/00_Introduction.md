@@ -9,6 +9,7 @@ If you are reading this book, you are likely interested in decentralization, dis
 - Facebook, elections, etc.
 - IOT Data being used by insurance companies
 - the devaluation of music and art
+- ML Fairness
 
 As you can see, there's a lot of work to be done - not just for members of our industry but for the general public. While this work isn't purely technical - consumers will require education and agency in decentralizing themselves and their data - this text will assume that you, the reader, are technical enough to implement the concepts put forward in this book.
 
