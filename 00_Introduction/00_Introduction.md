@@ -1,7 +1,6 @@
 # Introduction
 
-
-## Welcome to Our Distributed Future
+## Centralized Power: The Present
 
 If you are reading this book, you are likely interested in decentralization, distributed technology, peer-to-peer architectures, or some combination of the three. If you're not, perhaps you should be! Anybody that has been paying attention during the last few years has seen some truly landmark events in terms of privacy, data soverignty, and decentralized technologies:
 
@@ -13,7 +12,7 @@ As you can see, there's a lot of work to be done - not just for members of our i
 
 Whether you are a front-end developer, a back-end developer, a user experience expert, or even a technology writer or marketer, you will play a key role in advocating and implementing distributed applications in the 21st century. This means that you, yes _you_ are on the front-lines of decentralization, and _you_ be part of building our distributed future.
 
-## Historical Context
+## How did we get here? A Historical Context
 
 Distributed systems are nothing new, yet somehow advances in this space tend to "disrupt" more thoughougly than any VC-funded startup can ever hope to, with results that are often as tragic as they are profound.
 
@@ -26,11 +25,16 @@ By the late 1980s, academic works involving distributed consensus algorithms suc
 in 1991, the first World Wide Website went live, and what is now the most popular content and user interface layer for the internet was born. The web allowed anybody with the means to publish a website and link to other sites using their location-based addresses.
 
 Already you can see we have a distributed infrastructure, the seeds of distributed computation, and a hyperlinked data structure. This alone 
+
 ### Early Peer-to-Peer Applications
 
 TODO: Kleppman, etc
 
 TODO: 1999-2004 Napster, Kazaa, etc.
+
+### The Gig Economy
+
+TODO: The gig economy, distrbuted serfdom, 
 
 ### Enter the Blockchain
 
@@ -38,11 +42,7 @@ The publication of the Bitcoin whitepaper in October 2008, started a new renaiss
 
 Thegave the industry a new focus and a new way of thinking about a critical finance. The fact that it was published by a mysterious figure, the so-called Satoshi Nakamoto, only served to mystify technologists and 
 
-### The Gig Economy
-
-TODO: The gig economy, distrbuted serfdom, 
-
-### The New Distributed Renaissance
+## The Way Out: Our Distributed Future 
 
 TODO: IPFS
 
