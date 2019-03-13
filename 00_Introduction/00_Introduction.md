@@ -11,7 +11,7 @@ Anybody that has been paying attention during the last few years has been a witn
 - the devaluation of music and art
 - ML Fairness
 
-The central problem in a lot of these cases is a simple asymmetry - the people that _generate_ the data do not end up _owning_ the data. This can and will be used against you, in a court of law or elsewhere.
+The central problem in all these cases comes from a simple asymmetry: the people that _generate_ the data do not end up _owning_ the data. This can and will be used against you: in a court of law, in your bank account balance, in your social stature and in your overall life outcome.
 
 ## How did we get here? A Historical Context
 
@@ -35,7 +35,7 @@ TODO: 1999-2004 Napster, Kazaa, etc.
 
 ### The Gig Economy
 
-TODO: The gig economy, distrbuted serfdom, 
+Companies now use decentralized thiBy providing a centralized platform to manage a decentralized set of assets 
 
 ### Enter the Blockchain
 
