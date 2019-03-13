@@ -4,6 +4,12 @@ We want to believe that any application that can be built using traditional mode
 
 OrbitDB excels in flexibly building complex distributed appplications.
 
+### OrbitDB is NOT a Blockchain
+
+OrbitDB operates on the model of _eventual consistency_ meaning that operations can be taking place at places and times that you are unaware of, with the assumption that you'll eventually sync up. Each time you interact with the database, you are interactive with a snapshot in time.
+
+This contrasts with Blockchain's idea of _strong consistency_ where entries are added to the database only after they have been verified by a distributed consensus algorithm.
+
 ### Who is already using OrbitDB?
 
 Perhaps the best way to answer your question of "What can I build with OrbitDB?" is by example. There are already several organizations using OrbitDB in the wild.
