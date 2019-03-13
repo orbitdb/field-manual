@@ -4,14 +4,15 @@
 
 Anybody that has been paying attention during the last few years has been a witness to some truly landmark events:
 
-- GDPR
-- Massive data breaches
-- Facebook, elections, etc.
-- IOT Data being used by insurance companies
-- the devaluation of music and art
-- ML Fairness
+- Data stores in centralized locations has been breached time adn time again in the form of government and criminal hacking, exposing the data of millions of people per attack
+- The Internet-of-Things has linke your behavioral and usage data directly to the headquarters of megacorporations
+- Artists, musicians, performers, and writers alike are now able to use platforms like Spotify and Amazon to publish their work to a larger audience, but the devaluation of art and music is complete, leaving struggling artisans to compete with each other for fractions of what they made even 10 years ago.
+- Historical data is now being mined and repurposed for algorithms, leading to practices such as real estate pricing and predictive policing. Only very recently has any attention been paid to the bias inherent in these data sets.
+- Facebook's true innovation - monetizing **attention** by way of harvesting and processing user data - has wreaked its fair share of havok in terms of society and politics.
 
 The central problem in all these cases comes from a simple asymmetry: the people that _generate_ the data do not end up _owning_ the data. This can and will be used against you: in a court of law, in your bank account balance, in your social stature and in your overall life outcome.
+
+While recent legislation has fired back against these megacorporations.
 
 ## How did we get here? A Historical Context
 
