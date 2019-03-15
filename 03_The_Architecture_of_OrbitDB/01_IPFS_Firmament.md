@@ -71,3 +71,7 @@ This is a _directed acyclic graph_ or a "DAG". Connections only flow in one dire
 Node connections are generally represented in data by storing a pointer to another node id. For example, modeling a twitter follow in JSON might look sometihng like `{ id: "@your_username", follows: "@aphelionz" }`. In a DAG, a common and very effective way is to point directly their CIDs - the unique cryptographic hash of the content you're looking for. This gives you benefits of using CIDS in general: verifiability and performance, and also the added benefit of being able to _enforce_ the acyclic property of the graph - it is effectively impossible for any past nodes to predict the hashes of future nodes in order to store a pointer to them ahead of time.
 
 > **Note:** This technique of using cryptographic hashes to link data is named after [Ralph Merkle](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C22&q=ralph+merkle&btnG=), so this data structure is called a _Merkle DAG_.
+
+#### Example
+
+TODO: `ipfs.dag` example
