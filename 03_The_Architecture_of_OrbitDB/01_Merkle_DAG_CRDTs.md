@@ -61,11 +61,13 @@ This is a _graph_ of connected _nodes_.
 
 ![Simple Graph](../images/Simple-Graph.jpg)
 
-This is a _directed graph_
+This is a _directed graph_. Connections flow in a certain direction, and can be reciprocal.
 
 ![Directed Graph](../images/Directed-Graph.jpg)
 
-This is an directed _acyclic_ graph.
+This is a directed _acyclic_ graph. Connections only flow in one direction and never "cycle." or loop back.
+
+![Directed Acyclic Graph](../images/Directed-Acyclic-Graph.jpg)
 
 As you can see, a directed acyclic graph, or DAG, is a graph of nodes, connected in a direction, that never circles back upon itself. That is, no nodes later in the graph point back to any previous nodes.
 
