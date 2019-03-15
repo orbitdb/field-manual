@@ -55,7 +55,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 If you copy and paste that , newlines and all, into a file named `MIT` and then add that text to IPFS, it will return `QmWpvK4bYR7k9b1feM48fskt2XsZfMaPfNnFxdbhJHw7QJ` every time. That is now, and will be in the future, the _content address_ of that file.
 
-### Directed Acyclic Graphs, Merkle Style
+### Directed Acyclic Graphs
 
 This is a _graph_ of connected _nodes_.
 
@@ -63,7 +63,7 @@ This is a _graph_ of connected _nodes_.
 
 This is a _directed graph_
 
-TODO: directed graph illustration
+![Directed Graph](../images/Directed-Graph.jpg)
 
 This is an directed _acyclic_ graph.
 
@@ -73,4 +73,6 @@ You can make the nodes "point" to each other, but perhaps the best way is to use
 
 This technique of using cryptographic hashes to link data is named after [Ralph Merkle](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C22&q=ralph+merkle&btnG=), so this data structure is called a Merkle DAG.
 
-### CRDTs
+### Interplanetary Linked Data
+
+Many popular pieces of software, notably Git and blockchain technologies that power cryptocurrencies like Bitcoin, rely on Merkle DAGS. IPFS does as well, using it to form the basis of a standard called Interplanetary Linked Data, or IPLD.
