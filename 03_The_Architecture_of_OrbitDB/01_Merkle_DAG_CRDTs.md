@@ -6,8 +6,7 @@
   <h3>Table of Contents</h3>
   
 - [Content-Addressed vs Location-Addressed](#content-addressed-vs-location-addressed)
-- Y
-- Z
+- [Directed Acyclic Graphs](#directed-acyclic-graphs)
 
 </div>
 
@@ -57,24 +56,18 @@ If you copy and paste that , newlines and all, into a file named `MIT` and then 
 
 ### Directed Acyclic Graphs
 
-This is a _graph_ of connected _nodes_.
+This is a _graph_ of connected _nodes_. Think of a network of computers connected via Ethernet cable. Ethernet is directionless; the computers are simply "connected."
 
 ![Simple Graph](../images/Simple-Graph.jpg)
 
-This is a _directed graph_. Connections flow in a certain direction, and can be reciprocal.
+This is a _directed graph_. Connections flow in a certain direction, but can be reciprocal. Think of users on a social media network that allows "following." You following another user is not the same as them following you, but following can be mutual.
 
 ![Directed Graph](../images/Directed-Graph.jpg)
 
-This is a directed _acyclic_ graph. Connections only flow in one direction and never "cycle." or loop back.
+This is a _directed acyclic graph_ or a "DAG". Connections only flow in one direction and never "cycle." or loop back. This 
 
 ![Directed Acyclic Graph](../images/Directed-Acyclic-Graph.jpg)
 
-As you can see, a directed acyclic graph, or DAG, is a graph of nodes, connected in a direction, that never circles back upon itself. That is, no nodes later in the graph point back to any previous nodes.
+Node connections are generally represented in data by storing a pointer to another node id. For example, modeling a twitter follow in JSON might look sometihng like `{ id: "@your_username", follows: "@aphelionz" }`. In a DAG, a common and very effective way is to point directly their CIDs - the unique cryptographic hash of the content you're looking for. This gives you benefits of using CIDS in general: verifiability and performance, and also the added benefit of being able to _enforce_ the acyclic property of the graph - it is effectively impossible for any past nodes to predict the hashes of future nodes in order to store a pointer to them ahead of time.
 
-You can make the nodes "point" to each other, but perhaps the best way is to use their CIDs. You get the benefits of using CIDS in general: verifiability and performance, and nwo you have the added benefit of being able to _enforce_ the acyclic property of the graph - it is virtually impossible for any past nodes to predict the hashes of future nodes in order to reference backwards.
-
-This technique of using cryptographic hashes to link data is named after [Ralph Merkle](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C22&q=ralph+merkle&btnG=), so this data structure is called a Merkle DAG.
-
-### Interplanetary Linked Data
-
-Many popular pieces of software, notably Git and blockchain technologies that power cryptocurrencies like Bitcoin, rely on Merkle DAGS. IPFS does as well, using it to form the basis of a standard called Interplanetary Linked Data, or IPLD.
+> **Note:** This technique of using cryptographic hashes to link data is named after [Ralph Merkle](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C22&q=ralph+merkle&btnG=), so this data structure is called a _Merkle DAG_.
