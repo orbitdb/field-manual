@@ -15,7 +15,7 @@
 
 Most content on the internet is _location-addressed_. You type in a familiar name, such as [https://github.com/orbitdb](https://github.com/orbitdb) and that request is sent through a system that queries, cross-references, and retrieves that content based on _where_ that content is. That is, which servers out of the millions  out there are the ones with your data on it.
 
-TODO; Location-addressed illustration.
+![Location-Addressed Illustration](../images/Location-Addressed.jpg)
 
 In IPFS, your files are instead _content-addressed_. When you add content to IPFS, that content is given an address based on _what_ it is, freeing it from the constraints of its location.
 
