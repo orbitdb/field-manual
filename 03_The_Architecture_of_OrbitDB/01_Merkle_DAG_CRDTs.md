@@ -17,22 +17,20 @@ Most content on the internet is _location-addressed_. You type in a familiar nam
 
 ![Location-Addressed Illustration](../images/Location-Addressed.jpg)
 
-In IPFS, your files are instead _content-addressed_. When you add content to IPFS, that content is given an address based on _what_ it is, freeing it from the constraints of its location. You simply ask for what you want, and multiple servers can respond at the same time if they have the data.
+In IPFS, your files are instead _content-addressed_. When you add content to IPFS, that content is given an address based on _what_ it is, freeing it from the constraints of its location. You simply ask for what you want, by its _hash_, and multiple servers can respond at the same time if they have the data.
 
 ![Content-Addressed Hashing](../images/Content-Addressed.jpg)
 
-Content addressing is based on a technique called _hashing_. This is a very oblique way of saying that it chops up your data into blocks, sums them together repeatedly, and reduces the filw down to a unique alphanumeric string called a _hash_. This is a process identical to a "checksum," if you're familiar with that.
+Content addressing is achieved by a technique called _hashing_, which is a very oblique way of saying "chops up your data into blocks, sum them together repeatedly, and reduce the filw down to a unique, consistently-sized alphanumeric string."  This is a process identical to generating a "checksum," if you're familiar with that.
 
-TODO: Content-addressed illustration.
-
-There are currently two standards in play, Content ID version 0 (CIDv0) and Content ID version 1 (CIDv1).
+For hashing algorithms, there are currently two standards in play: Content ID version 0 (CIDv0) and Content ID version 1 (CIDv1).
 
 - CIDv0 hashes look like this: `QmWpvK4bYR7k9b1feM48fskt2XsZfMaPfNnFxdbhJHw7QJ`
 - CIDv1 hashes look like this: `zdpuAmRtbL62Yt5w3H6rpm8PoMZFoQuqLgxoMsDJR5frJGxKJ`
 
 > **Note:** These hashes are a special type called a [multihash](https://github.com/multiformats/multihash). In practice, this means they have self-describing prefixes. If you see something starting with `zdpu`, you know it's a CIDv1.
 
-The two main reasons to switch to content addressing are _performance_ and _verifiability_.  of the main reasons for contend-addressing is performance - 
+The two main reasons to switch to content addressing are _performance_ and _verifiability_. The performance boost comes from the fact that you can download files simultaneously from multiple peers, similar to Bittorrent. The hashes are also verifiable, meaning that you only download data you request. No other data can have that same hash. 
 
 #### Example
 
@@ -55,7 +53,7 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
-If you copy and paste that , newlines and all, into a file named `MIT` and then add that text to IPFS, it will return `QmWpvK4bYR7k9b1feM48fskt2XsZfMaPfNnFxdbhJHw7QJ` every time.
+If you copy and paste that , newlines and all, into a file named `MIT` and then add that text to IPFS, it will return `QmWpvK4bYR7k9b1feM48fskt2XsZfMaPfNnFxdbhJHw7QJ` every time. That is now, and will be in the future, the _content address_ of that file.
 
 ### Directed Acyclic Graphs, Merkle Style
 
