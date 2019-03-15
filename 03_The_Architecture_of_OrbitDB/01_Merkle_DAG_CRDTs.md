@@ -59,7 +59,7 @@ If you copy and paste that , newlines and all, into a file named `MIT` and then 
 
 This is a _graph_ of connected _nodes_.
 
-TODO: Graph illustration
+![Simple Graph](../images/Simple-Graph.jpg)
 
 This is a _directed graph_
 
