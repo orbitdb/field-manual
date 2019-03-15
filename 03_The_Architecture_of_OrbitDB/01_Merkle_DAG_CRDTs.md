@@ -13,11 +13,13 @@
 
 ### Content-Addressed vs Location-Addressed
 
-Most content on the internet is _location-addressed_. You type in a familiar name, such as [https://github.com/orbitdb](https://github.com/orbitdb) and that request is sent through a system that queries, cross-references, and retrieves that content based on _where_ that content is. That is, which servers out of the millions  out there are the ones with your data on it.
+Most content on the internet is _location-addressed_. You type in a familiar name, such as [https://github.com/orbitdb](https://github.com/orbitdb) and that request is sent to the Domain Name System (DNS), which queries, cross-references, and determines which servers out of the millions  out there are the ones with your data on it. Then, that server would understand how to process your query, and send the data back.
 
 ![Location-Addressed Illustration](../images/Location-Addressed.jpg)
 
-In IPFS, your files are instead _content-addressed_. When you add content to IPFS, that content is given an address based on _what_ it is, freeing it from the constraints of its location.
+In IPFS, your files are instead _content-addressed_. When you add content to IPFS, that content is given an address based on _what_ it is, freeing it from the constraints of its location. You simply ask for what you want, and multiple servers can respond at the same time if they have the data.
+
+![Content-Addressed Hashing](../images/Content-Addressed.jpg)
 
 Content addressing is based on a technique called _hashing_. This is a very oblique way of saying that it chops up your data into blocks, sums them together repeatedly, and reduces the filw down to a unique alphanumeric string called a _hash_. This is a process identical to a "checksum," if you're familiar with that.
 
