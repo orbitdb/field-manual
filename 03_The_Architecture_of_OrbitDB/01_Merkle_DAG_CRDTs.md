@@ -1,4 +1,4 @@
-## The Interplanetary File System
+## Firmament: The Interplanetary File System
 
 > In order to understand how OrbitDB works, you need to understand a few things about how the Interplanetary File System (IPFS) works. IPFS is unique in a number of ways, but the TODO most relevant to you are how it assigns addresses to data, and 
 
