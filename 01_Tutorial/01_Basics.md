@@ -154,7 +154,7 @@ folder later.
 instantiation) and swarm peers list (peers that can connect and disconnect at any time to empty. We will populate these
 later.
 - `node.on("error", (e) => { throw new Error(e) })` implements extremely basic error handling if something happens
-during node creation
+during the creation of the IPFS node.
 - `node.on("ready", (e) => { orbitdb = new OrbitDB(node) })` instantiates OrbitDB on top of the IPFS node when it is ready.
 
 By running the code above, you have created a new IPFS node that works locally and is not connected to any peers.
@@ -177,7 +177,7 @@ blocks/  config  datastore/  datastore_spec  keys/  version
 
 Looking inside the `orbitdb/` folder you will see that the subfolder has the same ID as orbitdb, as well as the IPFS node. This is purposeful, as this initial folder contains metadata that OrbitDB needs to operate. See Part 3 for detailed information about this.
 
-The `ipfs/` folder contains all of your IPFS data. Explaining this in depth is outside of the scope of this tutorial, and  the curious can find out more [here](https://ipfs.io).
+The `ipfs/` folder contains all of your IPFS data. Explaining this in depth is outside of the scope of this tutorial, but  the curious can find out more [here](https://ipfs.io).
 
 ##### What else happened in the browser?
 
@@ -202,7 +202,7 @@ Expand of your `_init` function to the following:
 +   this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
 +
 +   const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
-+   this.pieces = await orbitdb.docstore('pieces', options)
++   this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
   }
 ```
 
