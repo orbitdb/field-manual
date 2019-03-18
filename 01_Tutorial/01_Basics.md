@@ -99,7 +99,7 @@ From here on out, we will ignore these isometric bookends and concentrate wholly
 OrbitDB requires a running IPFS node to operate, so you will create one here and notify OrbitDB about it. by running the
 following code. It's a lot but it constitutes the frame for an _isomorphic_ JavaScript app, that is, one that runs in both the browser and in node.js with the same code.
 
-> **Note:** We have designed Chapters 1 and 2 of the tutorial to work work offline, not requiring any internet connectivity or connections to peers.
+> **Note:** We have designed Chapters 1 and 2 of the tutorial to work offline, not requiring any internet connectivity or connections to peers.
 
 ```diff
 class NewPiecePlease() {
