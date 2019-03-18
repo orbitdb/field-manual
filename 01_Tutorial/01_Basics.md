@@ -229,7 +229,7 @@ You will see something like the following as an output: `/orbitdb/zdpuB3VvBJHqYC
 
 Your code created a local OrbitDB database, of type "docstore", writable only by the user who created it.
 
-- `options` defines the parameters for the database we are about to create.
+- `defaultOptions` and `docStoreOptions` define the parameters for the database we are about to create.
   - `accessController: { write: [orbitdb.identity.publicKey] }` defines the ACL, or "Access Control List". In this instance
   we are restricting `write` access to ONLY orbitdb instances identified by our particular `publicKey`
   - `indexBy: "hash"` is a docstore-specific option, which specifies which field to index our database by
