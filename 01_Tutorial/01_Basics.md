@@ -223,7 +223,7 @@ You will see something like the following as an output: `/orbitdb/zdpuB3VvBJHqYC
     - The **name** of the database
 3. The final part is the name you provided, in this case `pieces`, which becomes the final part of the multiaddress
 
-> *Note:* Addresses that start with Qm… are typically CIDv0 content addresses, while addresses that start with zdpu…. are CIDv1. Misunderstanding OrbitDB addressing can lead to some very unexpected - sometimes hilarious, sometimes disastrous outcomes. Read more in Part 2: Thinking Peer to Peer to learn more.
+> *Note:* Addresses that start with Qm… are typically CIDv0 content addresses, while addresses that start with zdpu…. are CIDv1. Misunderstanding OrbitDB addresses can lead to some very unexpected - sometimes hilarious, sometimes disastrous outcomes.
 
 #### What just happened?
 
