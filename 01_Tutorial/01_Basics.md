@@ -69,7 +69,7 @@ Create a new file called `newpieceplease.js` and put this code in there:
 + }
 
 + try {
-+   module.exports = exports = new NewPiecePlease(IPFS, OrbitDB)
++   module.exports = exports = new NewPiecePlease(Ipfs, OrbitDB)
 + } catch (e) {
 +   window.NPP = new NewPiecePlease(window.Ipfs, window.OrbitDB)
 + }
