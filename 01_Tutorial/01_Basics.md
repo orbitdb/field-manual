@@ -105,7 +105,9 @@ following code. It's a lot but it constitutes the frame for an _isomorphic_ Java
 class NewPiecePlease() {
 -   constructor(IPFS, OrbitDB) { }
 +   constructor(IPFS, OrbitDB) {
-+     let node = new IPFS({
++     this.OrbitDB = OrbitDB
++
++     this.node = new IPFS({
 +       preload: { enabled: false },
 +       repo: "./ipfs",
 +       EXPERIMENTAL: { pubsub: true },
@@ -115,12 +117,12 @@ class NewPiecePlease() {
 +       }
 +     });
 +
-+     node.on("error", (e) => { throw (e) })
-+     node.on("ready", this._init.bind(this))
++     this.node.on("error", (e) => { throw (e) })
++     this.node.on("ready", this._init.bind(this))
 +   }
 +
 +   async _init() {
-+     this.orbitdb = await OrbitDB.createInstance(this.node)
++     this.orbitdb = await this.OrbitDB.createInstance(this.node)
 +
 +     this.onready()
 +   }
