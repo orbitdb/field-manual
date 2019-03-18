@@ -18,7 +18,7 @@ In the following chapters you will learn the following topics.
 
 1. [Laying the Foundation](./01_Tutorial/01_Basics.md) covers the installation of IPFS and OrbitDB and the basics of database creation.
 2. [Managing Data](./01_Tutorial/02_Managing_Data.md) introduces OrbitDB data stores and walks you through basic create, update, and delete methods of OrbitDB.
-3. [Structuring Data](./01_Tutorial/03_Structuring_Data.md) suggests some ways to structure multiple OrbitDBs into a more robust schema, primary via nesting.
+3. [Structuring Data](./01_Tutorial/03_Structuring_Data.md) suggests some ways to structure multiple OrbitDBs into a more robust schema.
 4. [Peer-to-peer, Part 1 (IPFS)](./01_Tutorial/04_P2P_Part_1.md) begins a large discussion of peer-to-peer networking and messaging, starting with the IPFS layer.
 5. [Peer-to-peer, Part 2 (OrbitDB)](./01_Tutorial/04_P2P_Part_2.md) adds OrbitDB to the mix through database discovery, connection, and replication.
 6. [Identity and Permissions](./01_Tutorial/06_Identity_Permission.md) hardens the library via encryption and distributed identity.
@@ -35,11 +35,7 @@ Using OrbitDB as the backbone, you will build a JavaScript class that enables su
 
 #### Why a music app?
 
-OrbitDB is already used all over the world, and this tutorial reflects that. There are many other topics we could
-have chosen that touch the vast majority of humans on earth: finance, politics, climate, religion. However, those are
-generally contentious and complicated.
-
-We believe that **music** is a uniquely universal cultural feature - something that all humans share, enjoy, or at least appreciate. Your participation in this tutorial will make it easier for musicians all over the world to find sheet music to practice with. This isn't a naïve overstatement; it is really possible that what you make here will functionally be usable immediately, as a solid MVP, by actual musicians - and we encourage you to let us know if you know anyone who does end up using it! Some MVPs are make-and-forget; this one will stand on its own legs.
+OrbitDB is already used all over the world, and we believe that **music** is a uniquely universal cultural feature - something that all humans share, enjoy, or at least appreciate. Your participation in this tutorial will make it easier for musicians all over the world to find sheet music to practice with. This isn't a naïve overstatement; it is really possible that what you make here will functionally be usable immediately, as a solid MVP, by actual musicians - and we encourage you to let us know if you know anyone who does end up using it! Some MVPs are make-and-forget; this one will stand on its own legs.
 
 ### Conventions
 
