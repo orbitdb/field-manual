@@ -21,7 +21,7 @@ There's a lot of moving parts in connecting to a peer's OrbitDB database, and yo
 
 Throughout the OrbitDB / IPFS stack, logging is controlled via a global variable called `LOG` which uses string pattern matching to filter and display logs, e.g. `LOG="*"` will show all logs and be very noisy.
 
-In node.js, you can enable this by passing an environment variable before the invocation of the `node` command:
+In Node.js, you can enable this by passing an environment variable before the invocation of the `node` command:
 
 ```bash
 $ LOG="orbit*" node
@@ -29,7 +29,7 @@ $ LOG="orbit*" node
 
 In the browser, you can set this as a global variable on `window`:
 
-```javascript
+```JavaScript
 window.LOG="orbit*"
 ```
 
@@ -142,7 +142,7 @@ Finally, create the `handleMessageReceived` function:
 
 In your application code you can use this functionality like so:
 
-```javascript
+```JavaScript
 // Connect to a peer that you know has a New Piece, Please! user database
 await NPP.connectToPeer("Qm.....")
 
@@ -257,7 +257,7 @@ Finally, create the `connectToCompanions` function:
 
 In your application layer, you can test this functionality like so:
 
-```javascript
+```JavaScript
 NPP.oncompaniononline = console.log
 NPP.oncompanionnotfound = () => { throw(e) }
 ```
@@ -296,7 +296,7 @@ Create the following function, which combines much of the code you've written an
 + }
 ```
 
-You can now test this by creating a few different instances of the app (try both browser and node.js instances), connecting them via their peer IDs, discovering their databases, and running `NPP.queryCatalog()`.
+You can now test this by creating a few different instances of the app (try both browser and Node.js instances), connecting them via their peer IDs, discovering their databases, and running `NPP.queryCatalog()`.
 
 #### What just happened?
 

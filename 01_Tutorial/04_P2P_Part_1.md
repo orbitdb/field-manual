@@ -33,7 +33,7 @@ class NewPiecePlease {
     });
 ```
 
-Now, you can either delete your data, by deleting the `ipfs` and `orbitdb` folders in node.js, or by clearing your local data in the browser, or you can restore locally. If you don't mind doing this, you can skip ahead to [Getting a list of connected peers](#getting-a-list-of-connected-peers).
+Now, you can either delete your data, by deleting the `ipfs` and `orbitdb` folders in Node.js, or by clearing your local data in the browser, or you can restore locally. If you don't mind doing this, you can skip ahead to [Getting a list of connected peers](#getting-a-list-of-connected-peers).
 
 #### Restoring default IPFS config values
 
@@ -43,24 +43,24 @@ If you don't want to blow away your data, then you can manually restore the defa
 
 Bootstrap peers are peers that your node connects to automatically when it starts. IPFS supplies this list by default and is comprised of a decentralized set of public IPFS servers.
 
-However, since we purposefully started with an empty list of bootstrap peers and they won't be restored by simply removing the config values. This is because bootstrap and swarm values are persisted in your IPFS config. This is located in the filesystem in the case of node.js and in IndexedDB in the case of the browser. You should not manually edit these files.
+However, since we purposefully started with an empty list of bootstrap peers and they won't be restored by simply removing the config values. This is because bootstrap and swarm values are persisted in your IPFS config. This is located in the filesystem in the case of Node.js and in IndexedDB in the case of the browser. You should not manually edit these files.
 
 However, nothing will change yet when you run the app. To see this, run this command in a running application:
 
-```javascript
+```JavaScript
 await NPP.node.bootstrap.list()
 // outputs []
 ```
 
 To restore the default peers, like the one generated in the previous chapters, run this command _once_ to restore your default bootstrap peers.
 
-```javascript
+```JavaScript
 this.node.bootstrap.add(undefined, { default: true })
 ```
 
 Re-running `bootstrap.list` now gives you a colorful array of bootstrap peers, ready to be connected to.
 
-```javascript
+```JavaScript
 await NPP.node.bootstrap.list()
 /* outputs:
 '/ip4/104.236.176.52/tcp/4001/ipfs/QmSoLnSGccFuZQJzRadHn95W2CrSFmZuTdDWP8HXaHca9z',
@@ -96,13 +96,13 @@ Swarm listening on /p2p-circuit/ipfs/QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz
 Swarm listening on /p2p-circuit/p2p-websocket-star/ipfs/QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX
 ```
 
-In node.js, run this command:
+In Node.js, run this command:
 
-```javascript
+```JavaScript
 NPP.node.config.set("Addresses.Swarm", ['/ip4/0.0.0.0/tcp/4002', '/ip4/127.0.0.1/tcp/4003/ws'], console.log)
 ```
 
-After restarting your app you will see the console output confirming you're swarming. In node.js you will see something like:
+After restarting your app you will see the console output confirming you're swarming. In Node.js you will see something like:
 
 ```plain
 Swarm listening on /p2p-websocket-star/ipfs/QmXG8yk8UJjMT6qtE2zSxzz3U7z5jSYRgVWLCUFqAVnByM
@@ -120,12 +120,12 @@ Swarm listening on /p2p-circuit/ip4/127.0.0.1/tcp/4003/ws/ipfs/QmXG8yk8UJjMT6qtE
 
 You can get the addresses that your node is publishing on via the following command:
 
-```javascript
+```JavaScript
 const id = await NPP.node.id()
 console.log(id.addresses)
 ```
 
-You will see a list of addresses your node is publishing on. Expect the browser to have only 2, and node.js to have more. Since we're dealing with both node.js and the browser, we'll focus on the addresses starting with `p2p-circuit`.
+You will see a list of addresses your node is publishing on. Expect the browser to have only 2, and Node.js to have more. Since we're dealing with both Node.js and the browser, we'll focus on the addresses starting with `p2p-circuit`.
 
 #### What just happened?
 
@@ -134,7 +134,7 @@ Before this, you were working offline. Now you're not. You've been connected to 
 - Removing `preload: { enabled: false }` enables connection to the bottom two nodes from the above bootstrap list.
 - Removing `config: {  Bootstrap: [], Addresses: { Swarm: [] } }` will prevent the storing of empty arrays in your config files for the `Bootstrap` and `Addresses.Swarm` config keys
 - `this.node.bootstrap.add(undefined, { default: true })` restores the default list of bootstrap peers, as seen above
-- `NPP.node.config.set("Addresses.Swarm", ...` restores the default swarm addresses. You should have run this in node.js only
+- `NPP.node.config.set("Addresses.Swarm", ...` restores the default swarm addresses. You should have run this in Node.js only
 - `relay: { enabled: true, hop: { enabled: true, active: true } }` sets up a your node as a "circuit relay", which means that others will be able to "hop" through your node to connect to your peers, and your node will hop over others to do the same.
 
 Again, you won't have to do either of these restorations if you're starting with a fresh IPFS repo. These instructions are just included to deepen your understanding of what's going on in the stack. We realize we've been spending a lot of time in IPFS config and IPFS commands - it's understandable, since the IPFS features form the backbone of what we're doing with OrbitDB.
@@ -156,7 +156,7 @@ Create the `getIpfsPeers` function inside of the `NewPiecePlease` class.
 
 Then, in your application code:
 
-```javascript
+```JavaScript
 const peers = await NPP.getPeers()
 console.log(peers.length)
 // 8
@@ -166,9 +166,9 @@ Note that this number will increase over time as your swarm automatically grows,
 
 ### Manually connecting to peers
 
-All users will be running their own IPFS nodes either in the browser or on node.js. They'll want to connect together, so you will now allow your users to connect to other peers via their IPFS ids.
+All users will be running their own IPFS nodes either in the browser or on Node.js. They'll want to connect together, so you will now allow your users to connect to other peers via their IPFS ids.
 
-There's a number of ways to model and test this during development - you could open up two browsers, or a public and private window in the same browser. Similarly, you could run one instance of the app in node.js and the other in the browser. You should be able to connect to any of them.
+There's a number of ways to model and test this during development - you could open up two browsers, or a public and private window in the same browser. Similarly, you could run one instance of the app in Node.js and the other in the browser. You should be able to connect to any of them.
 
 Create the `connectToPeer` function inside the `NewPiecePlease` class:
 
@@ -220,7 +220,7 @@ Finally, create the a simple, yet extensible, `handlePeerConnected` function.
 
 In your application code, implement these functions like so:
 
-```javascript
+```JavaScript
 NPP.onpeerconnect = console.log
 await NPP.connectToPeer("QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX")
 // some time later, outputs "QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX"
@@ -231,7 +231,7 @@ await NPP.connectToPeer("QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX")
 You created 2 functions: one that shows a list of peers and another that lets you connect to peers via their multiaddress.
 
 - `this.node.swarm.peers()` returns a an array of connected peers
-- `protocol = "/p2p-circuit/ipfs/"` is used as a default since this is a common protocol between browser and node.js
+- `protocol = "/p2p-circuit/ipfs/"` is used as a default since this is a common protocol between browser and Node.js
 - `this.node.swarm.connect(protocol + multiaddr)` connects to a peer via their a multiaddress that combines `protocol` and `multiaddr` into an address like `p2p-circuit/ipfs/Qm....`
 - `this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))` registers the `handlePeerConnected` function to be called whenever a peer connects to the application node.
 - `ipfsPeer.id._idB58String` is a nice, synchronous way to get the peer id.
@@ -277,7 +277,7 @@ Update the `_init` function to look like the following:
 
 Then, add the `handleMessageReceived` function to `NewPiecePlease`
 
-```javascript
+```JavaScript
 handleMessageReceived(msg) {
   if(this.onmessage) this.onmessage(msg)
 }
@@ -285,7 +285,7 @@ handleMessageReceived(msg) {
 
 Use this in your application:
 
-```javascript
+```JavaScript
 NPP.onmessage = console.log
 /* When receiving a message, it will output something like:
 {
@@ -319,7 +319,7 @@ Create the `sendMessage` function inside the `NewPiecePlease` class:
 
 You can then utilize this function in your application code, and your user will see the output as defined in the previous subsection.
 
-```javascript
+```JavaScript
 let data // can be any JSON-serializable value
 const hash = "QmXG8yk8UJjMT6qtE2zSxzz3U7z5jSYRgVWLCUFqAVnByM";
 const callback = console.error

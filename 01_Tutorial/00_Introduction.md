@@ -4,13 +4,13 @@
 
 ## Introduction
 
-In order to maximize accessibility this tutorial does not favor either node.js or the browser, since the same OrbitDB code runs on both. By following this tutorial step-by-step, your goal will be to build a _library_ in the form of a JavaScript class that empowers a UI developer (CLI or Web) to build out a fully-realized application.
+In order to maximize accessibility this tutorial does not favor either Node.js or the browser, since the same OrbitDB code runs on both. By following this tutorial step-by-step, your goal will be to build a _library_ in the form of a JavaScript class that empowers a UI developer (CLI or Web) to build out a fully-realized application.
 
 ### Requirements
 
-* A computer with a command line (unix/linux based or Windows command prompt)
+* A computer with a command line (UNIX/Linux based or Windows command prompt)
 * A modern web browser (Firefox, Chrome, Edge, etc)
-* node.js (optional)
+* Node.js (optional)
 
 ### What will I learn?
 
@@ -31,11 +31,13 @@ If you are a musician, you probably need some form of sheet music to practice. W
 
 These self-organizing clusters of musicians will always need better ways to share common and necessary sheet music with each other. What better use case for a peer-to-peer application?
 
-Using OrbitDB as the backbone, you will build a JavaScript class that enables such an application. It will allow people to import and maintain a local collection of their own sheet music in the form of PDF files. More importantly, they will be able to _share_ this music by letting them interface with _peers_, and search across multiple distribute databases at once for music. For fun, and for users who are just looking for something to sight-read, you will give them a magic "button" that, given an instrument, will display piece of sheet music at random from their collection.
+Using OrbitDB as the backbone, you will build a JavaScript class that enables such an application. It will allow people to import and maintain a local collection of their own sheet music in the form of PDF files. More importantly, they will be able to _share_ this music by letting them interface with _peers_, and search across multiple distributed databases at once for music. For fun, and for users who are just looking for something to sight-read, you will give them a magic "button" that, given an instrument, will display piece of sheet music at random from their collection.
 
 #### Why a music app?
 
 OrbitDB is already used all over the world, and we believe that **music** is a uniquely universal cultural feature - something that all humans share, enjoy, or at least appreciate. Your participation in this tutorial will make it easier for musicians all over the world to find sheet music to practice with. This isn't a naïve overstatement; it is really possible that what you make here will functionally be usable immediately, as a solid MVP, by actual musicians - and we encourage you to let us know if you know anyone who does end up using it! Some MVPs are make-and-forget; this one will stand on its own legs.
+
+Admittedly, a music app is somewhat arbitrary. But if you're here to learn more about OrbitDB, you'll get what you came for.
 
 ### Conventions
 
@@ -48,13 +50,13 @@ OrbitDB is already used all over the world, and we believe that **music** is a u
 * Type the examples in, do not copy and paste.
 * **What just happened?** sections are interspersed to explain in depth what happens on a technical level
 * This tutorial attempts to be as _agnostic_ as possible in terms of:
-  * Your operating system. Some command line commands are expressed as unix commands, but everything here should work on Windows as well.
+  * Your operating system. Some command line commands are expressed as UNIX commands, but everything here should work on Windows as well.
   * Your folder structure. All of the code here is written in a single file, `newpieceplease.js`
   * Your editor. Use whatever you want.
   * Your UI layer. You will see _examples_ of how the code will be used on the UI layer, be it command line or browser based, but you will not be building out the UI as part of the tutorial steps.
 * `async` and `await` are used prominently. Feel free to replace those with explicit `Promise` objects if you like.
-* Steps that **you** should complete are represented and highlighted as _diffs_. Example application code is represented as Javascript  
-* For the sake of keeping things focused, we will exclude any HTML or CSS from this tutorial and focus only on the Javascript code.
+* Steps that **you** should complete are represented and highlighted as _diffs_. Example application code is represented as JavaScript  
+* For the sake of keeping things focused, we will exclude any HTML or CSS from this tutorial and focus only on the JavaScript code.
 • _Italicized_ words are words which we think you should learn to become familiar with.
 • **Bolded** words are merely for textual emphasis. We want to make sure you don’t miss something!
 • Some typographical errors and misspellings - Javascript for JavaScript, decentralised instead of decentralized, and so on - will sneak in. If you see something, open a PR with a change! Check out our GitHub repository that this document is hosted in. All contributors will be credited.

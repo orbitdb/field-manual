@@ -66,9 +66,9 @@ Add a function called `addNewPiece` function now:
 
 We have uploaded and pinned a few piano scores to IPFS, and will provide the hashes. You can add these hashes to your database by fleshing out and using the `addNewPiece` function.
 
-In your application code, node.js or browser, you can use this function like so, utilizing the default value for the `instrument` argument.
+In your application code, Node.js or browser, you can use this function like so, utilizing the default value for the `instrument` argument.
 
-```javascript
+```JavaScript
 const cid = NPP.addNewPiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ")
 const content = await NPP.node.dag.get(cid)
 console.log(content.value.payload)
@@ -147,7 +147,7 @@ Fill in the following functions now:
 
 In your application code, you can use these functions like so:
 
-```javascript
+```JavaScript
 pieces = NPP.getAllPieces()
 pieces.forEach((piece) => { /* do something */ })
 
@@ -157,7 +157,7 @@ console.log(piece)
 
 Pulling a random score from the database is a great way to find random music to practice. Run this code:
 
-```javascript
+```JavaScript
 const pieces = NPP.getPieceByInstrument("Piano")
 const randomPiece = pieces[items.length * Math.random() | 0]
 console.log(randomPiece)
@@ -207,7 +207,7 @@ Fill in the `updatePieceByHash` and `deletePieceByHash` functions now:
 
 In your application code, you can run these new functions and see the opcodes that return to get a sense of what is going on.
 
-```javascript
+```JavaScript
 const cid = await NPP.updatePiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ", "Harpsichord")
 // do stuff with the cid as above
 
@@ -261,9 +261,9 @@ You can then use that hash in the same manner as above to add it to the database
 
 ##### In Node.js
 
-In Node.JS, adding a file from the filesystem can be accomplished like so:
+In Node.js, adding a file from the filesystem can be accomplished like so:
 
-```javascript
+```JavaScript
 var IPFS = require('ipfs')
 var ipfs = new IPFS(/* insert appropriate options here for your local IPFS installation */)
 
@@ -274,7 +274,7 @@ ipfs.addFromFs("./file.pdf").then(console.log)
 
 If you have a HTML file input with an ID of "fileUpload", you can do something like the following to add content to IPFS:
 
-```javascript
+```JavaScript
 var fileInput = document.getElementById("fileUpload")
 
 var file = fileInput.files[0]
@@ -296,7 +296,7 @@ Note that there are still issues with swarming in the browser, so you may have t
 
 #### What just happened?
 
-You added some potentially very large media files to IPFS, and then stored the 40-byte addresses in OrbitDB for retrieval and use. You are now able to leverage the benefits of both IPFS and OrbitDB in both the browser and node.js.
+You added some potentially very large media files to IPFS, and then stored the 40-byte addresses in OrbitDB for retrieval and use. You are now able to leverage the benefits of both IPFS and OrbitDB in both the browser and Node.js.
 
 > **Note:** IPFS nodes run _inside_ the browser, so if you're adding lots of files via the above method, keep an eye on your IndexedDB quotas, since that's where IPFS is storing the blocks.
 
