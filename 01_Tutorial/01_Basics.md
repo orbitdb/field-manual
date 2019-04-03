@@ -29,23 +29,17 @@ different between the browser and Node.js, so we cover both here.
 Choose a project directory and `cd` to there from your command line. Then run the following command.
 
 ```bash
-$ npm init
-... enter commands to create package.json ...
-
-TODO Why not suggest --yes here?
-
+$ npm init --yes
 $ npm install orbit-db ipfs
 ```
 
 This will create a `package.json`, `package-lock.json`, and `node_modules` folder.
 
-> **Note:** If you're running on a Windows prompt, or if you don't have certain build tools like [`g++`](TODO) and [`python`](TODO) installed, you may see a noisy console output with lots of warnings and errors. Keep going, your code should still run.
-
-TODO Link to g++ and python for people who want to install it.
+> **Note:** If you're running on a Windows prompt, or if you don't have certain build tools like [`g++`](https://gcc.gnu.org) and [`python`](https://www.python.org) installed, you may see a noisy console output with lots of warnings and errors. Keep going, your code should still run.
 
 #### In the Browser
 
-If you're using the browser for this tutorial, we recommend using [unpkg](TODO) for obtaining pre-built, minified versions of both IPFS and OrbitDB. Simply include these in your HTML:
+If you're using the browser for this tutorial, we recommend using [unpkg](https://www.unpkg.com) for obtaining pre-built, minified versions of both IPFS and OrbitDB. Simply include these in your HTML:
 
 ```html
 <script src="https://unpkg.com/ipfs/dist/index.min.js"></script>
