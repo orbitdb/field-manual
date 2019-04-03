@@ -1,15 +1,15 @@
 {
   "name": "orbitdb-field-manual",
   "version": "1.0.0",
-  "description": "Readme TBD",
+  "description": "An end-to-end tutorial, an in-depth look at OrbitDB's architecture, and even some philosophical musings about decentralization and the distributed industry. From the creators of OrbitDB.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "markdownlint -c markdownlint.json *.md */*.md",
     "build": "make build"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Mark Henderson",
+  "license": "CC-BY-NC-ND-4.0",
   "devDependencies": {
     "markdownlint": "^0.12.0",
     "markdownlint-cli": "^0.14.0"
