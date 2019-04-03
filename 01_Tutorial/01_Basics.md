@@ -1,8 +1,6 @@
 ## Chapter 1 - Laying the Foundation
 
-> The basics of OrbitDB include _installing OrbitDB (and IPFS)_, _setting up a new isomorphic project_, _creating databases_, and _understanding how to choose data stores_.
-
-TODO What do you mean by isomorphic? I remember that term mostly from playing around with meteor. What does it mean in this context? Can you define it somewhere for people like me?
+> The basics of OrbitDB include installing OrbitDB (and IPFS), setting up an isomorphic project that runs in both Node.js and the browser, creating databases, and understanding how to choose data stores.
 
 <div>
   <h3>Table of Contents</h3>
