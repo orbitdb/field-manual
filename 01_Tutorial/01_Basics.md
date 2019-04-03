@@ -1,6 +1,6 @@
 ## Chapter 1 - Laying the Foundation
 
-> The basics of OrbitDB include installing OrbitDB (and IPFS), setting up an isomorphic project that runs in both Node.js and the browser, creating databases, and understanding how to choose data stores.
+> The basics of OrbitDB include installing OrbitDB (and IPFS), setting up an isomorphic project that runs in both Node.js and the browser, creating databases, and understanding how to choose datastores.
 
 <div>
   <h3>Table of Contents</h3>
@@ -10,7 +10,7 @@ Please see the [Introduction](./00_Introduction.md) before beginning this chapte
 - [Installing the requirements: IPFS and OrbitDB](#installing-the-requirements-ipfs-and-orbitdb)
 - [Instantiating IPFS and OrbitDB](#instantiating-ipfs-and-orbitdb)
 - [Creating a database](#creating-a-database)
-- [Choosing a data store](#choosing-a-data-store) TODO Why not datastore?
+- [Choosing a datastore](#choosing-a-data-store) TODO Why not datastore?
 - [Key takeaways](#key-takeaways)
 
 </div>
@@ -269,7 +269,7 @@ Similarly, a new IndexedDB database was created to hold your OrbitDB-specific in
 
 This shows you one of OrbitDB's core strengths - the ability to manage a lot of complexity between its own internals and those of IPFS, providing a clear and clean API to manage the data that matters to you.
 
-### Choosing a data store
+### Choosing a datastore
 
 OrbitDB organizes its functionality by separating different data management concerns, schemas and APIs into **stores**. We chose a `docstore` for you in the last chapter, but after this tutorial it will be your job to determine the right store for the job.
 
