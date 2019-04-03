@@ -10,7 +10,7 @@ Please see the [Introduction](./00_Introduction.md) before beginning this chapte
 - [Installing the requirements: IPFS and OrbitDB](#installing-the-requirements-ipfs-and-orbitdb)
 - [Instantiating IPFS and OrbitDB](#instantiating-ipfs-and-orbitdb)
 - [Creating a database](#creating-a-database)
-- [Choosing a datastore](#choosing-a-data-store) TODO Why not datastore?
+- [Choosing a datastore](#choosing-a-data-store)
 - [Key takeaways](#key-takeaways)
 
 </div>
@@ -22,11 +22,7 @@ Before you start working on the core functionality behind the peer-to-peer shari
 You will need to get the code for OrbitDB and its dependency, IPFS, and make it available to your project. The process is
 different between the browser and Node.js, so we cover both here.
 
-|||
-| ------ | ---------------------------------------------------- |
-| ![NOTE](../images/note.svg) | Both OrbitDB and js-ipfs are open source, which give you the ability to build and even contribute to the code. This will be covered in detail in Part 3. |
-
-TODO You mean Chapter 3? Doesn't look like this has been written yet.
+> **Note**: Both OrbitDB and js-ipfs are open source, which give you the ability to build and even contribute to the code. This will be covered in detail in [Part 3](../03_The_Architecture_of_OrbitDB).
 
 #### In Node.js
 
