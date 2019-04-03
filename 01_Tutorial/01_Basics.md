@@ -28,11 +28,11 @@ different between the browser and node.js, so we cover both here.
 
 #### In node.js
 
-Choose a project directory and `cd` to there from your command line. Then run the following command.
+Choose a project directory and `cd` to there from your command line. Then run the following command:
 
 ```bash
-$ npm init
-... enter commands to create package.json ...
+$ npm init --yes
+# ... enter commands to create package.json ...
 
 $ npm install orbit-db ipfs
 ```
@@ -40,6 +40,8 @@ $ npm install orbit-db ipfs
 This will create a `package.json`, `package.lock`, and `node_modules` folder.
 
 > **Note:** If you're running on a windows prompt, or if you don't have certain build tools like `g++` and `python` installed, you may see a noisy console output with lots of warnings and errors. Keep going, your code should still run.
+
+> **Note:** Adding the `--yes` flag will automatically use your npm defaults. You can go through and edit the package.json later, but it's not entirely necessary for this part of the tutorial.
 
 #### In the Browser
 
