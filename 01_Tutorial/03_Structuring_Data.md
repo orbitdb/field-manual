@@ -46,7 +46,7 @@ async addNewPiece(hash, instrument = "Piano") {
 
 In your application code this would look something like this:
 
-```javascript
+```JavaScript
 const cid = await NPP.addNewPiece("QmdzDacgJ9EQF9Z8G3L1fzFwiEu255Nm5WiCey9ntrDPSL", "Piano")
 const content = await NPP.node.dag.get(cid)
 console.log(content.value.payload.value)
@@ -94,7 +94,7 @@ Now, add a few functions to `NewPiecePlease` that utilize the counters when nece
 
 These can be used in your application code like so:
 
-```javascript
+```JavaScript
 const piece = NPP.getPieceByHash("QmdzDacgJ9EQF9Z8G3L1fzFwiEu255Nm5WiCey9ntrDPSL")
 const cid = await NPP.incrementPracticeCounter(piece)
 const content = await NPP.node.dag.get(cid)
@@ -171,7 +171,7 @@ Then add the following functions in your class:
 
 In your application code, you can use them like this:
 
-```javascript
+```JavaScript
 await NPP.updateProfile("username", "aphelionz")
 
 var profileFields = NPP.getAllProfileFields();A
@@ -235,7 +235,7 @@ Then, update your _init_ function to call `loadFixtureData` with some starter da
 
 Then, if you were to clear all local data and load the app from scratch, you would see this:
 
-```javascript
+```JavaScript
 var profileFields = NPP.getAllProfileFields()
 console.log(profileFields)
 ```

@@ -1,6 +1,6 @@
 ## Chapter 1 - Laying the Foundation
 
-> The basics of OrbitDB include  _installing OrbitDB (and IPFS)_, _setting up a new isomorphic project_, _creating databases_, and _understanding how to choose data stores_.
+> The basics of OrbitDB include installing OrbitDB (and IPFS), setting up an isomorphic project that runs in both Node.js and the browser, creating databases, and understanding how to choose datastores.
 
 <div>
   <h3>Table of Contents</h3>
@@ -10,7 +10,7 @@ Please see the [Introduction](./00_Introduction.md) before beginning this chapte
 - [Installing the requirements: IPFS and OrbitDB](#installing-the-requirements-ipfs-and-orbitdb)
 - [Instantiating IPFS and OrbitDB](#instantiating-ipfs-and-orbitdb)
 - [Creating a database](#creating-a-database)
-- [Choosing a data store](#choosing-a-data-store)
+- [Choosing a datastore](#choosing-a-data-store)
 - [Key takeaways](#key-takeaways)
 
 </div>
@@ -20,32 +20,28 @@ Please see the [Introduction](./00_Introduction.md) before beginning this chapte
 Before you start working on the core functionality behind the peer-to-peer sharing of sheet music, you’ll need to get the foundations of our distributed database set up.
 
 You will need to get the code for OrbitDB and its dependency, IPFS, and make it available to your project. The process is
-different between the browser and node.js, so we cover both here.
+different between the browser and Node.js, so we cover both here.
 
-|||
-| ------ | ---------------------------------------------------- |
-| ![NOTE](../images/note.svg) | Both OrbitDB and js-ipfs are open source, which give you the ability to build and even contribute to the code. This will be covered in detail these in Part 3. |
+> **Note**: Both OrbitDB and js-ipfs are open source, which give you the ability to build and even contribute to the code. This will be covered in detail in [Part 3](../03_The_Architecture_of_OrbitDB).
 
-#### In node.js
+#### In Node.js
 
 Choose a project directory and `cd` to there from your command line. Then run the following command:
 
 ```bash
 $ npm init --yes
-# ... enter commands to create package.json ...
-
 $ npm install orbit-db ipfs
 ```
 
-This will create a `package.json`, `package.lock`, and `node_modules` folder.
+This will create a `package.json`, `package-lock.json`, and `node_modules` folder.
 
-> **Note:** If you're running on a windows prompt, or if you don't have certain build tools like `g++` and `python` installed, you may see a noisy console output with lots of warnings and errors. Keep going, your code should still run.
+> **Note:** If you're running on a Windows prompt, or if you don't have certain build tools like [`g++`](https://gcc.gnu.org) and [`python`](https://www.python.org) installed, you may see a noisy console output with lots of warnings and errors. Keep going, your code should still run.
 
 > **Note:** Adding the `--yes` flag will automatically use your npm defaults. You can go through and edit the package.json later, but it's not entirely necessary for this part of the tutorial.
 
 #### In the Browser
 
-If you're using the browser for this tutorial, we recommend using unpkg for obtaining pre-built, minified versions of both IPFS and OrbitDB. Simply include these in your HTML:
+If you're using the browser for this tutorial, we recommend using [unpkg](https://www.unpkg.com) for obtaining pre-built, minified versions of both IPFS and OrbitDB. Simply include these in your HTML:
 
 ```html
 <script src="https://unpkg.com/ipfs/dist/index.min.js"></script>
@@ -56,7 +52,7 @@ You will now have global `Ipfs` and `OrbitDB` objects available to you. You will
 
 ### Creating the isomorphic bookends
 
-Since OrbitDB works in the browser and node.js, you're going to want to make the library as _isomorphic_ as possible. This means we want the same code to run in the browser as runs in JS. Luckily, you will have the luxury of using the same language, JavaScript, for both node.js and browser environments.
+Since OrbitDB works in the browser and Node.js, you're going to want to make the library as _isomorphic_ as possible. This means we want the same code to run in the browser as runs in REPL or local environment. Luckily, you will have the luxury of using the same language, JavaScript, for both Node.js and browser environments.
 
 Create a new file called `newpieceplease.js` and put this code in there:
 
@@ -77,7 +73,7 @@ Create a new file called `newpieceplease.js` and put this code in there:
 + }
 ```
 
-In the browser, you can include this file in a script tag and have an `NPP` object at your disposal. In node.js, you can simply call something like:
+In the browser, you can include this file in a script tag and have an `NPP` object at your disposal. In Node.js, you can simply call something like:
 
 ```plain
 $ node
@@ -89,7 +85,7 @@ Not much should happen either way, since there's not much code there yet. For no
 
 #### What just happened?
 
-Using some key JavaScript features, you have created the shell for our application that runs in both node.js and the browser. It defines a new class called `NewPiecePlease`, with a constructor that takes two arguments
+Using some key JavaScript features, you have created the shell for our application that runs in both Node.js and the browser. It defines a new class called `NewPiecePlease`, with a constructor that takes two arguments
 
 1. `IPFS` for the `js-ipfs` constructor
 2. `OrbitDB` for the `orbit-db` constructor
@@ -99,7 +95,7 @@ From here on out, we will ignore these isometric bookends and concentrate wholly
 ### Instantiating IPFS and OrbitDB
 
 OrbitDB requires a running IPFS node to operate, so you will create one here and notify OrbitDB about it. by running the
-following code. It's a lot but it constitutes the frame for an _isomorphic_ JavaScript app, that is, one that runs in both the browser and in node.js with the same code.
+following code. It's a lot but it constitutes the frame for an _isomorphic_ JavaScript app, that is, one that runs in both the browser and in Node.js with the same code.
 
 > **Note:** We have designed Chapters 1 and 2 of the tutorial to work offline, not requiring any internet connectivity or connections to peers.
 
@@ -133,7 +129,7 @@ class NewPiecePlease() {
 
 This allows you to run something like the following in your application code:
 
-```javascript
+```JavaScript
 NPP.onready = () => {
    console.log(NPP.orbitdb.id)
 }
@@ -148,7 +144,7 @@ Start with the `new Ipfs` line. This code creates a new IPFS node. Note the defa
 - `preload: { enabled: false }` disables the use of so-called "pre-load" IPFS nodes. These nodes exist to help load balance
 the global network and prevent DDoS. However, these nodes can go down and cause errors. Since we are only working offline
 for now, we include this line to disable them.
-- `repo: './ipfs'` designates the path of the repo in node.js only. In the browser, you can actually remove this line. The
+- `repo: './ipfs'` designates the path of the repo in Node.js only. In the browser, you can actually remove this line. The
 default setting is a folder called `.jsipfs` in your home directory. You will see why we choose this acute location for the
 folder later.
 - `EXPERIMENTAL: { pubsub: true }` enables IPFS pubsub, which is a method of communicating between nodes and **is required for OrbitDB usage**, despite whether or not we are connected to other peers.
@@ -164,9 +160,9 @@ You have also loaded a new `orbitdb` object into memory, ready to create databas
 
 *You are now ready to use OrbitDB!*
 
-##### What else happened in node.js?
+##### What else happened in Node.js?
 
-When you ran the code in node.js, you created two folders in your project structure: `'orbitdb/` and `ipfs/`.
+When you ran the code in Node.js, you created two folders in your project structure: `'orbitdb/` and `ipfs/`.
 
 ```bash
 $ # slashes added to ls output for effect
@@ -210,7 +206,7 @@ Expand of your `_init` function to the following:
 
 Then, in your application code, run this:
 
-```javascript
+```JavaScript
 NPP.onready = () => {
    console.log(NPP.pieces.id)
 }
@@ -240,7 +236,7 @@ completed, the database is open and can be acted upon.
 
 > **Caution!** A note about identity: Your public key is not your identity. We repeat, *your public key is not your identity*.  That being said, it is often used as such for convenience's sake, and the lack of better alternatives. So, in the early parts of this  tutorial we say "writable only to you" when we really mean "writable only by an OrbitDB instance on top of an IPFS node that has the correct id, which we are assuming is controlled by you."
 
-##### What else happened in node.js?
+##### What else happened in Node.js?
 
 You will see some activity inside your project's `orbitdb/` folder. This is good.
 
@@ -265,7 +261,7 @@ Similarly, a new IndexedDB database was created to hold your OrbitDB-specific in
 
 This shows you one of OrbitDB's core strengths - the ability to manage a lot of complexity between its own internals and those of IPFS, providing a clear and clean API to manage the data that matters to you.
 
-### Choosing a data store
+### Choosing a datastore
 
 OrbitDB organizes its functionality by separating different data management concerns, schemas and APIs into **stores**. We chose a `docstore` for you in the last chapter, but after this tutorial it will be your job to determine the right store for the job.
 
@@ -291,7 +287,7 @@ Also, OrbitDB developers can write their own stores if it suits them. This is an
 - OrbitDB instances create databases which have unique _addresses_
 - Basic access rights to OrbitDB databases are managed using access control lists (or ACLs), based on the ID of the IPFS node performing the requests on the database
 - OrbitDB database addresses are hashes of the database's ACL, its type, and its name.
-- Since OrbitDB and IPFS are written in JavaScript, it is possible to build isomorphic applications that run in the browser  and in node.js
+- Since OrbitDB and IPFS are written in JavaScript, it is possible to build isomorphic applications that run in the browser  and in Node.js
 - OrbitDB manages needed flexibility of schema and API design in functionality called **stores**.
 - OrbitDB comes with a handful of stores, and you can write your own.
 - Each store will have its own API, but you will generally have at least a `get` and a `put`
