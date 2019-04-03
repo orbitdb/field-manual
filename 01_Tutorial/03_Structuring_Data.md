@@ -186,7 +186,7 @@ We think you're getting the idea.
 
 You created a database to store anything and everything that might pertain to a user, and then linked the `pieces` to that, nested inside.
 
-- `this.orbitdb.kvstore("user", this.defaultOptions)` creates a new OrbitDB of a type that allows you to manage a simple key value store.
+- `this.orbitdb.kvstore("user", this.defaultOptions)` creates a new OrbitDB of a type that allows you to manage a simple key-value store.
 - `this.user.set('pieces', this.pieces.id)` is the function that the `kvstore` uses to set items. This is equivalent to something like the shorthand `user = {}; user.pieces = id`
 - `NPP.user.all()` returns all keys and values from a `keystore` database
 - `this.user.del(key)` deletes the specified key and corresponding value from the store
@@ -264,8 +264,8 @@ You created simple fixture data and a function to load it into a fresh instantia
 - The distributed applications of the future will be complex and require data structures to mirror and manage that complexity.
 - Luckily, OrbitDB is extremely flexible when it comes to generating complex and linked data structures
 - These structures can contain any combination of OrbitDB stores - you are not limited to just one.
-- You can nest a database within another, and you can create new databases to next your existing databases within.
+- You can nest a database within another, and you can create new databases to nest your existing databases within.
 - _Nesting_ databases is a powerful approach, but it is one of many. **Do not** feel limited. **Do** share novel approaches with the community.
 - Fixture data can be loaded easily, and locally, by simply including a basic set of values during app initialization
 
-<strong>And with this, you are now ready to connect to the outside world. Continue to [Chapter 4: Peer to Peer Part 1](04_P2P_Part_1.md) to join your app to the global IPFS network, and to other users!</strong>
+<strong>And with this, you are now ready to connect to the outside world. Continue to [Chapter 4: Peer-to-Peer, Part 1](04_P2P_Part_1.md) to join your app to the global IPFS network, and to other users!</strong>

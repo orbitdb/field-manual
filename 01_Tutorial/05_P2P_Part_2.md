@@ -164,7 +164,7 @@ You updated your code to send a message to connected peers after 2 seconds, and 
 - `this.node.pubsub.subscribe` registers an event handler that calls `this.handleMessageReceived`
 - `peerDb.events.on("replicated" ...` fires when the database has been loaded and the data has been retrieved from IPFS and is stored locally. It means, simply, that you have the data and it is ready to be used.
 
-> **Note:** If you're a security-minded person, this is probably giving you a panic attack. That's ok, these methods are for educational purposes only and are meant to enhance your understanding of how a system like this works. We will cover authorization and authentication in the next chapter.
+> **Note:** If you're a security-minded person, this is probably giving you anxiety. That's ok, these methods are for educational purposes only and are meant to enhance your understanding of how a system like this works. We will cover authorization and authentication in the next chapter.
 
 ### Connecting automatically to peers with discovered databases
 

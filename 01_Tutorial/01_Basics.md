@@ -26,7 +26,7 @@ different between the browser and Node.js, so we cover both here.
 
 #### In Node.js
 
-Choose a project directory and `cd` to there from your command line. Then run the following command.
+Choose a project directory and `cd` to there from your command line. Then run the following command:
 
 ```bash
 $ npm init --yes
@@ -36,6 +36,8 @@ $ npm install orbit-db ipfs
 This will create a `package.json`, `package-lock.json`, and `node_modules` folder.
 
 > **Note:** If you're running on a Windows prompt, or if you don't have certain build tools like [`g++`](https://gcc.gnu.org) and [`python`](https://www.python.org) installed, you may see a noisy console output with lots of warnings and errors. Keep going, your code should still run.
+
+> **Note:** Adding the `--yes` flag will automatically use your npm defaults. You can go through and edit the package.json later, but it's not entirely necessary for this part of the tutorial.
 
 #### In the Browser
 
@@ -290,7 +292,7 @@ Also, OrbitDB developers can write their own stores if it suits them. This is an
 - OrbitDB comes with a handful of stores, and you can write your own.
 - Each store will have its own API, but you will generally have at least a `get` and a `put`
 
-<strong>Now that you haveve laid the groundwork, you will learn how to work with data! Onward then, to [Chapter 2: Managing Data](./02_Managing_Data.md).</strong>
+<strong>Now that you have laid the groundwork, you will learn how to work with data! Onward then, to [Chapter 2: Managing Data](./02_Managing_Data.md).</strong>
 
 - Resolves #[367](https://github.com/orbitdb/orbit-db/issues/367)
 - Resolves #[366](https://github.com/orbitdb/orbit-db/issues/366)

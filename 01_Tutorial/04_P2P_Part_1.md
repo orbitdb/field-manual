@@ -344,7 +344,7 @@ You enabled a simple message sending and receiving system which allows peer-to-p
 - Peer-to-peer communication is achieved through a "pubsub" model
 - In pubsub, users subscribe to, and broadcast messages to, "topics"
 
-<strong>Now, move on to [Chapter 05 - Peer to Peer Part 2](./05_P2P_Part_2.md)</strong>
+<strong>Now, move on to [Chapter 05 - Peer-to-Peer, Part 2](./05_P2P_Part_2.md)</strong>
 
 - Resolves #[463](https://github.com/orbitdb/orbit-db/issues/463)
 - Resolves #[468](https://github.com/orbitdb/orbit-db/issues/468)

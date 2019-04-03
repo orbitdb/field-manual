@@ -24,9 +24,9 @@ This has the following implications:
 1. Everybody will still be able to read the data given a CID or content hash via a simple `ipfs.dag.get` or `ipfs.get` call.
 2. The ACL can never change, which means you can't add/revoke other write permissions, and if you lose access to your IPFS node, you can never write to it either.
 
-Security is a vast topic. People can, and do, spend decades of their lives thinking about and working on securirty in all it's numerous aspects. For the purposes of this tutorial, we will approach security from three perspectives: Encryption, Identity, and Authorization.
+Security is a vast topic. People can, and do, spend decades of their lives thinking about and working on security in all it's numerous aspects. For the purposes of this tutorial, we will approach security from three perspectives: Encryption, Identity, and Authorization.
 
-### Encryping and decrypting your data
+### Encrypting and decrypting your data
 
 The first thing you'll do to mitigate implication #1 above is to encrypt the data locally, and store it in OrbitDB (and therefore IPFS) in its encrypted form. Your users might want to create some private profile fields, so you'll enable this functionality.
 
@@ -89,17 +89,17 @@ You have many options to choose from in terms of, and while we are reticent to m
 - [Node.js crypto module](https://nodejs.org/api/crypto.html)
 - [Web Crypto Libraries](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API)
 
-Encrypting data will work great given a strong enough encryption method. If you picked correctly, you now have until the heat death of the universe until somebdoy guesses your encryption keys and brute forces your data open. The problem, then, becomes **key management**.
+Encrypting data will work great given a strong enough encryption method. If you picked correctly, you could wait at the restaurant at the end of the universe until somebody guesses your encryption keys and brute forces your data open. The problem, then, becomes **key management**.
 
 ### Smart Contract Authentication
 
 Distributed identity is still a hotly contested topic, and frankly an unsolved problem, in our industry. However, many organizations have recently lept ahead with solutions and there will be more to come. [Metamask] and its ties to the ethereum blockchain, are one.
 
-#### What just happeened?
+#### What just happened?
 
 ### Creating your own authentication middleware
 
-#### What just happeened?
+#### What just happened?
 
 ### Key takeaways
 
