@@ -24,9 +24,9 @@ This has the following implications:
 1. Everybody will still be able to read the data given a CID or content hash via a simple `ipfs.dag.get` or `ipfs.get` call.
 2. The ACL can never change, which means you can't add/revoke other write permissions, and if you lose access to your IPFS node, you can never write to it either.
 
-Security is a vast topic. People can, and do, spend decades of their lives thinking about and working on securirty in all it's numerous aspects. For the purposes of this tutorial, we will approach security from three perspectives: Encryption, Identity, and Authorization.
+Security is a vast topic. People can, and do, spend decades of their lives thinking about and working on security in all it's numerous aspects. For the purposes of this tutorial, we will approach security from three perspectives: Encryption, Identity, and Authorization.
 
-### Encryping and decrypting your data
+### Encrypting and decrypting your data
 
 The first thing you'll do to mitigate implication #1 above is to encrypt the data locally, and store it in OrbitDB (and therefore IPFS) in its encrypted form. Your users might want to create some private profile fields, so you'll enable this functionality.
 
@@ -95,11 +95,11 @@ Encrypting data will work great given a strong enough encryption method. If you 
 
 Distributed identity is still a hotly contested topic, and frankly an unsolved problem, in our industry. However, many organizations have recently lept ahead with solutions and there will be more to come. [Metamask] and its ties to the ethereum blockchain, are one.
 
-#### What just happeened?
+#### What just happened?
 
 ### Creating your own authentication middleware
 
-#### What just happeened?
+#### What just happened?
 
 ### Key takeaways
 
