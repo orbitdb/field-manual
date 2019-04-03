@@ -294,7 +294,7 @@ Also, OrbitDB developers can write their own stores if it suits them. This is an
 - OrbitDB comes with a handful of stores, and you can write your own.
 - Each store will have its own API, but you will generally have at least a `get` and a `put`
 
-<strong>Now that you haveve laid the groundwork, you will learn how to work with data! Onward then, to [Chapter 2: Managing Data](./02_Managing_Data.md).</strong>
+<strong>Now that you have laid the groundwork, you will learn how to work with data! Onward then, to [Chapter 2: Managing Data](./02_Managing_Data.md).</strong>
 
 - Resolves #[367](https://github.com/orbitdb/orbit-db/issues/367)
 - Resolves #[366](https://github.com/orbitdb/orbit-db/issues/366)

@@ -89,7 +89,7 @@ You have many options to choose from in terms of, and while we are reticent to m
 - [Node.js crypto module](https://nodejs.org/api/crypto.html)
 - [Web Crypto Libraries](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API)
 
-Encrypting data will work great given a strong enough encryption method. If you picked correctly, you now have until the heat death of the universe until somebdoy guesses your encryption keys and brute forces your data open. The problem, then, becomes **key management**.
+Encrypting data will work great given a strong enough encryption method. If you picked correctly, you could wait at the restaurant at the end of the universe until somebody guesses your encryption keys and brute forces your data open. The problem, then, becomes **key management**.
 
 ### Smart Contract Authentication
 
