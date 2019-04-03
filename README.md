@@ -28,13 +28,13 @@ You can download a copy of the book for here, available for download in the foll
 
 ## Maintainers
 
-Mark Henderson (@aphelionz) is the maintainer and lead author of the OrbitDB field manual. However, this work is built upon the work and input of many other people:
+Mark Henderson ([@aphelionz](https://github.com/aphelionz)) is the maintainer and lead author of the OrbitDB field manual. However, this work is built upon the work and input of many other people:
 
-- @haadcode
-- @shamb0t
-- @v-v
-- @RichardLitt
-- @sirfumblestone
+- [@haadcode](https://github.com/haadcode)
+- [@shamb0t](https://github.com/shamb0t)
+- [@vvp](https://github.com/vvp)
+- [@RichardLitt](https://github.com/RichardLitt)
+- [@sirfumblestone](https://github.com/sirfumblestone)
 
 ## Contributing
 
