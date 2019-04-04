@@ -199,7 +199,10 @@ Expand of your `_init` function to the following:
     this.orbitdb = await OrbitDB.createInstance(node)
 +   this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
 +
-+   const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
++   const docStoreOptions = {
++     ...defaultOptions,
++     indexBy: 'hash',
++   }
 +   this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
   }
 ```
