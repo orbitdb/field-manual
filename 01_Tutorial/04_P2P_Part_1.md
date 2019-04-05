@@ -190,8 +190,11 @@ Then, update the `_init` function to include an event handler for when a peer is
     this.orbitdb = await OrbitDB.createInstance(this.node)
     this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
 
-    const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
-    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
+    const docStoreOptions = {
+      ...defaultOptions,
+      indexBy: 'hash',
+    }
+    this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
     await this.pieces.load()
 
     this.user = await this.orbitdb.kvstore("user", this.defaultOptions)
@@ -254,8 +257,11 @@ Update the `_init` function to look like the following:
     this.orbitdb = await OrbitDB.createInstance(this.node)
     this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
 
-    const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
-    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
+    const docStoreOptions = {
+      ...defaultOptions,
+      indexBy: 'hash',
+    }
+    this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
     await this.pieces.load()
 
     this.user = await this.orbitdb.kvstore("user", this.defaultOptions)

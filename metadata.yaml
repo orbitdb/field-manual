@@ -1,9 +1,10 @@
 ---
 title: The OrbitDB Field Manual
 abstract:
-  Straight from the creators of OrbitDB. Contains an end-to-end tutorial, an in-depth look at
+  "Straight from the creators of OrbitDB. Contains an end-to-end tutorial, an in-depth look at
   OrbitDB's underlying architecture, and even some philsophical musings about decentralization
-  and the distributed industry.
+  and the distributed industry. \n\n\n
+  This work is work is copyrighted by Haja Networks Oy, under a CC-BY-NC 4.0 Unported International License."
 subject:
   Subject!
 author:

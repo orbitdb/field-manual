@@ -137,8 +137,11 @@ Update your `_init` function to look like this:
     this.orbitdb = await OrbitDB.createInstance(this.node)
     this.defaultOptions = { write: [this.orbitdb.identity.publicKey] }
 
-    const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
-    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
+    const docStoreOptions = {
+      ...defaultOptions,
+      indexBy: 'hash',
+    }
+    this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
     await this.pieces.load()
 
 +   this.user = await this.orbitdb.kvstore("user", this.defaultOptions)
@@ -216,8 +219,11 @@ Then, update your _init_ function to call `loadFixtureData` with some starter da
     this.orbitdb = await OrbitDB.createInstance(this.node)
     this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
 
-    const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
-    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
+    const docStoreOptions = {
+      ...defaultOptions,
+      indexBy: 'hash',
+    }
+    this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
     await this.pieces.load()
 
     this.user = await this.orbitdb.kvstore("user", this.defaultOptions)

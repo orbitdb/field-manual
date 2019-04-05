@@ -27,8 +27,11 @@ Update your `NewPiecePlease class` handler, adding **one line** at the bottom of
     this.orbitdb = await OrbitDB.createInstance(this.node)
     this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
 
-    const docStoreOptions = Object.assign(this.defaultOptions, { indexBy: 'hash' })
-    this.piecesDb = await this.orbitdb.docstore('pieces', options)
+    const docStoreOptions = {
+      ...defaultOptions,
+      indexBy: 'hash',
+    }
+    this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
 +   await this.piecesDb.load()
   }
 }
