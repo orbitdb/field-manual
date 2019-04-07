@@ -6,9 +6,20 @@ Please read the introduciton first and then skip ahead to the relevant part or p
 
 ## A different perspective on centralized power
 
-Instead of adding to the stream of discourse railing against centralized power and so-called "Big Tech," we want to offer another perspective: every technology that every company has created, and every piece of data they have stored in their silos has together provided vast opportunities for us in the decentralized space. The ziggurat of the centralized is nothing more than a pedestal and springboard for us to leap off of into a bright future filled with new products and servives as yet unimagined.
+We think there's enough writing out there about the evils of centralization.
 
-In short, everything past is prologue to this moment - and we're glad you're with us.
+Instead, we want to offer the perspective that that every technology that every company before us has created, and every piece of data they have stored in their silos, has collectively provided a vast set of opportunities for us in the decentralized space. The ziggurat of the centralized is nothing more than a pedestal and springboard for us to leap off of into a bright future filled with new products and services as yet unimagined.
+
+We now have the capabilities to create distributed, decentralized applications where:
+
+- The user is in full control of their own data
+- Third-party applications ask permission to run locally, instead of storing your information on their servers
+- Peers connect directly to each other with no middlemen
+- Applications start as GDPR and HIPAA compliant, never revealing sensitive information
+- Every layer of the application can be swapped out and configured: the data layer, the middleware, and the UI layer, creating hypercustomizatible experienced
+- Industries once thought intractable can be served - finance, healthcare, manufacturing, and more
+
+We truly believe that everything past, for better or worse, is prologue to this moment - and we're glad you're with us.
 
 ## Historical Context
 
