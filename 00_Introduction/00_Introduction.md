@@ -1,18 +1,16 @@
 # Introduction
 
-## Centralized Power: The Present
+Welcome to the OrbitDB Field Manual. This book serves as a technical manual to the database engine known as OrbitDB, and also provides higher-level context for peer-to-peer technologies and ways of thinking.
 
-The last few years have been a watershed for how we collectively understand the internet, data, and our increasingly interconnected world. For instance, here are a few major events that have changed our perceptions of security, privacy, and access:
+Please read the introduciton first and then skip ahead to the relevant part or parts that interest you. In general, Parts 1 and 3 are more technical in focus, and Parts 2 and 4 are more prosaic.
 
-- Data stores in centralized locations has been breached time and time again in the form of government and criminal hacking, exposing the data of millions of people per attack. TODO Link all of these with real-world examples
-- The Internet-of-Things has linked your behavioral and usage data directly to the headquarters of large corporations; corporations, like Amazon, Apple, and Microsoft, that are so large that they are able to directly influence politics on the global scale, and are unlike anything that our society has before. This linking has in turn lead to personalization, manipulation, and exploitation to an alarming degree.
-- Artists, musicians, performers, and writers alike are now able to use platforms like Spotify and Amazon to publish their work to a larger audience, but the devaluation of art and music is dire, leaving struggling artisans to compete with each other for fractions of what they made even 10 years ago.
-- Historical data is now being mined and repurposed for algorithms, leading to practices such as real estate pricing and predictive policing. Only very recently has any attention been paid to the bias inherent in these data sets.
-- The trend of tracking user hits has lead to many large corporations monetizing **attention** by way of harvesting and processing user data. This, when done both by major media companies (Fox News, MSNBC) and social web sites (Facebook) has wreaked its fair share of havoc in terms of society and politics.
+## A different perspective on centralized power
 
-These individual points are connected. The central problem in all these cases comes from a simple asymmetry: the people that _generate_ the data do not end up _owning_ the data. This can (and has, and will) be used against you: in a court of law, in your bank account balance, in your social structure, and in your digital and physical life.
+Instead of adding to the stream of discourse railing against centralized power and so-called "Big Tech," we want to offer another perspective: every technology that every company has created, and every piece of data they have stored in their silos has together provided vast opportunities for us in the decentralized space. The ziggurat of the centralized is nothing more than a pedestal and springboard for us to leap off of into a bright future filled with new products and servives as yet unimagined.
 
-## How did we get here? A Historical Context
+In short, everything past is prologue to this moment - and we're glad you're with us.
+
+## Historical Context
 
 Distributed systems are nothing new, yet somehow advances in this space tend to "disrupt" more thoroughly than any VC-funded startup can ever hope to, with results that are often as tragic as they are profound.
 
@@ -34,7 +32,7 @@ TODO: 1999-2004 Napster, Kazaa, etc.
 
 ### The Gig Economy
 
-Companies now use decentralized thiBy providing a centralized platform to manage a decentralized set of assets 
+Companies now use decentralized ways of organizing their By providing a centralized platform to manage a decentralized set of assets 
 
 ### Enter the Blockchain
 
@@ -42,8 +40,12 @@ The publication of the Bitcoin whitepaper in October 2008, started a new renaiss
 
 Thegave the industry a new focus and a new way of thinking about a critical finance. The fact that it was published by a mysterious figure, the so-called Satoshi Nakamoto, only served to mystify technologists and 
 
-## The Way Out: Our Distributed Future 
+## Our distributed, decentralized future 
 
 TODO: IPFS
 
 We would argue that cryptocurrency and blockchain technologies only laid the foundation of our distributed future. Projects like IPFS, which harness the power of directed acyclic graphs. TODO: Filecoin
+
+## Conclusions
+
+If you still want to take an adversarial approach, feel free - nothing that we've written so far is incompatible with that. It may simply be a case that taking a positive approach to solving these problems will prove more fruitful, more productive, and healhier in the end.
