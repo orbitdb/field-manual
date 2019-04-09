@@ -77,7 +77,7 @@ const content = await NPP.node.dag.get(cid)
 console.log(content.value.payload)
 ```
 
-Running this code should give you something like the following output. Hold steady, it'is overwhelming but it will make sense after we explain what happened. For more information see Part 3, The Architecture of OrbitDB.
+Running this code should give you something like the following output. Hold steady, it is overwhelming but it will make sense after we explain what happened. For more information see Part 3, The Architecture of OrbitDB.
 
 ```json
 {

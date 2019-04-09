@@ -1,6 +1,6 @@
 ## OrbitDB Replication
 
-> OrbitDB replication is something that happens automatically, under the hood. Understanding how to use it is one thing, but many times you'll want a deeper understanding of what happens, step-by-step when a database is created and data is transferred betwen peers.
+> OrbitDB replication is something that happens automatically, under the hood. Understanding how to use it is one thing, but many times you'll want a deeper understanding of what happens, step-by-step when a database is created and data is transferred between peers.
 
 <div>
   <h3>Table of Contents</h3>

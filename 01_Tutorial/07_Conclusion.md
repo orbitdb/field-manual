@@ -6,4 +6,4 @@ By this point, you probably know more about OrbitDB than 99% of the general publ
 
 If you have issues with the tutorial, if you find errors or simply have a suggestion as to better approaches, please create a pull request and provide feedback.
 
-The next part of the book, [Thinking Peer to Peer](../02_Thinking_Peer_to_Peer), expands on the deeper concepts that you've been exposed to here at a higher level. Read on.
+The next part of the book, [Thinking Peer to Peer](../02_Thinking_Peer_to_Peer), expands on the concepts that you've been exposed to here at a higher level. Read on.
