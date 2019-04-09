@@ -1,8 +1,8 @@
 ## What can I use OrbitDB for?
 
-We want to believe that any application that can be built using traditional models can be buiilt with a peer-to-peer architecture. Perhaps view this as a challenge.
+We want to believe that any application that can be built using traditional models can be built with a peer-to-peer architecture. Perhaps view this as a challenge.
 
-OrbitDB excels in flexibly building complex distributed appplications.
+OrbitDB excels in flexibly building complex distributed applications.
 
 ### OrbitDB is NOT a Blockchain
 

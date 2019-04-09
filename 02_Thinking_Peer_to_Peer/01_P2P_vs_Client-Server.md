@@ -56,7 +56,7 @@ Therefore, they are not true _peers._
 
 ### Peers vs Clients
 
-If there are no servers, then it would follow that there are no clients. In the traditional model, the functionality of an application is split up between it's server and its client. Perhaps you've heard the terms _thin client_, _business layer_, _front-end_, _back-end_. They all mean specific things but all hint at a core feature of client server - that there is some functionality that a user has access to, and some functionality they don't.
+If there are no servers, then it would follow that there are no clients. In the traditional model, the functionality of an application is split up between its server and its client. Perhaps you've heard the terms _thin client_, _business layer_, _front-end_, _back-end_. They all mean specific things but all hint at a core feature of client server - that there is some functionality that a user has access to, and some functionality they don't.
 
 The concept of a **peer** dismisses this notion, and when users run peer-to-peer applications, they are running the entire application code of the entire system locally. This is true of any true peer-to-peer application you are used to: Bittorrent, a Bitcoin wallet, even a program from previous generations like Kazaa. When you run any of those, you're running the entire system on your computer, and that's that. No additional code is required.
 
@@ -64,7 +64,7 @@ While the functionality of the peer is the same across all instances of the appl
 
 ### Encryption vs Authorization
 
-In a system where anybody can connect to anybody else, security becomes paramount. However, without a centralized server, traditional forms of security become impossible. If there are no central chokepoints to marshall data through, there is no place to authorize every user that wants access. Additionally, users often want as much privacy as possible - even demanding full anonymity (or at least pseudonymity) in many cases.
+In a system where anybody can connect to anybody else, security becomes paramount. However, without a centralized server, traditional forms of security become impossible. If there are no central chokepoints to marshal data through, there is no place to authorize every user that wants access. Additionally, users often want as much privacy as possible - even demanding full anonymity (or at least pseudonymity) in many cases.
 
 A prime solution to this problem of distributed security is the use of strong encryption: both to encrypt the data _at rest_, meaning when it is stored on any device, and _in transit_, meaning when it is being transmitted from one device to another over an internet connection.
 
