@@ -57,6 +57,8 @@ Anybody can:
 
 To do so, create a pull request, which are are welcome and accepted.
 
+Please look at and follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+
 ### Building
 
 Requires [`Pandoc`](https://pandoc.org/) to convert markdown to other formats.
