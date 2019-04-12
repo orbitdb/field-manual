@@ -12,4 +12,4 @@ That all being said: welcome to the first days of our distributed future.
 
 ### Up next in the book
 
-Next up is [Part 1: The OrbitDB Tutorial](..//01_Tutorial). This is an long form tutorial that will introduce a new coder to all the important aspects of OrbitDB. If you are not a coder and simply wish to understand the nature of decentralization and peer-to-peer technologies, check out [Part 2: Thinking Peer-to-Peer[(../02_Thinking_Peer_to_Peer) or [Part 4: What's Next?](../04_What_Next)
+Next up is [Part 1: The OrbitDB Tutorial](..//01_Tutorial). This is an long form tutorial that will introduce a new coder to all the important aspects of OrbitDB. If you are not a coder and simply wish to understand the nature of decentralization and peer-to-peer technologies, check out [Part 2: Thinking Peer-to-Peer](../02_Thinking_Peer_to_Peer) or [Part 4: What's Next?](../04_What_Next).
