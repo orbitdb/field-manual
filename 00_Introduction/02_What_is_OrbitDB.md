@@ -14,6 +14,12 @@ OrbitDB is packaged as a Node.js library, available [here](https://github.com/or
 
 Work is currently underway to allow support for other programming languages via a common HTTP API.
 
+### OrbitDB is NOT a Blockchain
+
+OrbitDB operates on the model of _eventual consistency_ meaning that operations can be taking place at places and times that you are unaware of, with the assumption that you'll eventually connect with peers, share your logs, and sync your data. This contrasts with Blockchain's idea of _strong consistency_ where entries are added to the database only after they have been verified by some distributed consensus algorithm.
+
+There is no built-in "double spend" protection in OrbitDB - that is on you, the developer, to implement.
+
 ### OrbitDB is free (as in freedom) software
 
 OrbitDB is released under the MIT software license, which is an exceedingly permissible license. Organizations and individual developers are free to fork, embed, modify, and contribute to the code with no obligations from you, or from us. Of course, this also means there are no warranties as well.
