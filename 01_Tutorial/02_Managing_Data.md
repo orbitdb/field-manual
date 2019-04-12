@@ -90,7 +90,7 @@ Running this code should give you something like the following output. Hold stea
 }
 ```
 
-> **Note:** We hope you like the original Metroid NES game, or at least the music from it!
+> **Note:** We hope you like the original Metroid NES game, or at least the music from it! All music Copyright © Nintendo.
 
 #### What just happened?
 
