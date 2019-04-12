@@ -23,7 +23,7 @@ This has the following implications:
 1. Everybody will still be able to read the data given a CID or content hash via a simple `ipfs.dag.get` or `ipfs.get` call.
 2. The ACL can never change, which means you can't add/revoke other write permissions, and if you lose access to your IPFS node, you can never write to it either.
 
-Security is a vast topic. People can, and do, spend decades of their lives thinking about and working on security in all its numerous aspects. For the purposes of this tutorial, we will approach security from three perspectives: Encryption, Identity, and Authorization.
+Security is a vast topic. People can, and do, spend decades of their lives thinking about and working on security in all its numerous aspects. For the purposes of this tutorial, we will approach security from two perspectives: Encryption and Access control
 
 ### Encrypting and decrypting your data
 
@@ -88,25 +88,59 @@ You have many options to choose from in terms of, and while we are reticent to m
 - [Node.js crypto module](https://nodejs.org/api/crypto.html)
 - [Web Crypto Libraries](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API)
 
-Encrypting data will work great given a strong enough encryption method. If you picked correctly, you could wait at the restaurant at the end of the universe until somebody guesses your encryption keys and brute forces your data open. The problem, then, becomes **key management**.
-
-### Smart Contract Authentication
-
-Distributed identity is still a hotly contested topic, and frankly an unsolved problem, in our industry. However, many organizations have recently leapt ahead with solutions and there will be more to come. [Metamask] and its ties to the ethereum blockchain, are one.
-
-#### What just happened?
+Encrypting data will work great given a strong enough encryption method. If you picked correctly, you could wait at the restaurant at the end of the universe until somebody guesses your encryption keys and brute forces your data open. The problem, then, becomes _key management_.
 
 ### Creating your own authentication middleware
 
+Out of the box, OrbitDB only uses your user's IPFS public keys to authenticate, if at all. This is purposeful because our philosophy is to enable as much flexibility as possible. With regards to access, this could mean that you can either use a third-party application to verify access, such as "Log in with Metamask", or use your applications custom code to control access.
+
+You will do this now via a simple example that you can build upon in the future.
+
+Add a simple function to the `NewPiecePlease` class:
+
+```
++ authenticated() { return true }
+```
+
+It's not much to look at, but remember that you can put whatever code you want there to return true or false: You can check a cookie, contact an API, or verify identity against a third party service like Keybase or even something like Twitter. You just want this function to return a boolean.
+
+Then, create a brand new javascript class called "NPPAccessController"
+
+```
++ class NPPAccessController extends AccessController {
++   async canAppend (entry, identityProvider) {
++     const authenticated = NPP.authenticated()
++     return Promise.resolve(authenticated)
++   }
++
++   async grant () { }
++ }
+```
+
+Finally, pass in this access controller as an option when creating databases.
+
+```
++ const customAccessOptions = {
++   ..defaultOptions
++    accessControllerr: NPPAccessController
++ }
++ const counterDb = await this.orbitdb.counter(dbName, customAccessOptions)
+```
+
+Your access controller will then utilize the `NPP.authenticated` function to verify. Right now this will always return `true`, but you are free to modify that function as you see fit based on your custom needs.
+
 #### What just happened?
+
+You created a simple access controller, using code from within the `NewPiecePlease` class to verify.
+
+- `authenticated` is your playground - check cookies, ask your servers, do whatever you need to do there.
+- `AccessController` is the class you want to extend to create your custom access controllers
+- `canAppend` is a permission function that returns a resolved promise based on your custom code. A rejected promise means a rejected database append.
+- `grant`, if implemented, would allow you to grant access to new users of the system over time.
 
 ### Key takeaways
 
-- Resolves: #[397](https://github.com/orbitdb/orbit-db/issues/397)
-- Resolves: #[222](https://github.com/orbitdb/orbit-db/issues/222)
-- Resolves: #[327](https://github.com/orbitdb/orbit-db/issues/327)
-- Resolves: #[357](https://github.com/orbitdb/orbit-db/issues/357)
-- Resolves: #[475](https://github.com/orbitdb/orbit-db/issues/475)
-- Resolves: #[380](https://github.com/orbitdb/orbit-db/issues/380)
-- Resolves: #[458](https://github.com/orbitdb/orbit-db/issues/458)
-- Resolves: #[467](https://github.com/orbitdb/orbit-db/issues/467)
+- Security is hard and it is on you, the developer, to keep it in mind as you develop your applications
+- OrbitDB is unopinionated in terms of security topics, which provides maximal flexibility
+- Strong encryption is an effective way to ensure your data remains private inside a peer-to-peer swarm
+- Access Control is fully plugabble and customizable inside OrbitDB
