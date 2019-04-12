@@ -92,9 +92,9 @@ Encrypting data will work great given a strong enough encryption method. If you 
 
 ### Creating your own authentication middleware
 
-Out of the box, OrbitDB only uses your user's IPFS public keys to authenticate, if at all. This is purposeful because our philosophy is to enable as much flexibility as possible. With regards to access, this could mean that you can either use a third-party application to verify access, such as "Log in with Metamask", or use your applications custom code to control access.
+Out of the box, OrbitDB only checks your user's IPFS public keys to authenticate, if at all. This is purposeful: our philosophy is to provide maxmial flexibility. With regards to access, this could mean that you can either use a third-party application to verify access, such as "Log in with Metamask", or use custom application code to control access.
 
-You will do this now via a simple example that you can build upon in the future.
+You will now implement this via a simple example that you can build upon in the future.
 
 Add a simple function to the `NewPiecePlease` class:
 
@@ -102,9 +102,9 @@ Add a simple function to the `NewPiecePlease` class:
 + authenticated() { return true }
 ```
 
-It's not much to look at, but remember that you can put whatever code you want there to return true or false: You can check a cookie, contact an API, or verify identity against a third party service like Keybase or even something like Twitter. You just want this function to return a boolean.
+It's not much to look at, but remember that you can put whatever code you want there to return true or false: You can check a cookie, contact an API, or verify identity against a third party service like Keybase or Twitter. You just want this function to return a boolean.
 
-Then, create a brand new javascript class called "NPPAccessController"
+Then, create a brand new JavaScript class called "NPPAccessController"
 
 ```
 + class NPPAccessController extends AccessController {
@@ -117,7 +117,7 @@ Then, create a brand new javascript class called "NPPAccessController"
 + }
 ```
 
-Finally, pass in this access controller as an option when creating databases.
+Finally, add this to your options object to include this access controller, and pass in the options when creating databases.
 
 ```
 + const customAccessOptions = {
@@ -133,14 +133,14 @@ Your access controller will then utilize the `NPP.authenticated` function to ver
 
 You created a simple access controller, using code from within the `NewPiecePlease` class to verify.
 
-- `authenticated` is your playground - check cookies, ask your servers, do whatever you need to do there.
+- `authenticated` is your playground - check cookies, ask your servers, do whatever you need to do
 - `AccessController` is the class you want to extend to create your custom access controllers
-- `canAppend` is a permission function that returns a resolved promise based on your custom code. A rejected promise means a rejected database append.
-- `grant`, if implemented, would allow you to grant access to new users of the system over time.
+- `canAppend` is a permission function that returns a resolved promise based on your custom code - a rejected promise means a rejected database append
+- `grant`, if implemented, would allow you to grant access to new users of the system over time
 
 ### Key takeaways
 
 - Security is hard and it is on you, the developer, to keep it in mind as you develop your applications
 - OrbitDB is unopinionated in terms of security topics, which provides maximal flexibility
 - Strong encryption is an effective way to ensure your data remains private inside a peer-to-peer swarm
-- Access Control is fully plugabble and customizable inside OrbitDB
+- OrbitDB Access Control is fully plugabble and customizable
