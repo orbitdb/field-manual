@@ -1,6 +1,6 @@
 ## Chapter 6: Identity and Permissions
 
-> TODO: Description
+> OrbitDB is extremely flexible and extensible, allowing for security via strong _encryption_, and _custom access control_ based on your application's specific code and requirements 
 
 <div>
   <h3>Table of Contents</h3>
@@ -9,8 +9,7 @@ Please complete [Chapter 5 - Peer to Peer Part 2 (OrbitDB)](./05_P2P_Part_2.md) 
 
 - [On security](#on-security)
 - [Encryping and decrypting your data](#encrypting-and-decrypting-your-data)
-- [Distrbuted identity management](#distributed-identity-management)
-
+- [Creating a custom access controller](#creating-a-custom-access-controller)
 </div>
 
 ### On security
