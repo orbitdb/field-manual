@@ -14,8 +14,8 @@
     "markdownlint": "^0.12.0",
     "markdownlint-cli": "^0.14.0"
   },
-  "bugs": "https://github.com/orbitdb/orbitdb-field-manual/issues",
-  "homepage": "https://github.com/orbitdb/orbitdb-field-manual",
+  "bugs": "https://github.com/orbitdb/field-manual/issues",
+  "homepage": "https://github.com/orbitdb/field-manual",
   "contributors": [
     "aphelionz",
     "richardlitt",
