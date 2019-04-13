@@ -1,6 +1,6 @@
 ## Firmament: The Interplanetary File System
 
-> In order to understand how OrbitDB works, you need to understand a few things about how the Interplanetary File System (IPFS) works. IPFS is unique in a number of ways, but the TODO most relevant to you are how it assigns addresses to data, and 
+> In order to understand OrbitDB, you need to understand a few things about how the Interplanetary File System (IPFS) works. IPFS is unique in a number of ways, but the TODO most relevant to you are how it assigns addresses to data, and how _linked data_ structures are created.
 
 <div>
   <h3>Table of Contents</h3>
