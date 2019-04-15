@@ -77,8 +77,6 @@ Now in a diagram:
 
 ![Multiple Nodes Over Time](../images/multiple-nodes-log-over-time.png)
 
-##### Multiple Node CRDT over time, Least-Complex Example
-
 We can then see how it's possible that a CRDT may have more than one head entry (maybe hundreds) and how those entries change over time with multiple users.
 
 #### Tails
