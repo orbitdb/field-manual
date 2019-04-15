@@ -1,6 +1,6 @@
-## The `ipfs-log` package
+## The `[ipfs-log](https://github.com/orbitdb/ipfs-log)` package
 
-> The funcionality provided by the `ipfs-log` package is an implementation of a _Conflict-Free Replicated Data Type_ (CRDT) that utilizes IPFS's built in _directed acyclic graph_ (DAG) functionality to link data in a specific way. The functionality in this package forms the backbone of orbit-db.
+> The funcionality provided by the `[ipfs-log](https://github.com/orbitdb/ipfs-log)` package is an implementation of a _Conflict-Free Replicated Data Type_ (CRDT) that utilizes IPFS's built in _directed acyclic graph_ (DAG) functionality to link data in a specific way. The functionality in this package forms the backbone of orbit-db.
 
 <div>
   <h3>Table of Contents</h3>
@@ -12,15 +12,29 @@ TODO
 
 ### Conflict-Free Replicated Data Type (CRDT)
 
-In the [previous chapter] we discussed how we can use IPFS's _directted acyclic graph_ (DAG) functionality to create linked data structures. OrbitDB utilizes this by building logs wherein each entry is linked to the previous one. To share state reliably between users, and to prevent the system from being confused as to how to parse these logs deterministically, a specific type of data structure called a _Conflict-Free Replicated Data Type_, or CRDT is used.
+In the [previous chapter](../01_IPFS_Firmament.md) we discussed how we can use IPFS's _directted acyclic graph_ (DAG) functionality to create linked data structures. OrbitDB utilizes this by building logs wherein each entry is linked to the previous one. To share state reliably between users, and to prevent the system from being confused as to how to parse these logs deterministically, a specific type of data structure called a _Conflict-Free Replicated Data Type_, or CRDT is used.
 
 A CRDT is a type of log that solves the problem of locally storing and ultimately merging distrubuted data sets to other distributed data sets<sup>1</sup>. CRDTs allows users to perform operations on local databases with the intent of merging or joining those data with the data stored on the devices of other peers in the network.
+
+The `[ipfs-log](https://github.com/orbitdb/ipfs-log)` package specifically uses a G-Set CRDT, which in practice means append-only with no deletetion.
+
+```JavaScript
+class GSet {
+  constuctor (values) {}
+  append (value) {}
+  merge (set) {}
+  get (value) {}
+  has (value) {}
+  get values () {}
+  get length () {}
+}
+```
 
 ### Lamport Clocks
 
 To achieve successful merging - merging that is properly associative and deterministic - entries are timestamped with something called a Lamport Clock<sup>2</sup>. The timestamp of each entry is a pair of values: a logical clock counter of the entry (as opposed to wall clock), and an identifier of the user or device that generated the entry.
 
-In the case of ipfs-log, the identifier is the public key of the IPFS node where the entries are initially generated.
+In the case of /, the identifier is the public key of the IPFS node where the entries are initially generated.
 
 ```json
 // Lamport Clock Object
@@ -77,21 +91,6 @@ This concept is visualized below, with the dim entries signifying non-traversed,
 
 ![Tails Example](../images/multiple-nodes-log-over-time.png)
 
-G-Set
-ipfs-log specifically uses a G-Set CRDT, which in practice means append-only with no deletetion.
-
-```JavaScript
-class GSet {
-  constuctor (values) {}
-  append (value) {}
-  merge (set) {}
-  get (value) {}
-  has (value) {}
-  get values () {}
-  get length () {}
-}
-```
-
-You can learn more in the academic references here:
-* https://citemaster.net/get/10b50274-7bc5-11e5-8aa1-00163e009cc7/p558-lamport.pdf
-* https://hal.inria.fr/inria-00555588
+#### References
+1. https://citemaster.net/get/10b50274-7bc5-11e5-8aa1-00163e009cc7/p558-lamport.pdf
+2. https://hal.inria.fr/inria-00555588
