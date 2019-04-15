@@ -10,7 +10,7 @@ TODO
 </div>
 
 
-### Conflict-Free Replicated Data Type (CRDT)
+### The Conflict-Free Replicated Data Type (CRDT)
 
 In the [previous chapter](../01_IPFS_Firmament.md) we discussed how we can use IPFS's _directted acyclic graph_ (DAG) functionality to create linked data structures. OrbitDB utilizes this by building logs wherein each entry is linked to the previous one. To share state reliably between users, and to prevent the system from being confused as to how to parse these logs deterministically, a specific type of data structure called a _Conflict-Free Replicated Data Type_, or CRDT is used.
 
@@ -64,14 +64,14 @@ However, we are not in the business of single-device / single-user logs, so let'
 
 First, in plain words and some pseudocode:
 
-1. User 1 starts a Log (log1 = new Log)
-2. User 2 starts a Log (log2 = new Log)
-3. User 1 adds two entries to the log (log1.append)
-4. User 2 merges that log with their own (log2.join(log1))
-5. User 1 adds two more entries (log1.append)
-6. User 2 adds an entry (log2.append)
-7. User 2 merges the log again (log2.join)
-8. User 2 adds one more entry (log2.append)
+1. User 1 starts a Log (`log1 = new Log`)
+2. User 2 starts a Log (`log2 = new Log`)
+3. User 1 adds two entries to the log (`log1.append`)
+4. User 2 merges that log with their own (`log2.join(log1)`)
+5. User 1 adds two more entries (`log1.append`)
+6. User 2 adds an entry (`log2.append`)
+7. User 2 merges the log again (`log2.join`)
+8. User 2 adds one more entry (`log2.append`)
 
 Now in a diagram:
 
