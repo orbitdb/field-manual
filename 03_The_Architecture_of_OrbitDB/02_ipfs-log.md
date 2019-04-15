@@ -1,6 +1,6 @@
-## The `[ipfs-log](https://github.com/orbitdb/ipfs-log)` package
+## The [`ipfs-log`](https://github.com/orbitdb/ipfs-log) package
 
-> The funcionality provided by the `[ipfs-log](https://github.com/orbitdb/ipfs-log)` package is an implementation of a _Conflict-Free Replicated Data Type_ (CRDT) that utilizes IPFS's built in _directed acyclic graph_ (DAG) functionality to link data in a specific way. The functionality in this package forms the backbone of orbit-db.
+> The funcionality provided by the [`ipfs-log`](https://github.com/orbitdb/ipfs-log) package is an implementation of a _Conflict-Free Replicated Data Type_ (CRDT) that utilizes IPFS's built in _directed acyclic graph_ (DAG) functionality to link data in a specific way. The functionality in this package forms the backbone of orbit-db.
 
 <div>
   <h3>Table of Contents</h3>
@@ -16,7 +16,7 @@ In the [previous chapter](../01_IPFS_Firmament.md) we discussed how we can use I
 
 A CRDT is a type of log that solves the problem of locally storing and ultimately merging distrubuted data sets to other distributed data sets<sup>1</sup>. CRDTs allows users to perform operations on local databases with the intent of merging or joining those data with the data stored on the devices of other peers in the network.
 
-The `[ipfs-log](https://github.com/orbitdb/ipfs-log)` package specifically uses a G-Set CRDT, which in practice means append-only with no deletetion.
+The [`ipfs-log`](https://github.com/orbitdb/ipfs-log) package specifically uses a G-Set CRDT, which in practice means append-only with no deletetion.
 
 ```JavaScript
 class GSet {
