@@ -5,7 +5,9 @@
 <div>
   <h3>Table of Contents</h3>
 
-TODO
+* [The Conflict-Free Replicated Data Type (CRDT)](#the-conflict-free-replicated-data-type-CRDT)
+* [Lamport Clocks](#lamport-clocks)
+* [Heads and Tails](#heads-and-tails)
 
 </div>
 
