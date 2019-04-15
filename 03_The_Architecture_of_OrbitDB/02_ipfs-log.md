@@ -1,45 +1,36 @@
 ## The `ipfs-log` package
 
-> The Log provided by the ipfs-log package is an implementation of a Conflict-Free Replicated Data Type (CRDT) that utilizes the Interplanetary File System (IPFS) as a storage backend. The functionality in this package forms the backbone of orbit-db.
+> The funcionality provided by the `ipfs-log` package is an implementation of a _Conflict-Free Replicated Data Type_ (CRDT) that utilizes IPFS's built in _directed acyclic graph_ (DAG) functionality to link data in a specific way. The functionality in this package forms the backbone of orbit-db.
 
 <div>
   <h3>Table of Contents</h3>
 
-- Intro
-
-- Nomenclature and Concepts
-Prerequisites
-IPFS Node
-Access Controller
-Identity
-Usage
-Creating Logs
-Manipulating Logs
-Joining Logs
-API Documentation
-Log
-Nomenclature and Concepts
-
+TODO
 
 </div>
 
+
 ### Conflict-Free Replicated Data Type (CRDT)
 
-A Conflict-Free Replicated Data Type is a type of log that solves the problem of locally storing, and ultimately merging, distrubuted data sets to other distributed data sets1. It allows users to perform operations on local databases with the intent of merging or joining those data with the data stored on the devices of other peers in the network.
+In the [previous chapter] we discussed how we can use IPFS's _directted acyclic graph_ (DAG) functionality to create linked data structures. OrbitDB utilizes this by building logs wherein each entry is linked to the previous one. To share state reliably between users, and to prevent the system from being confused as to how to parse these logs deterministically, a specific type of data structure called a _Conflict-Free Replicated Data Type_, or CRDT is used.
 
-### Lamport Clock
+A CRDT is a type of log that solves the problem of locally storing and ultimately merging distrubuted data sets to other distributed data sets<sup>1</sup>. CRDTs allows users to perform operations on local databases with the intent of merging or joining those data with the data stored on the devices of other peers in the network.
 
-To achieve successful merging - merging that is properly associative - entries are timestamped with something called a Lamport Clock2. The timestamp of each entry is a pair of values: a logical clock counter of the entry (as opposed to wall clock), and an identifier of the user or device that generated the entry.
+### Lamport Clocks
+
+To achieve successful merging - merging that is properly associative and deterministic - entries are timestamped with something called a Lamport Clock<sup>2</sup>. The timestamp of each entry is a pair of values: a logical clock counter of the entry (as opposed to wall clock), and an identifier of the user or device that generated the entry.
 
 In the case of ipfs-log, the identifier is the public key of the IPFS node where the entries are initially generated.
 
 ```json
 // Lamport Clock Object
 {
-  id: '042750228c5d81653e5142e6a56d55...e5216b9a6612dbfc56e906bdbf34ea373c92b30d7',
-  time: 0
+  "id": "042750228c5d81653e5142e6a56d55...e5216b9a6612dbfc56e906bdbf34ea373c92b30d7",
+  "time": 0
 }
 ```
+
+> **Note:** The "time" field is a monotonically increasing integer that increments each time a new entry is added to the log. It is not "wall time", e.g. a unix timestamp.
 
 ### Heads and Tails
 
