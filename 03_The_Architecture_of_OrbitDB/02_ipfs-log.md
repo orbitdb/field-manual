@@ -89,7 +89,7 @@ For our example, let's imagine a log with hundreds of millions of entries. You d
 
 This concept is visualized below, with the dim entries signifying non-traversed, and the orange entries signifying tails.
 
-![Tails Example](../images/multiple-nodes-log-over-time.png)
+![Tails Example](../images/tails-example.png)
 
 #### References
 1. https://citemaster.net/get/10b50274-7bc5-11e5-8aa1-00163e009cc7/p558-lamport.pdf
