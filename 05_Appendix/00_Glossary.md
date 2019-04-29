@@ -13,6 +13,7 @@ A small note: We don't have entries for abbreviations, such as IPFS for Interpla
 * **Filecoin**:
 * **InterPlanetary File System (IPFS)**:
 * **isomorphic**:
+* **js-ipfs**: The JavaScript implementation of IPFS. [GitHub](https://github.com/ipfs/js-ipfs).
 * **packet switching**: Packet switching is a method of grouping data that is transmitted over a digital network into packets. Packets are made of a header and a payload. Data in the header are used by networking hardware to direct the packet to its destination where the payload is extracted and used by application software. Packet switching is the primary basis for data communications in computer networks worldwide. [Wikipedia](https://en.wikipedia.org/wiki/Packet_switching).
 * **Paxos**: Paxos is a family of protocols for solving consensus in a network of unreliable processors (that is, processors that may fail). Consensus is the process of agreeing on one result among a group of participants. This problem becomes difficult when the participants or their communication medium may experience failures. [Wikipedia](https://en.wikipedia.org/wiki/Paxos_(computer_science)).
 * **strong consistency**: In this structural process, entries are added to a database only after they have been verified by some distributed consensus algorithm.

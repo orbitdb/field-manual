@@ -4,9 +4,9 @@ Distributed systems are nothing new, yet somehow advances in this space tend to 
 
 ### The Birth of the Internet
 
-In the late 1960s, The Internet itself was developed as a decentralized system of computers capable of sustaining a nuclear attack. Individual computers were linked together via physical cables. A process known as [**packet switching**](https://en.wikipedia.org/wiki/Packet_switching) was implemented to send data in disparate chunks, which were expected to be re-assembled in order on the receiving end.
+In the late 1960s, The Internet itself was developed as a decentralized system of computers capable of sustaining a nuclear attack. Individual computers were linked together via physical cables. A process known as [_packet switching_](https://en.wikipedia.org/wiki/Packet_switching) was implemented to send data in disparate chunks, which were expected to be re-assembled in order on the receiving end.
 
-By the late 1980s, academic works involving distributed consensus algorithms such as [Paxos](https://en.wikipedia.org/wiki/Paxos_(computer_science)) were introduced. TODO: flesh out
+By the late 1980s, academic works involving distributed consensus algorithms such as [_Paxos_](https://en.wikipedia.org/wiki/Paxos_(computer_science)) were introduced. TODO: flesh out
 
 In 1991, the first World Wide Website went live, and what is now the most popular content and user interface layer for the internet was born. The web allowed anybody with the means to publish a website and link to other sites using their location-based addresses.
 
@@ -30,8 +30,8 @@ This gave the industry a new focus and a new way of thinking about a critical fi
 
 ## Our distributed, decentralized future
 
-TODO: IPFS
+TODO: _IPFS_
 
-We would argue that cryptocurrency and blockchain technologies only laid the foundation of our distributed future. Projects like IPFS, which harness the power of directed acyclic graphs. TODO: Filecoin
+We would argue that cryptocurrency and blockchain technologies only laid the foundation of our distributed future. Projects like IPFS, which harness the power of directed acyclic graphs. TODO: _Filecoin_
 
 ## Conclusions

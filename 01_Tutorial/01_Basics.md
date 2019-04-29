@@ -19,8 +19,7 @@ Please see the [Introduction](./00_Introduction.md) before beginning this chapte
 
 Before you start working on the core functionality behind the peer-to-peer sharing of sheet music, you’ll need to get the foundations of our distributed database set up.
 
-You will need to get the code for OrbitDB and its dependency, IPFS, and make it available to your project. The process is
-different between the browser and Node.js, so we cover both here.
+You will need to get the code for OrbitDB and its dependency, IPFS, and make it available to your project. The process is different between the browser and Node.js, so we cover both here.
 
 > **Note**: Both OrbitDB and js-ipfs are open source, which give you the ability to build and even contribute to the code. This will be covered in detail in [Part 3](../03_The_Architecture_of_OrbitDB).
 
