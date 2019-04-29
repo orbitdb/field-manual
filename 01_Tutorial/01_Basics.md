@@ -84,6 +84,8 @@ try {
 }
 ```
 
+Source: [GitHub], or on IPFS at `QmRZycUKy3MnRKRxkLu8jTzBEVHZovsYcbhdiwLQ221eBP`.
+
 In the browser, you can include this file in a script tag and have an `NPP` object at your disposal. In Node.js, you can simply call something like:
 
 ```plain
