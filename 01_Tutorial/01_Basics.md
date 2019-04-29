@@ -29,7 +29,7 @@ Choose a project directory and `cd` to there from your command line. Then run th
 
 ```bash
 $ npm init --yes
-$ npm install orbit-db ipfs
+$ npm install --save orbit-db@next ipfs
 ```
 
 This will create a `package.json`, `package-lock.json`, and `node_modules` folder.
@@ -37,6 +37,17 @@ This will create a `package.json`, `package-lock.json`, and `node_modules` folde
 > **Note:** If you're running on a Windows prompt, or if you don't have certain build tools like [`g++`](https://gcc.gnu.org) and [`python`](https://www.python.org) installed, you may see a noisy console output with lots of warnings and errors. Keep going, your code should still run.
 
 > **Note:** Adding the `--yes` flag will automatically use your npm defaults. You can go through and edit the package.json later, but it's not entirely necessary for this part of the tutorial.
+
+If you want to use Git to track your progress, we also suggest the following:
+
+```bash
+$ git init
+$ echo node_modules > .gitignore
+```
+
+Of course, be careful before copying and pasting any commands anyone ever tells you into your terminal. If you don't understand a command, figure out what it is supposed to do, before copying it over. Copy and paste at your own risk.
+
+> **Note:** This code was tested on Node v11.14.0. Your mileage for other versions may vary.
 
 #### In the Browser
 
@@ -55,21 +66,21 @@ Since OrbitDB works in the browser and Node.js, you're going to want to make the
 
 Create a new file called `newpieceplease.js` and put this code in there:
 
-```diff
-+ try {
-+   const Ipfs = require('ipfs')
-+   const OrbitDB = require('orbit-db')
-+ } catch(e) {}
+```js
+try {
+  const Ipfs = require('ipfs')
+  const OrbitDB = require('orbit-db')
+} catch (e) {}
 
-+ class NewPiecePlease {
-+   constructor(IPFS, OrbitDB) { }
-+ }
+class NewPiecePlease {
+  constructor(IPFS, OrbitDB) { }
+}
 
-+ try {
-+   module.exports = exports = new NewPiecePlease(Ipfs, OrbitDB)
-+ } catch (e) {
-+   window.NPP = new NewPiecePlease(window.Ipfs, window.OrbitDB)
-+ }
+try {
+  module.exports = exports = new NewPiecePlease (Ipfs, OrbitDB)
+} catch (e) {
+  window.NPP = new NewPiecePlease (window.Ipfs, window.OrbitDB)
+}
 ```
 
 In the browser, you can include this file in a script tag and have an `NPP` object at your disposal. In Node.js, you can simply call something like:
