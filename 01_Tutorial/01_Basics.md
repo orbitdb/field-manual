@@ -62,7 +62,7 @@ Create a new file called `newpieceplease.js` and put this code in there:
 +   const OrbitDB = require('orbit-db')
 + } catch(e) {}
 
-+ class NewPiecePlease() {
++ class NewPiecePlease {
 +   constructor(IPFS, OrbitDB) { }
 + }
 
@@ -100,7 +100,7 @@ following code. It's a lot but it constitutes the frame for an _isomorphic_ Java
 > **Note:** We have designed Chapters 1 and 2 of the tutorial to work offline, not requiring any internet connectivity or connections to peers.
 
 ```diff
-class NewPiecePlease() {
+class NewPiecePlease {
 -   constructor(IPFS, OrbitDB) { }
 +   constructor(IPFS, OrbitDB) {
 +     this.OrbitDB = OrbitDB
