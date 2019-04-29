@@ -12,11 +12,11 @@ Instead, we want to offer a more positive perspective: Every third-party company
 
 We now have the capabilities to create distributed, decentralized applications where:
 
-- The user is in full control of their own data
-- Third-party applications ask permission to run their code locally, instead of on their servers
-- Peers connect directly to each other; no third parties
-- Applications start as GDPR and HIPAA compliant, never revealing sensitive information
-- Every layer of the application can be swapped out and configured: the data layer, the middleware, and the UI layer, creating hyper-customizatible experiences
-- Industries once thought intractable can be served - finance, healthcare, manufacturing, and more
+- The user is in full control of their own data.
+- Third-party applications ask permission to run their code locally, instead of on their servers.
+- Peers connect directly to each other, without third parties.
+- Applications start as GDPR and HIPAA compliant, never revealing sensitive information.
+- Every layer of the application can be swapped out and configured: the data layer, the middleware, and the UI layer, creating hyper-customizable experiences.
+- Industries once thought intractable can be served: finance, healthcare, manufacturing, and more.
 
-We truly believe that everything past, for better or worse, is prologue to this, and we're so glad you're with us.
+We truly believe that everything past, for better or worse, is a prologue to this, and we're so glad you're with us.
