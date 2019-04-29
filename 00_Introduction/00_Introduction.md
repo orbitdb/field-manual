@@ -2,7 +2,7 @@
 
 Welcome to the OrbitDB Field Manual. This book serves as a technical manual to the _distributed_, _decentralized_, _peer-to-peer_ database engine known as _OrbitDB_, and also provides higher-level context for peer-to-peer technologies and ways of thinking.
 
-Please read the introduction first and then feel free to skip ahead to the relevant part or parts that interest you. Parts 1 and 3 are more technical in focus, and Parts 2 and 4 are more prosaic.
+Please read the introduction first and then feel free to skip ahead to the relevant part or parts that interest you. [Parts 1](..//01_Tutorial) and [3](..//03_The_Architecture_of_OrbitDB) are more technical in focus, and [Parts 2](..//02_What_is_OrbitDB) and [4](..//04_Warning) are more prosaic.
 
 ## A different perspective on centralized power
 

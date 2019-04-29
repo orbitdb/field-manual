@@ -10,7 +10,7 @@ Beyond that, what should you as the developer understand about OrbitDB?
 
 ### OrbitDB is written in JavaScript
 
-OrbitDB is packaged as a Node.js library, available [here](https://github.com/orbitdb/orbit-db). JavaScript was chosen because of its popularity in the programming community, its ubiquity in web browsers, and its interoperability with the JavaScript implementation of IPFS, called _js-ipfs_.
+OrbitDB is packaged as a Node.js library, available [here](https://github.com/orbitdb/orbit-db). JavaScript was chosen because of its popularity in the programming community, its ubiquity in web browsers, and its interoperability with the JavaScript implementation of IPFS, called [_js-ipfs_](https://github.com/ipfs/js-ipfs).
 
 Work is currently underway to allow support for other programming languages via a common HTTP API.
 
