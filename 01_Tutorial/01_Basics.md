@@ -67,19 +67,20 @@ Since OrbitDB works in the browser and Node.js, you're going to want to make the
 Create a new file called `newpieceplease.js` and put this code in there:
 
 ```js
-try {
-  const Ipfs = require('ipfs')
-  const OrbitDB = require('orbit-db')
-} catch (e) {}
-
 class NewPiecePlease {
-  constructor(IPFS, OrbitDB) { }
+  constructor (Ipfs, OrbitDB) {
+    this.Ipfs = Ipfs
+    this.OrbitDB = OrbitDB
+  }
 }
 
 try {
-  module.exports = exports = new NewPiecePlease (Ipfs, OrbitDB)
+    const Ipfs = require('ipfs')
+    const OrbitDB = require('orbit-db')
+
+    module.exports = exports = new NewPiecePlease(Ipfs, OrbitDB)
 } catch (e) {
-  window.NPP = new NewPiecePlease (window.Ipfs, window.OrbitDB)
+    window.NPP = new NewPiecePlease(window.Ipfs, window.OrbitDB)
 }
 ```
 
