@@ -19,8 +19,7 @@ Please see the [Introduction](./00_Introduction.md) before beginning this chapte
 
 Before you start working on the core functionality behind the peer-to-peer sharing of sheet music, you’ll need to get the foundations of our distributed database set up.
 
-You will need to get the code for OrbitDB and its dependency, IPFS, and make it available to your project. The process is
-different between the browser and Node.js, so we cover both here.
+You will need to get the code for OrbitDB and its dependency, IPFS, and make it available to your project. The process is different between the browser and Node.js, so we cover both here.
 
 > **Note**: Both OrbitDB and js-ipfs are open source, which give you the ability to build and even contribute to the code. This will be covered in detail in [Part 3](../03_The_Architecture_of_OrbitDB).
 
@@ -30,7 +29,7 @@ Choose a project directory and `cd` to there from your command line. Then run th
 
 ```bash
 $ npm init --yes
-$ npm install orbit-db ipfs
+$ npm install --save orbit-db@next ipfs
 ```
 
 This will create a `package.json`, `package-lock.json`, and `node_modules` folder.
@@ -38,6 +37,17 @@ This will create a `package.json`, `package-lock.json`, and `node_modules` folde
 > **Note:** If you're running on a Windows prompt, or if you don't have certain build tools like [`g++`](https://gcc.gnu.org) and [`python`](https://www.python.org) installed, you may see a noisy console output with lots of warnings and errors. Keep going, your code should still run.
 
 > **Note:** Adding the `--yes` flag will automatically use your npm defaults. You can go through and edit the package.json later, but it's not entirely necessary for this part of the tutorial.
+
+If you want to use Git to track your progress, we also suggest the following:
+
+```bash
+$ git init
+$ echo node_modules > .gitignore
+```
+
+Of course, be careful before copying and pasting any commands anyone ever tells you into your terminal. If you don't understand a command, figure out what it is supposed to do, before copying it over. Copy and paste at your own risk.
+
+> **Note:** This code was tested on Node v11.14.0. Your mileage for other versions may vary.
 
 #### In the Browser
 
@@ -56,22 +66,25 @@ Since OrbitDB works in the browser and Node.js, you're going to want to make the
 
 Create a new file called `newpieceplease.js` and put this code in there:
 
-```diff
-+ try {
-+   const Ipfs = require('ipfs')
-+   const OrbitDB = require('orbit-db')
-+ } catch(e) {}
+```js
+class NewPiecePlease {
+  constructor (Ipfs, OrbitDB) {
+    this.Ipfs = Ipfs
+    this.OrbitDB = OrbitDB
+  }
+}
 
-+ class NewPiecePlease {
-+   constructor(IPFS, OrbitDB) { }
-+ }
+try {
+    const Ipfs = require('ipfs')
+    const OrbitDB = require('orbit-db')
 
-+ try {
-+   module.exports = exports = new NewPiecePlease(Ipfs, OrbitDB)
-+ } catch (e) {
-+   window.NPP = new NewPiecePlease(window.Ipfs, window.OrbitDB)
-+ }
+    module.exports = exports = new NewPiecePlease(Ipfs, OrbitDB)
+} catch (e) {
+    window.NPP = new NewPiecePlease(window.Ipfs, window.OrbitDB)
+}
 ```
+
+Source: [GitHub](https://github.com/orbitdb/field-manual/blob/a5459ac56402f620cab424c6c399f7c593e94f85/code_examples/01_01_newpieceplease.js), or on IPFS at `QmRZycUKy3MnRKRxkLu8jTzBEVHZovsYcbhdiwLQ221eBP`.
 
 In the browser, you can include this file in a script tag and have an `NPP` object at your disposal. In Node.js, you can simply call something like:
 
@@ -94,38 +107,38 @@ From here on out, we will ignore these isometric bookends and concentrate wholly
 
 ### Instantiating IPFS and OrbitDB
 
-OrbitDB requires a running IPFS node to operate, so you will create one here and notify OrbitDB about it. by running the
-following code. It's a lot but it constitutes the frame for an _isomorphic_ JavaScript app, that is, one that runs in both the browser and in Node.js with the same code.
+OrbitDB requires a running IPFS node to operate, so you will create one here and notify OrbitDB about it.
 
 > **Note:** We have designed Chapters 1 and 2 of the tutorial to work offline, not requiring any internet connectivity or connections to peers.
 
-```diff
+```js
 class NewPiecePlease {
--   constructor(IPFS, OrbitDB) { }
-+   constructor(IPFS, OrbitDB) {
-+     this.OrbitDB = OrbitDB
-+
-+     this.node = new IPFS({
-+       preload: { enabled: false },
-+       repo: "./ipfs",
-+       EXPERIMENTAL: { pubsub: true },
-+       config: {
-+         Bootstrap: [],
-+         Addresses: { Swarm: [] }
-+       }
-+     });
-+
-+     this.node.on("error", (e) => { throw (e) })
-+     this.node.on("ready", this._init.bind(this))
-+   }
-+
-+   async _init() {
-+     this.orbitdb = await this.OrbitDB.createInstance(this.node)
-+
-+     this.onready()
-+   }
+  constructor (IPFS, OrbitDB) {
+    this.OrbitDB = OrbitDB
+
+    this.node = new IPFS({
+      preload: { enabled: false },
+      repo: './ipfs',
+      EXPERIMENTAL: { pubsub: true },
+      config: {
+        Bootstrap: [],
+        Addresses: { Swarm: [] }
+      }
+    })
+
+    this.node.on('error', (e) => { throw (e) })
+    this.node.on('ready', this._init.bind(this))
+  }
+
+  async _init () {
+    this.orbitdb = await this.OrbitDB.createInstance(this.node)
+    this.onready()
+  }
 }
+
 ```
+
+Source: [GitHub](https://github.com/orbitdb/field-manual/blob/68714a5eef18530ef172bb0f889a90d5f91ef39a/code_examples/newpieceplease.js), or on IPFS at `QmZsbrY7EZJRXwuqQXw2Ad9jfJAMvLWDcrwLNj7Yo4v7YK`.
 
 This allows you to run something like the following in your application code:
 
@@ -135,7 +148,7 @@ NPP.onready = () => {
 }
 ```
 
-In the output you will see something called a "multihash", like `QmPSicLtjhsVifwJftnxncFs4EwYTBEjKUzWweh1nAA87B`. This is the identifier of your IPFS node.
+In the output you will see something called a "multihash", like `QmPSicLtjhsVifwJftnxncFs4EwYTBEjKUzWweh1nAA87B`. This is the identifier of your IPFS node. (You may have noticed we referenced multihashes above for the code examples: these are the multihashes you can use to download the example code files, if GitHub is down.)
 
 #### What just happened?
 
@@ -145,9 +158,9 @@ Start with the `new Ipfs` line. This code creates a new IPFS node. Note the defa
 the global network and prevent DDoS. However, these nodes can go down and cause errors. Since we are only working offline
 for now, we include this line to disable them.
 - `repo: './ipfs'` designates the path of the repo in Node.js only. In the browser, you can actually remove this line. The
-default setting is a folder called `.jsipfs` in your home directory. You will see why we choose this acute location for the
+default setting is a folder called `.jsipfs` in your home directory. You will see why we choose this specific location for the
 folder later.
-- `EXPERIMENTAL: { pubsub: true }` enables IPFS pubsub, which is a method of communicating between nodes and **is required for OrbitDB usage**, despite whether or not we are connected to other peers.
+- `EXPERIMENTAL: { pubsub: true }` enables [IPFS pubsub](https://blog.ipfs.io/25-pubsub/), which is a method of communicating between nodes and **is required for OrbitDB usage**, despite whether or not we are connected to other peers.
 - `config: { Bootstrap: [], Addresses: { Swarm: [] }}` sets both our bootstrap peers list (peers that are loaded on
 instantiation) and swarm peers list (peers that can connect and disconnect at any time to empty. We will populate these
 later.
