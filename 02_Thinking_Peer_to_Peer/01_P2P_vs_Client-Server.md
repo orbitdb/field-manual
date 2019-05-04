@@ -42,7 +42,7 @@ This approach has obvious pros and cons:
 
 #### On "Serverless"
 
-It's often claimed, and rightly so, that the popular term "serverless" is at best a misnomer, and at worst completely disingenuous. This term was coined to popularize the idea of writing code that can then be run, at a cost, on a "Function-as-a-Service" platform that all of the major cloud providers run. However, the common criticism is that this is just "somebody else's server," and it's true.
+It's often claimed, and rightly so, that the popular term "serverless" is at best a misnomer, and at worst completely disingenuous. This term was coined to popularize the idea of writing code that can then be run on a "Function-as-a-Service" platform, without any a-priori server set up or configuration, and without on-going costs beyond the immediate execution. However, the _serverless_ name refers only to the developer no longer needing to configure or maintain a server themselves, but servers are still needed.
 
 Peer-to-peer architectures _can be_ the true "serverless." It is possible, today, to create applications that share user data in a peer-to-peer fashion, avoiding middlemen and third parties, and relying on the surplus computational power. The reason the previous sentence is qualified is because there are some major challenges we will all be facing together in our distributed future:
 
