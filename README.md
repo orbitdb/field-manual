@@ -18,15 +18,15 @@ Next, **[Thinking Peer to Peer](./02_Thinking_Peer_to_Peer)** is a collection of
 
 Then, **[The Architecture of OrbitDB](./03_The_Architecture_of_OrbitDB)** covers in-depth, in a more reference style, how OrbitDB is structured and architected. It includes a description of `ipfs-log`, the core of OrbitDB, the data `stores` and finally into how the `orbit-db` library packages it all together into a single, cohesive package that works in both the browser and the command line.
 
-Finally, **[What comes next?](./04_What_next)** provides some guidance and suggestions into the next topics you explore. This will serve as a launch pad to further amplify your understanding of how our distributed future will be built.
+Finally, **[What comes next?](./04_What_Next)** provides some guidance and suggestions into the next topics you explore. This will serve as a launch pad to further amplify your understanding of how our distributed future will be built.
 
 ## How to read this book
 
 While this book is best consumed by reading cover-to-cover, we understand that your time is valuable and you want to get the most out of it in the shortest amount of time. Here are some suggestions to that effect.
 
-If you are a technical person and want to use OrbitDB to build distributed, peer-to-peer applications, start with [Part 1: The tutorial](./01_Tutorial/00_Introduction.md), move to [Part 3: The Architecture of OrbitDB](./03_The_Architecture_of_OrbitDB). Then, read chapters from [Part 2](./02_Thinking_Peer_to_Peer) and [Part 4](./04_What_next) as you need them to fill in any gaps in knoweldge you may have.
+If you are a technical person and want to use OrbitDB to build distributed, peer-to-peer applications, start with [Part 1: The tutorial](./01_Tutorial/00_Introduction.md), move to [Part 3: The Architecture of OrbitDB](./03_The_Architecture_of_OrbitDB). Then, read chapters from [Part 2](./02_Thinking_Peer_to_Peer) and [Part 4](./04_What_Next) as you need them to fill in any gaps in knoweldge you may have.
 
-If you do not want to write code, and want to understand peer-to-peer systems and architectures at a higher level, you should be able to get away with only reading [Part 2: Thinking Peer to Peer](./02_Thinking_Peer_to_Peer), and then moving on to [Part 4](./04_What_next), followed by [Part 3](./03_The_Architecture_of_OrbitDB) to complete your understanding of OrbitDB and peer-to-peer systems in general.
+If you do not want to write code, and want to understand peer-to-peer systems and architectures at a higher level, you should be able to get away with only reading [Part 2: Thinking Peer to Peer](./02_Thinking_Peer_to_Peer), and then moving on to [Part 4](./04_What_Next), followed by [Part 3](./03_The_Architecture_of_OrbitDB) to complete your understanding of OrbitDB and peer-to-peer systems in general.
 
 Please note that we may repeat ourselves across different parts of the book, which means there may be some redundancy. This is intentional as we cannot guarantee people will read the book in order. Feel free to skim any sections that you already feel like you understand.
 
