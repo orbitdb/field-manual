@@ -16,12 +16,12 @@ In order to maximize accessibility this tutorial does not favor either Node.js o
 
 In the following chapters you will learn the following topics.
 
-1. [Laying the Foundation](./01_Tutorial/01_Basics.md) covers the installation of IPFS and OrbitDB and the basics of database creation.
-2. [Managing Data](./01_Tutorial/02_Managing_Data.md) introduces OrbitDB data stores and walks you through basic create, update, and delete methods of OrbitDB.
-3. [Structuring Data](./01_Tutorial/03_Structuring_Data.md) suggests some ways to structure multiple OrbitDBs into a more robust schema.
-4. [Peer-to-peer, Part 1 (IPFS)](./01_Tutorial/04_P2P_Part_1.md) begins a large discussion of peer-to-peer networking and messaging, starting with the IPFS layer.
-5. [Peer-to-peer, Part 2 (OrbitDB)](./01_Tutorial/04_P2P_Part_2.md) adds OrbitDB to the mix through database discovery, connection, and replication.
-6. [Identity and Permissions](./01_Tutorial/06_Identity_Permission.md) hardens the library via encryption and distributed identity.
+1. [Laying the Foundation](./01_Basics.md) covers the installation of IPFS and OrbitDB and the basics of database creation.
+2. [Managing Data](./02_Managing_Data.md) introduces OrbitDB data stores and walks you through basic create, update, and delete methods of OrbitDB.
+3. [Structuring Data](./03_Structuring_Data.md) suggests some ways to structure multiple OrbitDBs into a more robust schema.
+4. [Peer-to-peer, Part 1 (IPFS)](./04_P2P_Part_1.md) begins a large discussion of peer-to-peer networking and messaging, starting with the IPFS layer.
+5. [Peer-to-peer, Part 2 (OrbitDB)](./05_P2P_Part_2.md) adds OrbitDB to the mix through database discovery, connection, and replication.
+6. [Identity and Permissions](./06_Identity_Permission.md) hardens the library via encryption and distributed identity.
 
 This tutorial is a work in progress, and individuals should feel encouraged to submit pull requests and provide feedback.
 
