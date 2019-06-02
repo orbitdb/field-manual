@@ -1,0 +1,32 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<script src="https://unpkg.com/ipfs@0.35.0/dist/index.min.js"></script>
+		<script src="https://www.unpkg.com/orbit-db@0.20.0/dist/orbitdb.min.js"></script>
+		<script src="./newpieceplease.js"></script>
+		<script language="Javascript">
+NPP.onready = async () => {
+	const hash = "QmdzDacgJ9EQF9Z8G3L1fzFwiEu255Nm5WiCey9ntrDPSL";
+	let cid
+	let content
+
+	cid = await NPP.addNewPiece(hash, "Piano")
+
+	if (cid) {
+		content = await NPP.node.dag.get(cid)
+		console.log(content.value.payload.value)
+	}
+
+	const piece = NPP.getPieceByHash(hash)
+	cid = await NPP.incrementPracticeCounter(piece)
+	content = await NPP.node.dag.get(cid)
+	console.log(content.value.payload)
+
+	await NPP.updateProfileField("username", "aphelionz")
+	var profileFields = NPP.getAllProfileFields();
+	console.log(profileFields)
+	await NPP.deleteProfileField("username")
+}
+		</script>
+</html>
