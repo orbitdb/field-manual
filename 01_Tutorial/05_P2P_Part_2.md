@@ -115,7 +115,7 @@ async _init() {
   this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
 + await this.node.pubsub.subscribe(nodeInfo.id, this.handleMessageReceived.bind(this))
 
-  if(this.onready) this.onready()
+  this.onready()
 }
 ```
 
@@ -206,7 +206,7 @@ async _init() {
 + this.companionConnectionInterval = setInterval(this.connectToCompanions.bind(this), 10000)
 + this.connectToCompanions()
 
-  if(this.onready) this.onready()
+  this.onready()
 }
 ```
 

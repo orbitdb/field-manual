@@ -208,7 +208,7 @@ Then, update the `_init` function to include an event handler for when a peer is
 
 +   this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
 
-    if(this.onready) this.onready()
+    this.onready()
   }
 ```
 
@@ -276,7 +276,7 @@ Update the `_init` function to look like the following:
     this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
 +   await this.node.pubsub.subscribe(nodeInfo.id, this.handleMessageReceived.bind(this))
 
-    if(this.onready) this.onready()
+    this.onready()
   }
 
 ```

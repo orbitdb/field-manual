@@ -33,6 +33,8 @@ Update your `NewPiecePlease class` handler, adding **one line** at the bottom of
     }
     this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
 +   await this.pieces.load()
+
+    this.onready()
   }
 }
 ```

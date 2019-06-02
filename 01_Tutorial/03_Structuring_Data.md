@@ -141,12 +141,14 @@ Update your `_init` function to look like this:
       ...defaultOptions,
       indexBy: 'hash',
     }
-    this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
+    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
     await this.pieces.load()
 
 +   this.user = await this.orbitdb.kvstore("user", this.defaultOptions)
 +   await this.user.load()
 +   await this.user.set('pieces', this.pieces.id)
+
+    this.onready()
   });
 ```
 
@@ -223,7 +225,7 @@ Then, update your _init_ function to call `loadFixtureData` with some starter da
       ...defaultOptions,
       indexBy: 'hash',
     }
-    this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
+    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
     await this.pieces.load()
 
     this.user = await this.orbitdb.kvstore("user", this.defaultOptions)
