@@ -100,7 +100,7 @@ async _init() {
     ...defaultOptions,
     indexBy: 'hash',
   }
-  this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
+  this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
   await this.pieces.load()
 
   this.user = await this.orbitdb.keyvalue("user", this.defaultOptions)
@@ -185,12 +185,12 @@ async _init() {
     ...defaultOptions,
     indexBy: 'hash',
   }
-  this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
+  this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
   await this.pieces.load()
 
   this.user = await this.orbitdb.keyvalue("user", this.defaultOptions)
   await this.user.load()
-  
+
 + this.companions = await this.orbitdb.keyvalue("companions", this.defaultOptions)
 + await this.companions.load()
 

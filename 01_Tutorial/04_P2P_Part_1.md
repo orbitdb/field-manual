@@ -194,7 +194,7 @@ Then, update the `_init` function to include an event handler for when a peer is
       ...defaultOptions,
       indexBy: 'hash',
     }
-    this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
+    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
     await this.pieces.load()
 
     this.user = await this.orbitdb.kvstore("user", this.defaultOptions)
@@ -261,7 +261,7 @@ Update the `_init` function to look like the following:
       ...defaultOptions,
       indexBy: 'hash',
     }
-    this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
+    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
     await this.pieces.load()
 
     this.user = await this.orbitdb.kvstore("user", this.defaultOptions)
