@@ -32,12 +32,12 @@ async addNewPiece(hash, instrument = "Piano") {
   }
 
 + const dbName = "counter." + hash.substr(20,20)
-+ const counterDb = await this.orbitdb.counter(dbName, this.defaultOptions)
++ const counter = await this.orbitdb.counter(dbName, this.defaultOptions)
 
   const cid = await this.pieces.put({
     hash: hash,
     instrument: instrument,
-+   counter: counterDb.id
++   counter: counter.id
   })
 
   return cid
