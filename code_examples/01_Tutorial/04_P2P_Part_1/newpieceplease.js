@@ -153,7 +153,7 @@ class NewPiecePlease {
     async sendMessage(topic, message, callback) {
         try {
             const msgString = JSON.stringify(message)
-            const messageBuffer = this.node.types.Buffer(msgString)
+            const messageBuffer = Buffer.from(msgString)
             await this.node.pubsub.publish(topic, messageBuffer)
         } catch (e) {
             throw (e)
