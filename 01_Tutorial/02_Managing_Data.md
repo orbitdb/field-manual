@@ -31,8 +31,10 @@ Update your `NewPiecePlease class` handler, adding **one line** at the bottom of
       ...defaultOptions,
       indexBy: 'hash',
     }
-    this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
-+   await this.piecesDb.load()
+    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
++   await this.pieces.load()
+
+    this.onready()
   }
 }
 ```
@@ -41,7 +43,7 @@ Update your `NewPiecePlease class` handler, adding **one line** at the bottom of
 
 After you instantiated the database you loaded its contents into memory for use. It is empty for now, but not for long! Loading the database at this point after instantiation will save you trouble later.
 
-- `await piecesDb.load()` is a function that will need to be called whenever we want the latest and greatest snapshot of data in the database. The `load` function retrieves all of the values via their _content addresses_ and loads the content into memory.
+- `await pieces.load()` is a function that will need to be called whenever we want the latest and greatest snapshot of data in the database. The `load` function retrieves all of the values via their _content addresses_ and loads the content into memory.
 
 > **Note:** You are probably wondering about if you have a large database of millions of documents, and the implications of loading them all into memory. It is a valid concern, and you should move on to Part 4 of this book once you are done with the tutorial.
 
@@ -59,7 +61,7 @@ Add a function called `addNewPiece` function now:
 +     return;
 +   }
 +
-+   const cid = await piecesDb.put({
++   const cid = await pieces.put({
 +     hash: hash,
 +     instrument: instrument
 +   })
@@ -96,7 +98,7 @@ Running this code should give you something like the following output. Hold stea
 
 You wrote and tested a function that allows users to add new sheet music to the database.
 
-- `piecesDb.put({ ... })` is the most important line here. This call takes an object to store and returns a _multihash_, which is the hash of the content added to IPFS.
+- `pieces.put({ ... })` is the most important line here. This call takes an object to store and returns a _multihash_, which is the hash of the content added to IPFS.
 - `node.dag.get(hash)` is a function that takes a CID and returns content.
 - `"op": "PUT"` is a notable part of the output. At the core of OrbitDB databases is the **OPLOG**, where all data are stored as a log of operations, which are then calculated into the appropriate schema for application use. The operation is specified here as a `PUT`, and the `key`/`value` pair is your data.
 
@@ -130,21 +132,21 @@ Fill in the following functions now:
 
 ```diff
 + getAllPieces() {
-+   const pieces = this.piecesDb.get('')
++   const pieces = this.pieces.get('')
 +   return pieces
 + }
 ```
 
 ```diff
 + getPieceByHash(hash) {
-+   const singlePiece = this.piecesDb.get(hash)[0]
++   const singlePiece = this.pieces.get(hash)[0]
 +   return singlePiece
 + }
 ```
 
 ```diff
 + getByInstrument(instrument) {
-+   return this.piecesDb.query((piece) => piece.instrument === instrument)
++   return this.pieces.query((piece) => piece.instrument === instrument)
 + }
 ```
 
@@ -180,7 +182,7 @@ Both `console.log` calls above will return something like this:
 You queried the database of scores you created earlier in the chapter, retrieving by hash and also randomly.
 
 - `pieces.get(hash)` is a simple function that performs a partial string search on your database indexes. It will return an array of records that match. As you can see in your `getAllPieces` function, you can pass an empty string to return all pieces.
-- `return this.piecesDb.query((piece) => piece.instrument === instrument)` queries the database, returning. It's most analogous to JavaScripts `Array.filter` method.
+- `return this.pieces.query((piece) => piece.instrument === instrument)` queries the database, returning. It's most analogous to JavaScripts `Array.filter` method.
 
 > **Note:** Generally speaking, `get` functions do not return promises since the calculation of database state happens at the time of a _write_. This is a trade-off to allow for ease of use and performance based on the assumption that writes are _generally_ less frequent than reads.
 
@@ -196,14 +198,14 @@ Fill in the `updatePieceByHash` and `deletePieceByHash` functions now:
 + async updatePieceByHash(hash, instrument = "Piano") {
 +   const piece = await this.getPieceByHash(hash)
 +   piece.instrument = instrument
-+   const cid = await this.piecesDb.put(piece)
++   const cid = await this.pieces.put(piece)
 +   return cid
 + }
 ```
 
 ```diff
 + async deletePieceByHash(hash) {
-+   const cid = await this.piecesDb.del(hash)
++   const cid = await this.pieces.del(hash)
 +   return cid
 + }
 ```
@@ -233,8 +235,8 @@ While the opcode for PUT will be the same, the opcode for `deletePieceByHash` is
 
 You may be thinking something like this: "Wait, if OrbitDB is built upon IPFS and IPFS is immutable, then how are we updating or deleting records?" Great question, and the answer lies in the opcodes  Let us step through the code so we can get to that.
 
-- `this.piecesDb.put` is nothing new, we are just using it to perform an update instead of an insert
-- `this.piecesDb.del` is a simple function that takes a hash, deletes the record, and returns a CID
+- `this.pieces.put` is nothing new, we are just using it to perform an update instead of an insert
+- `this.pieces.del` is a simple function that takes a hash, deletes the record, and returns a CID
 - `"op": "DEL"` is another opcode, `DEL` for DELETE. This log entry effectively removes this key from your records and also removes the content from your local IPFS
 
 ### Storing Media Files

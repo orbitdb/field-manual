@@ -100,7 +100,7 @@ async _init() {
     ...defaultOptions,
     indexBy: 'hash',
   }
-  this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
+  this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
   await this.pieces.load()
 
   this.user = await this.orbitdb.keyvalue("user", this.defaultOptions)
@@ -115,7 +115,7 @@ async _init() {
   this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
 + await this.node.pubsub.subscribe(nodeInfo.id, this.handleMessageReceived.bind(this))
 
-  if(this.onready) this.onready()
+  this.onready()
 }
 ```
 
@@ -185,12 +185,12 @@ async _init() {
     ...defaultOptions,
     indexBy: 'hash',
   }
-  this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
+  this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
   await this.pieces.load()
 
   this.user = await this.orbitdb.keyvalue("user", this.defaultOptions)
   await this.user.load()
-  
+
 + this.companions = await this.orbitdb.keyvalue("companions", this.defaultOptions)
 + await this.companions.load()
 
@@ -206,7 +206,7 @@ async _init() {
 + this.companionConnectionInterval = setInterval(this.connectToCompanions.bind(this), 10000)
 + this.connectToCompanions()
 
-  if(this.onready) this.onready()
+  this.onready()
 }
 ```
 

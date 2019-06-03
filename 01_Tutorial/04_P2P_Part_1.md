@@ -19,7 +19,7 @@ Please complete [Chapter 3 - Structuring Data](./03_Structuring_Data.md) first.
 
 Your users can manage their local sheet music library, but music is a social, connected venture. The app should reflect that! You will now reconfigure your IPFS node to connect to the global network and begin swarming with other peers.  This tutorial started offline to focus on OrbitDB's core concepts, and now you will undo this and connect the app, properly, to the global IPFS network.
 
-To do so, the `NewPiecePlease` constructor like so:
+To connect globally, the `NewPiecePlease` constructor like so:
 
 ```diff
 class NewPiecePlease {
@@ -157,7 +157,7 @@ Create the `getIpfsPeers` function inside of the `NewPiecePlease` class.
 Then, in your application code:
 
 ```JavaScript
-const peers = await NPP.getPeers()
+const peers = await NPP.getIpfsPeers()
 console.log(peers.length)
 // 8
 ```
@@ -194,21 +194,21 @@ Then, update the `_init` function to include an event handler for when a peer is
       ...defaultOptions,
       indexBy: 'hash',
     }
-    this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
+    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
     await this.pieces.load()
 
     this.user = await this.orbitdb.kvstore("user", this.defaultOptions)
     await this.user.load()
 
     await this.loadFixtureData({
-      "username": Math.floor(Math.rand() * 1000000),
+      "username": Math.floor(Math.random() * 1000000),
       "pieces": this.pieces.id,
       "nodeId": nodeInfo.id
     })
 
 +   this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
 
-    if(this.onready) this.onready()
+    this.onready()
   }
 ```
 
@@ -261,14 +261,14 @@ Update the `_init` function to look like the following:
       ...defaultOptions,
       indexBy: 'hash',
     }
-    this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
+    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
     await this.pieces.load()
 
     this.user = await this.orbitdb.kvstore("user", this.defaultOptions)
     await this.user.load()
 
     await this.loadFixtureData({
-      "username": Math.floor(Math.rand() * 1000000),
+      "username": Math.floor(Math.random() * 1000000),
       "pieces": this.pieces.id,
       "nodeId": nodeInfo.id
     })
@@ -276,7 +276,7 @@ Update the `_init` function to look like the following:
     this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
 +   await this.node.pubsub.subscribe(nodeInfo.id, this.handleMessageReceived.bind(this))
 
-    if(this.onready) this.onready()
+    this.onready()
   }
 
 ```

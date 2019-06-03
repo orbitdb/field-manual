@@ -32,12 +32,12 @@ async addNewPiece(hash, instrument = "Piano") {
   }
 
 + const dbName = "counter." + hash.substr(20,20)
-+ const counterDb = await this.orbitdb.counter(dbName, this.defaultOptions)
++ const counter = await this.orbitdb.counter(dbName, this.defaultOptions)
 
   const cid = await this.pieces.put({
     hash: hash,
     instrument: instrument,
-+   counter: counterDb.id
++   counter: counter.id
   })
 
   return cid
@@ -141,12 +141,14 @@ Update your `_init` function to look like this:
       ...defaultOptions,
       indexBy: 'hash',
     }
-    this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
+    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
     await this.pieces.load()
 
 +   this.user = await this.orbitdb.kvstore("user", this.defaultOptions)
 +   await this.user.load()
 +   await this.user.set('pieces', this.pieces.id)
+
+    this.onready()
   });
 ```
 
@@ -223,14 +225,14 @@ Then, update your _init_ function to call `loadFixtureData` with some starter da
       ...defaultOptions,
       indexBy: 'hash',
     }
-    this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
+    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
     await this.pieces.load()
 
     this.user = await this.orbitdb.kvstore("user", this.defaultOptions)
     await this.user.load()
 
 +   await this.loadFixtureData({
-+     "username": Math.floor(Math.rand() * 1000000),
++     "username": Math.floor(Math.random() * 1000000),
 +     "pieces": this.pieces.id,
 +     "nodeId": peerInfo.id
 +   })
