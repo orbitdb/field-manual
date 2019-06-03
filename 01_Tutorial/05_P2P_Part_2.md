@@ -73,7 +73,7 @@ The flow you will create will be:
 
 1. User manually requests a connection to a user
 2. On a successful connection, both peers send messages containing their user information via a database address
-3. Peer user databases are loaded, replicated, and inspected for a `userDb` key
+3. Peer user databases are loaded, replicated, and inspected for a `user` key
 4. On a successful discovery, user information is added to our local `companions` database
 
 First, update your `handlePeerConnected` function to call `sendMessage` we introduce a timeout here to give the peers a second or two to breathe once they are connected. You can later tune this, or remove it as you see fit and as future IPFS features provide greater network reliability and performance.
@@ -88,38 +88,7 @@ First, update your `handlePeerConnected` function to call `sendMessage` we intro
   }
 ```
 
-Then, register and add the `handleMessageReceived` function to the `NewPiecePlease` class
-
-```diff
-async _init() {
-  const nodeInfo = await this.node.id()
-  this.orbitdb = await OrbitDB.createInstance(this.node)
-  this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
-
-  const docStoreOptions = {
-    ...defaultOptions,
-    indexBy: 'hash',
-  }
-  this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
-  await this.pieces.load()
-
-  this.user = await this.orbitdb.keyvalue("user", this.defaultOptions)
-  await this.user.load()
-
-  await this.loadFixtureData({
-    "username": Math.floor(Math.random() * 1000000),
-    "pieces": this.pieces.id,
-    "nodeId": nodeInfo.id,
-  })
-
-  this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
-+ await this.node.pubsub.subscribe(nodeInfo.id, this.handleMessageReceived.bind(this))
-
-  this.onready()
-}
-```
-
-Finally, create the `handleMessageReceived` function:
+Now, update your `handleMessageReceived` function to replicate the user database:
 
 ```diff
 + async handleMessageReceived(msg) {
