@@ -7,12 +7,8 @@
 		<script src="./newpieceplease.js"></script>
 		<script language="Javascript">
 NPP.onready = async () => {
-	NPP.node.id(function (err, identity) {
-  		if (err) {
-    		throw err
-  		}
-  		console.log(identity.id)
-	})
+	const identity = await NPP.node.id()
+  	console.log(identity.id)
 
 	setInterval(async () => {
 		const peers = await NPP.getIpfsPeers()
