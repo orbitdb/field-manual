@@ -232,7 +232,7 @@ Then, update your _init_ function to call `loadFixtureData` with some starter da
     await this.user.load()
 
 +   await this.loadFixtureData({
-+     "username": Math.floor(Math.rand() * 1000000),
++     "username": Math.floor(Math.random() * 1000000),
 +     "pieces": this.pieces.id,
 +     "nodeId": peerInfo.id
 +   })

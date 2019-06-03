@@ -19,7 +19,7 @@ Please complete [Chapter 3 - Structuring Data](./03_Structuring_Data.md) first.
 
 Your users can manage their local sheet music library, but music is a social, connected venture. The app should reflect that! You will now reconfigure your IPFS node to connect to the global network and begin swarming with other peers.  This tutorial started offline to focus on OrbitDB's core concepts, and now you will undo this and connect the app, properly, to the global IPFS network.
 
-To do so, the `NewPiecePlease` constructor like so:
+To connect globally, the `NewPiecePlease` constructor like so:
 
 ```diff
 class NewPiecePlease {
@@ -157,7 +157,7 @@ Create the `getIpfsPeers` function inside of the `NewPiecePlease` class.
 Then, in your application code:
 
 ```JavaScript
-const peers = await NPP.getPeers()
+const peers = await NPP.getIpfsPeers()
 console.log(peers.length)
 // 8
 ```
@@ -201,7 +201,7 @@ Then, update the `_init` function to include an event handler for when a peer is
     await this.user.load()
 
     await this.loadFixtureData({
-      "username": Math.floor(Math.rand() * 1000000),
+      "username": Math.floor(Math.random() * 1000000),
       "pieces": this.pieces.id,
       "nodeId": nodeInfo.id
     })
@@ -268,7 +268,7 @@ Update the `_init` function to look like the following:
     await this.user.load()
 
     await this.loadFixtureData({
-      "username": Math.floor(Math.rand() * 1000000),
+      "username": Math.floor(Math.random() * 1000000),
       "pieces": this.pieces.id,
       "nodeId": nodeInfo.id
     })
