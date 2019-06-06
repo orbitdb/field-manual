@@ -5,9 +5,9 @@
 <div>
   <h3>Table of Contents</h3>
 
-- [Setting up](#setting_up)
-- [Obtaining the SSL certificates](#obtaining_the_ssl_certificates)
-- [Interacting with OrbitDB over HTTP](#interacting_with_orbitdb_over_http)
+- [Setting up](#setting-up)
+- [Obtaining the SSL certificates](#obtaining-the-ssl-certificates)
+- [Interacting with OrbitDB over HTTP](#interacting-with-orbitdb-over-http)
 - [Replicating](#replicating)
 - [Key takeaways](#key-takeaways)
 
@@ -62,7 +62,7 @@ npm install
 
 The latest version of the OrbitDB HTTP API incorporates HTTP/2. Therefore, to run the server, you will need to generate SSL certificates.
 
-There are a couple of options available for obtaining certificates; you can issue a certificate using a certificate authority such as Let’s Encrypt, or, you can become your own CA. For development environments, the second option may be better and a thorough overview on how to do this is covered in the section [Generating a self-signed certificate](#generatinr_a_self_signed_certificate).
+There are a couple of options available for obtaining certificates; you can issue a certificate using a certificate authority such as Let’s Encrypt, or, you can become your own CA. For development environments, the second option may be better and a thorough overview on how to do this is covered in the section [Generating a self-signed certificate](#generating-a-self-signed-certificate).
 
 The rest of this tutorial will assume you have a trusted SSL certificate set up and that curl will use your trust store to validate the certificate. If not, you will need to tell curl to ignore the certificate verification by passing the -k flag:
 
