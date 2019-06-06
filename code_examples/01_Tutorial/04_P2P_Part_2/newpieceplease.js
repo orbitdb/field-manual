@@ -15,6 +15,7 @@ class NewPiecePlease {
     async _init () {
         const nodeInfo = await this.node.id()
         this.orbitdb = await this.OrbitDB.createInstance(this.node)
+        // differences between older apis which use publicKey are causing problems.
         this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
 
         const docStoreOptions = {
