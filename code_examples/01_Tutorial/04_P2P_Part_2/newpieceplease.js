@@ -183,11 +183,15 @@ class NewPiecePlease {
     async sendMessage(topic, message, callback) {
         try {
             const msgString = JSON.stringify(message)
-            const messageBuffer = Buffer.from(msgString)
+            const messageBuffer = this.getBuffer().from(msgString)
             await this.node.pubsub.publish(topic, messageBuffer)
         } catch (e) {
             throw (e)
         }
+    }
+
+    getBuffer() {
+        return (typeof Buffer === "undefined") ? Ipfs.Buffer : Buffer
     }
 
     getCompanions() {
