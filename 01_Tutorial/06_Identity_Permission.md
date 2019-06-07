@@ -1,10 +1,10 @@
 ## Chapter 6: Identity and Permissions
 
-> OrbitDB is extremely flexible and extensible, allowing for security via strong _encryption_, and _custom access control_ based on your application's specific code and requirements 
+> OrbitDB is extremely flexible and extensible, allowing for security via strong _encryption_, and _custom access control_ based on your application's specific code and requirements
 
 <div>
   <h3>Table of Contents</h3>
-  
+
 Please complete [Chapter 5 - Peer to Peer Part 2 (OrbitDB)](./05_P2P_Part_2.md) first.
 
 - [On security](#on-security)
@@ -92,9 +92,11 @@ Encrypting data will work great given a strong enough encryption method. If you 
 
 ### Creating your own authentication middleware
 
-Out of the box, OrbitDB only checks your user's IPFS public keys to authenticate, if at all. This is purposeful: our philosophy is to provide maxmial flexibility. With regards to access, this could mean that you can either use a third-party application to verify access, such as "Log in with Metamask", or use custom application code to control access.
+Write access to databases is managed using OrbitDB's access controllers. Access controllers are flexible and extensible; you can either use the default, OrbitDBAccessController, or you can create your own. This means that you can use a third-party application to verify access, such as "Log in with Metamask", or use custom application code to control access.
 
-You will now implement this via a simple example that you can build upon in the future.
+If no access controller is specified, OrbitDB will use the default OrbitDBAccessController to grant write access. OrbitDBAccessController allows you to list which peers have access. If no peers are specified, only the creator of the database will be granted write access. The peer's identity.id property is used to grant write access to a database when using OrbitDBAccessController.
+
+Alternatively, you can define your own rules to manage write access. You will now implement an access controller using a simple example that can be built upon in the future.
 
 Add a simple function to the `NewPiecePlease` class:
 
