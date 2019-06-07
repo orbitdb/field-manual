@@ -148,7 +148,7 @@ First, update your `_init` function to make a new "companions" database:
 async _init() {
   const nodeInfo = await this.node.id()
   this.orbitdb = await OrbitDB.createInstance(this.node)
-  this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
+  this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
 
   const docStoreOptions = {
     ...defaultOptions,

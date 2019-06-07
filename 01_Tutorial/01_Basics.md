@@ -55,7 +55,7 @@ If you're using the browser for this tutorial, we recommend using [unpkg](https:
 
 ```html
 <script src="https://unpkg.com/ipfs/dist/index.min.js"></script>
-<script src="https://www.unpkg.com/orbit-db/src/OrbitDB.js"></script>
+<script src="https://www.unpkg.com/orbit-db/dist/orbitdb.min.js"></script>
 ```
 
 You will now have global `Ipfs` and `OrbitDB` objects available to you. You will see how we'll use these later.
@@ -210,7 +210,7 @@ Expand of your `_init` function to the following:
 ```diff
   async _init {
     this.orbitdb = await OrbitDB.createInstance(node)
-+   this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
++   this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
 +
 +   const docStoreOptions = {
 +     ...defaultOptions,
@@ -244,8 +244,8 @@ You will see something like the following as an output: `/orbitdb/zdpuB3VvBJHqYC
 Your code created a local OrbitDB database, of type "docstore", writable only by the user who created it.
 
 - `defaultOptions` and `docStoreOptions` define the parameters for the database we are about to create.
-  - `accessController: { write: [orbitdb.identity.publicKey] }` defines the ACL, or "Access Control List". In this instance
-  we are restricting `write` access to ONLY the OrbitDB instances identified by our particular `publicKey`
+  - `accessController: { write: [orbitdb.identity.id] }` defines the ACL, or "Access Control List". In this instance
+  we are restricting `write` access to ONLY the OrbitDB instances identified by our particular `id`
   - `indexBy: "hash"` is a docstore-specific option, which specifies which field to index our database by
 - `pieces = await orbitdb.docstore('pieces', options)` is the magic line that creates the database. Once this line is
 completed, the database is open and can be acted upon.
