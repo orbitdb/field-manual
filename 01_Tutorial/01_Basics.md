@@ -80,7 +80,11 @@ try {
 
     module.exports = exports = new NewPiecePlease(Ipfs, OrbitDB)
 } catch (e) {
+  if (typeof (window) != 'undefined') {
     window.NPP = new NewPiecePlease(window.Ipfs, window.OrbitDB)
+  } else {
+    console.error(e);
+  }
 }
 ```
 
