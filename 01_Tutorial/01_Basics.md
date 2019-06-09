@@ -213,7 +213,7 @@ Expand of your `_init` function to the following:
 +   this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
 +
 +   const docStoreOptions = {
-+     ...defaultOptions,
++     ...this.defaultOptions,
 +     indexBy: 'hash',
 +   }
 +   this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
