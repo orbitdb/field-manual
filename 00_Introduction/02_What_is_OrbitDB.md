@@ -16,7 +16,7 @@ Work is currently underway to allow support for other programming languages via 
 
 ### OrbitDB is NOT a Blockchain
 
-OrbitDB operates on the model of _eventual consistency_ meaning that operations can be taking place at places and times that you are unaware of, with the assumption that you'll eventually connect with peers, share your logs, and sync your data. This contrasts with Blockchain's idea of _strong consistency_ where entries are added to the database only after they have been verified by some distributed consensus algorithm.
+OrbitDB operates on the model of _strong eventual consistency_ meaning that operations can be taking place at places and times that you are unaware of, with the assumption that you'll eventually connect with peers, share your logs, and sync your data. This contrasts with Blockchain's idea of _strong consistency_ where entries are added to the database only after they have been verified by some distributed consensus algorithm.
 
 There is no built-in "double spend" protection in OrbitDB - that is on you, the developer, to implement.
 
