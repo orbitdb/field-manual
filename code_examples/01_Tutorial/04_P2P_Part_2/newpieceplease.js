@@ -2,6 +2,7 @@ class NewPiecePlease {
     constructor (IPFS, OrbitDB) {
         this.OrbitDB = OrbitDB
         this.node = new IPFS({
+            preload: {enabled: false},
             relay: { enabled: true, hop: { enabled: true, active: true } },
             repo: './ipfs',
             EXPERIMENTAL: { pubsub: true }
@@ -14,6 +15,7 @@ class NewPiecePlease {
     async _init () {
         const nodeInfo = await this.node.id()
         this.orbitdb = await this.OrbitDB.createInstance(this.node)
+        // differences between older apis which use publicKey are causing problems.
         this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
 
         const docStoreOptions = {
@@ -34,8 +36,14 @@ class NewPiecePlease {
             "nodeId": nodeInfo.id
         })
 
+        this.companions = await this.orbitdb.keyvalue("companions", this.defaultOptions)
+        await this.companions.load()
+
         this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
         await this.node.pubsub.subscribe(nodeInfo.id, this.handleMessageReceived.bind(this))
+
+        this.companionConnectionInterval = setInterval(this.connectToCompanions.bind(this), 10000)
+        this.connectToCompanions()
 
         // when the OrbitDB docstore has loaded, intercept this method to
         // carry out further operations.
@@ -143,10 +151,32 @@ class NewPiecePlease {
 
     handlePeerConnected(ipfsPeer) {
         const ipfsId = ipfsPeer.id._idB58String;
+
+        setTimeout(async () => {
+            await this.sendMessage(ipfsId, { user: this.user.id })
+        }, 2000)
+
         if(this.onpeerconnect) this.onpeerconnect(ipfsId)
     }
 
     handleMessageReceived(msg) {
+        const parsedMsg = JSON.parse(msg.data.toString())
+        const msgKeys = Object.keys(parsedMsg)
+
+        switch (msgKeys[0]) {
+            case "user":
+                var peer = await this.orbitdb.open(parsedMsg.user)
+                peer.events.on("replicated", async () => {
+                    if (peer.get("pieces")) {
+                        await this.companions.set(peer.id, peer.all
+                        this.ondbdiscovered && this.ondbdiscovered(peer)
+                    }
+                })
+                break;
+            default:
+                break;
+        }
+
         if(this.onmessage) this.onmessage(msg)
     }
 
@@ -162,6 +192,41 @@ class NewPiecePlease {
 
     getBuffer() {
         return (typeof Buffer === "undefined") ? Ipfs.Buffer : Buffer
+    }
+
+    getCompanions() {
+        return this.companions.all
+    }
+
+    async connectToCompanions() {
+        const companionIds = Object.values(this.companions.all).map(companion => companion.nodeId)
+        const connectedPeerIds = await this.getIpfsPeers()
+        companionIds.forEach(async (companionId) => {
+            if (connectedPeerIds.indexOf(companionId) !== -1) return
+            try {
+                await this.connectToPeer(companionId)
+                this.oncompaniononline && this.oncompaniononline()
+            } catch (e) {
+                this.oncompanionnotfound && this.oncompanionnotfound()
+            }
+        })
+    }
+
+    async queryCatalog() {
+        const peerIndex = NPP.companions.all()
+        const dbAddrs = Object.keys(peerIndex).map(key => peerIndex[key].pieces)
+
+        const allPieces = await Promise.all(dbAddrs.map(async (addr) => {
+            const db = await this.orbitdb.open(addr)
+            await db.load()
+
+            return db.get('')
+        }))
+
+        return allPieces.reduce((flatPieces, pieces) => {
+            pieces.forEach(p => flatPieces.push(p))
+            return flatPieces
+        }, this.pieces.get(''))
     }
 }
 

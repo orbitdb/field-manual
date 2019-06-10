@@ -66,7 +66,7 @@ Which will then output something like:
 
 You changed your code to add a new database of type `counter` for each new entry added to the database.
 
-- `const options = { accessController: { write: [this.orbitdb.identity.publicKey] }}` should be recognizable from Chapter 1. This sets options for the db, namely the `accessController` to give write access only to your node's ID, or public key.
+- `const options = { accessController: { write: [this.orbitdb.identity.id] }}` should be recognizable from Chapter 1. This sets options for the db, namely the `accessController` to give write access only to your node's ID.
 - `this.orbitdb.counter` creates a new counter type with `options` that provide a write ACL for your IPFS node
 - `const dbName = "counter." + hash.substr(20,20)` prepends `counter.` to the truncated database name. See the note below.
 - `this.pieces.put` is then modified to store the _address_ of this new database for later retrieval similar to the way you  stored media addresses in a previous chapter.
@@ -135,7 +135,7 @@ Update your `_init` function to look like this:
 ```diff
   async _init() {
     this.orbitdb = await OrbitDB.createInstance(this.node)
-    this.defaultOptions = { write: [this.orbitdb.identity.publicKey] }
+    this.defaultOptions = { write: [this.orbitdb.identity.id] }
 
     const docStoreOptions = {
       ...defaultOptions,
@@ -219,7 +219,7 @@ Then, update your _init_ function to call `loadFixtureData` with some starter da
   async _init() {
 +   const peerInfo = await this.node.id()
     this.orbitdb = await OrbitDB.createInstance(this.node)
-    this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
+    this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
 
     const docStoreOptions = {
       ...defaultOptions,

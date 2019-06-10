@@ -188,7 +188,7 @@ Then, update the `_init` function to include an event handler for when a peer is
   async _init() {
     const nodeInfo = await this.node.id()
     this.orbitdb = await OrbitDB.createInstance(this.node)
-    this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
+    this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
 
     const docStoreOptions = {
       ...defaultOptions,
@@ -255,7 +255,7 @@ Update the `_init` function to look like the following:
   async _init() {
     const nodeInfo = await this.node.id()
     this.orbitdb = await OrbitDB.createInstance(this.node)
-    this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
+    this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
 
     const docStoreOptions = {
       ...defaultOptions,

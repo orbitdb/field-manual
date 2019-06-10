@@ -18,7 +18,7 @@ class NewPiecePlease {
     async _init () {
         const peerInfo = await this.node.id()
         this.orbitdb = await this.OrbitDB.createInstance(this.node)
-        this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
+        this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
 
         const docStoreOptions = {
           ...this.defaultOptions,

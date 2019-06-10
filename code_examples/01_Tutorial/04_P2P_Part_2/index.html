@@ -7,8 +7,8 @@
 		<script src="./newpieceplease.js"></script>
 		<script language="Javascript">
 NPP.onready = async () => {
-	NPP.onpeerconnect = console.log
-	await NPP.connectToPeer("paste your other node's IPFS hash here")
+	const identity = await NPP.node.id()
+  	console.log(identity.id)
 }
 		</script>
 </html>
