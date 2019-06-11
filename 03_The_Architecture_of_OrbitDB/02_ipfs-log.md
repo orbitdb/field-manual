@@ -91,6 +91,76 @@ This concept is visualized below, with the dim entries signifying non-traversed,
 
 ![Tails Example](../images/tails-example.png)
 
+
+### Anatomy of a Log Entry
+
+`ipfs-log` entries are JSON objects that follow a specific schema to form linked lists, or "chains" in a (Directed Acyclic Graph) DAG. In doing so, IPFS can be utilized as an append-only operation log.
+
+What follows is sort of a "minimum viable example" of such a log. Below the example is a field-by-field explanation of what's going on.
+
+```JSON
+[
+  {
+    "hash": "zdpuAmL9zAgC4KFdMWW6yjpEcSYTnBunjTeijHv8GTKrxoz7D",
+    "id": "example-log",
+    "payload": "one",
+    "next": [],
+    "v": 1,
+    "clock": {
+      "id": "04524f55b54154aa9ec5a54118821c666d19825c0b4e4e91fac387035dbf679803cbdc858b052558f75d5e52ed5b2c38b94d4f652ee63142bae91b95df3b36fe4b",
+      "time": 1
+    },
+    "key": "04524f55b54154aa9ec5a54118821c666d19825c0b4e4e91fac387035dbf679803cbdc858b052558f75d5e52ed5b2c38b94d4f652ee63142bae91b95df3b36fe4b",
+    "identity": {
+      "id": "0281c2c485e5f03f006f8e7ccb34f4281d2d7ae7d8571660e745eb4e07b4d8f35d",
+      "publicKey": "04524f55b54154aa9ec5a54118821c666d19825c0b4e4e91fac387035dbf679803cbdc858b052558f75d5e52ed5b2c38b94d4f652ee63142bae91b95df3b36fe4b",
+      "signatures": {
+        "id": "3045022100c7fe5bab3844e197cccc9dc0962977f0381b96acaf9518688a278e0f8ddbc78d0220137e7d154a076319fe418e24f4d861683cf6823f3f725d1f4eb30b17cb1f3fbe",
+        "publicKey": "3044022043dc1a586910538cd534666d8c66599e6349e82c6ba7fe5bf4d43cfefc4a3e9f02205838a492371fee3f22e4aeeeda9d0f8c1176bf16f64139049b0c6b47d89a8e63"
+      },
+      "type": "orbitdb"
+    },
+    "sig": "3045022100e85408f20d8917eea076e091a64507c1115f9314cf8578b1c483810e82dc6b8902206649fea6407261157310ef59fc518bb902a7b32a9ddf55817a6010df004ed452"
+  },
+  {
+    "hash": "zdpuAoGa1MseCvKwbk9xdGK6aNyB5JqdYX8WrkUA8UCz7fRut",
+    "id": "example-log",
+    "payload": {
+      "two": "hello"
+    },
+    "next": [
+      "zdpuAmL9zAgC4KFdMWW6yjpEcSYTnBunjTeijHv8GTKrxoz7D"
+    ],
+    "v": 1,
+    "clock": {
+      "id": "04524f55b54154aa9ec5a54118821c666d19825c0b4e4e91fac387035dbf679803cbdc858b052558f75d5e52ed5b2c38b94d4f652ee63142bae91b95df3b36fe4b",
+      "time": 2
+    },
+    "key": "04524f55b54154aa9ec5a54118821c666d19825c0b4e4e91fac387035dbf679803cbdc858b052558f75d5e52ed5b2c38b94d4f652ee63142bae91b95df3b36fe4b",
+    "identity": {
+      "id": "0281c2c485e5f03f006f8e7ccb34f4281d2d7ae7d8571660e745eb4e07b4d8f35d",
+      "publicKey": "04524f55b54154aa9ec5a54118821c666d19825c0b4e4e91fac387035dbf679803cbdc858b052558f75d5e52ed5b2c38b94d4f652ee63142bae91b95df3b36fe4b",
+      "signatures": {
+        "id": "3045022100c7fe5bab3844e197cccc9dc0962977f0381b96acaf9518688a278e0f8ddbc78d0220137e7d154a076319fe418e24f4d861683cf6823f3f725d1f4eb30b17cb1f3fbe",
+        "publicKey": "3044022043dc1a586910538cd534666d8c66599e6349e82c6ba7fe5bf4d43cfefc4a3e9f02205838a492371fee3f22e4aeeeda9d0f8c1176bf16f64139049b0c6b47d89a8e63"
+      },
+      "type": "orbitdb"
+    },
+    "sig": "304402207cb815276e16d222759f65558d22c3067b54be86f1ce66f1be057e7c188367d6022050e4b93ddc40bc174b725623473a00412cb56180254c18ec34b616afe4ef1840"
+  }
+]
+```
+
+* **hash**: the hash of the entry, in cidv1 format (this will switch to base32 soon)
+* **id**: the user-supplied ID of the log
+* **payload**: the actual content of the log entry, can be any JSON-serializable object
+* **next**: an array of hashes that point to previous log entries from the _head_ of the log.
+* **v**: the version of the log schema. Typically for internal tracking only and migration purposes
+* **clock** the lamport clock values. explained above
+* **key** the orbitdb-generated public key for verification purposes
+* **identity** the identity object. defaults to the standard OrbitDB identity but can be customized
+* **sig** the signaure of the entry, signed by the orbitdb private key, for verification purposes
+
 #### References
 1. https://citemaster.net/get/10b50274-7bc5-11e5-8aa1-00163e009cc7/p558-lamport.pdf
 2. https://hal.inria.fr/inria-00555588
