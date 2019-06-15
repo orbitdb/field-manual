@@ -57,8 +57,8 @@ Admittedly, a music app is somewhat arbitrary. But if you're here to learn more 
 * `async` and `await` are used prominently. Feel free to replace those with explicit `Promise` objects if you like.
 * Steps that **you** should complete are represented and highlighted as _diffs_. Example application code is represented as JavaScript  
 * For the sake of keeping things focused, we will exclude any HTML or CSS from this tutorial and focus only on the JavaScript code.
-• _Italicized_ words are words which we think you should learn to become familiar with.
-• **Bolded** words are merely for textual emphasis. We want to make sure you don’t miss something!
-• Some typographical errors and misspellings - Javascript for JavaScript, decentralised instead of decentralized, and so on - will sneak in. If you see something, open a PR with a change! Check out our GitHub repository that this document is hosted in. All contributors will be credited.
+* _Italicized_ words are words which we think you should learn to become familiar with.
+* **Bolded** words are merely for textual emphasis. We want to make sure you don’t miss something!
+* Some typographical errors and misspellings - Javascript for JavaScript, decentralised instead of decentralized, and so on - will sneak in. If you see something, open a PR with a change! Check out our GitHub repository that this document is hosted in. All contributors will be credited.
 
 <strong>Ready? Start with [Chapter 1: Laying the Foundation](./01_Basics.md)</strong>
