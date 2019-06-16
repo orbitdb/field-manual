@@ -24,19 +24,17 @@ Your users may want to keep track of their practice, at minimum how many times t
 Update the `addNewPiece` function to create a `counter` store every time a new piece is added to the database. You can utilize basic access control again to ensure that only a node with your IPFS node's ID can write to it.
 
 ```diff
-async addNewPiece(hash, instrument = "Piano") {
+async addNewPiece (hash, instrument = 'Piano') {
   const existingPiece = this.pieces.get(hash)
   if(existingPiece) {
     await this.updatePieceByHash(hash, instrument)
     return;
   }
 
-+ const dbName = "counter." + hash.substr(20,20)
++ const dbName = 'counter.' + hash.substr(20,20)
 + const counter = await this.orbitdb.counter(dbName, this.defaultOptions)
 
-  const cid = await this.pieces.put({
-    hash: hash,
-    instrument: instrument,
+  const cid = await this.pieces.put({ hash, instrument,
 +   counter: counter.id
   })
 
@@ -47,7 +45,7 @@ async addNewPiece(hash, instrument = "Piano") {
 In your application code this would look something like this:
 
 ```JavaScript
-const cid = await NPP.addNewPiece("QmdzDacgJ9EQF9Z8G3L1fzFwiEu255Nm5WiCey9ntrDPSL", "Piano")
+const cid = await NPP.addNewPiece('QmdzDacgJ9EQF9Z8G3L1fzFwiEu255Nm5WiCey9ntrDPSL', 'Piano')
 const content = await NPP.node.dag.get(cid)
 console.log(content.value.payload.value)
 ```
@@ -79,13 +77,13 @@ You changed your code to add a new database of type `counter` for each new entry
 Now, add a few functions to `NewPiecePlease` that utilize the counters when necessary
 
 ```diff
-+ async getPracticeCount(piece) {
++ async getPracticeCount (piece) {
 +   const counter = await this.orbitdb.counter(piece.counter)
 +   await counter.load()
 +   return counter.value
 + }
 
-+ async incrementPracticeCounter(piece) {
++ async incrementPracticeCounter (piece) {
 +   const counter = await this.orbitdb.counter(piece.counter)
 +   const cid = await counter.inc()
 +   return cid
@@ -95,7 +93,7 @@ Now, add a few functions to `NewPiecePlease` that utilize the counters when nece
 These can be used in your application code like so:
 
 ```JavaScript
-const piece = NPP.getPieceByHash("QmdzDacgJ9EQF9Z8G3L1fzFwiEu255Nm5WiCey9ntrDPSL")
+const piece = NPP.getPieceByHash('QmdzDacgJ9EQF9Z8G3L1fzFwiEu255Nm5WiCey9ntrDPSL')
 const cid = await NPP.incrementPracticeCounter(piece)
 const content = await NPP.node.dag.get(cid)
 console.log(content.value.payload)
@@ -138,13 +136,13 @@ Update your `_init` function to look like this:
     this.defaultOptions = { write: [this.orbitdb.identity.id] }
 
     const docStoreOptions = {
-      ...defaultOptions,
+      ...this.defaultOptions,
       indexBy: 'hash',
     }
     this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
     await this.pieces.load()
 
-+   this.user = await this.orbitdb.kvstore("user", this.defaultOptions)
++   this.user = await this.orbitdb.kvstore('user', this.defaultOptions)
 +   await this.user.load()
 +   await this.user.set('pieces', this.pieces.id)
 
@@ -155,20 +153,20 @@ Update your `_init` function to look like this:
 Then add the following functions in your class:
 
 ```diff
-+ async deleteProfileField(key) {
++ async deleteProfileField (key) {
 +   const cid = await this.user.del(key)
 +   return cid
 + }
 
-+ getAllProfileFields() {
-+   return NPP.user.all();
++ getAllProfileFields () {
++   return this.user.all;
 + }
 
-+ getProfileField(key) {
++ getProfileField (key) {
 +   return this.user.get(key)
 + }
 
-+ async updateProfileField(key, value) {
++ async updateProfileField (key, value) {
 +   const cid = await this.user.set(key, value)
 +   return cid
 + }
@@ -177,9 +175,9 @@ Then add the following functions in your class:
 In your application code, you can use them like this:
 
 ```JavaScript
-await NPP.updateProfile("username", "aphelionz")
+await NPP.updateProfileField("username", "aphelionz")
 
-var profileFields = NPP.getAllProfileFields();A
+const profileFields = NPP.getAllProfileFields()
 // { "username": "aphelionz", "pieces": "/orbitdb/zdpu...../pieces" }
 
 await NPP.deleteProfileField("username")
@@ -191,9 +189,9 @@ We think you're getting the idea.
 
 You created a database to store anything and everything that might pertain to a user, and then linked the `pieces` to that, nested inside.
 
-- `this.orbitdb.kvstore("user", this.defaultOptions)` creates a new OrbitDB of a type that allows you to manage a simple key-value store.
+- `this.orbitdb.kvstore('user', this.defaultOptions)` creates a new OrbitDB of a type that allows you to manage a simple key-value store.
 - `this.user.set('pieces', this.pieces.id)` is the function that the `kvstore` uses to set items. This is equivalent to something like the shorthand `user = {}; user.pieces = id`
-- `NPP.user.all()` returns all keys and values from a `keystore` database
+- `this.user.all` contains all keys and values from a `keystore` database **This is a property, not a function!**
 - `this.user.del(key)` deletes the specified key and corresponding value from the store
 - `this.user.get(key)` retrieves the specified key and the corresponding value from the store
 
@@ -204,7 +202,7 @@ Fresh users to the app will need a strong onboarding experience, and you will en
 First, create the `loadFixtureData` function inside the `NewPiecePlease` class:
 
 ```diff
-+ async loadFixtureData(fixtureData) {
++ async loadFixtureData (fixtureData) {
 +   const fixtureKeys = Object.keys(fixtureData)
 +   for (let i in fixtureKeys) {
 +     let key = fixtureKeys[i]
@@ -222,19 +220,19 @@ Then, update your _init_ function to call `loadFixtureData` with some starter da
     this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
 
     const docStoreOptions = {
-      ...defaultOptions,
+      ...this.defaultOptions,
       indexBy: 'hash',
     }
     this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
     await this.pieces.load()
 
-    this.user = await this.orbitdb.kvstore("user", this.defaultOptions)
+    this.user = await this.orbitdb.kvstore('user', this.defaultOptions)
     await this.user.load()
 
 +   await this.loadFixtureData({
-+     "username": Math.floor(Math.random() * 1000000),
-+     "pieces": this.pieces.id,
-+     "nodeId": peerInfo.id
++     'username': Math.floor(Math.random() * 1000000),
++     'pieces': this.pieces.id,
++     'nodeId': peerInfo.id
 +   })
 
     this.onready()
