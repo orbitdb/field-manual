@@ -30,7 +30,7 @@ $ LOG="orbit*" node
 In the browser, you can set this as a global variable on `window`:
 
 ```JavaScript
-window.LOG="orbit*"
+window.LOG='orbit*'
 ```
 
 Then, once you re-run the app, you should see a great deal of console info, abridged here:
@@ -79,11 +79,11 @@ The flow you will create will be:
 First, update your `handlePeerConnected` function to call `sendMessage` we introduce a timeout here to give the peers a second or two to breathe once they are connected. You can later tune this, or remove it as you see fit and as future IPFS features provide greater network reliability and performance.
 
 ```diff
-  handlePeerConnected(ipfsPeer) {
-    const ipfsId = ipfsPeer.id._idB58String;
+  handlePeerConnected (ipfsPeer) {
+    const ipfsId = ipfsPeer.id.toB58String()
 +   setTimeout(async () => {
 +     await this.sendMessage(ipfsId, { userDb: this.user.id })
-+   }, 2000)$
++   }, 2000)
     if(this.onpeerconnect) this.onpeerconnect(ipfsPeer)
   }
 ```
@@ -91,21 +91,21 @@ First, update your `handlePeerConnected` function to call `sendMessage` we intro
 Now, update your `handleMessageReceived` function to replicate the user database:
 
 ```diff
-+ async handleMessageReceived(msg) {
++ async handleMessageReceived (msg) {
 +   const parsedMsg = JSON.parse(msg.data.toString())
 +   const msgKeys = Object.keys(parsedMsg)
 +
-+   switch(msgKeys[0]) {
-+     case "userDb":
++   switch (msgKeys[0]) {
++     case 'userDb':
 +       var peerDb = await this.orbitdb.open(parsedMsg.userDb)
-+       peerDb.events.on("replicated", async () => {
-+         if(peerDb.get("pieces")) {
++       peerDb.events.on('replicated', async () => {
++         if (peerDb.get('pieces')) {
 +           this.ondbdiscovered && this.ondbdiscovered(peerDb)
 +         }
 +       })
-+       break;
++       break
 +     default:
-+       break;
++       break
 +   }
 +
 +   if(this.onmessage) this.onmessage(msg)
@@ -116,7 +116,7 @@ In your application code you can use this functionality like so:
 
 ```JavaScript
 // Connect to a peer that you know has a New Piece, Please! user database
-await NPP.connectToPeer("Qm.....")
+await NPP.connectToPeer('Qm.....')
 
 NPP.ondbdiscovered = (db) => console.log(db.all)
 /* outputs:
@@ -134,7 +134,7 @@ You updated your code to send a message to connected peers after 2 seconds, and 
 
 - `this.sendMessage(ipfsId, { user: this.user.id })` utilizes the function you created previously to send a message to a peer via a topic named from their IPFS id
 - `this.node.pubsub.subscribe` registers an event handler that calls `this.handleMessageReceived`
-- `peer.events.on("replicated" ...` fires when the database has been loaded and the data has been retrieved from IPFS and is stored locally. It means, simply, that you have the data and it is ready to be used.
+- `peer.events.on('replicated' ...` fires when the database has been loaded and the data has been retrieved from IPFS and is stored locally. It means, simply, that you have the data and it is ready to be used.
 
 > **Note:** If you're a security-minded person, this is probably giving you anxiety. That's ok, these methods are for educational purposes only and are meant to enhance your understanding of how a system like this works. We will cover authorization and authentication in the next chapter.
 
@@ -151,25 +151,25 @@ async _init() {
   this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
 
   const docStoreOptions = {
-    ...defaultOptions,
+    ...this.defaultOptions,
     indexBy: 'hash',
   }
   this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
   await this.pieces.load()
 
-  this.user = await this.orbitdb.keyvalue("user", this.defaultOptions)
+  this.user = await this.orbitdb.keyvalue('user', this.defaultOptions)
   await this.user.load()
 
-+ this.companions = await this.orbitdb.keyvalue("companions", this.defaultOptions)
++ this.companions = await this.orbitdb.keyvalue('companions', this.defaultOptions)
 + await this.companions.load()
 
   await this.loadFixtureData({
-    "username": Math.floor(Math.random() * 1000000),
-    "pieces": this.pieces.id,
-    "nodeId": nodeInfo.id,
+    'username': Math.floor(Math.random() * 1000000),
+    'pieces': this.pieces.id,
+    'nodeId': nodeInfo.id,
   })
 
-  this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
+  this.node.libp2p.on('peer:connect', this.handlePeerConnected.bind(this))
   await this.node.pubsub.subscribe(nodeInfo.id, this.handleMessageReceived.bind(this))
 
 + this.companionConnectionInterval = setInterval(this.connectToCompanions.bind(this), 10000)
@@ -182,7 +182,7 @@ async _init() {
 Next, create a `getCompanions()` abstraction for your application layer
 
 ```diff
-+ getCompanions() {
++ getCompanions () {
 +   return this.companions.all
 + }
 ```
@@ -195,17 +195,17 @@ Then, update your `handleMessageReceived` function to add a discovered peer's us
     const msgKeys = Object.keys(parsedMsg)
 
     switch(msgKeys[0]) {
-      case "userDb":
+      case 'userDb':
         const peerDb = await this.orbitdb.open(parsedMsg.userDb)
-        peerDb.events.on("replicated", async () => {
-          if(peerDb.get("pieces")) {
+        peerDb.events.on('replicated', async () => {
+          if(peerDb.get('pieces')) {
 +           await this.companions.set(peerDb.id, peerDb.all)
             this.ondbdiscovered && this.ondbdiscovered(peerDb)
           }
         })
-        break;
+        break
       default:
-        break;
+        break
     }
 
     if(this.onmessage) this.onmessage(msg)
@@ -215,10 +215,10 @@ Then, update your `handleMessageReceived` function to add a discovered peer's us
 Finally, create the `connectToCompanions` function:
 
 ```diff
-+ async connectToCompanions() {
++ async connectToCompanions () {
 +   const companionIds = Object.values(this.companions.all).map(companion => companion.nodeId)
 +   const connectedPeerIds = await this.getIpfsPeers()
-+   companionIds.forEach(async (companionId) => {
++   await Promise.all(companionIds.map(async (companionId) => {
 +     if (connectedPeerIds.indexOf(companionId) !== -1) return
 +     try {
 +       await this.connectToPeer(companionId)
@@ -226,7 +226,7 @@ Finally, create the `connectToCompanions` function:
 +     } catch (e) {
 +       this.oncompanionnotfound && this.oncompanionnotfound()
 +     }
-+   })
++   }))
 + }
 ```
 
@@ -241,10 +241,10 @@ NPP.oncompanionnotfound = () => { throw(e) }
 
 You created yet another database for your user's musical companions, and updated this database upon database discovery. You can use this to create "online indicators" for all companions in your UI layer.
 
-- `await this.orbitdb.keyvalue("companions", this.defaultOptions)` creates a new keyvalue store called "companions"
+- `await this.orbitdb.keyvalue('companions', this.defaultOptions)` creates a new keyvalue store called "companions"
 - `this.companions.all` retrieves the full list of key/value pairs from the database
 - `this.companions.set(peer.id, peer.all)` adds a record to the companions database, with the database ID as the key, and the data as the value stored. Note that you can do nested keys and values inside a `keyvalue` store
-- `companionIds.forEach` will then call `this.connectToPeer(companionId)` in parallel for all registered companions in your database. If they are found `oncompaniononline` will fire. If not, `oncompanionnotfound` will fire next.
+- `companionIds.map` will then call `this.connectToPeer(companionId)` in parallel for all registered companions in your database. If they are found `oncompaniononline` will fire. If not, `oncompanionnotfound` will fire next.
 
 ### Simple distributed queries
 
@@ -253,35 +253,30 @@ This may be the moment you've been waiting for - now you will perform a simple p
 Create the following function, which combines much of the code you've written and knowledge you've obtained so far:
 
 ```diff
-+ async queryCatalog() {
-+   const peerIndex = NPP.companions.all
-+   const dbAddrs = Object.keys(peerIndex).map(key => peerIndex[key].pieces)
++ async queryCatalog (queryFn) {
++   const dbAddrs = Object.values(this.companions.all).map(peer => peer.pieces)
 +
 +   const allPieces = await Promise.all(dbAddrs.map(async (addr) => {
 +     const db = await this.orbitdb.open(addr)
 +     await db.load()
 +
-+     return db.get('')
++     return db.query(queryFn)
 +   }))
 +
-+   return allPieces.reduce((flatPieces, pieces) => {
-+     pieces.forEach(p => flatPieces.push(p))
-+     return flatPieces
-+   }, this.pieces.get(''))
++   return allPieces.reduce((flatPieces, pieces) => flatPieces.concat(pieces), this.pieces.query(queryFn))
 + }
 ```
 
-You can now test this by creating a few different instances of the app (try both browser and Node.js instances), connecting them via their peer IDs, discovering their databases, and running `NPP.queryCatalog()`.
+You can now test this by creating a few different instances of the app (try both browser and Node.js instances), connecting them via their peer IDs, discovering their databases, and running `NPP.queryCatalog(x => true)`.
 
 #### What just happened?
 
 You performed your first distributed query using OrbitDB. We hope that by now the power of such a simple system, under 200 lines of code so far, can be used to create distributed applications.
 
-- `NPP.companions.all` will return the current list of discovered companions
+- `this.companions.all` will return the current list of discovered companions
 - `this.orbitdb.open(addr)` will open the peer's database and `db.load` will load it into memory
+- `db.query(queryFn)` will filter the pieces in the peer's database using the `queryFn` as a filter
 - `allPieces.reduce` will take an array of arrays and squash it into a flat array
-
-For now it will return _all_ pieces, but for bonus points you can try incorporating the `docstore.query` function instead of `docstore.get('')`.
 
 ### Key takeaways
 
