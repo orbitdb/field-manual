@@ -23,12 +23,12 @@ The first thing your users will want is to make sure that when they load the app
 Update your `NewPiecePlease class` handler, adding **one line** at the bottom of the IPFS `ready` handler:
 
 ```diff
-  _init() {
+  async _init () {
     this.orbitdb = await OrbitDB.createInstance(this.node)
     this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
 
     const docStoreOptions = {
-      ...defaultOptions,
+      ...this.defaultOptions,
       indexBy: 'hash',
     }
     this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
@@ -54,17 +54,14 @@ Next, your users will want to be able to add sheet music to their catalog. You w
 Add a function called `addNewPiece` function now:
 
 ```diff
-+ async addNewPiece(hash, instrument = "Piano") {
-+   const existingPiece = this.pieces.get(hash)
-+   if(existingPiece) {
++ async addNewPiece(hash, instrument = 'Piano') {
++   const existingPiece = this.getPieceByHash(hash)
++   if (existingPiece) {
 +     await this.updatePieceByHash(hash, instrument)
-+     return;
++     return
 +   }
 +
-+   const cid = await pieces.put({
-+     hash: hash,
-+     instrument: instrument
-+   })
++   const cid = await this.pieces.put({ hash, instrument })
 +   return cid
 + }
 ```
@@ -145,7 +142,7 @@ Fill in the following functions now:
 ```
 
 ```diff
-+ getByInstrument(instrument) {
++ getPieceByInstrument(instrument) {
 +   return this.pieces.query((piece) => piece.instrument === instrument)
 + }
 ```
@@ -156,7 +153,7 @@ In your application code, you can use these functions like so:
 pieces = NPP.getAllPieces()
 pieces.forEach((piece) => { /* do something */ })
 
-piece = NPP.getPieceByHash('QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ')
+piece = NPP.getPieceByHash('QmNR2n4zywCV61MeMLB6JwPueAPqtheqpfiA4fLPMxouEmQ')
 console.log(piece)
 ```
 
@@ -164,7 +161,7 @@ Pulling a random score from the database is a great way to find random music to 
 
 ```JavaScript
 const pieces = NPP.getPieceByInstrument("Piano")
-const randomPiece = pieces[items.length * Math.random() | 0]
+const randomPiece = pieces[pieces.length * Math.random() | 0]
 console.log(randomPiece)
 ```
 
@@ -195,7 +192,7 @@ Again, each OrbitDB store may have slightly different methods for this. In the `
 Fill in the `updatePieceByHash` and `deletePieceByHash` functions now:
 
 ```diff
-+ async updatePieceByHash(hash, instrument = "Piano") {
++ async updatePieceByHash (hash, instrument = 'Piano') {
 +   const piece = await this.getPieceByHash(hash)
 +   piece.instrument = instrument
 +   const cid = await this.pieces.put(piece)
@@ -204,7 +201,7 @@ Fill in the `updatePieceByHash` and `deletePieceByHash` functions now:
 ```
 
 ```diff
-+ async deletePieceByHash(hash) {
++ async deletePieceByHash (hash) {
 +   const cid = await this.pieces.del(hash)
 +   return cid
 + }
@@ -280,21 +277,13 @@ ipfs.addFromFs("./file.pdf").then(console.log)
 If you have a HTML file input with an ID of "fileUpload", you can do something like the following to add content to IPFS:
 
 ```JavaScript
-var fileInput = document.getElementById("fileUpload")
-
-var file = fileInput.files[0]
-if (file) {
-  var reader = new FileReader();
-  reader.readAsBinaryString(file)
-
-  reader.onerror = (e) => console.error(e)
-  reader.onload = async function (evt) {
-    const contents = evt.target.result
-    const buffer = NPP.node.types.Buffer(contents)
-    const result = await NPP.node.add(buffer)
-    const cid = await NPP.addNewPiece(result[0].hash, instrument)
+document.getElementById("fileUpload").addEventListener('change', async (event) => {
+  const file = event.target.files[0]
+  if (file) {
+    const result = await NPP.node.add(file)
+    const cid = await NPP.addNewPiece(result[0].hash)
   }
-}
+})
 ```
 
 Note that there are still issues with swarming in the browser, so you may have trouble discovering content. Stay tuned for future `js-ipfs` releases to fix this.
