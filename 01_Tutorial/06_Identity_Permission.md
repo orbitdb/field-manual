@@ -32,40 +32,36 @@ The first thing you'll do to mitigate implication #1 above is to encrypt the dat
 OrbitDB is agnostic in terms of encryption to ensure maximum flexibility with your application layer. However, you can learn a simple method of reading and writing encrypted data to the stores, by creating a simple (and useless in terms of real security) pair of functions.
 
 ```diff
-+ encrypt(data) {
++ encrypt (data) {
 +   const stringified = JSON.stringify(data)
-+   const reversed = stringified.split("").reverse().join("")
-+   return
++   const reversed = stringified.split('').reverse().join('')
++   return reversed
 + }
 
-+ decrypt(data) {
-+   const unreversed = data.split("").reverse().join("")
-+   const jsonEncoded = JSON.parse(jsonEncoded)
-+   return jsonEncoded
++ decrypt (data) {
++   const unreversed = data.split('').reverse().join('')
++   const json = JSON.parse(unreversed)
++   return json
 + }
 ```
 
 Then, for example, you could update the `getProfileFields` and `updateProfile` functions:
 
 ```diff
-- getProfileField(key) {
-+ getProfileField(key, encrypted=false) {
+- getProfileField (key) {
++ getProfileField (key, encrypted = false) {
 -    return this.user.get(key)
-+    let data
++    if (encrypted) key = this.decrypt(key)
 +
-+    if(encrypted) {
-+      key = this.decrypt(key)
-+      data = this.decrypt(data)
-+    } else {
-+      data = this.user.get(key)
-+    }
++    let data = this.user.get(key)
++    if (encrypted) data = this.decrypt(data)
 +
 +    return data
 + }
 
-- async updateProfileField(key, value) {
-- async updateProfileField(key, value, encrypted=true) {
-+   if(encrypted) {
+- async updateProfileField (key, value) {
+- async updateProfileField (key, value, encrypted = true) {
++   if (encrypted) {
 +     key = this.encrypt(key)
 +     value = this.encrypt(value)
 +   }
@@ -83,7 +79,7 @@ You learned a simple but effective method of encrypting and decrypting data for 
 - `this.encrypt` will encrypt the data locally in memory before storage
 - `this.decrypt` will take encrypted data from storage, and decrypt it locally, in memory
 
-You have many options to choose from in terms of, and while we are reticent to make an "official" recommendation, here's a few places you can start to look:
+You have many options to choose from when it comes to encryption, and while we are reticent to make an "official" recommendation, here's a few places you can start to look:
 
 - [Node.js crypto module](https://nodejs.org/api/crypto.html)
 - [Web Crypto Libraries](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API)
@@ -100,7 +96,7 @@ Alternatively, you can define your own rules to manage write access. You will no
 
 Add a simple function to the `NewPiecePlease` class:
 
-```
+```diff
 + authenticated() { return true }
 ```
 
@@ -108,7 +104,7 @@ It's not much to look at, but remember that you can put whatever code you want t
 
 Then, create a brand new JavaScript class called "NPPAccessController"
 
-```
+```diff
 + class NPPAccessController extends AccessController {
 +   async canAppend (entry, identityProvider) {
 +     const authenticated = NPP.authenticated()
@@ -121,10 +117,10 @@ Then, create a brand new JavaScript class called "NPPAccessController"
 
 Finally, add this to your options object to include this access controller, and pass in the options when creating databases.
 
-```
+```diff
 + const customAccessOptions = {
-+   ..defaultOptions
-+    accessControllerr: NPPAccessController
++    ...this.defaultOptions,
++    accessController: NPPAccessController
 + }
 + const counterDb = await this.orbitdb.counter(dbName, customAccessOptions)
 ```
