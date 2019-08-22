@@ -29,7 +29,7 @@ Choose a project directory and `cd` to there from your command line. Then run th
 
 ```bash
 $ npm init --yes
-$ npm install --save orbit-db@next ipfs
+$ npm install --save orbit-db ipfs
 ```
 
 This will create a `package.json`, `package-lock.json`, and `node_modules` folder.
