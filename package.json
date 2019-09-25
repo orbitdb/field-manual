@@ -1,6 +1,7 @@
 {
   "name": "orbitdb-field-manual",
   "version": "1.0.0",
+  "private": true,
   "description": "An end-to-end tutorial, an in-depth look at OrbitDB's architecture, and even some philosophical musings about decentralization and the distributed industry. From the creators of OrbitDB.",
   "main": "index.js",
   "scripts": {
@@ -27,7 +28,7 @@
     "manual",
     "book",
     "tutorial",
-    "docs"
+    "docs",
     "orbit"
   ]
 }
