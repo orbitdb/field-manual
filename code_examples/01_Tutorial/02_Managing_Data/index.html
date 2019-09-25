@@ -1,0 +1,51 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<script src="https://unpkg.com/ipfs@0.35.0/dist/index.min.js"></script>
+		<script src="https://www.unpkg.com/orbit-db/dist/orbitdb.min.js"></script>
+		<script src="./newpieceplease.js"></script>
+		<script language="Javascript">
+NPP.onready = async () => {
+	let cid
+	const hash = "QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ";
+
+	cid = await NPP.addNewPiece(hash)
+
+	if (cid) {
+ 		const content = await NPP.node.dag.get(cid)
+ 		console.log(content.value.payload.value)
+	}
+
+	console.log('getting all pieces')
+	let pieces = NPP.getAllPieces()
+	pieces.forEach((piece) => {
+		console.log(piece)
+	})
+
+	console.log('getting piece by ' + hash)
+	piece = NPP.getPieceByHash(hash)
+	console.log(piece)
+
+	console.log('getting random piece')
+	pieces = NPP.getPieceByInstrument("Piano")
+	const randomPiece = pieces[pieces.length * Math.random() | 0]
+	console.log(randomPiece)
+
+	cid = await NPP.updatePieceByHash(hash, "Harpsichord")
+
+	if (cid) {
+		console.log('update piece' + hash)
+ 		const content = await NPP.node.dag.get(cid)
+ 		console.log(content.value.payload.value)
+	}
+
+	cid = await NPP.deletePieceByHash(hash)
+
+	if (cid) {
+		const content = await NPP.node.dag.get(cid)
+		console.log(content.value.payload)
+	}
+}
+		</script>
+</html>

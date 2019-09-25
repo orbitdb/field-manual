@@ -19,16 +19,17 @@ Please complete [Chapter 3 - Structuring Data](./03_Structuring_Data.md) first.
 
 Your users can manage their local sheet music library, but music is a social, connected venture. The app should reflect that! You will now reconfigure your IPFS node to connect to the global network and begin swarming with other peers.  This tutorial started offline to focus on OrbitDB's core concepts, and now you will undo this and connect the app, properly, to the global IPFS network.
 
-To do so, the `NewPiecePlease` constructor like so:
+To connect globally, the `NewPiecePlease` constructor like so:
 
 ```diff
 class NewPiecePlease {
   constructor (IPFS, OrbitDB) {
++   this.IPFS = IPFS
     this.node = new IPFS({
 -     preload: { enabled: false }
 +     relay: { enabled: true, hop: { enabled: true, active: true } },
       EXPERIMENTAL: { pubsub: true },
-      repo: "./ipfs",
+      repo: './ipfs',
 -     config: {  Bootstrap: [], Addresses: { Swarm: [] } }
     });
 ```
@@ -99,7 +100,7 @@ Swarm listening on /p2p-circuit/p2p-websocket-star/ipfs/QmWxWkrCcgNBG2uf1HSVAwb9
 In Node.js, run this command:
 
 ```JavaScript
-NPP.node.config.set("Addresses.Swarm", ['/ip4/0.0.0.0/tcp/4002', '/ip4/127.0.0.1/tcp/4003/ws'], console.log)
+NPP.node.config.set('Addresses.Swarm', ['/ip4/0.0.0.0/tcp/4002', '/ip4/127.0.0.1/tcp/4003/ws'], console.log)
 ```
 
 After restarting your app you will see the console output confirming you're swarming. In Node.js you will see something like:
@@ -134,7 +135,7 @@ Before this, you were working offline. Now you're not. You've been connected to 
 - Removing `preload: { enabled: false }` enables connection to the bottom two nodes from the above bootstrap list.
 - Removing `config: {  Bootstrap: [], Addresses: { Swarm: [] } }` will prevent the storing of empty arrays in your config files for the `Bootstrap` and `Addresses.Swarm` config keys
 - `this.node.bootstrap.add(undefined, { default: true })` restores the default list of bootstrap peers, as seen above
-- `NPP.node.config.set("Addresses.Swarm", ...` restores the default swarm addresses. You should have run this in Node.js only
+- `NPP.node.config.set('Addresses.Swarm', ...` restores the default swarm addresses. You should have run this in Node.js only
 - `relay: { enabled: true, hop: { enabled: true, active: true } }` sets up a your node as a "circuit relay", which means that others will be able to "hop" through your node to connect to your peers, and your node will hop over others to do the same.
 
 Again, you won't have to do either of these restorations if you're starting with a fresh IPFS repo. These instructions are just included to deepen your understanding of what's going on in the stack. We realize we've been spending a lot of time in IPFS config and IPFS commands - it's understandable, since the IPFS features form the backbone of what we're doing with OrbitDB.
@@ -157,7 +158,7 @@ Create the `getIpfsPeers` function inside of the `NewPiecePlease` class.
 Then, in your application code:
 
 ```JavaScript
-const peers = await NPP.getPeers()
+const peers = await NPP.getIpfsPeers()
 console.log(peers.length)
 // 8
 ```
@@ -173,7 +174,7 @@ There's a number of ways to model and test this during development - you could o
 Create the `connectToPeer` function inside the `NewPiecePlease` class:
 
 ```diff
-+ async connectToPeer(multiaddr, protocol = "/p2p-circuit/ipfs/") {
++ async connectToPeer (multiaddr, protocol = '/p2p-circuit/ipfs/') {
 +   try {
 +     await this.node.swarm.connect(protocol + multiaddr)
 +   } catch(e) {
@@ -186,38 +187,38 @@ Then, update the `_init` function to include an event handler for when a peer is
 
 ```diff
   async _init() {
-    const nodeInfo = await this.node.id()
+    const peerInfo = await this.node.id()
     this.orbitdb = await OrbitDB.createInstance(this.node)
-    this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
+    this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
 
     const docStoreOptions = {
-      ...defaultOptions,
+      ...this.defaultOptions,
       indexBy: 'hash',
     }
-    this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
+    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
     await this.pieces.load()
 
-    this.user = await this.orbitdb.kvstore("user", this.defaultOptions)
+    this.user = await this.orbitdb.kvstore('user', this.defaultOptions)
     await this.user.load()
 
     await this.loadFixtureData({
-      "username": Math.floor(Math.rand() * 1000000),
-      "pieces": this.pieces.id,
-      "nodeId": nodeInfo.id
+      'username': Math.floor(Math.random() * 1000000),
+      'pieces': this.pieces.id,
+      'nodeId': peerInfo.id
     })
 
-+   this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
++   this.node.libp2p.on('peer:connect', this.handlePeerConnected.bind(this))
 
-    if(this.onready) this.onready()
+    this.onready()
   }
 ```
 
 Finally, create the a simple, yet extensible, `handlePeerConnected` function.
 
 ```diff
-+ handlePeerConnected(ipfsPeer) {
-+   const ipfsId = ipfsPeer.id._idB58String;
-+   if(this.onpeerconnect) this.onpeerconnect(ipfsId)
++ handlePeerConnected (ipfsPeer) {
++   const ipfsId = ipfsPeer.id.toB58String()
++   if (this.onpeerconnect) this.onpeerconnect(ipfsId)
 + }
 ```
 
@@ -225,8 +226,8 @@ In your application code, implement these functions like so:
 
 ```JavaScript
 NPP.onpeerconnect = console.log
-await NPP.connectToPeer("QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX")
-// some time later, outputs "QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX"
+await NPP.connectToPeer('QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX')
+// some time later, outputs 'QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX'
 ```
 
 #### What just happened?
@@ -234,10 +235,10 @@ await NPP.connectToPeer("QmWxWkrCcgNBG2uf1HSVAwb9RzcSYYC2d6CRsfJcqrz2FX")
 You created 2 functions: one that shows a list of peers and another that lets you connect to peers via their multiaddress.
 
 - `this.node.swarm.peers()` returns a an array of connected peers
-- `protocol = "/p2p-circuit/ipfs/"` is used as a default since this is a common protocol between browser and Node.js
+- `protocol = '/p2p-circuit/ipfs/'` is used as a default since this is a common protocol between browser and Node.js
 - `this.node.swarm.connect(protocol + multiaddr)` connects to a peer via their a multiaddress that combines `protocol` and `multiaddr` into an address like `p2p-circuit/ipfs/Qm....`
-- `this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))` registers the `handlePeerConnected` function to be called whenever a peer connects to the application node.
-- `ipfsPeer.id._idB58String` is a nice, synchronous way to get the peer id.
+- `this.node.libp2p.on('peer:connect', this.handlePeerConnected.bind(this))` registers the `handlePeerConnected` function to be called whenever a peer connects to the application node.
+- `ipfsPeer.id.toB58String()` is a nice, synchronous way to get the peer id.
 
 ### Peer to peer communication via IPFS pubsub
 
@@ -253,30 +254,30 @@ Update the `_init` function to look like the following:
 
 ```diff
   async _init() {
-    const nodeInfo = await this.node.id()
+    const peerInfo = await this.node.id()
     this.orbitdb = await OrbitDB.createInstance(this.node)
-    this.defaultOptions = { accessController: { write: [this.orbitdb.identity.publicKey] }}
+    this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
 
     const docStoreOptions = {
       ...defaultOptions,
       indexBy: 'hash',
     }
-    this.piecesDb = await this.orbitdb.docstore('pieces', docStoreOptions)
+    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
     await this.pieces.load()
 
-    this.user = await this.orbitdb.kvstore("user", this.defaultOptions)
+    this.user = await this.orbitdb.kvstore('user', this.defaultOptions)
     await this.user.load()
 
     await this.loadFixtureData({
-      "username": Math.floor(Math.rand() * 1000000),
-      "pieces": this.pieces.id,
-      "nodeId": nodeInfo.id
+      'username': Math.floor(Math.random() * 1000000),
+      'pieces': this.pieces.id,
+      'nodeId': peerInfo.id
     })
 
-    this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
-+   await this.node.pubsub.subscribe(nodeInfo.id, this.handleMessageReceived.bind(this))
+    this.node.libp2p.on('peer:connect', this.handlePeerConnected.bind(this))
++   await this.node.pubsub.subscribe(peerInfo.id, this.handleMessageReceived.bind(this))
 
-    if(this.onready) this.onready()
+    this.onready()
   }
 
 ```
@@ -284,8 +285,8 @@ Update the `_init` function to look like the following:
 Then, add the `handleMessageReceived` function to `NewPiecePlease`
 
 ```JavaScript
-handleMessageReceived(msg) {
-  if(this.onmessage) this.onmessage(msg)
+handleMessageReceived (msg) {
+  if (this.onmessage) this.onmessage(msg)
 }
 ```
 
@@ -312,10 +313,10 @@ Now that the nodes are listening, they'll want to send messages to each other. Y
 Create the `sendMessage` function inside the `NewPiecePlease` class:
 
 ```diff
-+ async sendMessage(topic, message, callback) {
++ async sendMessage(topic, message) {
 +   try {
 +     const msgString = JSON.stringify(message)
-+     const messageBuffer = this.node.types.Buffer(msgString)
++     const messageBuffer = this.IPFS.Buffer(msgString)
 +     await this.node.pubsub.publish(topic, messageBuffer)
 +   } catch (e) {
 +     throw (e)
@@ -328,15 +329,14 @@ You can then utilize this function in your application code, and your user will 
 ```JavaScript
 let data // can be any JSON-serializable value
 const hash = "QmXG8yk8UJjMT6qtE2zSxzz3U7z5jSYRgVWLCUFqAVnByM";
-const callback = console.error
-await NPP.sendMessage(hash, data, callback)
+await NPP.sendMessage(hash, data)
 ```
 
 #### What just happened?
 
 You enabled a simple message sending and receiving system which allows peer-to-peer communication.
 
-- `this.node.types.Buffer(msgString)` encoded the message, after JSON stringification, into a Buffer object.
+- `this.IPFS.Buffer(msgString)` encoded the message, after JSON stringification, into a Buffer object.
 - `this.node.pubsub.publish(topic, messageBuffer)` sends the encoded Buffer to the topic specified. In our case, this will be the IPFS id
 
 > **Note:** These techniques are presented for _educational purposes only_, with no consideration as to security or privacy. You should be encrypting and signing messages at the application level. More on this in Chapter 6 of the tutorial.

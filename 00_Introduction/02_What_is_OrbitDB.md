@@ -4,7 +4,7 @@ OrbitDB is a database engine that is built on top of the _Interplanetary File Sy
 
 You can consider _IPFS_ to be the distributed "hard drive" where all data are content-addressed and retrievable from a peer-to-peer swarm. It then follows that _[OrbitDB](https://github.com/orbitdb/orbit-db)_ is the distributed database that lives on that hard drive.
 
-OrbitDB creates and manages mutable databases and provides an extremely simple interface, centered around the IPFS `get` and `set` functions. From these simply underpinnings, OrbitDB manages a great deal of complexity to store these databases, in a distributed fashion, on IPFS. OrbitDB achieves this by building structures called _Conflict-free Replicated Data Types_, or _CRDTs_. CRDTs are essentially logs with specifically-formatted "clock" values that allow multiple users to perform independent and asynchronous operations on the same distributed database. When the peers share these logs with each other, the clock values ensure that there is no ambiguity about how their disparate entries will be put back together.
+OrbitDB creates and manages mutable databases and provides an extremely simple interface, centered around the IPFS `get` and `set` functions. From these simple underpinnings, OrbitDB manages a great deal of complexity to store these databases, in a distributed fashion, on IPFS. OrbitDB achieves this by building structures called _Conflict-free Replicated Data Types_, or _CRDTs_. CRDTs are essentially logs with specifically-formatted "clock" values that allow multiple users to perform independent and asynchronous operations on the same distributed database. When the peers share these logs with each other, the clock values ensure that there is no ambiguity about how their disparate entries will be put back together.
 
 Beyond that, what should you as the developer understand about OrbitDB?
 
@@ -16,7 +16,7 @@ Work is currently underway to allow support for other programming languages via 
 
 ### OrbitDB is NOT a Blockchain
 
-OrbitDB operates on the model of _eventual consistency_ meaning that operations can be taking place at places and times that you are unaware of, with the assumption that you'll eventually connect with peers, share your logs, and sync your data. This contrasts with Blockchain's idea of _strong consistency_ where entries are added to the database only after they have been verified by some distributed consensus algorithm.
+OrbitDB operates on the model of _strong eventual consistency_ meaning that operations can be taking place at places and times that you are unaware of, with the assumption that you'll eventually connect with peers, share your logs, and sync your data. This contrasts with Blockchain's idea of _strong consistency_ where entries are added to the database only after they have been verified by some distributed consensus algorithm.
 
 There is no built-in "double spend" protection in OrbitDB - that is on you, the developer, to implement.
 

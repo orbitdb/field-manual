@@ -16,12 +16,12 @@ In order to maximize accessibility this tutorial does not favor either Node.js o
 
 In the following chapters you will learn the following topics.
 
-1. [Laying the Foundation](./01_Tutorial/01_Basics.md) covers the installation of IPFS and OrbitDB and the basics of database creation.
-2. [Managing Data](./01_Tutorial/02_Managing_Data.md) introduces OrbitDB data stores and walks you through basic create, update, and delete methods of OrbitDB.
-3. [Structuring Data](./01_Tutorial/03_Structuring_Data.md) suggests some ways to structure multiple OrbitDBs into a more robust schema.
-4. [Peer-to-peer, Part 1 (IPFS)](./01_Tutorial/04_P2P_Part_1.md) begins a large discussion of peer-to-peer networking and messaging, starting with the IPFS layer.
-5. [Peer-to-peer, Part 2 (OrbitDB)](./01_Tutorial/04_P2P_Part_2.md) adds OrbitDB to the mix through database discovery, connection, and replication.
-6. [Identity and Permissions](./01_Tutorial/06_Identity_Permission.md) hardens the library via encryption and distributed identity.
+1. [Laying the Foundation](./01_Basics.md) covers the installation of IPFS and OrbitDB and the basics of database creation.
+2. [Managing Data](./02_Managing_Data.md) introduces OrbitDB data stores and walks you through basic create, update, and delete methods of OrbitDB.
+3. [Structuring Data](./03_Structuring_Data.md) suggests some ways to structure multiple OrbitDBs into a more robust schema.
+4. [Peer-to-peer, Part 1 (IPFS)](./04_P2P_Part_1.md) begins a large discussion of peer-to-peer networking and messaging, starting with the IPFS layer.
+5. [Peer-to-peer, Part 2 (OrbitDB)](./05_P2P_Part_2.md) adds OrbitDB to the mix through database discovery, connection, and replication.
+6. [Identity and Permissions](./06_Identity_Permission.md) hardens the library via encryption and distributed identity.
 
 This tutorial is a work in progress, and individuals should feel encouraged to submit pull requests and provide feedback.
 
@@ -57,8 +57,8 @@ Admittedly, a music app is somewhat arbitrary. But if you're here to learn more 
 * `async` and `await` are used prominently. Feel free to replace those with explicit `Promise` objects if you like.
 * Steps that **you** should complete are represented and highlighted as _diffs_. Example application code is represented as JavaScript  
 * For the sake of keeping things focused, we will exclude any HTML or CSS from this tutorial and focus only on the JavaScript code.
-• _Italicized_ words are words which we think you should learn to become familiar with.
-• **Bolded** words are merely for textual emphasis. We want to make sure you don’t miss something!
-• Some typographical errors and misspellings - Javascript for JavaScript, decentralised instead of decentralized, and so on - will sneak in. If you see something, open a PR with a change! Check out our GitHub repository that this document is hosted in. All contributors will be credited.
+* _Italicized_ words are words which we think you should learn to become familiar with.
+* **Bolded** words are merely for textual emphasis. We want to make sure you don’t miss something!
+* Some typographical errors and misspellings - Javascript for JavaScript, decentralised instead of decentralized, and so on - will sneak in. If you see something, open a PR with a change! Check out our GitHub repository that this document is hosted in. All contributors will be credited.
 
 <strong>Ready? Start with [Chapter 1: Laying the Foundation](./01_Basics.md)</strong>

@@ -1,10 +1,10 @@
 ## Chapter 6: Identity and Permissions
 
-> OrbitDB is extremely flexible and extensible, allowing for security via strong _encryption_, and _custom access control_ based on your application's specific code and requirements 
+> OrbitDB is extremely flexible and extensible, allowing for security via strong _encryption_, and _custom access control_ based on your application's specific code and requirements
 
 <div>
   <h3>Table of Contents</h3>
-  
+
 Please complete [Chapter 5 - Peer to Peer Part 2 (OrbitDB)](./05_P2P_Part_2.md) first.
 
 - [On security](#on-security)
@@ -32,40 +32,36 @@ The first thing you'll do to mitigate implication #1 above is to encrypt the dat
 OrbitDB is agnostic in terms of encryption to ensure maximum flexibility with your application layer. However, you can learn a simple method of reading and writing encrypted data to the stores, by creating a simple (and useless in terms of real security) pair of functions.
 
 ```diff
-+ encrypt(data) {
++ encrypt (data) {
 +   const stringified = JSON.stringify(data)
-+   const reversed = stringified.split("").reverse().join("")
-+   return
++   const reversed = stringified.split('').reverse().join('')
++   return reversed
 + }
 
-+ decrypt(data) {
-+   const unreversed = data.split("").reverse().join("")
-+   const jsonEncoded = JSON.parse(jsonEncoded)
-+   return jsonEncoded
++ decrypt (data) {
++   const unreversed = data.split('').reverse().join('')
++   const json = JSON.parse(unreversed)
++   return json
 + }
 ```
 
 Then, for example, you could update the `getProfileFields` and `updateProfile` functions:
 
 ```diff
-- getProfileField(key) {
-+ getProfileField(key, encrypted=false) {
+- getProfileField (key) {
++ getProfileField (key, encrypted = false) {
 -    return this.user.get(key)
-+    let data
++    if (encrypted) key = this.decrypt(key)
 +
-+    if(encrypted) {
-+      key = this.decrypt(key)
-+      data = this.decrypt(data)
-+    } else {
-+      data = this.user.get(key)
-+    }
++    let data = this.user.get(key)
++    if (encrypted) data = this.decrypt(data)
 +
 +    return data
 + }
 
-- async updateProfileField(key, value) {
-- async updateProfileField(key, value, encrypted=true) {
-+   if(encrypted) {
+- async updateProfileField (key, value) {
+- async updateProfileField (key, value, encrypted = true) {
++   if (encrypted) {
 +     key = this.encrypt(key)
 +     value = this.encrypt(value)
 +   }
@@ -83,7 +79,7 @@ You learned a simple but effective method of encrypting and decrypting data for 
 - `this.encrypt` will encrypt the data locally in memory before storage
 - `this.decrypt` will take encrypted data from storage, and decrypt it locally, in memory
 
-You have many options to choose from in terms of, and while we are reticent to make an "official" recommendation, here's a few places you can start to look:
+You have many options to choose from when it comes to encryption, and while we are reticent to make an "official" recommendation, here's a few places you can start to look:
 
 - [Node.js crypto module](https://nodejs.org/api/crypto.html)
 - [Web Crypto Libraries](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API)
@@ -92,13 +88,15 @@ Encrypting data will work great given a strong enough encryption method. If you 
 
 ### Creating your own authentication middleware
 
-Out of the box, OrbitDB only checks your user's IPFS public keys to authenticate, if at all. This is purposeful: our philosophy is to provide maxmial flexibility. With regards to access, this could mean that you can either use a third-party application to verify access, such as "Log in with Metamask", or use custom application code to control access.
+Write access to databases is managed using OrbitDB's access controllers. Access controllers are flexible and extensible; you can either use the default, OrbitDBAccessController, or you can create your own. This means that you can use a third-party application to verify access, such as "Log in with Metamask", or use custom application code to control access.
 
-You will now implement this via a simple example that you can build upon in the future.
+If no access controller is specified, OrbitDB will use the default OrbitDBAccessController to grant write access. OrbitDBAccessController allows you to list which peers have access. If no peers are specified, only the creator of the database will be granted write access. The peer's identity.id property is used to grant write access to a database when using OrbitDBAccessController.
+
+Alternatively, you can define your own rules to manage write access. You will now implement an access controller using a simple example that can be built upon in the future.
 
 Add a simple function to the `NewPiecePlease` class:
 
-```
+```diff
 + authenticated() { return true }
 ```
 
@@ -106,7 +104,7 @@ It's not much to look at, but remember that you can put whatever code you want t
 
 Then, create a brand new JavaScript class called "NPPAccessController"
 
-```
+```diff
 + class NPPAccessController extends AccessController {
 +   async canAppend (entry, identityProvider) {
 +     const authenticated = NPP.authenticated()
@@ -119,10 +117,10 @@ Then, create a brand new JavaScript class called "NPPAccessController"
 
 Finally, add this to your options object to include this access controller, and pass in the options when creating databases.
 
-```
+```diff
 + const customAccessOptions = {
-+   ..defaultOptions
-+    accessControllerr: NPPAccessController
++    ...this.defaultOptions,
++    accessController: NPPAccessController
 + }
 + const counterDb = await this.orbitdb.counter(dbName, customAccessOptions)
 ```

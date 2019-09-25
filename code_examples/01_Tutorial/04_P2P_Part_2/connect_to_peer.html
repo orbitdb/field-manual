@@ -1,0 +1,19 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<script src="https://unpkg.com/ipfs@0.35.0/dist/index.min.js"></script>
+		<script src="https://www.unpkg.com/orbit-db/dist/orbitdb.min.js"></script>
+		<script src="./newpieceplease.js"></script>
+		<script language="Javascript">
+NPP.onready = async () => {
+	await NPP.connectToPeer("paste your other node's IPFS hash here")
+	NPP.ondbdiscovered = (db) => console.log(db.all)
+
+	NPP.oncompaniononline = console.log
+	NPP.oncompanionnotfound = () => { throw(e) }
+
+	NPP.queryCatalog()
+}
+		</script>
+</html>
