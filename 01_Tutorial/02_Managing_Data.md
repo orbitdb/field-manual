@@ -51,13 +51,13 @@ After you instantiated the database you loaded its contents into memory for use.
 
 Next, your users will want to be able to add sheet music to their catalog. You will use functions exposed from OrbitDB's `keyvalue` store now.
 
-Add a function called `addNewPiece` function now:
+Add a function called `addNewPiece` function now, with some commented out functions we'll use later.
 
 ```diff
 + async addNewPiece(hash, instrument = 'Piano') {
-+   const existingPiece = this.getPieceByHash(hash)
++   // const existingPiece = this.getPieceByHash(hash)
 +   if (existingPiece) {
-+     await this.updatePieceByHash(hash, instrument)
++     // await this.updatePieceByHash(hash, instrument)
 +     return
 +   }
 +
@@ -144,6 +144,23 @@ Fill in the following functions now:
 ```diff
 + getPieceByInstrument(instrument) {
 +   return this.pieces.query((piece) => piece.instrument === instrument)
++ }
+```
+
+and uncomment them from `addNewPiece`:
+
+```diff
++ async addNewPiece(hash, instrument = 'Piano') {
+-   // const existingPiece = this.getPieceByHash(hash)
++   const existingPiece = this.getPieceByHash(hash)
++   if (existingPiece) {
+-     // await this.updatePieceByHash(hash, instrument)
++     await this.updatePieceByHash(hash, instrument)
++     return
++   }
++
++   const cid = await this.pieces.put({ hash, instrument })
++   return cid
 + }
 ```
 
