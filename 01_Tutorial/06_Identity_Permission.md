@@ -60,7 +60,7 @@ Then, for example, you could update the `getProfileFields` and `updateProfile` f
 + }
 
 - async updateProfileField (key, value) {
-- async updateProfileField (key, value, encrypted = true) {
++ async updateProfileField (key, value, encrypted = true) {
 +   if (encrypted) {
 +     key = this.encrypt(key)
 +     value = this.encrypt(value)
