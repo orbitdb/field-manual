@@ -175,7 +175,7 @@ The `–https-key` and `–https-cert` options above assume you are using the se
 The REST server is now running. You can test this by running something simple (we are going to use cURL to run the rest of these command so make sure you have it installed):
 
 ```bash
-curl -X GET http://localhost:3000/identity
+curl -X GET https://localhost:3000/identity
 ```
 
 This will return a JSON string representing your OrbitDB node’s identity information. This includes your public key (which we will use later).
@@ -185,13 +185,13 @@ This will return a JSON string representing your OrbitDB node’s identity infor
 Creating a data store is very easy with the REST API and you can launch a store based on any of the supported types. For example, you can create a feed data store by running:
 
 ```bash
-curl -X POST http://localhost:3000/db/my-feed --data 'create=true' --data 'type=feed'
+curl -X POST https://localhost:3000/db/my-feed --data 'create=true' --data 'type=feed'
 ```
 
 You can also use JSON to specify the initial data store features:
 
 ```bash
-curl -X POST http://localhost:3000/db/my-feed -H "Content-Type: application/json" --data '{"create":"true","type":"feed"}'
+curl -X POST https://localhost:3000/db/my-feed -H "Content-Type: application/json" --data '{"create":"true","type":"feed"}'
 ```
 
 #### Adding some data
@@ -199,13 +199,13 @@ curl -X POST http://localhost:3000/db/my-feed -H "Content-Type: application/json
 Let’s add some data to our feed:
 
 ```bash
-curl -X POST http://localhost:3000/db/my-feed/add --data-urlencode "A beginner's guide to OrbitDB REST API"
+curl -X POST https://localhost:3000/db/my-feed/add --data-urlencode "A beginner's guide to OrbitDB REST API"
 ```
 
 And viewing the data we have just added:
 
 ```bash
-curl -X GET  http://localhost:3000/db/my-feed/all
+curl -X GET  https://localhost:3000/db/my-feed/all
 ["A beginner's guide to OrbitDB REST API"]
 ```
 
@@ -222,7 +222,7 @@ Assuming you have a second computer which is accessible over your intranet or vi
 Before you replicate your feed data store, you will need to make a note of its address. You can do this by querying the data store’s details:
 
 ```bash
-curl http://localhost:3000/db/my-feed
+curl https://localhost:3000/db/my-feed
 {"address":{"root":"zdpuAzCDGmFKdZuwQzCZEgNGV9JT1kqt1NxCZtgMb4ZB4xijw","path":"my-feed"},"dbname":"my-feed","id":"/orbitdb/zdpuAzCDGmFKdZuwQzCZEgNGV9JT1kqt1NxCZtgMb4ZB4xijw/my-feed","options":{"create":"true","localOnly":false,"maxHistory":-1,"overwrite":true,"replicate":true},"type":"feed","capabilities":["add","get","iterator","remove"]}
 ```
 
@@ -235,7 +235,7 @@ On your second machine, make sure you have IPFS running and the OrbitDB REST ser
 Replicating the my-feed data simply requires you query the first machine’s my-feed data store using the full address. Using the address of the my-feed data store I queried earlier, request the data:
 
 ```bash
-curl http://localhost:3000/db/zdpuAzCDGmFKdZuwQzCZEgNGV9JT1kqt1NxCZtgMb4ZB4xijw%2Fmy-feed/all
+curl https://localhost:3000/db/zdpuAzCDGmFKdZuwQzCZEgNGV9JT1kqt1NxCZtgMb4ZB4xijw%2Fmy-feed/all
 ["A beginner's guide to OrbitDB REST API"]
 ```
 
@@ -248,13 +248,13 @@ And that’s it. You have successfully created a new OrbitDB data store on one m
 Let’s test it out. Back on your first machine, add another entry to the feed data store:
 
 ```bash
-curl -X POST http://localhost:3000/db/my-feed/add --data-urlencode "Learning about IPFS"
+curl -X POST https://localhost:3000/db/my-feed/add --data-urlencode "Learning about IPFS"
 ```
 
 On your second machine, retrieve the feed list again:
 
 ```bash
-curl http://localhost:3000/db/zdpuAzCDGmFKdZuwQzCZEgNGV9JT1kqt1NxCZtgMb4ZB4xijw%2Fmy-feed/all
+curl https://localhost:3000/db/zdpuAzCDGmFKdZuwQzCZEgNGV9JT1kqt1NxCZtgMb4ZB4xijw%2Fmy-feed/all
 ["A beginner's guide to OrbitDB REST API","Learning about IPFS"]
 ```
 
@@ -263,7 +263,7 @@ curl http://localhost:3000/db/zdpuAzCDGmFKdZuwQzCZEgNGV9JT1kqt1NxCZtgMb4ZB4xijw%
 What happens if you want to add more entries to the my-feed data store from your second machine:
 
 ```bash
-curl -X POST http://localhost:3000/db/my-feed/add --data-urlencode "Adding an item from the second OrbitDB REST peer."
+curl -X POST https://localhost:3000/db/my-feed/add --data-urlencode "Adding an item from the second OrbitDB REST peer."
 {"statusCode":500,"error":"Internal Server Error","message":"Error: Could not append entry, key \"03cc598325319e6c07594b50880747604d17e2be36ba8774cd2ccce44e125da236\" is not allowed to write to the log"}
 ```
 
@@ -272,31 +272,31 @@ If you check the output from your REST server you will see a permissions error. 
 It is important to note that the data store must be created with an access controller pre-specified. Start by deleting the data store on the first machine:
 
 ```bash
-curl -X DELETE http://localhost:3000/db/my-feed
+curl -X DELETE https://localhost:3000/db/my-feed
 ```
 
 We must now set up the my-feed database again and add some data:
 
 ```bash
-curl -X POST http://localhost:3000/db/feed.new -H "Content-Type: application/json" --data '{"create":"true","type":"feed","accessController":{"type": "orbitdb","write": ["048161d9685991dc87f3e049aa04b1da461fdc5f8a280ed6234fa41c0f9bc98a1ce91f07494584a45b97160ac818e100a6b27777e0b1b09e6ba4795dcc797a6d8b"]}}'
+curl -X POST https://localhost:3000/db/feed.new -H "Content-Type: application/json" --data '{"create":"true","type":"feed","accessController":{"type": "orbitdb","write": ["048161d9685991dc87f3e049aa04b1da461fdc5f8a280ed6234fa41c0f9bc98a1ce91f07494584a45b97160ac818e100a6b27777e0b1b09e6ba4795dcc797a6d8b"]}}'
 ```
 
 Note the accessController property; this specify the controller type and the key which can write to the database. In this case it is the first machine’s public key, which can be retrieved by running:
 
 ```bash
-curl http://localhost:3000/identity
+curl https://localhost:3000/identity
 ```
 
 On the second machine, retrieve the public key:
 
 ```bash
-curl http://localhost:3000/identity
+curl https://localhost:3000/identity
 ```
 
 Grab the publicKey value. We will now enable write access to the my-feed database:
 
 ```bash
-curl -X PUT http://localhost:3000/db/feed.new/access/write --data 'publicKey=04072d1bdd0e5e43d9e10619d997f6293f4759959e19effb958785b7f08413fb81501496a043385c245dedc952ee01c06bc9c654afe79b11dd5f130796baf8d2da'
+curl -X PUT https://localhost:3000/db/feed.new/access/write --data 'publicKey=04072d1bdd0e5e43d9e10619d997f6293f4759959e19effb958785b7f08413fb81501496a043385c245dedc952ee01c06bc9c654afe79b11dd5f130796baf8d2da'
 ```
 
 publicKey will be the publicKey of the second machine. We must execute this request from the first machine because only the first machine currently has write permissions to the data store.
@@ -304,7 +304,7 @@ publicKey will be the publicKey of the second machine. We must execute this requ
 With the second machine’s publickey added, we can go ahead and add a new my-feed from the second machine:
 
 ```bash
-curl -X POST http://localhost:3000/db/my-feed/add --data-urlencode "Adding an item from the second OrbitDB REST peer."
+curl -X POST https://localhost:3000/db/my-feed/add --data-urlencode "Adding an item from the second OrbitDB REST peer."
 ```
 
 ### Key takeaways
