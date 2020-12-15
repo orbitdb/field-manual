@@ -55,7 +55,7 @@ If you're using the browser for this tutorial, we recommend using [unpkg](https:
 
 ```html
 <script src="https://unpkg.com/ipfs@0.35.0/dist/index.min.js"></script>
-<script src="https://www.unpkg.com/orbit-db/dist/orbitdb.min.js"></script>
+<script src="https://www.unpkg.com/browse/orbit-db@0.25.3/dist/orbitdb.min.js"></script>
 ```
 
 You will now have global `Ipfs` and `OrbitDB` objects available to you. You will see how we'll use these later.
