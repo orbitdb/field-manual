@@ -56,7 +56,7 @@ await NPP.node.bootstrap.list()
 To restore the default peers, like the one generated in the previous chapters, run this command _once_ to restore your default bootstrap peers.
 
 ```JavaScript
-this.node.bootstrap.add(undefined, { default: true })
+this.node.bootstrap.reset()
 ```
 
 Re-running `bootstrap.list` now gives you a colorful array of bootstrap peers, ready to be connected to.
