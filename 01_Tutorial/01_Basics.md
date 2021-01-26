@@ -55,7 +55,7 @@ If you're using the browser for this tutorial, we recommend using [unpkg](https:
 
 ```html
 <script src="https://unpkg.com/ipfs@0.35.0/dist/index.min.js"></script>
-<script src="https://www.unpkg.com/browse/orbit-db@0.25.3/dist/orbitdb.min.js"></script>
+<script src="https://www.unpkg.com/browse/orbit-db@0.25.3/dist/orbitdb.min.js" type="text/html"></script>
 ```
 
 You will now have global `Ipfs` and `OrbitDB` objects available to you. You will see how we'll use these later.
@@ -84,7 +84,7 @@ try {
 }
 ```
 
-Source: [GitHub](https://github.com/orbitdb/field-manual/blob/a5459ac56402f620cab424c6c399f7c593e94f85/code_examples/01_01_newpieceplease.js), or on IPFS at `QmRZycUKy3MnRKRxkLu8jTzBEVHZovsYcbhdiwLQ221eBP`.
+Source: [GitHub](https://github.com/orbitdb/field-manual/blob/a5459ac56402f620cab424c6c399f7c593e94f85/code_examples/01_01_newpieceplease.js), or on IPFS at `QmV3ZPNPBgqie1U31xh8DPA7hvSewiMxWs1YmwDAWDCBYr`.
 
 In the browser, you can include this file in a script tag and have an `NPP` object at your disposal. In Node.js, you can simply call something like:
 
@@ -138,7 +138,7 @@ class NewPiecePlease {
 
 ```
 
-Source: [GitHub](https://github.com/orbitdb/field-manual/blob/68714a5eef18530ef172bb0f889a90d5f91ef39a/code_examples/newpieceplease.js), or on IPFS at `QmZsbrY7EZJRXwuqQXw2Ad9jfJAMvLWDcrwLNj7Yo4v7YK`.
+Source: [GitHub](https://github.com/orbitdb/field-manual/blob/68714a5eef18530ef172bb0f889a90d5f91ef39a/code_examples/newpieceplease.js), or on IPFS at `QmXBM4WagdsiSUzJyW2ZEAUp2sCwzTRc84AwUY5dNBtPhL`.
 
 This allows you to run something like the following in your application code:
 
