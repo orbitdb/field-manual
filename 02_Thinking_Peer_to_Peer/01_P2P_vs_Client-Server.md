@@ -36,7 +36,7 @@ This approach has obvious pros and cons:
 - **Pro:** By default, applications will work offline and keep your data local and safe.
 - **Con:** The peers in the network are "untrusted" and will be able to request your data if they know the content address
 - **Pro:** The network will be robust and self-healing
-- **Con:** If an offline peer that has data you need, you may not be able to access it unless it's replicated elsewhere
+- **Con:** If a peer, that has data you need, is offline, you may not be able to access it unless it's replicated elsewhere
 - **Pro:** If there _is_ a data breach, the so-called blast radius will be contained since it will only affect singular or small groups of devices, not necessarily affecting every user of the application.
 - **Con:** There will be new, as-of-yet unimagined, vectors of attack to deceive and compromise data in these networks.
 
