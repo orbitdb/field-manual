@@ -113,10 +113,13 @@ OrbitDB requires a running IPFS node to operate, so you will create one here and
 
 ```js
 class NewPiecePlease {
-  constructor (IPFS, OrbitDB) {
+  constructor (Ipfs, OrbitDB) {
     this.OrbitDB = OrbitDB
+    this.Ipfs = Ipfs
+  }
 
-    this.node = new IPFS({
+  async create() {
+    this.node = await this.Ipfs.create({
       preload: { enabled: false },
       repo: './ipfs',
       EXPERIMENTAL: { pubsub: true },
@@ -126,19 +129,20 @@ class NewPiecePlease {
       }
     })
 
-    this.node.on('error', (e) => { throw (e) })
-    this.node.on('ready', this._init.bind(this))
+    this._init()
   }
 
   async _init () {
     this.orbitdb = await this.OrbitDB.createInstance(this.node)
-    this.onready()
+    this.defaultOptions = { accessController: {
+      write: [this.orbitdb.identity.id]
+      }
+    }
   }
 }
-
 ```
 
-Source: [GitHub](https://github.com/orbitdb/field-manual/blob/68714a5eef18530ef172bb0f889a90d5f91ef39a/code_examples/newpieceplease.js), or on IPFS at `QmZsbrY7EZJRXwuqQXw2Ad9jfJAMvLWDcrwLNj7Yo4v7YK`.
+Source: [GitHub](../code_examples/01_Tutorial/02_Managing_Data).
 
 This allows you to run something like the following in your application code:
 
@@ -146,13 +150,15 @@ This allows you to run something like the following in your application code:
 NPP.onready = () => {
    console.log(NPP.orbitdb.id)
 }
+
+NPP.create()
 ```
 
 In the output you will see something called a "multihash", like `QmPSicLtjhsVifwJftnxncFs4EwYTBEjKUzWweh1nAA87B`. This is the identifier of your IPFS node. (You may have noticed we referenced multihashes above for the code examples: these are the multihashes you can use to download the example code files, if GitHub is down.)
 
 #### What just happened?
 
-Start with the `new Ipfs` line. This code creates a new IPFS node. Note the default settings:
+Start with the `Ipfs.create` line. This code creates a new IPFS node. Note the default settings:
 
 - `preload: { enabled: false }` disables the use of so-called "pre-load" IPFS nodes. These nodes exist to help load balance
 the global network and prevent DDoS. However, these nodes can go down and cause errors. Since we are only working offline
@@ -207,16 +213,16 @@ Your users will want to create a catalog of musical pieces to practice. You will
 
 Expand of your `_init` function to the following:
 
-```diff
+```js
   async _init () {
     this.orbitdb = await OrbitDB.createInstance(node)
-+   this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
-+
-+   const docStoreOptions = {
-+     ...this.defaultOptions,
-+     indexBy: 'hash',
-+   }
-+   this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
+    this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
+
+    const docStoreOptions = {
+      ...this.defaultOptions,
+      indexBy: 'hash',
+    }
+    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
   }
 ```
 
