@@ -158,7 +158,8 @@ In the output you will see something called a "multihash", like `QmPSicLtjhsVifw
 
 #### What just happened?
 
-Start with the `Ipfs.create` line. This code creates a new IPFS node. Note the default settings:
+Once calling `create`, the `Ipfs.create` line creates a new IPFS node.
+Note the default settings:
 
 - `preload: { enabled: false }` disables the use of so-called "pre-load" IPFS nodes. These nodes exist to help load balance
 the global network and prevent DDoS. However, these nodes can go down and cause errors. Since we are only working offline
