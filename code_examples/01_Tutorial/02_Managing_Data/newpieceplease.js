@@ -1,82 +1,80 @@
 class NewPiecePlease {
-    constructor (IPFS, OrbitDB) {
-        this.OrbitDB = OrbitDB
-        this.node = new IPFS({
-            preload: { enabled: false },
-            repo: './ipfs',
-            EXPERIMENTAL: { pubsub: true },
-            config: {
-        	    Bootstrap: [],
-        	    Addresses: { Swarm: [] }
-            }
-        })
+  constructor (Ipfs, OrbitDB) {
+    this.OrbitDB = OrbitDB
+    this.Ipfs = Ipfs
+  }
 
-        this.node.on('error', (e) => { throw (e) })
-        this.node.on('ready', this._init.bind(this))
+  async create() {
+    this.node = await this.Ipfs.create({
+      preload: { enabled: false },
+      repo: './ipfs',
+      EXPERIMENTAL: { pubsub: true },
+      config: {
+        Bootstrap: [],
+        Addresses: { Swarm: [] }
+      }
+    })
+
+    this._init()
+  }
+
+  async _init () {
+    this.orbitdb = await this.OrbitDB.createInstance(this.node)
+    this.defaultOptions = { accessController: {
+      write: [this.orbitdb.identity.id]
+      }
     }
 
-    async _init () {
-        this.orbitdb = await this.OrbitDB.createInstance(this.node)
-        this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
-
-        const docStoreOptions = {
-          ...this.defaultOptions,
-          indexBy: 'hash',
-        }
-
-        this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
-        await this.pieces.load()
-
-        this.onready()
+    const docStoreOptions = {
+      ...this.defaultOptions,
+      indexBy: 'hash',
     }
+    this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
+    await this.pieces.load()
+    this.onready()
+  }
 
-    async addNewPiece(hash, instrument = "Piano") {
-        const existingPiece = this.pieces.get(hash)
-
-        if(existingPiece.length > 0) {
-            const cid = await this.updatePieceByHash(hash, instrument)
-            return;
-        }
-
-        const cid = await this.pieces.put({
-           hash: hash,
-           instrument: instrument
-        })
-
-	   return cid
+  async addNewPiece(hash, instrument = "Piano") {
+    const existingPiece = this.getPieceByHash(hash)
+    if(!existingPiece) {
+      const cid = await this.pieces.put({ hash, instrument })
+      return cid
+    } else {
+      return await this.updatePieceByHash(hash, instrument)
     }
+  }
 
-	getAllPieces() {
-		const pieces = this.pieces.get('')
-		return pieces
-	}
+  async updatePieceByHash(hash, instrument = piano) {
+    const piece = await this.getPieceByHash(hash)
+    piece.instrument = instrument
+    return await this.pieces.put(piece)
+  }
 
-	getPieceByHash(hash) {
-		const singlePiece = this.pieces.get(hash)[0]
-		return singlePiece
-	}
+  async deletePieceByHash(hash) {
+    return await this.pieces.del(hash)
+  }
 
-	getPieceByInstrument(instrument) {
-	  	return this.pieces.query((piece) => piece.instrument === instrument)
-	}
+  getAllPieces() {
+    const pieces = this.pieces.get("")
+    return pieces
+  }
 
-	async updatePieceByHash(hash, instrument = "Piano") {
-		const piece = await this.getPieceByHash(hash)
-		piece.instrument = instrument
-		const cid = await this.pieces.put(piece)
-		return cid
-	}
+  getPieceByHash(hash) {
+    const singlePiece = this.pieces.get(hash)[0]
+    return singlePiece
+  }
 
-	async deletePieceByHash(hash) {
-		const cid = await this.pieces.del(hash)
-		return cid
-	}
+  getPieceByInstrument(instrument) {
+    return this.pieces.query(piece => piece.instrument === instrument)
+  }
 }
 
 try {
     const Ipfs = require('ipfs')
     const OrbitDB = require('orbit-db')
+
     module.exports = exports = new NewPiecePlease(Ipfs, OrbitDB)
 } catch (e) {
+    console.log(e)
     window.NPP = new NewPiecePlease(window.Ipfs, window.OrbitDB)
 }
