@@ -1,15 +1,21 @@
 class NewPiecePlease {
-    constructor (IPFS, OrbitDB) {
-        this.OrbitDB = OrbitDB
-        this.node = new IPFS({
-            preload: {enabled: false},
-            relay: { enabled: true, hop: { enabled: true, active: true } },
-            repo: './ipfs',
-            EXPERIMENTAL: { pubsub: true }
-        })
+    constructor (Ipfs, OrbitDB) {
+      this.OrbitDB = OrbitDB
+      this.Ipfs = Ipfs
+    }
 
-        this.node.on('error', (e) => { throw (e) })
-        this.node.on('ready', this._init.bind(this))
+    async create() {
+      this.node = await this.Ipfs.create({
+        preload: { enabled: false },
+        repo: './ipfs',
+        EXPERIMENTAL: { pubsub: true },
+        config: {
+          Bootstrap: [],
+          Addresses: { Swarm: [] }
+        }
+      })
+
+      this._init()
     }
 
     async _init () {
@@ -159,7 +165,7 @@ class NewPiecePlease {
         if(this.onpeerconnect) this.onpeerconnect(ipfsId)
     }
 
-    handleMessageReceived(msg) {
+    async handleMessageReceived(msg) {
         const parsedMsg = JSON.parse(msg.data.toString())
         const msgKeys = Object.keys(parsedMsg)
 
