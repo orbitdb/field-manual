@@ -2,8 +2,8 @@
 	<head>
 	</head>
 	<body>
-		<script src="https://unpkg.com/ipfs@0.35.0/dist/index.min.js"></script>
-		<script src="https://www.unpkg.com/orbit-db/dist/orbitdb.min.js"></script>
+		<script src="https://unpkg.com/ipfs@0.55.1/dist/index.min.js"></script>
+		<script src="https://unpkg.com/orbit-db@0.26.1/dist/orbitdb.min.js"></script>
 		<script src="./newpieceplease.js"></script>
 		<script language="Javascript">
 NPP.onready = async () => {
@@ -28,5 +28,7 @@ NPP.onready = async () => {
 	console.log(profileFields)
 	await NPP.deleteProfileField("username")
 }
+
+NPP.create()
 		</script>
 </html>
