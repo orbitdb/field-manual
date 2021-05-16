@@ -1,11 +1,11 @@
 <html>
 	<head>
+		<meta charset="utf-8">
 	</head>
 	<body>
-		<script src="https://unpkg.com/ipfs@0.35.0/dist/index.min.js"></script>
-		<script src="https://www.unpkg.com/orbit-db/dist/orbitdb.min.js"></script>
-		<script src="./newpieceplease.js"></script>
-		<script language="Javascript">
+		<script src="https://unpkg.com/ipfs@0.55.1/dist/index.min.js"></script>
+		<script src="https://unpkg.com/orbit-db@0.26.1/dist/orbitdb.min.js"></script>		<script src="./newpieceplease.js"></script>
+		<script language="javascript">
 NPP.onready = async () => {
 	let cid
 	const hash = "QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ";
@@ -47,5 +47,7 @@ NPP.onready = async () => {
 		console.log(content.value.payload)
 	}
 }
+
+NPP.create()
 		</script>
 </html>
