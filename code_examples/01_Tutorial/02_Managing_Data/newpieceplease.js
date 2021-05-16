@@ -75,6 +75,5 @@ try {
 
     module.exports = exports = new NewPiecePlease(Ipfs, OrbitDB)
 } catch (e) {
-    console.log(e)
     window.NPP = new NewPiecePlease(window.Ipfs, window.OrbitDB)
 }
