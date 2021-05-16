@@ -174,7 +174,7 @@ class NewPiecePlease {
                 var peer = await this.orbitdb.open(parsedMsg.user)
                 peer.events.on("replicated", async () => {
                     if (peer.get("pieces")) {
-                        await this.companions.set(peer.id, peer.all
+                        await this.companions.set(peer.id, peer.all)
                         this.ondbdiscovered && this.ondbdiscovered(peer)
                     }
                 })
