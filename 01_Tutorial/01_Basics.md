@@ -214,7 +214,7 @@ Your users will want to create a catalog of musical pieces to practice. You will
 
 Expand of your `_init` function to the following:
 
-```js
+```diff
   async _init () {
     this.orbitdb = await OrbitDB.createInstance(node)
     this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
