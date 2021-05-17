@@ -9,3 +9,6 @@ This part of the book can be read start-to-finish, or you can utilize it like a 
 ## Overview of OrbitDB Architecture
 
 ![OrbitDB Dependency Graph](../images/OrbitDB_Dependency_Graph.jpg)
+
+**[Firmament: The Interplanetary File System
+](./01_IPFS_Firmament.md)**
