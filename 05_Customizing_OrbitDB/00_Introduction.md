@@ -48,3 +48,5 @@ reading this chapter:
 You may not need to understand entirely what
 the `ipfs-log` is, but you should know that
 it exists and that it is the basis of all OrbitDB Stores.
+
+**Next: [What are Stores, AccessControllers and Indicies.](./01_Definitions.md)**
