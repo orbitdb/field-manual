@@ -15,3 +15,21 @@ In order to do this, we will follow this agenda:
 2. [Creating custom Access Controllers.](02_AccessController.md)
 3. [Creating a custom store.](03_Store.md)
 4. [Creating a custom index.](04_Index.md)
+
+
+## What will we implement?
+We have already implemented a note sharing app,
+where musicians can upload and share their
+notes as files and view those of other
+musicians.
+
+But what they cannot do, is
+cooperate with each.
+And isn't it with cooperation,
+that the greatest strengths of
+the internet come to bear?
+
+So we want to allow our users
+to not just share musical notes,
+but also comment on each others
+notes and discuss them.
