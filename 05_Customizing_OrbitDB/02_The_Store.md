@@ -14,11 +14,19 @@ Maybe adding a comment system first.
 And for each thread of discussion,
 we create a new database.
 
-And then we continue to add
-a new database for each new function.
+So, why should you define your own custom stores?
 
-But this can become too complex
-to manage and organize. 
+#### Advantages of Custom Stores
+- You can create your own interface functions. (Instead of the standard `get`, `put` and `iterator`)
+- You can implement your own data structure to use in local storage and optimize these for your use case.
+- You can implement encryption and decryption more easily.
+
+And why shouldn't you?
+### Disadvantages
+- You will have to learn about a lot of OrbitDB internals. (This can be seen as an advantage by some)
+- You will have to test your own data types and ensure, they actually are a CRDT.
+
+
 
 ### Isomorphic bookends
 You should be able to
