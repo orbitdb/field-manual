@@ -6,13 +6,7 @@ class NewPiecePlease {
 
     async create() {
       this.node = await this.Ipfs.create({
-        preload: { enabled: false },
         repo: './ipfs',
-        EXPERIMENTAL: { pubsub: true },
-        config: {
-          Bootstrap: [],
-          Addresses: { Swarm: [] }
-        }
       })
 
       this._init()
@@ -21,8 +15,12 @@ class NewPiecePlease {
     async _init () {
         const nodeInfo = await this.node.id()
         this.orbitdb = await this.OrbitDB.createInstance(this.node)
-        // differences between older apis which use publicKey are causing problems.
-        this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
+
+        this.defaultOptions = {
+          accessController: {
+            write: [this.orbitdb.identity.id]
+          }
+        }
 
         const docStoreOptions = {
           ...this.defaultOptions,
