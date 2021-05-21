@@ -12,9 +12,9 @@ and indices or how you can define your own.
 In order to do this, we will follow this agenda:
 
 1. [Defining the `Store`, `AccessController` and `Index`.](01_Definitions.md)
-2. [Creating custom Access Controllers.](02_AccessController.md)
-3. [Creating a custom store.](03_Store.md)
-4. [Creating a custom index.](04_AccessControllers.md)
+2. [Creating custom Stores.](02_AccessController.md)
+3. [Creating a custom Index.](03_Store.md)
+4. [Creating a custom Access controller.](04_AccessControllers.md)
 
 
 ## What will we implement?
