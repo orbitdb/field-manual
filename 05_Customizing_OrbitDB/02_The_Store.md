@@ -24,9 +24,13 @@ So, why should you define your own custom stores?
 And why shouldn't you?
 ### Disadvantages
 - You will have to learn about a lot of OrbitDB internals. (This can be seen as an advantage by some)
-- You will have to test your own data types and ensure, they actually are a CRDT.
+- You will have to test your own data types and ensure, they actually are a CRDTs.
 
+It is on you and your use case, to determine
+whether you need a custom store.
 
+If you think you don't, maybe just read on or skip to [chapter 4 about custom
+Access Controllers](04_AccessControllers.md), since that may still be interesting for you.
 
 ### Isomorphic bookends
 You should be able to
