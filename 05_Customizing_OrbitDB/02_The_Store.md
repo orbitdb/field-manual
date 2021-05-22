@@ -63,7 +63,7 @@ Add this to the `NotesStore.js`
 
 ```js
 function notesStore(IPFS, OrbitDB) {
-  class NotesStore extends OrbitDB.DocumentStore {
+  class NotesStore extends OrbitDB.EventStore {
   }
 
   return NotesStore
