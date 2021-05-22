@@ -9,7 +9,7 @@ function noteStore(IPFS, OrbitDB) {
     static get type () {
       return "noteStore"
     }
-    
+
     async putNotes(data, mime, options = {}) {
       const {cid} = await ipfs.add(data)
 
@@ -18,7 +18,7 @@ function noteStore(IPFS, OrbitDB) {
       return await this._addOperation({
         op: "PUTNOTES",
         key: null,
-        data: {
+        value: {
           cid: cid.toString(),
           mime: mime
         }

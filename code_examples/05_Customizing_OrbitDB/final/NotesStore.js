@@ -1,6 +1,8 @@
 function noteStore(IPFS, OrbitDB) {
   class NoteStore extends OrbitDB.EventStore {
     constructor(ipfs, id, dbname, options) {
+      if(!options.Index) Object.assign(options, { Index: NotesIndex })
+
       super(ipfs, id, dbname, options)
       this._type = NoteStore.type
       this._ipfs = ipfs
@@ -18,7 +20,7 @@ function noteStore(IPFS, OrbitDB) {
       return await this._addOperation({
         op: "PUTNOTES",
         key: null,
-        data: {
+        value: {
           cid: cid.toString(),
           mime: mime
         }
