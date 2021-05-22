@@ -110,4 +110,76 @@ This is why, the `ipfs-log` is
 sometimes called an `oplog` or
 operations log.
 Because it is a log of operations,
-which is a reference
+which is a reference to
+one of the two kinds of
+Conflict Free Replicated Data Types (CRDTs),
+that can be implemented using OrbitDB, [Operation-based CRDTs](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type#Operation-based_CRDTs).
+But [State-based CRDTs](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type#State-based_CRDTs) can be implemented on OrbitDB as well.
+
+Each operation should have three fields:
+- `op` is a string to identify the type of operation. In this case it is `"PUTNOTES"`.
+- `key` an optional key field to identify the `data` field.
+- `value` is the actual data of the operation and the Store can put data of any JSON serializable format here.
+In `putNotes` this stores the CID and MIME Type of the Notes data.
+
+### More interface functions
+Besides adding new Notes, we also have to be able to delete them
+and fetch them.
+Let's implement a `deleteNotes` and `getNotes` methods to do this:
+
+```js
+async deleteNotes(hash, options = {}) {
+  const operation = {
+    op: "DELNOTES",
+    key: null,
+    value: hash
+  }
+  return this._addOperation(operation, options)
+}
+
+getNotes(hash) {
+  const entry = this.get(hash).payload
+  return entry
+}
+```
+
+#### What happens here?
+As you can see, `deleteNotes` also creates
+an operation.
+It is not very different to `putNotes`,
+except that the `value` and `op` fields
+have different values and formats.
+The actual deleting happens in the Index
+upon parsing the operation.
+
+*Deleting decentralized data, that has been added
+to IPFS, is never certain and if you add Personally identifiable information
+to OrbitDB or other data, where it has to be possible to delete them,
+you'll never be sure, that they have been deleted across  the entire network.
+So, don't do that.*
+
+`getNotes` is using the `this.get` method, inherited from
+the `EventStore`.
+It might be important to explain, that `EventStore.get().payload`
+is equivalent to, what has been passed to `_addOperation` as the
+operation object.
+So, the object returned by `getNotes` should look like this for example:
+```js
+{
+  op: "PUTNOTES",
+  key: null,
+  value: {
+    cid: "Qm...",
+    mime: "application/pdf"
+  }
+}
+```
+
+### Key takeaways.
+- Custom Stores function as interfaces between the `ipfs-log`, Index and the users.
+- The Store can add entries to the `ipfs-log`
+- The Store can read from the Index (as we did in `getNotes`).
+- The `ipfs-log` of a database is sometimes called `oplog`, because the entries
+are called Operations.
+
+**[Next: Implementing a comment system]**
