@@ -52,5 +52,6 @@ try {
 
   module.exports = noteStore(IPFS, OrbitDB)
 } catch (e) {
+  console.log(e)
   window.NoteStore = noteStore(window.Ipfs, window.OrbitDB, window.NotesIndex)
 }

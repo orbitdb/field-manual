@@ -55,4 +55,4 @@ But this also means, you cannot modify your access
 controller and it's options after you created
 the database.
 
-**Next: [Developing a comment system](02_AccessController.md)**
+**Next: [Choosing a data structure](02_Choosing_a_data_structure.md)**
