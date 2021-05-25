@@ -113,4 +113,4 @@ With this utility class, we can now get on to implementing the Index
 API.
 
 
-**[Next: Defining the Index](03_Defining_the_Index.md)
+**[Next: Defining the Index](03_Defining_the_Index.md)**
