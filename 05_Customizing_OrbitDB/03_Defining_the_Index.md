@@ -108,6 +108,7 @@ from the `ipfs-log` in chronological order.
 So, let's lay out the skeleton:
 ```js
 updateIndex(oplog) {
+  let order = 0
   oplog.values.reduce((handled, item) => {
     if(!handled.includes(item.hash)) {
       handled.push(item.hash)
@@ -122,9 +123,7 @@ updateIndex(oplog) {
         case "ADDCOMMENT":
 
           break;
-        case "ADDCOMMENT":
 
-          break;
         case "DELETECOMMENT":
 
           break;
@@ -135,6 +134,10 @@ updateIndex(oplog) {
   }, [])
 }
 ```
+The `updateIndex` starts with a line, that
+initializes an `order` variable to 0.
+This will help us, when we get to `ADDCOMMENT`.
+
 We start by reducing the `oplog.values` Array.
 The accumulator of the reducer contains
 the hashes of the items, that have already been handled.
@@ -153,7 +156,108 @@ Index can handle:
 - `DELETECOMMENT` to delete a comment.
 
 ### Implementing `ADDNOTES` handling
+Add notes is by far the simplest operation to handle,
+since we just need to add a new `TreeNode` to the `_index`.
+```js
+case "ADDNOTES":
+  this._index[item.hash] = new TreeNode(item.payload.value)
+
+  break;
+```
 
 ### Implementing `DELETENOTES` handling
+And deleting notes is the inverse:
+```js
+case "DELETENOTES":
+  delete this._index[item.hash]
+
+  break;
+```
+
 ### Implementing `ADDCOMMENT` handling
+Adding comments is a little more complicated.
+We first have to find the parent of the comment in the notes
+or among the comments themselves.
+
+To do this properly in adequate time, we have
+to add a `_comments` property to our `Index` in the `constructor`:
+```js
+constructor() {
+  this._index = {}
+  this._comments = {}
+}
+```
+
+In this object, we store each comment's `TreeNode` by it's hash or rather
+the hash of the Operation Item, that added them for easy access.
+```js
+case "ADDCOMMENT":
+  let reference = item.payload.key
+  let node = {
+    comment: item.payload.value,
+    id: order
+  }
+  order++
+
+  if(this._index[item.payload.key] !== undefined) {
+    node = this._index[item.payload.key].addChild(node)
+
+  } else if(this._comments[item.payload.key] !== undefined){
+    node = this._index[item.payload.key].addChild(node)
+  } else {
+    break;
+  }
+
+  this._comments[item.hash] = node
+
+  break;
+```
+This branch of the `ADDCOMMENT` switch starts
+by utilizing the `key` field of the Operation,
+which is interpreted as the hash of the notes pieces
+or the comments.
+Then the node of the comment is created, containing
+both the comment and an `id` field.
+Here we use the `updateIndex` wide used `order` variable,
+which is incremented afterwards.
+Because the `order` variable is increased for each comment
+on each note. This makes it possible to sort the comments in `getComments`.
+
+After this, the `TreeNode`, that is referred to by the Operator's
+`key` field, gets a new child in the form of the comment.
+
+And at last, we store the created `TreeNode`, in `_comments`
+for later.
+
 ### Implementing `DELETECOMMENT` handling
+After the monster of a branch above, this case is
+pretty relaxing in comparison:
+```js
+case "DELETECOMMENT":
+  let comment = item.payload.key
+  delete this._comments[item.hash]
+
+  break;
+```
+
+## Conclusion
+We have now defined the complete
+Index for the comment system.
+You can now read it through the `getNotes` and `getComments`.
+
+But we haven't discussed two topics yet:
+- How do you add data to the database?
+- And how can you ensure, that the database isn't modified incorrectly? How can we ensure that user A doesn't delete the comment of user B?
+
+Both of those question will be addressed
+in the next chapters of this Tutorial.
+First, in the Store chapters, we discuss,
+how you can add data to the database.
+
+And in the chapters about the
+Access Controller we will at the end
+of this Tutorial discuss, how
+you can control, how can change what
+in your databases.
+
+**Next: [Defining the Store](04_Defining_the_Store.md)

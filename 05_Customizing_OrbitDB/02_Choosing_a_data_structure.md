@@ -104,7 +104,9 @@ class TreeNode {
   }
 
   addChild(data) {
-    this.children.push(new TreeNode(data))
+    let node = new TreeNode(data)
+    this.children.push(node)
+    return node
   }
 }
 ```

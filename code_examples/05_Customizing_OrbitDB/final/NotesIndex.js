@@ -3,6 +3,7 @@
 class NotesIndex {
   constructor() {
     this._index = {}
+    this._comments = {}
   }
 
   getNotes(cid) {
@@ -25,25 +26,44 @@ class NotesIndex {
   }
 
   updateIndex(oplog) {
+    let order = 0
     oplog.values.reduce((handled, item) => {
       if(!handled.includes(item.hash)) {
         handled.push(item.hash)
 
         switch (item.payload.op)) {
           case "ADDNOTES":
+            this._index[item.hash] = new TreeNode(item.payload.value)
 
             break;
           case "DELETENOTES":
+            delete this._index[item.hash]
 
             break;
           case "ADDCOMMENT":
+            let reference = item.payload.key
+            let node = {
+              comment: item.payload.value,
+              id: order
+            }
+            order++
 
-            break;
-          case "ADDCOMMENT":
+            if(this._index[item.payload.key] !== undefined) {
+              node = this._index[item.payload.key].addChild(node)
+
+            } else if(this._comments[item.payload.key] !== undefined){
+              node = this._index[item.payload.key].addChild(node)
+            } else {
+              break;
+            }
+
+            this._comments[item.hash] = node
 
             break;
           case "DELETECOMMENT":
-
+            let comment = item.payload.key
+            delete this._comments[item.hash]
+            
             break;
           default:
 
@@ -60,7 +80,9 @@ class TreeNode {
   }
 
   addChild(data) {
-    this.children.push(new TreeNode(data))
+    let node = new TreeNode(data)
+    this.children.push(node)
+    return node
   }
 }
 
