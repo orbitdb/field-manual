@@ -7,7 +7,7 @@ Index data structure.
 I settled us on a
 Tree data structure,
 where each notes piece
-be a root and the comments
+are a root and the comments
 would be children of that
 root.
 
@@ -260,4 +260,4 @@ of this Tutorial discuss, how
 you can control, how can change what
 in your databases.
 
-**Next: [Defining the Store](04_Defining_the_Store.md)
+**Next: [Defining the Store](04_Defining_the_Store.md)**
