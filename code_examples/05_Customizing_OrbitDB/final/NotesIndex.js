@@ -33,7 +33,7 @@ class NotesIndex {
 
         switch (item.payload.op) {
           case "ADDNOTES":
-            this._index[item.hash] = new Notes(cid)
+            this._index.notes[item.hash] = new Notes(cid)
             break;
           case "ADDCOMMENT"
             let cid = item.payload.key
@@ -43,10 +43,10 @@ class NotesIndex {
             commentsId++
           case "DEL":
             let cid = item.payload.value
-            if(this._index[cid] !== undefined) {
-              delete this._index[cid]
+            if(this._index.notes[cid] !== undefined) {
+              delete this._index.notes[cid]
             } else {
-              this._index.
+              delete this._index.comments[cid]
             }
           default:
 
