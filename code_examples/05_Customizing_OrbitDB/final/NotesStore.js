@@ -1,4 +1,4 @@
-function noteStore(IPFS, OrbitDB) {
+function noteStore(IPFS, OrbitDB, NotesIndex) {
   class NoteStore extends OrbitDB.EventStore {
     constructor(ipfs, id, dbname, options) {
       if(!options.Index) Object.assign(options, { Index: NotesIndex })
@@ -37,8 +37,7 @@ function noteStore(IPFS, OrbitDB) {
     }
 
     getNotes(hash) {
-      const entry = this.get(hash).payload.data
-      return entry
+      return this._index.get(hash)
     }
   }
 
@@ -49,9 +48,9 @@ function noteStore(IPFS, OrbitDB) {
 try {
   const IPFS = require("ipfs")
   const OrbitDB = require("orbit-db")
+  const NotesIndex = require("./NotesIndex")
 
   module.exports = noteStore(IPFS, OrbitDB)
 } catch (e) {
-  console.log(e)
-  window.NoteStore = noteStore(IPFS, OrbitDB)
+  window.NoteStore = noteStore(window.Ipfs, window.OrbitDB, window.NotesIndex)
 }
