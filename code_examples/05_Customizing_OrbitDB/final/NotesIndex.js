@@ -70,3 +70,9 @@ class Comment {
     this.id = id
   }
 }
+
+try {
+  module.exports = NotesIndex
+} catch (e) {
+  window.NotesIndex = NotesIndex
+}
