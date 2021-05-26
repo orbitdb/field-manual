@@ -195,6 +195,7 @@ case "ADDCOMMENT":
   let reference = item.payload.key
   let node = {
     comment: item.payload.value,
+    author: item.identity.id,
     id: order
   }
   order++
@@ -217,8 +218,11 @@ by utilizing the `key` field of the Operation,
 which is interpreted as the hash of the notes pieces
 or the comments.
 Then the node of the comment is created, containing
-both the comment and an `id` field.
-Here we use the `updateIndex` wide used `order` variable,
+both the comment, an `author` field and an `id` field.
+The `author` field is set to the ID of the OrbitDB instance
+that is passed to the operation and already verified by OrbitDB.
+
+And for the `id` we use the `updateIndex`-wide `order` variable,
 which is incremented afterwards.
 Because the `order` variable is increased for each comment
 on each note. This makes it possible to sort the comments in `getComments`.
