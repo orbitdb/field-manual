@@ -210,4 +210,26 @@ but you might want to do this in the index instead.
 
 By the way, all operations are signed by
 your OrbitDB Identity on creation and
-we thus don't need to 
+we thus don't need to add any further
+information about the auther.
+See the [Implementing `ADDCOMMENT` handling](03_Defining_the_Index.md#Implementing-ADDCOMMENT-handling)
+section of the previous chapter.
+
+# Other Stores
+You might note, that this is a very complicated
+and custom store and index.
+But the actual techniques used
+are deployed already in all of the
+built-in Stores.
+
+So, if you want further examples of how
+you could implement your own custom
+stores, reading the source code of the
+`*Store.js` and `*Index.js` file
+can be very illuminating and inspiring.
+
+I would advice reading the [`EventIndex.js`](https://github.com/orbitdb/orbit-db-eventstore/blob/main/src/EventIndex.js)
+and the [KVStore's Store and Index files](https://github.com/orbitdb/orbit-db-kvstore/blob/main/src/).
+
+# Key Takeaways
+- Stores inherit from each other.

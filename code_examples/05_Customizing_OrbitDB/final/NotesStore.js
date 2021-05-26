@@ -1,7 +1,8 @@
 function notesStore(IPFS, OrbitDB, NotesIndex) {
   class NoteStore extends OrbitDB.EventStore {
     constructor(ipfs, id, dbname, options) {
-      if(!options.Index) Object.assign(options, { Index: NotesIndex })
+      if(!options.Index) options = Object.assign(options, { Index: NotesIndex })
+      console.log(options.Index)
 
       super(ipfs, id, dbname, options)
       this._type = NoteStore.type
