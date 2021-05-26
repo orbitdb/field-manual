@@ -107,5 +107,85 @@ getComments(cid, flat = true) {
 }
 ```
 As you can see, `this._index` is an instance of the `NotesIndex`,
-if no other Index was passed in to the constructor
-and we can easily access the methods we defined on the Index.
+if no other Index was passed in to the constructor,
+and we can easily access the methods we defined in the Index.
+
+## Adding Data to the Store
+Now, let's finally add some data
+to our Store.
+
+First, we should make it possible
+to add a Notes Piece by it's CID:
+```js
+addNotesByCID(cid, mime, instrument = "piano", options = {}) {
+  return this._addOperation({
+    op: "ADDNOTES",
+    key: null,
+    value: {
+      cid: cid,
+      mime: mime,
+      instrument: instrument
+    }
+  }, options)
+}
+```
+*The `NotesStore.addNotesByCID` method*
+
+As you can see, we use an `_addOperation`
+method, which adds an operation
+to the `ipfs-log` or `oplog`, which
+meets us again in the `updateIndex` method.
+
+`_addOperation` returns a `Promise<CID>`,
+so a promise of the hash of the operation
+entry in the oplog.
+
+And we also define a format for the notes:
+```js
+value: {
+  cid: cid,
+  mime: mime,
+  instrument: instrument
+}
+```
+
+#### `addNotesBinary`
+But we can still do more for the user
+in this store.
+`addNotesByCID` adds a notes file by it' CID.
+But this expects the notes file to have been
+added to IPFS, something that we can
+do automatically, since we stored the
+IPFS Node in the `this._ipfs` variable.
+```js
+async addNotesBinary(binary, mime, instrument = "piano", options = {}) {
+  let {cid} = await this._ipfs.add(binary)
+
+  if(options.pin) await this._ipfs.pin.add(cid)
+
+  return await this.addNotesByCID(cid.toString(), mime, instrument = instrument, options = options)
+}
+```
+This method adds the `Uint8Array` `binary` to IPFS.
+It then pins the data to the local IPFS Node,
+if the `options.pin` boolean is `true`.
+
+Afterwards, it calls the `addNotesByCID` function,
+with the generated `cid`.
+
+This is just an example of how you
+can make the Store API encompass more,
+than just adding operations to the `oplog`.
+
+For some other ideas of what can be done in the store,
+prior to adding an operation:
+- Formatting (with Protobuf)
+- Encryption and Decryption
+
+### Adding Comments
+After a user added their
+musical notes to their Database,
+users might want to add comments
+to the notes.
+
+Let's add a `addComment` method.
