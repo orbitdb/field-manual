@@ -232,4 +232,11 @@ I would advice reading the [`EventIndex.js`](https://github.com/orbitdb/orbit-db
 and the [KVStore's Store and Index files](https://github.com/orbitdb/orbit-db-kvstore/blob/main/src/).
 
 # Key Takeaways
-- Stores inherit from each other.
+- Stores inherit from each other. So you can extend built-in stores.
+- Stores work with the `Index` and the `this._addOperation` mostly.
+- `this._addOperation` adds an operation to the oplog and you can specify the `payload` field of each operation here.
+- Stores can also do more, than just reading and writing from the database, like:
+  1. You can use them to implement custom encryption/decryption
+  2. Format your data in specific ways (protobuf?)
+
+**Next: [Access Controllers](05_AccessControllers.md)**
