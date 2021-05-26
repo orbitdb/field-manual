@@ -31,7 +31,7 @@ class NotesIndex {
       if(!handled.includes(item.hash)) {
         handled.push(item.hash)
 
-        switch (item.payload.op)) {
+        switch (item.payload.op) {
           case "ADDNOTES":
             this._index[item.hash] = new TreeNode(item.payload.value)
 
@@ -44,6 +44,7 @@ class NotesIndex {
             let reference = item.payload.key
             let node = {
               comment: item.payload.value,
+              author: item.identity.id,
               id: order
             }
             order++

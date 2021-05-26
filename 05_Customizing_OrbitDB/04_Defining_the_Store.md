@@ -188,4 +188,26 @@ musical notes to their Database,
 users might want to add comments
 to the notes.
 
-Let's add a `addComment` method.
+Let's add an `addComment` method.
+```js
+addComment(text, reference) {
+  if(this._index.getNotes(reference) !== undefined || this._index._comments[reference] !== undefined) {
+     return this._addOperation({
+       op: "ADDCOMMENT",
+       key: reference,
+       value: text
+     })
+  } else {
+    return null
+  }
+}
+```
+You might observe, that this function performs
+some validation prior to creating the operation,
+ensuring that the reference actually exists.
+This is one way how you can use the store, too,
+but you might want to do this in the index instead.
+
+By the way, all operations are signed by
+your OrbitDB Identity on creation and
+we thus don't need to 
