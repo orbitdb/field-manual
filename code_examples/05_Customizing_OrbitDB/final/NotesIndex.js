@@ -63,7 +63,7 @@ class NotesIndex {
           case "DELETECOMMENT":
             let comment = item.payload.key
             delete this._comments[item.hash]
-            
+
             break;
           default:
 

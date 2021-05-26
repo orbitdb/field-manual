@@ -19,6 +19,38 @@ function notesStore(IPFS, OrbitDB, NotesIndex) {
     getComments(cid, flat = true) {
       return this._index.getComments(cid, flat = flat)
     }
+
+    addNotesByCID(cid, mime, instrument = "piano", options = {}) {
+      return this._addOperation({
+        op: "ADDNOTES",
+        key: null,
+        value: {
+          cid: cid,
+          mime: mime,
+          instrument: instrument
+        }
+      }, options)
+    }
+
+    async addNotesBinary(binary, mime, instrument = "piano", options = {}) {
+      let {cid} = await this._ipfs.add(binary)
+
+      if(options.pin) await this._ipfs.pin.add(cid)
+
+      return await this.addNotesByCID(cid.toString(), mime, instrument = instrument, options = options)
+    }
+
+    addComment(text, reference) {
+      if(this._index.getNotes(reference) !== undefined || this._index._comments[reference] !== undefined) {
+         return this._addOperation({
+           op: "ADDCOMMENT",
+           key: reference,
+           value: text
+         })
+      } else {
+        return null
+      }
+    }
   }
 
   return NoteStore
