@@ -1,8 +1,9 @@
 function notesStore(IPFS, OrbitDB, NotesIndex) {
   class NoteStore extends OrbitDB.EventStore {
     constructor(ipfs, id, dbname, options) {
-      if(!options.Index) options = Object.assign(options, { Index: NotesIndex })
-      console.log(options.Index)
+      if(!options.Index) {
+        options.Index = NotesIndex
+      }
 
       super(ipfs, id, dbname, options)
       this._type = NoteStore.type
@@ -63,7 +64,7 @@ try {
   const OrbitDB = require("orbit-db")
   const NotesIndex = require("./NotesIndex")
 
-  module.exports = notesStore(IPFS, OrbitDB)
+  module.exports = notesStore(IPFS, OrbitDB, NotesIndex)
 } catch (e) {
   console.log(e)
   window.NoteStore = notesStore(window.Ipfs, window.OrbitDB, window.NotesIndex)
