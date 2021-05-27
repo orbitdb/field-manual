@@ -46,3 +46,17 @@ peer in our own database.
 
 And there OrbitDB `AccessController`s
 come into action.
+
+They are invoked when an OrbitDB
+instance receives new entries for a specific
+database and they determine, whether
+the OrbitDB Instance should accept and
+use these entries or deny and trash them.
+
+Remember: These rules, that you write into
+the AccessController can be changed or ignored
+by other peers, if they so which.
+But then again, what do you care what other
+peers do with their own database, as long
+as your database is clean and conforming to
+all the rules you laid out?
