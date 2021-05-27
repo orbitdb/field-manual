@@ -60,3 +60,5 @@ But then again, what do you care what other
 peers do with their own database, as long
 as your database is clean and conforming to
 all the rules you laid out?
+
+**Next: [Implementing a custom AccessController](06_Implementing_a_custom_AccessController.md)**
