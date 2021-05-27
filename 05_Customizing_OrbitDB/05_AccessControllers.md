@@ -61,4 +61,9 @@ peers do with their own database, as long
 as your database is clean and conforming to
 all the rules you laid out?
 
+By the way, many people in the OrbitDB
+Community refer to AccessControllers by the
+shorthand `ACL`, which either means `AccessController List`
+or `AccessController Ledger`.
+
 **Next: [Implementing a custom AccessController](06_Implementing_a_custom_AccessController.md)**

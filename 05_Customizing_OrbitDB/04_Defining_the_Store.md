@@ -239,4 +239,4 @@ and the [KVStore's Store and Index files](https://github.com/orbitdb/orbit-db-kv
   1. You can use them to implement custom encryption/decryption
   2. Format your data in specific ways (protobuf?)
 
-**Next: [Access Controllers](05_AccessControllers.md)**
+**Next: [Moderating & Access Controllers](05_AccessControllers.md)**
