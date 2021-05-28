@@ -7,7 +7,7 @@ function accessController(AccessController) {
 }
 
 try {
-    const IPFS 
+    const
 } catch (e) {
 
 }
