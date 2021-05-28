@@ -29,7 +29,7 @@ go into it.
 Moderating is generally considered
 to be two separate tasks:
 1. Restricting the writing to a database
-2. Restricting the reading from a database and sharing of content.s
+2. Restricting the reading from a database and sharing of contents.
 
 In a decentralized network, sharing data
 is easy. Once any peer has some data, they
@@ -60,6 +60,14 @@ But then again, what do you care what other
 peers do with their own database, as long
 as your database is clean and conforming to
 all the rules you laid out?
+
+And, importantly, if most peers follow
+your rules, then most content that violates
+these rules, will not persist anyway,
+because nobody is around to pin it.
+Although in some cases for some specific
+data, somebody might be really insistent
+and pin it anyway.
 
 By the way, many people in the OrbitDB
 Community refer to AccessControllers by the
