@@ -4,7 +4,7 @@ we described how you might create
 a couple of built-in OrbitDB databases
 and write code to modify it.
 
-We shall try to build on this t0utorial
+We shall try to build on this tutorial
 to show you, how you can customize
 the built-in OrbitDB stores and
 indices or how you can define your own.
