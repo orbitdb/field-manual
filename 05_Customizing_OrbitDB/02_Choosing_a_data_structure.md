@@ -13,10 +13,10 @@ much independent from the Store and Index.
 
 ## Requirements
 Our data structure should achieve two things:
-- It should store the CID of the notes pieces and a string denoting the instrument.
-- It should also store the comments, which themselves refer to a piece of notes or a previous comment.
+- It should store the CID of the sheet music and a string denoting the instrument.
+- It should also store the comments, which themselves refer to a sheet music CID or a previous comment.
 
-The simplest data structure, that could fulfill these
+The simplest data structure that could fulfill these
 requirements would be a collection of trees.
 Each tree's root would be the Notes pieces and the
 children of that root would be the comments,

@@ -1,6 +1,6 @@
 # Defining the Index
 In the last chapter we
-considered, how we
+considered how we
 could define our
 Index data structure.
 
@@ -13,7 +13,7 @@ root.
 
 We then laid out the skeleton
 code for the Index and
-in this chapter, we will
+in this chapter we will
 actually define the Index
 or what makes the `NotesIndex`
 class an `Index`.
@@ -85,7 +85,7 @@ Replace the `getComments` function above, by this.
 We first define a helper function `flatten`, which goes
 through the array of children and adds each node
 of the tree therein to a flat array.
-Then we sort it, based on an id field in ascending order.
+Then we sort it based on an id field in ascending order.
 If you pass in `flat = false`, you'll still get the old
 behavior.
 

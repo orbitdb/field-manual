@@ -3,8 +3,8 @@
 Before we start to implement
 our custom store, access controller, and index
 to allow our users to comment on each others
-notes, we should probably define what a store,
-AccessController and Index are and what
+notes, we should probably define what a `Store`,
+`AccessController`, and `Index` are and what
 function they have in OrbitDB.
 
 ## The Store
@@ -15,8 +15,8 @@ the individual pieces (or rather their CIDs)
 and the `kvstore` type was used to
 represent a user.
 
-Both of those were instances of a Store.
-They stored some data and provided easy
+Both of those were instances of a `Store`.
+They calculated some state from `ipfs-log` and provided easy
 functions to access them, like `get`, `put` or `set`,
 with which you could easily interact with
 the database itself.
@@ -32,15 +32,15 @@ modifying the database and generates
 an easy to access and use representation
 of the current state of the database.
 
-The index is then used by the Store
-to implement it's API.
+The index is then used by the `Store`
+to implement its API.
 
 ## The Access Controllers
 Access Controllers or short ACL (Access Control List)
 were already discussed [02: Managing Data](../01_Tutorial/02_Managing_Data).
 
-They are a piece of code, that is invoked, whenever
-you try to write to the database, to ensure,
+They are a piece of code that is invoked whenever
+you try to write to the database to ensure
 that you have the right to do so.
 
 It is setup when you create a database
