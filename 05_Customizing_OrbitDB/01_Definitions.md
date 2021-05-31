@@ -23,7 +23,7 @@ the database itself.
 
 ## The Index
 But a store doesn't actually
-store the current state of the database,
+store the current state of the database in the RAM,
 because this is done in the `Index`.
 
 The index parses the log of operations
