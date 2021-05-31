@@ -16,7 +16,7 @@ notes as files and view those of other
 musicians.
 
 But what they cannot do, is
-cooperate with each.
+cooperate with each other.
 And isn't it with cooperation,
 that the greatest strengths of
 the internet come to bear?
@@ -27,11 +27,11 @@ but also comment on each others
 notes and discuss them.
 
 ## What do you need to read to understand this chapter?
-It is not expected, that
-you have read all of this Field Manual,
+It is not expected that
+you have read all of this Field Manual
 to understand this chapter.
 
-But you should have read these documents, before
+But you should have read these documents before
 reading this chapter:
 
 1. [The Tutorial](../01_Tutorial/00_Introduction.md)

@@ -1,7 +1,7 @@
 # What are Stores, AccessControllers and Indicies.
 
 Before we start to implement
-our custom store, access controller and index
+our custom store, access controller, and index
 to allow our users to comment on each others
 notes, we should probably define what a store,
 AccessController and Index are and what
