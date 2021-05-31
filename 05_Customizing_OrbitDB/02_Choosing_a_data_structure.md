@@ -3,8 +3,8 @@ Let's start implementing a comment system
 by choosing how we want to represent the
 comments in the Index.
 
-By choosing a data structure and
-working our way outwards to
+Choosing a data structure first 
+and working our way outwards to
 the store API, that best fits
 to the data structure and then
 implementing the Access Controller,
