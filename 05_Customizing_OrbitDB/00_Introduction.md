@@ -10,7 +10,7 @@ the built-in OrbitDB stores and
 indices or how you can define your own.
 
 ## What will we implement?
-We have already implemented a note sharing app,
+We have already implemented a sheet music sharing app,
 where musicians can upload and share their
 notes as files and view those of other
 musicians.
