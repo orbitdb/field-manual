@@ -9,9 +9,6 @@ to show you, how you can customize
 the built-in OrbitDB stores and
 indices or how you can define your own.
 
-In order to do this, we will follow this agenda:
-
-
 ## What will we implement?
 We have already implemented a note sharing app,
 where musicians can upload and share their
