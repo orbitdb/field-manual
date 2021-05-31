@@ -47,7 +47,8 @@ Some ideas, that you could
 pursue - but don't have to:
 - Event Handling: Firing events when receiving *new* comments, notes and deleting old ones.
 - Make it possible to edit comments.
-- Use a differentl data structure to represent the comments: A lazy hash table, where each notes piece and comment can be looked up and parsed upon request, instead of upon receiving new entries.
+- Use a different data structure to represent the comments: A lazy hash table, where each notes piece and comment can be looked up and parsed upon request, instead of upon receiving new entries.
+- Use a different delete heuristic: Don't delete comments, if the comments or music sheets they refer to are deleted. Do something else! Maybe move them up the tree or put them into a `detached comments` array. It's a question of your imagination.
 
 You are free to change the source code here however
 you want.
