@@ -69,9 +69,4 @@ Although in some cases for some specific
 data, somebody might be really insistent
 and pin it anyway.
 
-By the way, many people in the OrbitDB
-Community refer to AccessControllers by the
-shorthand `ACL`, which either means `AccessController List`
-or `AccessController Ledger`.
-
 **Next: [Implementing a custom AccessController](06_Implementing_a_custom_AccessController.md)**
