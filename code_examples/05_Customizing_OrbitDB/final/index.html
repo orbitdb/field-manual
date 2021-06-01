@@ -1,0 +1,18 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<script src="https://unpkg.com/ipfs@0.55.1/dist/index.min.js"></script>
+		<script src="https://unpkg.com/orbit-db@0.26.1/dist/orbitdb.min.js"></script>
+		<script src="./NotesStore.js"></script>
+    <script src="./notespiecesplease.js"></script>
+		<script language="Javascript">
+NPP.onready = async () => {
+	const identity = await NPP.node.id()
+  	console.log(identity.id)
+}
+
+NPP.create()
+
+		</script>
+</html>

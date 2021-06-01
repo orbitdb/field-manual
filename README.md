@@ -6,7 +6,7 @@
   <img src="images/orbit_db_logo_color.jpg" width="256" />
 </p>
 
-[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/orbitdb/Lobby) [![Matrix](https://img.shields.io/badge/matrix-%23orbitdb%3Apermaweb.io-blue.svg)](https://riot.permaweb.io/#/room/#orbitdb:permaweb.io) 
+[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/orbitdb/Lobby) [![Matrix](https://img.shields.io/badge/matrix-%23orbitdb%3Apermaweb.io-blue.svg)](https://riot.permaweb.io/#/room/#orbitdb:permaweb.io)
 
 ## What's in the book?
 
@@ -18,7 +18,13 @@ Next, **[Thinking Peer to Peer](./02_Thinking_Peer_to_Peer)** is a collection of
 
 Then, **[The Architecture of OrbitDB](./03_The_Architecture_of_OrbitDB)** covers in-depth, in a more reference style, the  structured and architecture of OrbitDB. It includes a description of `ipfs-log`, the core of OrbitDB, the data `stores` and finally how the `orbit-db` library brings it all together into a single, cohesive package that works both in the browser and on the command line.
 
-Finally, **[What comes next?](./04_What_Next)** provides some guidance and suggestions about subsequent topics you should explore. This section serves as a launch pad to further your understanding of how our distributed future will be built.
+**[What comes next?](./04_What_Next)** provides some guidance and suggestions about subsequent topics you should explore. This section serves as a launch pad to further your understanding of how our distributed future will be built.
+
+And after all that, we have a chapter on
+how you might write custom Stores in OrbitDB
+in **[Customizing OrbitDB](./05_Customizing_OrbitDB/00_Introduction.md)**, written in the form
+of a second Tutorial, that is based on our
+first chapter.
 
 ## How to read this book
 
@@ -26,7 +32,10 @@ While this book is best consumed by reading cover-to-cover, we understand that y
 
 If you are a technical person and want to use OrbitDB to build distributed, peer-to-peer applications, start with [Part 1: The tutorial](./01_Tutorial/00_Introduction.md), move to [Part 3: The Architecture of OrbitDB](./03_The_Architecture_of_OrbitDB), and then read chapters from [Part 2](./02_Thinking_Peer_to_Peer) and [Part 4](./04_What_Next) as necessary to fill in any knowledge gaps you may have.
 
-If you do not want to write code, but instead want to understand peer-to-peer systems and architectures at a higher level, you should be able to get away with only reading [Part 2: Thinking Peer to Peer](./02_Thinking_Peer_to_Peer), and then moving on to [Part 4](./04_What_Next), followed by [Part 3](./03_The_Architecture_of_OrbitDB). 
+After reading Part 1, Part 3 and Part 2, you
+are equipped to read [Part 5: Customizing OrbitDB](./05_Customizing_OrbitDB/00_Introduction.md).
+
+If you do not want to write code, but instead want to understand peer-to-peer systems and architectures at a higher level, you should be able to get away with only reading [Part 2: Thinking Peer to Peer](./02_Thinking_Peer_to_Peer), and then moving on to [Part 4](./04_What_Next), followed by [Part 3](./03_The_Architecture_of_OrbitDB).
 
 Please note that we may repeat ourselves in different parts of the book. This is intentional because we cannot guarantee people will read the sections of the book in order. Please skim any sections that you already feel like you understand.
 
@@ -35,6 +44,19 @@ Please note that we may repeat ourselves in different parts of the book. This is
 Here you can download a copy of the book in the following free formats:
 
 - [PDF](./dist/Book.pdf)
+
+## Gaps and out-of-date sections
+OrbitDB is an alpha phase software in an
+alpha industry.
+A risk of this fact is, that
+documentation can quickly become
+out-of-date and be filled with errors.
+
+It is thus vital, that everyone reading
+the Field Manual from OrbitDB also
+stay in contact with the OrbitDB Community
+on [Matrix](https://matrix.to/#/!HsJJxyITRbsZekFjiE:gitter.im?via=gitter.im&via=matrix.org&via=familymoyaers.com) or [Gitter](https://gitter.im/orbitdb/Lobby) for questions and reporting of issues
+with the Manual.
 
 ## Maintainers
 
