@@ -1,0 +1,20 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.1
+
+jobs:
+  lint:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          name: Linting
+          command: npm run lint
+
+workflows:
+  linting:
+    jobs:
+      - lint
