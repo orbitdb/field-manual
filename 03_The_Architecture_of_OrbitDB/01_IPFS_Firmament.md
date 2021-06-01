@@ -64,7 +64,7 @@ This is a _directed graph_. Connections flow in a certain direction, but can be 
 
 ![Directed Graph](../images/Directed-Graph.jpg)
 
-This is a _directed acyclic graph_ or a "DAG". Connections only flow in one direction and never "cycle." or loop back. This 
+This is a _directed acyclic graph_ or a "DAG". Connections only flow in one direction and never "cycle." or loop back. This
 
 ![Directed Acyclic Graph](../images/Directed-Acyclic-Graph.jpg)
 

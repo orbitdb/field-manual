@@ -1,4 +1,5 @@
 # On Customizing OrbitDB
+
 In conclusion this
 part of the Field
 Manual of OrbitDB
@@ -35,6 +36,7 @@ about CRDTs, `oplogs` and
 other such complexities.
 
 # Where to go from here?
+
 The source code in this
 tutorial is incomplete
 by design.
@@ -45,6 +47,7 @@ the state differently.
 
 Some ideas, that you could
 pursue - but don't have to:
+
 - Event Handling: Firing events when receiving *new* comments, notes and deleting old ones.
 - Make it possible to edit comments.
 - Use a different data structure to represent the comments: A lazy hash table, where each notes piece and comment can be looked up and parsed upon request, instead of upon receiving new entries.

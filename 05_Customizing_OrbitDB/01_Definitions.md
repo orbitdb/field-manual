@@ -8,6 +8,7 @@ notes, we should probably define what a `Store`,
 function they have in OrbitDB.
 
 ## The Store
+
 You have already worked with several
 Stores in the Tutorial.
 The `docstore` was used to store
@@ -22,6 +23,7 @@ with which you could easily interact with
 the database itself.
 
 ## The Index
+
 But a store doesn't actually
 store the current state of the database in the RAM,
 because this is done in the `Index`.
@@ -36,6 +38,7 @@ The index is then used by the `Store`
 to implement its API.
 
 ## The Access Controllers
+
 Access Controllers or short ACL (Access Control List)
 were already discussed [02: Managing Data](../01_Tutorial/02_Managing_Data).
 
@@ -53,7 +56,7 @@ controller, can follow the rules of the access controller.
 
 But this also means, that you cannot change
 the type of your Access Controller, without
-changing the Manifest file and thus the OrbitDB 
+changing the Manifest file and thus the OrbitDB
 Address.
 
 **Next: [Choosing a data structure](02_Choosing_a_data_structure.md)**
