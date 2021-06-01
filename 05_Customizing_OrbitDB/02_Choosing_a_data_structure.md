@@ -1,4 +1,4 @@
-# Choosing a data structure
+## Choosing a data structure
 
 Let's start implementing a comment system
 by choosing how we want to represent the
@@ -12,7 +12,7 @@ implementing the Access Controller,
 since the Access Controller is very
 much independent from the Store and Index.
 
-## Requirements
+### Requirements
 
 Our data structure should achieve two things:
 
@@ -25,7 +25,7 @@ Each tree's root would be the Notes pieces and the
 children of that root would be the comments,
 the comments comments and so on and so on.
 
-## Generating the Trees from the `ipfs-log`
+### Generating the Trees from the `ipfs-log`
 
 Before starting to implement this data structure,
 we'll also have to consider, how to generate
@@ -47,17 +47,17 @@ For our purposes there can be these operations:
 
 This seems pretty straight forward.
 
-## What happens when we delete notes or comments, with all those comments referring to them?
+### What happens when we delete notes or comments, with all those comments referring to them?
 
 I propose using a simple rule: If a comment or piece of notes
 is deleted, all those refering to it are deleted too.
 Otherwise this tutorial becomes a complicated mess.
 
-# Implementing the Index.
+## Implementing the Index.
 
 Let's start by adding a new file to your project folder (if you haven't yet created one, do that now).
 
-## Isomorphic Bookends.
+### Isomorphic Bookends.
 
 You know the drill, before starting with the actual implementation
 of the Index, we have to define the bookends, that make our code
@@ -79,7 +79,7 @@ libraries from OrbitDB.
 
 It is using duck typing, instead of inheritance.
 
-## Defining the `NotesIndex` class.
+### Defining the `NotesIndex` class.
 
 Next, let's define the actual class
 of the `NotesIndex`.
@@ -96,7 +96,7 @@ class NotesIndex {
 We initialize the index to an empty object at first, because
 we don't yet have any data.
 
-## Defining the `TreeNode` helper class.
+### Defining the `TreeNode` helper class.
 
 After this, let's first implement our own `TreeNode` data type,
 that'll be used to represent the trees mentioned above.

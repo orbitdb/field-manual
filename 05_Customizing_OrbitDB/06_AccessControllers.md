@@ -1,4 +1,4 @@
-# Moderating your Comment Threads.
+## Moderating your Comment Threads.
 
 We have now gotten a store that
 you can publish notes and comments with.

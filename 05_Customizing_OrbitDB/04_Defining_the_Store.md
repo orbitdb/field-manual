@@ -1,4 +1,4 @@
-# Defining the Store
+## Defining the Store
 
 We now have our own
 `Index` in `NotesIndex.js`.
@@ -29,12 +29,12 @@ Tutorial in this Manual.
 Because there are five built-in
 stores, which will I not bother recounting here.
 
-# The `NotesStore` class
+### The `NotesStore` class
 
 You should now add a new JavaScript file
 and call it `NotesStore.js`.
 
-## Isomorphic Bookends
+#### Isomorphic Bookends
 
 For the third time in this Manual:
 Let's define an isomorphic bookend:
@@ -58,7 +58,7 @@ try {
 
 We'll from now on be working inside the `notesStore` function.
 
-## Defining the `NotesStore` class
+### Defining the `NotesStore` class
 
 To define a Store, we have to extend
 an existing Store class.
@@ -84,7 +84,7 @@ class NoteStore extends OrbitDB.EventStore {
 return NoteStore
 ```
 
-### What is happening here?
+#### What is happening here?
 
 The Store receives four parameters in it's `constructor`:
 
@@ -101,7 +101,7 @@ the options already has an `Index` specified.
 Besides this, all stores have to have a `type` property,
 to uniquely identify the `NotesStore`.
 
-## Defining a `getNotes` and `getComments`
+### Defining a `getNotes` and `getComments`
 
 We should probably implement a few get
 functions. But this is really low effort,
@@ -123,7 +123,7 @@ As you can see, `this._index` is an instance of the `NotesIndex`,
 if no other Index was passed in to the constructor,
 and we can easily access the methods we defined in the Index.
 
-## Adding Data to the Store
+### Adding Data to the Store
 
 Now, let's finally add some data
 to our Store.
@@ -203,7 +203,7 @@ prior to adding an operation:
 - Formatting (with Protobuf)
 - Encryption and Decryption
 
-### Adding Comments
+#### Adding Comments
 
 After a user added their
 musical notes to their Database,
@@ -239,7 +239,7 @@ information about the auther.
 See the [Implementing `ADDCOMMENT` handling](03_Defining_the_Index.md#Implementing-ADDCOMMENT-handling)
 section of the previous chapter.
 
-# Other Stores
+## Other Stores
 
 You might note that this is a very complicated
 custom store and index.
@@ -256,7 +256,7 @@ can be very illuminating and inspiring.
 I would advice reading the [`EventIndex.js`](https://github.com/orbitdb/orbit-db-eventstore/blob/main/src/EventIndex.js)
 and the [KVStore's Store and Index files](https://github.com/orbitdb/orbit-db-kvstore/blob/main/src/).
 
-# Key Takeaways
+## Key Takeaways
 
 - Stores inherit from each other. So you can extend built-in stores.
 - Stores work with the `Index` and the `this._addOperation` mostly.

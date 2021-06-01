@@ -1,4 +1,4 @@
-# What are Stores, AccessControllers and Indicies.
+## What are Stores, AccessControllers and Indicies.
 
 Before we start to implement
 our custom store, access controller, and index
@@ -7,7 +7,7 @@ notes, we should probably define what a `Store`,
 `AccessController`, and `Index` are and what
 function they have in OrbitDB.
 
-## The Store
+### The Store
 
 You have already worked with several
 Stores in the Tutorial.
@@ -22,7 +22,7 @@ functions to access them, like `get`, `put` or `set`,
 with which you could easily interact with
 the database itself.
 
-## The Index
+### The Index
 
 But a store doesn't actually
 store the current state of the database in the RAM,
@@ -37,7 +37,7 @@ of the current state of the database.
 The index is then used by the `Store`
 to implement its API.
 
-## The Access Controllers
+### The Access Controllers
 
 Access Controllers or short ACL (Access Control List)
 were already discussed [02: Managing Data](../01_Tutorial/02_Managing_Data).
