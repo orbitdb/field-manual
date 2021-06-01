@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "markdownlint -c markdownlint.json *.md */*.md",
+    "lint": "markdownlint --ignore dist -c markdownlint.json *.md */*.md",
     "build": "make build"
   },
   "author": "Mark Henderson",
