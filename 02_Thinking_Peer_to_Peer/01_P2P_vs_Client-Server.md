@@ -80,7 +80,7 @@ One final trade-off to using keypair encryption as a form of application securit
 
 As we move away from the traditional client-server model and towards a swarm of connected peers, we must think differently about the communication model. Traditionally, you would send messages via some sort of API - SOAP, REST, etc. The server would then process those requests, and disseminate information back out to the necessary clients.
 
-But now, we have a peer-to-peer swarm where certain clients may not be connected at the time of messaging, and different types of messages need to be sent. Using the message passing model, peers will be able to subscribe to "topics" and other peers will be able to broadcast on those same topics. Users must be connected to a swarm to be able to pubsub with other peers. IPFS implements message passing in the form of _pubsub_ - short for "publish and subscribe." 
+But now, we have a peer-to-peer swarm where certain clients may not be connected at the time of messaging, and different types of messages need to be sent. Using the message passing model, peers will be able to subscribe to "topics" and other peers will be able to broadcast on those same topics. Users must be connected to a swarm to be able to pubsub with other peers. IPFS implements message passing in the form of _pubsub_ - short for "publish and subscribe."
 
 Some examples:
 

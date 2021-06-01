@@ -10,6 +10,7 @@ Please complete [Chapter 5 - Peer to Peer Part 2 (OrbitDB)](./05_P2P_Part_2.md) 
 - [On security](#on-security)
 - [Encryping and decrypting your data](#encrypting-and-decrypting-your-data)
 - [Creating a custom access controller](#creating-a-custom-access-controller)
+
 </div>
 
 ### On security

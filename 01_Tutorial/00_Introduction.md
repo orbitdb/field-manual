@@ -42,9 +42,9 @@ Admittedly, a music app is somewhat arbitrary. But if you're here to learn more 
 ### Conventions
 
 * This tutorial is:
-    * _Imperative_, meaning that it contains instructions you will follow
-    * _Interactive_, meaning you are meant to code as you read
-    * _Isomorphic_, meaning that it will work in the browser or command line, whichever you choose
+  * _Imperative_, meaning that it contains instructions you will follow
+  * _Interactive_, meaning you are meant to code as you read
+  * _Isomorphic_, meaning that it will work in the browser or command line, whichever you choose
 * Read this tutorial in order, the learning builds on itself over time.
 * The UI Layer for this library is _suggested_, instead of built directly. The tutorial focuses on the building of a single JavaScript class which encapsulates all the functionality needed to build the UI layer.
 * Type the examples in, do not copy and paste.

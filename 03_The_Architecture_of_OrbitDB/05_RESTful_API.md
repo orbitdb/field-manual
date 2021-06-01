@@ -40,7 +40,7 @@ ipfs daemon --enable-pubsub-experiment
 
 #### Building the REST server
 
-Now get a copy of the code. You can grab it via Github at https://github.com/orbitdb/orbit-db-http-api:
+Now get a copy of the code. You can grab it via Github at <https://github.com/orbitdb/orbit-db-http-api>:
 
 ```bash
 wget https://github.com/orbitdb/orbit-db-http-api.zip
@@ -79,6 +79,7 @@ First, create your root CA private key:
 ```bash
 openssl genrsa -des3 -out rootSSL.key 2048
 ```
+
 ```bash
 Generating RSA private key, 2048 bit long modulus
 ………………+++

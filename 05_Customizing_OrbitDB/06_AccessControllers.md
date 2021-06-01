@@ -1,4 +1,5 @@
 # Moderating your Comment Threads.
+
 We have now gotten a store that
 you can publish notes and comments with.
 
@@ -28,6 +29,7 @@ go into it.
 
 Moderating is generally considered
 to be two separate tasks:
+
 1. Restricting the writing to a database
 2. Restricting the reading from a database and sharing of contents.
 

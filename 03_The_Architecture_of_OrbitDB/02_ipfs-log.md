@@ -11,7 +11,6 @@
 
 </div>
 
-
 ### The Conflict-Free Replicated Data Type (CRDT)
 
 In the [previous chapter](../01_IPFS_Firmament.md) we discussed how we can use IPFS's _directted acyclic graph_ (DAG) functionality to create linked data structures. OrbitDB utilizes this by building logs wherein each entry is linked to the previous one. To share state reliably between users, and to prevent the system from being confused as to how to parse these logs deterministically, a specific type of data structure called a _Conflict-Free Replicated Data Type_, or CRDT is used.
@@ -91,7 +90,6 @@ This concept is visualized below, with the dim entries signifying non-traversed,
 
 ![Tails Example](../images/tails-example.png)
 
-
 ### Anatomy of a Log Entry
 
 `ipfs-log` entries are JSON objects that follow a specific schema to form linked lists, or "chains" in a (Directed Acyclic Graph) DAG. In doing so, IPFS can be utilized as an append-only operation log.
@@ -162,5 +160,6 @@ What follows is sort of a "minimum viable example" of such a log. Below the exam
 * **sig** the signaure of the entry, signed by the orbitdb private key, for verification purposes
 
 #### References
-1. https://citemaster.net/get/10b50274-7bc5-11e5-8aa1-00163e009cc7/p558-lamport.pdf
-2. https://hal.inria.fr/inria-00555588
+
+1. <https://citemaster.net/get/10b50274-7bc5-11e5-8aa1-00163e009cc7/p558-lamport.pdf>
+2. <https://hal.inria.fr/inria-00555588>

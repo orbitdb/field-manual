@@ -46,6 +46,7 @@ Here you can download a copy of the book in the following free formats:
 - [PDF](./dist/Book.pdf)
 
 ## Gaps and out-of-date sections
+
 OrbitDB is an alpha phase software in an
 alpha industry.
 A risk of this fact is, that
