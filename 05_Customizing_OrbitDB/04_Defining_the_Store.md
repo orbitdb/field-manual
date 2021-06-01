@@ -84,7 +84,7 @@ class NoteStore extends OrbitDB.EventStore {
 return NoteStore
 ```
 
-#### What is happening here?
+### What is happening here?
 
 The Store receives four parameters in it's `constructor`:
 
@@ -166,7 +166,7 @@ value: {
 }
 ```
 
-#### `addNotesBinary`
+### `addNotesBinary`
 
 But we can still do more for the user
 in this store.
