@@ -28,5 +28,4 @@ build: clean
 	# pandoc --highlight-style=zenburn -o Book.epub metadata.yaml Book.md;
 	# cd dist; pandoc --highlight-style=zenburn -o Book.docx ../metadata.yaml Book.md;
 	# pandoc --highlight-style=zenburn -o Book.odt metadata.yaml Book.md;
-	docker rmi pandoc/latex:2.14
 	rm -f dist/Book.md
