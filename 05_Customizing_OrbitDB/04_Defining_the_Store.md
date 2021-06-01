@@ -3,7 +3,7 @@ We now have our own
 `Index` in `NotesIndex.js`.
 
 But how can we use it?
-Through the Store.
+Through the `Store`.
 
 The Store, as we know,
 actually does not store
@@ -216,8 +216,8 @@ See the [Implementing `ADDCOMMENT` handling](03_Defining_the_Index.md#Implementi
 section of the previous chapter.
 
 # Other Stores
-You might note, that this is a very complicated
-and custom store and index.
+You might note that this is a very complicated
+custom store and index.
 But the actual techniques used
 are deployed already in all of the
 built-in Stores.

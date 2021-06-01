@@ -3,7 +3,7 @@ We have now gotten a store, that
 you can publish notes and comments with.
 
 But you cannot actually
-control, who and what
+control who and what
 gets to comment and be a comment.
 
 In other words: How can you moderate
@@ -55,15 +55,15 @@ use these entries or deny and trash them.
 
 Remember: These rules, that you write into
 the AccessController can be changed or ignored
-by other peers, if they so which.
+by other peers, if they so wish.
 But then again, what do you care what other
 peers do with their own database, as long
 as your database is clean and conforming to
 all the rules you laid out?
 
-And, importantly, if most peers follow
+Additionally, if most peers follow
 your rules, then most content that violates
-these rules, will not persist anyway,
+these rules will not persist anyway,
 because nobody is around to pin it.
 Although in some cases for some specific
 data, somebody might be really insistent

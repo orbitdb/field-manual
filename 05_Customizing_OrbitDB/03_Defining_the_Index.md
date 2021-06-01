@@ -2,7 +2,7 @@
 In the last chapter we
 considered how we
 could define our
-Index data structure.
+`Index` data structure.
 
 I settled us on a
 Tree data structure,
@@ -22,13 +22,13 @@ class an `Index`.
 ## A few utility functions.
 Let's first define a few
 utility functions for fetching content from
-the Index.
+the `Index`.
 - Fetching a notes piece.
 - Fetching the comments on a piece of notes
 - Getting comments in a chronological order for a specific piece of notes.
 
 The last will be very helpful to UI Designers
-who have to translate this data structure into
+who have the crucial task of translating this data structure into
 pleasant UI.
 
 ### `getNotes`
@@ -41,7 +41,7 @@ getNotes(cid) {
 
 We fetch the tree with that CID and then only
 care for the `data` field of the `TreeNode`, because
-that's where the notes is actually stored.
+that's where the sheet music is actually stored.
 
 ### `getComments`
 Now implement the `NotesIndex.getComments(cid)` function like this:
@@ -92,7 +92,7 @@ behavior.
 
 ### The `updateIndex` function
 Up until this point, we have been
-writing utility functions, that are
+writing utility functions that are
 nice to have for our index to be used
 by our still to be defined store,
 but is not strictly necessary for
@@ -136,11 +136,11 @@ updateIndex(oplog) {
 ```
 The `updateIndex` starts with a line, that
 initializes an `order` variable to 0.
-This will help us, when we get to `ADDCOMMENT`.
+This will help us when we get to `ADDCOMMENT`.
 
 We start by reducing the `oplog.values` Array.
 The accumulator of the reducer contains
-the hashes of the items, that have already been handled.
+the hashes of the items that have already been handled.
 The current item is checked, not to have been handled already
 and is then added to the handled array.
 
@@ -189,7 +189,7 @@ constructor() {
 ```
 
 In this object, we store each comment's `TreeNode` by it's hash or rather
-the hash of the Operation Item, that added them for easy access.
+the hash of the Oplog `Entry` that added them for easy access.
 ```js
 case "ADDCOMMENT":
   let reference = item.payload.key
@@ -217,8 +217,8 @@ This branch of the `ADDCOMMENT` switch starts
 by utilizing the `key` field of the Operation,
 which is interpreted as the hash of the notes pieces
 or the comments.
-Then the node of the comment is created, containing
-both the comment, an `author` field and an `id` field.
+Then the node of the comment is created containing
+both the comment, an `author` field, and an `id` field.
 The `author` field is set to the ID of the OrbitDB instance
 that is passed to the operation and already verified by OrbitDB.
 
@@ -227,7 +227,7 @@ which is incremented afterwards.
 Because the `order` variable is increased for each comment
 on each note. This makes it possible to sort the comments in `getComments`.
 
-After this, the `TreeNode`, that is referred to by the Operator's
+After this, the `TreeNode` that is referred to by the Operator's
 `key` field, gets a new child in the form of the comment.
 
 And at last, we store the created `TreeNode`, in `_comments`
@@ -246,7 +246,7 @@ case "DELETECOMMENT":
 
 ## Conclusion
 We have now defined the complete
-Index for the comment system.
+`Index` for the comment system.
 You can now read it through the `getNotes` and `getComments`.
 
 But we haven't discussed two topics yet:
