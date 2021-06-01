@@ -28,15 +28,13 @@ You will need to get the code for OrbitDB and its dependency, IPFS, and make it 
 Choose a project directory and `cd` to there from your command line. Then run the following command:
 
 ```bash
-$ npm init --yes
+$ npm init --yes # use npm defaults, you can edit this later
 $ npm install --save orbit-db ipfs
 ```
 
 This will create a `package.json`, `package-lock.json`, and `node_modules` folder.
 
 > **Note:** If you're running on a Windows prompt, or if you don't have certain build tools like [`g++`](https://gcc.gnu.org) and [`python`](https://www.python.org) installed, you may see a noisy console output with lots of warnings and errors. Keep going, your code should still run.
-
-> **Note:** Adding the `--yes` flag will automatically use your npm defaults. You can go through and edit the package.json later, but it's not entirely necessary for this part of the tutorial.
 
 If you want to use Git to track your progress, we also suggest the following:
 
