@@ -1,4 +1,4 @@
-# Defining the Index
+## Defining the Index
 
 In the last chapter we
 considered how we
@@ -19,7 +19,7 @@ actually define the Index
 or what makes the `NotesIndex`
 class an `Index`.
 
-## A few utility functions.
+### A few utility functions.
 
 Let's first define a few
 utility functions for fetching content from
@@ -33,7 +33,7 @@ The last will be very helpful to UI Designers
 who have the crucial task of translating this data structure into
 pleasant UI.
 
-### `getNotes`
+#### `getNotes`
 
 But let's start with a simple `NotesIndex.getNotes` function.
 
@@ -47,7 +47,7 @@ We fetch the tree with that CID and then only
 care for the `data` field of the `TreeNode`, because
 that's where the sheet music is actually stored.
 
-### `getComments`
+#### `getComments`
 
 Now implement the `NotesIndex.getComments(cid)` function like this:
 
@@ -61,7 +61,7 @@ Get comments is almost entirely identical to `getNotes`, except
 that we don't return the `data`, but the `children` field of
 the `TreeNode`.
 
-### `getComments` with chronological order
+#### `getComments` with chronological order
 
 Now, let's get to our third and final `get` functions: `getComments`,
 but now with an argument: `flat = true`.
@@ -90,7 +90,7 @@ getComments(cid, flat = true) {
 
 Replace the `getComments` function above, by this.
 
-#### What happens here?
+##### What happens here?
 
 We first define a helper function `flatten`, which goes
 through the array of children and adds each node
@@ -99,7 +99,7 @@ Then we sort it based on an id field in ascending order.
 If you pass in `flat = false`, you'll still get the old
 behavior.
 
-### The `updateIndex` function
+#### The `updateIndex` function
 
 Up until this point, we have been
 writing utility functions that are
@@ -168,7 +168,7 @@ Index can handle:
 - `ADDCOMMENT` to add a comment to a piece of notes or some other comments.
 - `DELETECOMMENT` to delete a comment.
 
-### Implementing `ADDNOTES` handling
+#### Implementing `ADDNOTES` handling
 
 Add notes is by far the simplest operation to handle,
 since we just need to add a new `TreeNode` to the `_index`.
@@ -180,7 +180,7 @@ case "ADDNOTES":
   break;
 ```
 
-### Implementing `DELETENOTES` handling
+#### Implementing `DELETENOTES` handling
 
 And deleting notes is the inverse:
 
@@ -191,7 +191,7 @@ case "DELETENOTES":
   break;
 ```
 
-### Implementing `ADDCOMMENT` handling
+#### Implementing `ADDCOMMENT` handling
 
 Adding comments is a little more complicated.
 We first have to find the parent of the comment in the notes
@@ -254,7 +254,7 @@ After this, the `TreeNode` that is referred to by the Operator's
 And at last, we store the created `TreeNode`, in `_comments`
 for later.
 
-### Implementing `DELETECOMMENT` handling
+#### Implementing `DELETECOMMENT` handling
 
 After the monster of a branch above, this case is
 pretty relaxing in comparison:
@@ -267,7 +267,7 @@ case "DELETECOMMENT":
   break;
 ```
 
-## Conclusion
+### Conclusion
 
 We have now defined the complete
 `Index` for the comment system.

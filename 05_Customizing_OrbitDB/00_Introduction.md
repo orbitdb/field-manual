@@ -1,4 +1,4 @@
-# Customizing OrbitDB
+# Part 5: Customizing OrbitDB
 
 In the first chapter of this Field Manual,
 we described how you might create

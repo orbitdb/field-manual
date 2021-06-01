@@ -1,4 +1,4 @@
-# On Customizing OrbitDB
+## On Customizing OrbitDB
 
 In conclusion this
 part of the Field
@@ -35,7 +35,7 @@ and has no time to bother
 about CRDTs, `oplogs` and
 other such complexities.
 
-# Where to go from here?
+### Where to go from here?
 
 The source code in this
 tutorial is incomplete
