@@ -15,4 +15,3 @@ Access Controllers are implemented
 using inherited classes.
 Let's implement a `NotesAccessController.js`
 file with these Isomorphic bookends:
-```js
