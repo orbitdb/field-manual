@@ -27,7 +27,7 @@ the Index.
 - Fetching the comments on a piece of notes
 - Getting comments in a chronological order for a specific piece of notes.
 
-The last will be very helpful to those poor UI Designers,
+The last will be very helpful to UI Designers
 who have to translate this data structure into
 pleasant UI.
 
