@@ -1,10 +1,10 @@
 # Moderating your Comment Threads.
-We have now gotten a store, that
+We have now gotten a store that
 you can publish notes and comments with.
 
 But you cannot actually
 control who and what
-gets to comment and be a comment.
+gets to comment and count as a valid comment.
 
 In other words: How can you moderate
 a Peer-to-Peer Database?
@@ -56,7 +56,7 @@ use these entries or deny and trash them.
 Remember: These rules, that you write into
 the AccessController can be changed or ignored
 by other peers, if they so wish.
-But then again, what do you care what other
+But then again, consider whether it's important to you what other
 peers do with their own database, as long
 as your database is clean and conforming to
 all the rules you laid out?
