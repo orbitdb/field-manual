@@ -7,7 +7,7 @@
   "no-duplicate-heading": false,
   "no-inline-html": {
     "allowed_elements": [
-      "a", "p", "img", "br", "div", "h3", "strong"
+      "a", "p", "img", "br", "div", "h3", "strong", "sup"
     ]
   }
 }
