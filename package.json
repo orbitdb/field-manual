@@ -12,8 +12,9 @@
   "author": "Mark Henderson",
   "license": "CC-BY-NC-4.0",
   "devDependencies": {
-    "markdownlint": "^0.12.0",
-    "markdownlint-cli": "^0.14.0"
+    "@mapbox/node-pre-gyp": "^1.0.5",
+    "markdownlint": "^0.23.1",
+    "markdownlint-cli": "^0.27.1"
   },
   "bugs": "https://github.com/orbitdb/field-manual/issues",
   "homepage": "https://github.com/orbitdb/field-manual",
