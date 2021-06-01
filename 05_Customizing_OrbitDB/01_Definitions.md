@@ -45,14 +45,15 @@ that you have the right to do so.
 
 It is setup when you create a database
 and stored in the Manifest of the database.
-(That thing, that the mulithash in the middle
-of your orbitdb address refers to)
+(The multihash `zdpuAmQhKvDytoSn6NapRYZYTAWgqQpbJBfPLmUiSRBYgN7ah`in is refering to the
+Manifest file.`/orbitdb/zdpuAmQhKvDytoSn6NapRYZYTAWgqQpbJBfPLmUiSRBYgN7ah/example`)
 
 Anyone, who supports this type of access
 controller, can follow the rules of the access controller.
 
-But this also means, you cannot modify your access
-controller and it's options after you created
-the database.
+But this also means, that you cannot change
+the type of your Access Controller, without
+changing the Manifest file and thus the OrbitDB 
+Address.
 
 **Next: [Choosing a data structure](02_Choosing_a_data_structure.md)**
