@@ -85,6 +85,7 @@ Now, add a few functions to `NewPiecePlease` that utilize the counters when nece
 
 + async incrementPracticeCounter (piece) {
 +   const counter = await this.orbitdb.counter(piece.counter)
++   await counter.load()
 +   const cid = await counter.inc()
 +   return cid
 + }
