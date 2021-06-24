@@ -36,16 +36,16 @@ The output will be
 $ mkdir orbitdb-ch1
 $ cd orbitdb-ch1
 $ git init
-Initialized empty Git repository in /Users/kvutien/development/orbitdb-ch1/.git/
+   Initialized empty Git repository in /Users/kvutien/development/orbitdb-ch1/.git/
 $ echo node_modules > .gitignore
 $ npm init --yes
-Wrote to /Users/kvutien/development/orbitdb-ch1/package.json:
-... some stuff...
+   Wrote to /Users/kvutien/development/orbitdb-ch1/package.json:
+   ... some stuff...
 $ npm install orbit-db ipfs
-... a lot more stuff...
-+ orbit-db@0.26.1
-+ ipfs@0.55.4
-added 1165 packages from 1305 contributors and audited 1165 packages in 174.258s
+   ... a lot more stuff...
+   + orbit-db@0.26.1
+   + ipfs@0.55.4
+   added 1165 packages from 1305 contributors and audited 1165 packages in 174.258s
 
 ```
 This will create a `package.json`, `package-lock.json`, and `node_modules` folder.
