@@ -31,6 +31,13 @@ Create a project directory (for example `orbitdb-ch1`) and `cd` to there from yo
 $ npm init --yes
 $ npm install orbit-db ipfs
 ```
+If you want to use Git to track your progress, we also suggest typing the following command lines while in the folder:
+
+```bash
+$ git init
+$ echo node_modules > .gitignore
+```
+
 The output will be
 ```bash
 $ mkdir orbitdb-ch1
@@ -53,13 +60,6 @@ This will create 2 files `package.json`, `package-lock.json`, and a `node_module
 > **Note:** If you're running on a Windows prompt, or if you don't have certain build tools like [`g++`](https://gcc.gnu.org) and [`python`](https://www.python.org) installed, you may see a noisy console output with lots of warnings and errors. Keep going, your code should still run.
 
 > **Note:** Adding the `--yes` flag will automatically use your npm defaults. You can go through and edit the `package.json` later.
-
-If you want to use Git to track your progress, we also suggest typing the following command lines while in the folder:
-
-```bash
-$ git init
-$ echo node_modules > .gitignore
-```
 
 > **Note:** This code was tested on Node v12.14.8. Your mileage for other versions may vary.
 
