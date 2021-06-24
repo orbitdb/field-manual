@@ -36,7 +36,7 @@ The output will be
 $ mkdir orbitdb-ch1
 $ cd orbitdb-ch1
 $ git init
-   Initialized empty Git repository in /Users/kvutien/development/orbitdb-ch1/.git/
+   Initialized empty Git repository in /Users/myPath/orbitdb-ch1/.git/
 $ echo node_modules > .gitignore
 $ npm init --yes
    Wrote to /Users/kvutien/development/orbitdb-ch1/package.json:
