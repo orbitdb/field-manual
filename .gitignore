@@ -1,1 +1,5 @@
 node_modules
+.DS_Store
+ipfs/
+orbitdb/
+package-lock.json

@@ -25,29 +25,43 @@ You will need to get the code for OrbitDB and its dependency, IPFS, and make it 
 
 #### In Node.js
 
-Choose a project directory and `cd` to there from your command line. Then run the following command:
+Create a project directory (for example `orbitdb-ch1`) and `cd` to there from your command line. Then run the following command:
 
 ```bash
 $ npm init --yes
-$ npm install --save orbit-db ipfs
+$ npm install orbit-db ipfs
 ```
+The output will be
+```bash
+$ mkdir orbitdb-ch1
+$ cd orbitdb-ch1
+$ git init
+Initialized empty Git repository in /Users/kvutien/development/orbitdb-ch1/.git/
+$ echo node_modules > .gitignore
+$ npm init --yes
+Wrote to /Users/kvutien/development/orbitdb-ch1/package.json:
+... some stuff...
+$ npm install orbit-db ipfs
+... a lot more stuff...
++ orbit-db@0.26.1
++ ipfs@0.55.4
+added 1165 packages from 1305 contributors and audited 1165 packages in 174.258s
 
+```
 This will create a `package.json`, `package-lock.json`, and `node_modules` folder.
 
 > **Note:** If you're running on a Windows prompt, or if you don't have certain build tools like [`g++`](https://gcc.gnu.org) and [`python`](https://www.python.org) installed, you may see a noisy console output with lots of warnings and errors. Keep going, your code should still run.
 
-> **Note:** Adding the `--yes` flag will automatically use your npm defaults. You can go through and edit the package.json later, but it's not entirely necessary for this part of the tutorial.
+> **Note:** Adding the `--yes` flag will automatically use your npm defaults. You can go through and edit the `package.json` later.
 
-If you want to use Git to track your progress, we also suggest the following:
+If you want to use Git to track your progress, we also suggest typing the following command lines while in the folder:
 
 ```bash
 $ git init
 $ echo node_modules > .gitignore
 ```
 
-Of course, be careful before copying and pasting any commands anyone ever tells you into your terminal. If you don't understand a command, figure out what it is supposed to do, before copying it over. Copy and paste at your own risk.
-
-> **Note:** This code was tested on Node v11.14.0. Your mileage for other versions may vary.
+> **Note:** This code was tested on Node v12.14.8. Your mileage for other versions may vary.
 
 #### In the Browser
 
@@ -62,9 +76,9 @@ You will now have global `Ipfs` and `OrbitDB` objects available to you. You will
 
 ### Creating the isomorphic bookends
 
-Since OrbitDB works in the browser and Node.js, you're going to want to make the library as _isomorphic_ as possible. This means we want the same code to run in the browser as runs in REPL or local environment. Luckily, you will have the luxury of using the same language, JavaScript, for both Node.js and browser environments.
+Since OrbitDB works in the browser and Node.js, you're going to want to make the library as _isomorphic_ as possible. This means we want the same code to run in the browser as runs in REPL (Read-Eval-Print-Loop) or local environment. Luckily, you will have the luxury of using the same language, JavaScript, for both Node.js and browser environments.
 
-Create a new file called `newpieceplease.js` and put this code in there:
+In the folder, create a new file called `newpieceplease.js` and put this code in there:
 
 ```js
 class NewPiecePlease {
@@ -72,6 +86,7 @@ class NewPiecePlease {
     this.Ipfs = Ipfs
     this.OrbitDB = OrbitDB
   }
+  // placeholder
 }
 
 try {
@@ -80,44 +95,44 @@ try {
 
     module.exports = exports = new NewPiecePlease(Ipfs, OrbitDB)
 } catch (e) {
-    window.NPP = new NewPiecePlease(window.Ipfs, window.OrbitDB)
+    console.log(' -> caught an error:', err)
+    var NPP = new NewPiecePlease(global.Ipfs, global.OrbitDB) // for nodeJS 
+    // window.NPP = new NewPiecePlease(window.Ipfs, window.OrbitDB) // for browser
 }
 ```
 
-Source: [GitHub](https://github.com/orbitdb/field-manual/blob/a5459ac56402f620cab424c6c399f7c593e94f85/code_examples/01_01_newpieceplease.js), or on IPFS at `QmRZycUKy3MnRKRxkLu8jTzBEVHZovsYcbhdiwLQ221eBP`.
+Or you may want to copy-paste the above code from the [tutorial repo in GitHub](https://github.com/orbitdb/field-manual/blob/a5459ac56402f620cab424c6c399f7c593e94f85/code_examples/01_01_newpieceplease.js), or retrieve from IPFS at `QmRZycUKy3MnRKRxkLu8jTzBEVHZovsYcbhdiwLQ221eBP` if you know IPFS and have the IPFS daemon installed locally. Beware that the IPFS version may be slightly different from the Github version.
 
-In the browser, you can include this file in a script tag and have an `NPP` object at your disposal. In Node.js, you can simply call something like:
+In the browser, you can include this file in a script tag and have an `NPP` object at your disposal. 
 
-```plain
+In Node.js, you can simply call something like:
+
+```js
 $ node
-
 > const NPP = require('./newpieceplease')
+undefined
 ```
+Don't worry about the `undefined`. The evaluation loop of JavaScript displays it when your function doesn't return anything.
 
-Not much should happen either way, since there's not much code there yet. For now just make sure you can create the `NPP` constant.
+Not much should happen either way, since there's not much code there yet. For now you're just creating an instance `NPP` of the class `NewPiecePlease`.
 
 #### What just happened?
 
 Using some key JavaScript features, you have created the shell for our application that runs in both Node.js and the browser. It defines a new class called `NewPiecePlease`, with a constructor that takes two arguments
 
-1. `IPFS` for the `js-ipfs` constructor
-2. `OrbitDB` for the `orbit-db` constructor
+1. `Ipfs` for the constructor of  the `ipfs` package
+2. `OrbitDB` for constructor of the `orbit-db` package
 
 From here on out, we will ignore these isometric bookends and concentrate wholly on the `NewPiecePlease` class.
 
 ### Instantiating IPFS and OrbitDB
-
-OrbitDB requires a running IPFS node to operate, so you will create one here and notify OrbitDB about it.
-
 > **Note:** We have designed Chapters 1 and 2 of the tutorial to work offline, not requiring any internet connectivity or connections to peers.
 
-```js
-class NewPiecePlease {
-  constructor (Ipfs, OrbitDB) {
-    this.OrbitDB = OrbitDB
-    this.Ipfs = Ipfs
-  }
+OrbitDB requires a running IPFS node to operate, so you will create one here and notify OrbitDB about it. You'll create also an instance of OrbitDB in memory, ready to create databases and manage data.
 
+In the place of the comment `// Placeholder` of the code above, add the following code:
+
+```js
   async create() {
     this.node = await this.Ipfs.create({
       preload: { enabled: false },
@@ -137,28 +152,57 @@ class NewPiecePlease {
     this.defaultOptions = { accessController: {
       write: [this.orbitdb.identity.id]
       }
+    console.log('OrbitDB owner id: ', this.orbitdb.identity.id)
     }
   }
-}
 ```
 
-Source: [GitHub](../code_examples/01_Tutorial/02_Managing_Data).
+The above code is part of the [tutorial repo in GitHub](../code_examples/01_Tutorial/02_Managing_Data).
 
-This allows you to run something like the following in your application code:
+Run the complete code in `node` to check. For this doing, you need to reset the variable NPP in `node` and create a new instance of the updated class: exit from node with Control-D (^D) and relaunch `node`:
 
-```JavaScript
-NPP.onready = () => {
-   console.log(NPP.orbitdb.id)
-}
-
-NPP.create()
+```js
+$ node
+   Welcome to Node.js v12.18.4.
+   Type ".help" for more information.
+> const NPP = require('./newpieceplease')
+   undefined
+> NPP.onready = () => {console.log(NPP.orbitdb.id)}
+   [Function]
+> NPP.create()
 ```
+> **Note for the authors of this tutorial**: When I ran for the first time this code from a newly created folder `orbitdb-ch1`, the output is different from the subsequent runs. At first run, the output seems to come from the `ipfs init` command line and is like this
+> ```
+> Promise { <pending> }
+> > generating 2048-bit (rsa only) RSA keypair...
+> to get started, enter:
+> 	jsipfs cat /ipfs/QmfGBRT6BbWJd7yUc2uYdaUZJBbnEFvTqehPFoSMQ6wgdr/readme
+> 
+> ```
 
-In the output you will see something called a "multihash", like `QmPSicLtjhsVifwJftnxncFs4EwYTBEjKUzWweh1nAA87B`. This is the identifier of your IPFS node. (You may have noticed we referenced multihashes above for the code examples: these are the multihashes you can use to download the example code files, if GitHub is down.)
+> If I exit `node` and run the sequence of commands again, the subsequent outputs are different
+> ```
+> Promise { <pending> }
+> OrbitDB owner id:  03ecc23e7dfa8d1837ba979e719e934879c80dbd62fa0f42c84093f3ae53090e86
+> ```
+
+> I have no clue to explain, so I leave it to you.
+
+
+When you type the command ```NPP.onready()```, in the output you will see something called a "multihash", like `QmPSicLtjhsVifwJftnxncFs4EwYTBEjKUzWweh1nAA87B`. This is the identifier of your IPFS node. 
+```js
+> NPP.onready()
+   QmfEUEbNaTLRgLEFg6641e2ZzwWTRoY3iguwiCaqzu9W21
+   undefined
+```
+> **Note for the authors of this tutorial**: I didn't touch the side note belo, but from a beginner's point of view, it adds cognitive noise and doesn't really help understanding the main topic. How about removing these multihashes and this comment? The average beginner is more comfortable with Github.
+
+You may have noticed that we referenced multihashes above for the code examples: these are the multihashes you can use to download the example code files, if GitHub is down and once you are familiar with IPFS. But at this stage you may not need this tutorial anymore :)
 
 #### What just happened?
 
-Once calling `create`, the `Ipfs.create` line creates a new IPFS node.
+In the function `async create`, the `await this.Ipfs.create` call creates a new IPFS node.
+
 Note the default settings:
 
 - `preload: { enabled: false }` disables the use of so-called "pre-load" IPFS nodes. These nodes exist to help load balance
@@ -169,44 +213,49 @@ default setting is a folder called `.jsipfs` in your home directory. You will se
 folder later.
 - `EXPERIMENTAL: { pubsub: true }` enables [IPFS pubsub](https://blog.ipfs.io/25-pubsub/), which is a method of communicating between nodes and **is required for OrbitDB usage**, despite whether or not we are connected to other peers.
 - `config: { Bootstrap: [], Addresses: { Swarm: [] }}` sets both our bootstrap peers list (peers that are loaded on
-instantiation) and swarm peers list (peers that can connect and disconnect at any time to empty. We will populate these
+instantiation) and swarm peers list (peers that can connect and disconnect at any time to empty). We will populate these
 later.
-- `node.on("error", (e) => { throw new Error(e) })` implements extremely basic error handling if something happens
+
+> **Note for the authors of this tutorial**: The 2 following settings do not exist in the sample code?
+
+> - `node.on("error", (e) => { throw new Error(e) })` implements extremely basic error handling if something happens
 during the creation of the IPFS node.
-- `node.on("ready", (e) => { orbitdb = new OrbitDB(node) })` instantiates OrbitDB on top of the IPFS node when it is ready.
+> - `node.on("ready", (e) => { orbitdb = new OrbitDB(node) })` instantiates OrbitDB on top of the IPFS node when it is ready.
 
 By running the code above, you have created a new IPFS node that works locally and is not connected to any peers.
 You have also loaded a new `orbitdb` object into memory, ready to create databases and manage data.
 
 *You are now ready to use OrbitDB!*
 
-##### What else happened in Node.js?
+#### What else happened in Node.js?
 
-When you ran the code in Node.js, you created two folders in your project structure: `'orbitdb/` and `ipfs/`.
+When you ran the code in Node.js, you created two folders in your project folder (here we named it `orbitdb-ch1`): `'orbitdb/` and `ipfs/`. 
+
+Type the `ls` command from the console:
 
 ```bash
-$ # slashes added to ls output for effect
 $ ls orbitdb/
-QmNrPunxswb2Chmv295GeCvK9FDusWaTr1ZrYhvWV9AtGM/
+   QmfEUEbNaTLRgLEFg6641e2ZzwWTRoY3iguwiCaqzu9W21
 
 $ ls ipfs/
-blocks/  config  datastore/  datastore_spec  keys/  version
+   blocks		datastore	    keys		repo.lock
+   config		datastore_spec	pins		version
 ```
 
 Looking inside the `orbitdb/` folder you will see that the subfolder has the same ID as orbitdb, as well as the IPFS node. This is purposeful, as this initial folder contains metadata that OrbitDB needs to operate. See Part 3 for detailed information about this.
 
 The `ipfs/` folder contains all of your IPFS data. Explaining this in depth is outside of the scope of this tutorial, but  the curious can find out more [here](https://ipfs.io).
 
-##### What else happened in the browser?
+#### What else happened in the browser?
 
-In the browser IPFS content is handled inside of IndexedDB, a persistent storage mechanism for browsers
+In the browser IPFS content is handled inside of `IndexedDB`, a persistent storage mechanism for browsers
 
 ![An image showing the IPFS IndexedDB databases in Firefox](../images/ipfs_browser.png)
 
-Note since you have not explicitly defined a database in the browser, no IndexedDB databases have been created for OrbitDB yet.
+**Note:** Since you have not explicitly defined a database in the browser, no `IndexedDB` databases have been created for OrbitDB yet.
 
-> **Caution!** iOS and Android have been known to purge IndexedDB if storage space needs to be created inside of your phone.
-We recommend creating robust backup mechanisms at the application layer
+> **Caution!** iOS and Android have been known to purge `IndexedDB` if storage space needs to be created inside of your phone.
+If you use the browser, we recommend creating robust backup mechanisms at the application layer.
 
 ### Creating a database
 
@@ -217,7 +266,7 @@ Expand of your `_init` function to the following:
 ```diff
   async _init () {
     this.orbitdb = await OrbitDB.createInstance(node)
-+   this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
+    this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
 +
 +   const docStoreOptions = {
 +     ...this.defaultOptions,
@@ -227,15 +276,25 @@ Expand of your `_init` function to the following:
   }
 ```
 
-Then, in your application code, run this:
+For check the new version of the class, do the same as above: exit from node with Control-D (^D) and relaunch `node`:
 
-```JavaScript
-NPP.onready = () => {
-   console.log(NPP.pieces.id)
-}
+```js
+$ node
+   Welcome to Node.js v12.18.4.
+   Type ".help" for more information.
+> const NPP = require('./newpieceplease')
+   undefined
+> NPP.onready = () => {console.log(NPP.pieces.id)}
+   [Function]
+> NPP.create()
+   Promise { <pending> }
+   > IPFS node's id:  03ecc23e7dfa8d1837ba979e719e934879c80dbd62fa0f42c84093f3ae53090e86
+> NPP.onready()
+   /orbitdb/zdpuAxtiGj9xZaXCJx1z5852ZUYWJ8TjHeKBpMruUs7nNS8CC/pieces
+   undefined
 ```
 
-You will see something like the following as an output: `/orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces`. This is the id, or **address** (technically a multiaddress) of this database. It is important for you to not only _know_ this, but also to understand what it is. This string is composed of 3 parts, separated by `/`s:
+The output: `/orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces` is the id, or **address** (technically a multiaddress) of this database. It is important for you to not only _know_ this, but also to understand what it is. This string is composed of 3 parts, separated by `/`s:
 
 1. The first bit, `/orbitdb.`, is the protocol. It tells you that this address is an OrbitDB address.
 2. The second, or middle, part `zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3` that is the most interesting. This is the Content ID (CID) of the database manifest, which contains:
@@ -244,24 +303,25 @@ You will see something like the following as an output: `/orbitdb/zdpuB3VvBJHqYC
     - The **name** of the database
 3. The final part is the name you provided, in this case `pieces`, which becomes the final part of the multiaddress
 
-> *Note:* Addresses that start with Qm… are typically CIDv0 content addresses, while addresses that start with zdpu…. are CIDv1. Misunderstanding OrbitDB addresses can lead to some very unexpected - sometimes hilarious, sometimes disastrous outcomes.
+Learn more about multiaddress and manifest in the [OrbitDB Guide](https://github.com/orbitdb/orbit-db/blob/main/GUIDE.md#address)
 
 #### What just happened?
 
-Your code created a local OrbitDB database, of type "docstore", writable only by the user who created it.
+Your code created a local OrbitDB database, of type `docstore`, writable only by the user who created it. Here it is the OrbitDB instance --on top of an IPFS node that has the correct id, which we assume is controlled by you-- that created it.
 
 - `defaultOptions` and `docStoreOptions` define the parameters for the database we are about to create.
   - `accessController: { write: [orbitdb.identity.id] }` defines the ACL, or "Access Control List". In this instance
   we are restricting `write` access to ONLY the OrbitDB instances identified by our particular `id`
-  - `indexBy: "hash"` is a docstore-specific option, which specifies which field to index our database by
-- `pieces = await orbitdb.docstore('pieces', options)` is the magic line that creates the database. Once this line is
-completed, the database is open and can be acted upon.
+  - `indexBy: "hash"` is a `docstore`-specific option, which specifies the field by which our database is indexed
+- `pieces = await orbitdb.docstore('pieces', options)` is the API call that creates the database. Once this instruction is
+executed, the database is open and can be acted upon.
 
 > **Caution!** A note about identity: Your public key is not your identity. We repeat, *your public key is not your identity*.  That being said, it is often used as such for convenience's sake, and the lack of better alternatives. So, in the early parts of this  tutorial we say "writable only to you" when we really mean "writable only by an OrbitDB instance on top of an IPFS node that has the correct id, which we are assuming is controlled by you."
 
-##### What else happened in Node.js?
+### What else happened in Node.js?
 
-You will see some activity inside your project's `orbitdb/` folder. This is good.
+You will see some activity inside your project's `orbitdb/` folder. Type the `ls` command from the console:
+> **Note to the authors:** Are you sure that these informations haven't moved elsewhere? in `orbitdb/`? I see nothing else there than the first folder `Qm...`
 
 ```bash
 $ ls orbitdb/
@@ -276,7 +336,7 @@ $ ls orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces/
 
 You do not need to understand this fully for now, just know that it happened. Two subfolders, one being the original folder you saw when you instantiated OrbitDB, and now another that has the same address as your database.
 
-##### What else happened in the browser?
+### What else happened in the browser?
 
 Similarly, a new IndexedDB database was created to hold your OrbitDB-specific info, apart from the data itself which are still stored in IPFS.
 
@@ -306,14 +366,14 @@ Also, OrbitDB developers can write their own stores if it suits them. This is an
 
 - OrbitDB is a distributed database layer which stores its raw data in IPFS
 - Both IPFS and OrbitDB work offline and online
-- OrbitDB instances have an _ID_ which is the same as the underlying IPFS node's ID.
-- OrbitDB instances create databases which have unique _addresses_
+- OrbitDB instances have an `id` which is the same as the underlying IPFS node's `id`.
+- OrbitDB instances create databases which have each an unique `address` that includes a `manifest`
 - Basic access rights to OrbitDB databases are managed using access control lists (or ACLs), based on the ID of the IPFS node performing the requests on the database
-- OrbitDB database addresses are hashes of the database's ACL, its type, and its name.
-- Since OrbitDB and IPFS are written in JavaScript, it is possible to build isomorphic applications that run in the browser  and in Node.js
+- OrbitDB database `manifests` are hashes of the database's ACL, its type, and its name.
 - OrbitDB manages needed flexibility of schema and API design in functionality called **stores**.
 - OrbitDB comes with a handful of stores, and you can write your own.
 - Each store will have its own API, but you will generally have at least a `get` and a `put`
+- Since OrbitDB and IPFS are written in JavaScript, it is possible to build isomorphic applications that run in the browser  and in Node.js
 
 <strong>Now that you have laid the groundwork, you will learn how to work with data! Onward then, to [Chapter 2: Managing Data](./02_Managing_Data.md).</strong>
 
