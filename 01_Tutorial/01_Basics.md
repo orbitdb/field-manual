@@ -48,7 +48,7 @@ $ npm install orbit-db ipfs
    added 1165 packages from 1305 contributors and audited 1165 packages in 174.258s
 
 ```
-This will create a `package.json`, `package-lock.json`, and `node_modules` folder.
+This will create 2 files `package.json`, `package-lock.json`, and a `node_modules` folder.
 
 > **Note:** If you're running on a Windows prompt, or if you don't have certain build tools like [`g++`](https://gcc.gnu.org) and [`python`](https://www.python.org) installed, you may see a noisy console output with lots of warnings and errors. Keep going, your code should still run.
 
