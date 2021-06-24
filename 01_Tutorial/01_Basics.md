@@ -193,7 +193,7 @@ $ node
 > I have no clue to explain, so I leave it to you.
 
 
-When you type the command ```NPP.onready()```, in the output you will see something called a "multihash", like `QmPSicLtjhsVifwJftnxncFs4EwYTBEjKUzWweh1nAA87B`. This is the identifier of your IPFS node. 
+When you type the command ```NPP.onready()```, in the output you will see something called a "multihash", like `QmfEUEbNaTLRgLEFg6641e2ZzwWTRoY3iguwiCaqzu9W21`. This is the identifier of your IPFS node. 
 ```js
 > NPP.onready()
    QmfEUEbNaTLRgLEFg6641e2ZzwWTRoY3iguwiCaqzu9W21
