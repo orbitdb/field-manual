@@ -305,9 +305,9 @@ The output: `/orbitdb/zdpuAxtiGj9xZaXCJx1z5852ZUYWJ8TjHeKBpMruUs7nNS8CC/pieces` 
     - The **access control list** of the database
     - The **type** of the database
     - The **name** of the database
-3. The final part is the name you provided, in this case `pieces`, which becomes the final part of the multiaddress
+3. The final part is the name you provided, in this case `pieces`, which becomes the final part of the multiaddress.
 
-Learn more about multiaddress and manifest in the [OrbitDB Guide](https://github.com/orbitdb/orbit-db/blob/main/GUIDE.md#address)
+Learn more about multiaddress and manifest in the [OrbitDB Guide](https://github.com/orbitdb/orbit-db/blob/main/GUIDE.md#address).
 
 #### What just happened?
 
