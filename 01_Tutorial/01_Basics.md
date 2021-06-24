@@ -163,7 +163,7 @@ In the place of the comment `// Placeholder` of the code above, add the followin
 
 The above code is part of the [tutorial repo in GitHub](../code_examples/01_Tutorial/02_Managing_Data).
 
-Run this new code in `node` to check. For this doing, you need to reset the variable NPP in `node` and create a new instance of the updated class: exit from node with Control-D (^D) and relaunch `node`:
+Run this new code in `node` to check. For this doing, you need to reset the variable NPP in `node` and create a new instance of the updated class: exit from `node` with Control-D (^D) and relaunch `node`:
 
 ```js
 $ node
