@@ -248,7 +248,7 @@ $ ls ipfs/
 
 Looking inside the `orbitdb/` folder you will see that the subfolder has the same ID as orbitdb, as well as the IPFS node. This is purposeful, as this initial folder contains metadata that OrbitDB needs to operate. See Part 3 for detailed information about this.
 
-The `ipfs/` folder contains all of your IPFS data. Explaining this in depth is outside of the scope of this tutorial, but  the curious can find out more [here](https://ipfs.io).
+The `ipfs/` folder contains all of your IPFS data. Explaining this in depth is outside of the scope of this tutorial, but  the curious can [find out more here](https://ipfs.io).
 
 ### What else happened in the browser?
 
