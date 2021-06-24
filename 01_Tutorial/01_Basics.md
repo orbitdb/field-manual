@@ -309,7 +309,7 @@ The output: `/orbitdb/zdpuAxtiGj9xZaXCJx1z5852ZUYWJ8TjHeKBpMruUs7nNS8CC/pieces` 
 
 Learn more about multiaddress and manifest in the [OrbitDB Guide](https://github.com/orbitdb/orbit-db/blob/main/GUIDE.md#address).
 
-#### What just happened?
+### What just happened?
 
 Your code created a local OrbitDB database, of type `docstore`, writable only by the user who created it. Here it is the OrbitDB instance --on top of an IPFS node that has the correct id, which we assume is controlled by you-- that created it.
 
