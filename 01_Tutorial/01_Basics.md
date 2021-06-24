@@ -114,7 +114,7 @@ In Node.js, you can simply call something like:
 ```js
 $ node
 > const NPP = require('./newpieceplease')
-undefined
+   undefined
 ```
 Don't worry about the `undefined`. The evaluation loop of JavaScript displays it when your function doesn't return anything.
 
