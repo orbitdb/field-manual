@@ -41,6 +41,7 @@ If you want to use Git to track your progress, we also suggest typing the follow
 $ git init
 $ echo node_modules > .gitignore
 ```
+Of course, be careful before copying and pasting any commands anyone ever tells you into your terminal. If you don't understand a command, figure out what it is supposed to do, before copying it over. Copy and paste at your own risk.
 
 The output will be
 ```bash
@@ -100,8 +101,7 @@ try {
     module.exports = exports = new NewPiecePlease(Ipfs, OrbitDB)
 } catch (e) {
     console.log(' -> caught an error:', err)
-    var NPP = new NewPiecePlease(global.Ipfs, global.OrbitDB) // for nodeJS 
-    // window.NPP = new NewPiecePlease(window.Ipfs, window.OrbitDB) // for browser
+    globalThis.NPP = new NewPiecePlease(globalThis.Ipfs, globalThis.OrbitDB) 
 }
 ```
 
@@ -122,7 +122,7 @@ Not much should happen either way, since there's not much code there yet. For no
 
 #### What just happened?
 
-Yyou have created a JavaScript class that can be invoked inside both environments Node.js and the browser. The class is called `NewPiecePlease`, with a constructor that takes two arguments
+You have created a JavaScript class that can be invoked inside both environments Node.js and the browser. The class is called `NewPiecePlease`, with a constructor that takes two arguments
 
 1. `Ipfs` for the constructor of  the `ipfs` package
 2. `OrbitDB` for constructor of the `orbit-db` package
@@ -175,25 +175,8 @@ $ node
    [Function]
 > NPP.create()
 ```
-> **Note for the authors of this tutorial**: When I ran for the first time this code from a newly created folder `orbitdb-ch1`, the output is different from the subsequent runs. At first run, the output is not what is described in the tutorial. It seems to come from the `ipfs init` command line and is like this
-> ```
-> Promise { <pending> }
-> > generating 2048-bit (rsa only) RSA keypair...
-> to get started, enter:
-> 	jsipfs cat /ipfs/QmfGBRT6BbWJd7yUc2uYdaUZJBbnEFvTqehPFoSMQ6wgdr/readme
-> 
-> ```
 
-> If I exit `node` and run the sequence of commands again, the subsequent outputs are different and like what is described in the tutorial.
-> ```
-> Promise { <pending> }
-> OrbitDB owner id:  03ecc23e7dfa8d1837ba979e719e934879c80dbd62fa0f42c84093f3ae53090e86
-> ```
-
-> I have no clue to explain, so I leave it to you.
-
-
-When you type the command ```NPP.onready()```, in the output you will see something called a "multihash", like `QmfEUEbNaTLRgLEFg6641e2ZzwWTRoY3iguwiCaqzu9W21`. This is the identifier of your IPFS node. 
+After the command `NPP.create()`, when you type the command ```NPP.onready()```, in the output you will see something called a "multihash", like `QmfEUEbNaTLRgLEFg6641e2ZzwWTRoY3iguwiCaqzu9W21`. This is the identifier of your IPFS node. 
 ```js
 > NPP.onready()
    QmfEUEbNaTLRgLEFg6641e2ZzwWTRoY3iguwiCaqzu9W21
@@ -205,7 +188,7 @@ You may have noticed that we referenced multihashes above for the code examples:
 
 ### What just happened?
 
-In the function `async create`, the `await this.Ipfs.create` call creates a new IPFS node.
+In the function `async create`, the call to `await this.Ipfs.create` creates a new IPFS node.
 
 Meanings of the default settings:
 
@@ -280,9 +263,9 @@ Expand of your `_init` function to the following:
   }
 ```
 
-For check the new version of the class, do the same as above: exit from `node` with Control-D (^D) and relaunch `node`:
+To check the new version of the class, do the same as above: exit from `node` with Control-D (^D) and relaunch `node`:
 
-```js
+```
 $ node
    Welcome to Node.js v12.18.4.
    Type ".help" for more information.
@@ -300,7 +283,7 @@ $ node
 
 The output: `/orbitdb/zdpuAxtiGj9xZaXCJx1z5852ZUYWJ8TjHeKBpMruUs7nNS8CC/pieces` is the `id`, or **address** (technically a multiaddress) of this database. It is important for you to not only _know_ this, but also to understand what it is. This string is composed of 3 parts, separated by `/`'s:
 
-1. The first part, `/orbitdb.`, is the protocol. It tells you that this address is an OrbitDB address.
+1. The first part, `/orbitdb`, is the protocol. It tells you that this address is an OrbitDB address.
 2. The second (or middle) part `zdpuAxtiGj9xZaXCJx1z5852ZUYWJ8TjHeKBpMruUs7nNS8CC` that is the most interesting. This is the Content ID (CID) of the database **manifest**, which contains:
     - The **access control list** of the database
     - The **type** of the database
@@ -325,7 +308,7 @@ executed, the database is open and can be acted upon.
 ### What else happened, in Node.js?
 
 You will see some activity inside your project's `orbitdb/` folder. Type the `ls` command from the console:
-> **Note to the authors of this tutorial:** Are you sure that these informations haven't moved elsewhere? in `orbitdb/` I see nothing else there than the first folder `Qm...`
+> **Note to the authors of this tutorial:** Are you sure that these informations haven't moved elsewhere? in `orbitdb/` on my disk I see nothing else there than the first folder `Qm...`
 
 ```bash
 $ ls orbitdb/
@@ -364,7 +347,7 @@ You have the following choices:
 | **[docs](https://github.com/orbitdb/orbit-db/blob/master/API.md#orbitdbdocsnameaddress-options)** | A document database that stores JSON documents which can be indexed by a specified key. Useful for building search indices or version controlling documents and data.           |
 | **[counter](https://github.com/orbitdb/orbit-db/blob/master/API.md#orbitdbcounternameaddress)**   | An increment-only integer counter useful for counting events separate from log/feed data.                                                                                       |
 
-Also, OrbitDB developers can write their own stores if it suits them. This is an advanced topic and is covered in Part 3 of this book.
+Also, OrbitDB developers can write their own stores if it suits them. This is an advanced topic and is covered in [Part 3](./03_Structuring_Data.md) of this book.
 
 ### Key takeaways
 
