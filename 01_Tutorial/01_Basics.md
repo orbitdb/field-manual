@@ -325,7 +325,7 @@ executed, the database is open and can be acted upon.
 ### What else happened in Node.js?
 
 You will see some activity inside your project's `orbitdb/` folder. Type the `ls` command from the console:
-> **Note to the authors:** Are you sure that these informations haven't moved elsewhere? in `orbitdb/`? I see nothing else there than the first folder `Qm...`
+> **Note to the authors of this tutorial:** Are you sure that these informations haven't moved elsewhere? in `orbitdb/`? I see nothing else there than the first folder `Qm...`
 
 ```bash
 $ ls orbitdb/
