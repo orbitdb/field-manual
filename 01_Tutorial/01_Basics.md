@@ -199,11 +199,11 @@ When you type the command ```NPP.onready()```, in the output you will see someth
    QmfEUEbNaTLRgLEFg6641e2ZzwWTRoY3iguwiCaqzu9W21
    undefined
 ```
-> **Note for the authors of this tutorial**: I didn't touch the side note belo, but from a beginner's point of view, it adds cognitive noise and doesn't really help understanding the main topic. How about removing these multihashes and this comment? The average beginner is more comfortable with Github.
+> **Note for the authors of this tutorial**: I didn't touch the side note below, but from a beginner's point of view, it adds cognitive noise and doesn't really help understanding the main topic. How about removing this comment and the possibility to retrieve from IPFS altogether? The average beginner is more comfortable with using Github.
 
 You may have noticed that we referenced multihashes above for the code examples: these are the multihashes you can use to download the example code files, if GitHub is down and once you are familiar with IPFS. But at this stage you may not need this tutorial anymore :)
 
-#### What just happened?
+### What just happened?
 
 In the function `async create`, the `await this.Ipfs.create` call creates a new IPFS node.
 
