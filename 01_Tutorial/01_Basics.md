@@ -76,7 +76,7 @@ You will now have global `Ipfs` and `OrbitDB` objects available to you. You will
 
 ### Creating the isomorphic bookends
 
-Since OrbitDB works in the browser and Node.js, you're going to want to make the library as _isomorphic_ as possible. This means we want the same code to run in the browser as runs in REPL (Read-Eval-Print-Loop) or local environment. Luckily, you will have the luxury of using the same language, JavaScript, for both Node.js and browser environments.
+Since OrbitDB works in the browser and Node.js, you're going to want to make the library as _isomorphic_ as possible. This means we want the same code to run in the browser as it runs in REPL (Read-Eval-Print-Loop) or local environment. Luckily, you will have the luxury of using the same language, JavaScript, for both Node.js and browser environments.
 
 In the folder, create a new file called `newpieceplease.js` and put this code in there:
 
