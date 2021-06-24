@@ -280,7 +280,7 @@ Expand of your `_init` function to the following:
   }
 ```
 
-For check the new version of the class, do the same as above: exit from node with Control-D (^D) and relaunch `node`:
+For check the new version of the class, do the same as above: exit from `node` with Control-D (^D) and relaunch `node`:
 
 ```js
 $ node
@@ -298,7 +298,7 @@ $ node
    undefined
 ```
 
-The output: `/orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces` is the id, or **address** (technically a multiaddress) of this database. It is important for you to not only _know_ this, but also to understand what it is. This string is composed of 3 parts, separated by `/`s:
+The output: `/orbitdb/zdpuAxtiGj9xZaXCJx1z5852ZUYWJ8TjHeKBpMruUs7nNS8CC/pieces` is the id, or **address** (technically a multiaddress) of this database. It is important for you to not only _know_ this, but also to understand what it is. This string is composed of 3 parts, separated by `/`s:
 
 1. The first bit, `/orbitdb.`, is the protocol. It tells you that this address is an OrbitDB address.
 2. The second, or middle, part `zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3` that is the most interesting. This is the Content ID (CID) of the database manifest, which contains:
