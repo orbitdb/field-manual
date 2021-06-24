@@ -1,6 +1,8 @@
 ## Chapter 1 - Laying the Foundation
 
 > The basics of OrbitDB include installing OrbitDB (and IPFS), setting up an isomorphic project that runs in both Node.js and the browser, creating databases, and understanding how to choose datastores.
+> 
+> **Note for the authors:** IMHO a true beginner should focus on the core benefits of OrbitDB and IPFS. The isometric property is a nice to have but it might add another cognitive load.
 
 <div>
   <h3>Table of Contents</h3>
@@ -118,7 +120,7 @@ Not much should happen either way, since there's not much code there yet. For no
 
 #### What just happened?
 
-Using some key JavaScript features, you have created the shell for our application that runs in both Node.js and the browser. It defines a new class called `NewPiecePlease`, with a constructor that takes two arguments
+Yyou have created a JavaScript class that can be invoked inside both environments Node.js and the browser. The class is called `NewPiecePlease`, with a constructor that takes two arguments
 
 1. `Ipfs` for the constructor of  the `ipfs` package
 2. `OrbitDB` for constructor of the `orbit-db` package
