@@ -207,7 +207,7 @@ You may have noticed that we referenced multihashes above for the code examples:
 
 In the function `async create`, the `await this.Ipfs.create` call creates a new IPFS node.
 
-Note the default settings:
+Meanings of the default settings:
 
 - `preload: { enabled: false }` disables the use of so-called "pre-load" IPFS nodes. These nodes exist to help load balance
 the global network and prevent DDoS. However, these nodes can go down and cause errors. Since we are only working offline
