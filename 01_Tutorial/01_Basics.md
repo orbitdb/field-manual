@@ -175,7 +175,7 @@ $ node
    [Function]
 > NPP.create()
 ```
-> **Note for the authors of this tutorial**: When I ran for the first time this code from a newly created folder `orbitdb-ch1`, the output is different from the subsequent runs. At first run, the output is not what is described in the tutoirial. It seems to come from the `ipfs init` command line and is like this
+> **Note for the authors of this tutorial**: When I ran for the first time this code from a newly created folder `orbitdb-ch1`, the output is different from the subsequent runs. At first run, the output is not what is described in the tutorial. It seems to come from the `ipfs init` command line and is like this
 > ```
 > Promise { <pending> }
 > > generating 2048-bit (rsa only) RSA keypair...
