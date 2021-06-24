@@ -4,7 +4,7 @@
 > 
 > **Note for the authors of this tutorial:** IMHO a true beginner should focus on the core benefits of OrbitDB and IPFS. The isometric property is a nice to have but it might add another cognitive load. This tutorial would gain in ease of use by making 2 distinct sections for Node.js and for the browser.
 
-> **Note for the authors of this tutorial:** Would you mind replacing the HTML tags here, `div` and `h3`, with Markdown tags?
+> **Note for the authors of this tutorial:** Would you mind replacing the HTML tags here, `div` and `h3`, with Markdown tags? Or maybe you need them for other CI tools?
 
 <div>
   <h3>Table of Contents</h3>
