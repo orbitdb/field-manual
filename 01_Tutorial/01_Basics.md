@@ -231,7 +231,7 @@ You have also loaded a new `orbitdb` object into memory, ready to create databas
 
 *You are now ready to use OrbitDB!*
 
-#### What else happened in Node.js?
+### What else happened in Node.js?
 
 When you ran the code in Node.js, you created two folders in your project folder (here we named it `orbitdb-ch1`): `'orbitdb/` and `ipfs/`. 
 
@@ -250,7 +250,7 @@ Looking inside the `orbitdb/` folder you will see that the subfolder has the sam
 
 The `ipfs/` folder contains all of your IPFS data. Explaining this in depth is outside of the scope of this tutorial, but  the curious can find out more [here](https://ipfs.io).
 
-#### What else happened in the browser?
+### What else happened in the browser?
 
 In the browser IPFS content is handled inside of `IndexedDB`, a persistent storage mechanism for browsers
 
