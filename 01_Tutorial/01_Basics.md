@@ -231,7 +231,7 @@ You have also loaded a new `orbitdb` object into memory, ready to create databas
 
 *You are now ready to use OrbitDB!*
 
-### What else happened in Node.js?
+### What else happened, in Node.js?
 
 When you ran the code in Node.js, you created two folders in your project folder (here we named it `orbitdb-ch1`): `'orbitdb/` and `ipfs/`. 
 
@@ -250,7 +250,7 @@ Looking inside the `orbitdb/` folder you will see that the subfolder has the sam
 
 The `ipfs/` folder contains all of your IPFS data. Explaining this in depth is outside of the scope of this tutorial, but  the curious can [find out more here](https://ipfs.io).
 
-### What else happened in the browser?
+### What else happened, in the browser?
 
 In the browser IPFS content is handled inside of `IndexedDB`, a persistent storage mechanism for browsers
 
@@ -322,7 +322,7 @@ executed, the database is open and can be acted upon.
 
 > **Caution!** A note about identity: Your public key is not your identity. We repeat, *your public key is not your identity*.  That being said, it is often used as such for convenience's sake, and the lack of better alternatives. So, in the early parts of this  tutorial we say "writable only to you" when we really mean "writable only by an OrbitDB instance on top of an IPFS node that has the correct id, which we are assuming is controlled by you."
 
-### What else happened in Node.js?
+### What else happened, in Node.js?
 
 You will see some activity inside your project's `orbitdb/` folder. Type the `ls` command from the console:
 > **Note to the authors of this tutorial:** Are you sure that these informations haven't moved elsewhere? in `orbitdb/` I see nothing else there than the first folder `Qm...`
@@ -340,7 +340,7 @@ $ ls orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces/
 
 You do not need to understand this fully for now, just know that it happened. Two subfolders, one being the original folder you saw when you instantiated OrbitDB, and now another that has the same address as your database.
 
-### What else happened in the browser?
+### What else happened, in the browser?
 
 Similarly, a new IndexedDB database was created to hold your OrbitDB-specific info, apart from the data itself which are still stored in IPFS.
 
@@ -348,7 +348,7 @@ Similarly, a new IndexedDB database was created to hold your OrbitDB-specific in
 
 This shows you one of OrbitDB's core strengths - the ability to manage a lot of complexity between its own internals and those of IPFS, providing a clear and clean API to manage the data that matters to you.
 
-### Choosing a datastore
+### Choosing a datastore type
 
 OrbitDB organizes its functionality by separating different data management concerns, schemas and APIs into **stores**. We chose a `docstore` for you in the last chapter, but after this tutorial it will be your job to determine the right store for the job.
 
