@@ -9,7 +9,7 @@
 <div>
   <h3>Table of Contents</h3>
 
-Please see the [Introduction](./00_Introduction.md) before beginning this chapter.
+Please see the [Introduction](./00_Introduction.md) before beginning this chapter. In the following, you'll be guided to:
 
 - [Installing the requirements: IPFS and OrbitDB](#installing-the-requirements-ipfs-and-orbitdb)
 - [Instantiating IPFS and OrbitDB](#instantiating-ipfs-and-orbitdb)
@@ -112,7 +112,7 @@ In the browser, you can include this file in a script tag and have an `NPP` obje
 In Node.js, you can simply call something like:
 
 ```js
-$ node
+$ node --experimental-repl-await
 > const NPP = require('./newpieceplease')
    undefined
 ```
@@ -166,7 +166,7 @@ The above code is part of the [tutorial repo in GitHub](../code_examples/01_Tuto
 Run this new code in `node` to check. For this doing, you need to reset the variable NPP in `node` and create a new instance of the updated class: exit from `node` with Control-D (^D) and relaunch `node`:
 
 ```js
-$ node
+$ node --experimental-repl-await
    Welcome to Node.js v12.18.4.
    Type ".help" for more information.
 > const NPP = require('./newpieceplease')
@@ -266,7 +266,7 @@ Expand of your `_init` function to the following:
 To check the new version of the class, do the same as above: exit from `node` with Control-D (^D) and relaunch `node`:
 
 ```
-$ node
+$ node --experimental-repl-await
    Welcome to Node.js v12.18.4.
    Type ".help" for more information.
 > const NPP = require('./newpieceplease')
