@@ -120,7 +120,7 @@ class NewPiecePlease {
     this.node = await this.Ipfs.create({
       preload: { enabled: false },
       repo: './ipfs',
-      EXPERIMENTAL: { pubsub: true },
+      EXPERIMENTAL: { ipnsPubsub: true },
       config: {
         Bootstrap: [],
         Addresses: { Swarm: [] }
@@ -165,7 +165,7 @@ for now, we include this line to disable them.
 - `repo: './ipfs'` designates the path of the repo in Node.js only. In the browser, you can actually remove this line. The
 default setting is a folder called `.jsipfs` in your home directory. You will see why we choose this specific location for the
 folder later.
-- `EXPERIMENTAL: { pubsub: true }` enables [IPFS pubsub](https://blog.ipfs.io/25-pubsub/), which is a method of communicating between nodes and **is required for OrbitDB usage**, despite whether or not we are connected to other peers.
+- `EXPERIMENTAL: { ipnsPubsub: true }` enables [IPFS pubsub](https://blog.ipfs.io/25-pubsub/), which is a method of communicating between nodes and **is required for OrbitDB usage**, despite whether or not we are connected to other peers.
 - `config: { Bootstrap: [], Addresses: { Swarm: [] }}` sets both our bootstrap peers list (peers that are loaded on
 instantiation) and swarm peers list (peers that can connect and disconnect at any time to empty. We will populate these
 later.
