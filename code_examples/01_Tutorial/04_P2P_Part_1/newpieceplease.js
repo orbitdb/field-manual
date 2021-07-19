@@ -41,7 +41,7 @@ class NewPiecePlease {
             "nodeId": nodeInfo.id
         })
 
-        this.node.libp2p.on("peer:connect", this.handlePeerConnected.bind(this))
+        this.node.libp2p.connectionManager.on("peer:connect", this.handlePeerConnected.bind(this))
         await this.node.pubsub.subscribe(nodeInfo.id, this.handleMessageReceived.bind(this))
 
         // when the OrbitDB docstore has loaded, intercept this method to
