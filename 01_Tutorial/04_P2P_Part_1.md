@@ -207,7 +207,7 @@ Then, update the `_init` function to include an event handler for when a peer is
       'nodeId': peerInfo.id
     })
 
-+   this.node.libp2p.on('peer:connect', this.handlePeerConnected.bind(this))
++   this.node.libp2p.connectionManager.on('peer:connect', this.handlePeerConnected.bind(this))
 
     this.onready()
   }
