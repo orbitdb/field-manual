@@ -124,7 +124,7 @@ updateIndex(oplog) {
     if(!handled.includes(item.hash)) {
       handled.push(item.hash)
 
-      switch (item.payload.op)) {
+      switch (item.payload.op) {
         case "ADDNOTES":
 
           break;
