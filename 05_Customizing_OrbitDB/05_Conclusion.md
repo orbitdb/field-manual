@@ -65,10 +65,7 @@ code here: [final](../code_examples/05_Customizing_OrbitDB/final).
 We also have an Appendix
 to this part of the tutorial,
 that describes how you can
-use the `AccessControllers`
-with OrbitDB to moderate
-the discussions about the
-notes.
+implement Moderation.
 
 If you want to read that,
-go to this: **[Moderating your Comment Threads.](06_AccessControllers.md)**
+go to this: **[Moderating your Comment Threads.](06_Moderation.md)**
