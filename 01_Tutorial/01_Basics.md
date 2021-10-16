@@ -216,8 +216,6 @@ Expand of your `_init` function to the following:
 ```diff
   async _init () {
     this.orbitdb = await OrbitDB.createInstance(node)
-+   this.defaultOptions = { accessController: { write: [this.orbitdb.identity.id] }}
-+
 +   const docStoreOptions = {
 +     ...this.defaultOptions,
 +     indexBy: 'hash',
