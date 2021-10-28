@@ -228,7 +228,7 @@ Fill in the `updatePieceByHash` and `deletePieceByHash` functions now:
 In your application code, you can run these new functions and see the opcodes that return to get a sense of what is going on.
 
 ```JavaScript
-const cid = await NPP.updatePiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ", "Harpsichord")
+const cid = await NPP.updatePieceByHash("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ", "Harpsichord")
 // do stuff with the cid as above
 
 const cid = await NPP.deletePieceByHash("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ")
