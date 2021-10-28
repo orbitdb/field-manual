@@ -72,7 +72,7 @@ In your application code, Node.js or browser, you can use this function like so,
 
 ```JavaScript
 const cid = await NPP.addNewPiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ")
-const content = await NPP.node.dag.get(cid)
+const content = await NPP.node.dag.get(IPFS.asCID(cid))
 console.log(content.value.payload)
 ```
 
