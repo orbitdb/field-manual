@@ -96,7 +96,8 @@ Running this code should give you something like the following output. Hold stea
 You wrote and tested a function that allows users to add new sheet music to the database.
 
 - `pieces.put({ ... })` is the most important line here. This call takes an object to store and returns a _multihash_, which is the hash of the content added to IPFS.
-- `node.dag.get(hash)` is a function that takes a CID and returns content.
+- `node.dag.get(cid)` is a function that takes a CID and returns content.
+- `IPFS.asCID(hash)` converts the string representation of the CID to an instance of the `CID` class.
 - `"op": "PUT"` is a notable part of the output. At the core of OrbitDB databases is the **OPLOG**, where all data are stored as a log of operations, which are then calculated into the appropriate schema for application use. The operation is specified here as a `PUT`, and the `key`/`value` pair is your data.
 
 > **Note:** "dag" in the code refers to the acronym DAG, which stands for Directed Acyclic Graph. This is a data structure that is closely related to blockchain.
@@ -231,7 +232,7 @@ const cid = await NPP.updatePiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEm
 // do stuff with the cid as above
 
 const cid = await NPP.deletePieceByHash("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ")
-const content = await NPP.node.dag.get(cid)
+const content = await NPP.node.dag.get(IPFS.asCID(cid))
 console.log(content.value.payload)
 ```
 
