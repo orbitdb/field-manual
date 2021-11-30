@@ -71,8 +71,10 @@ We have uploaded and pinned a few piano scores to IPFS, and will provide the has
 In your application code, Node.js or browser, you can use this function like so, utilizing the default value for the `instrument` argument.
 
 ```JavaScript
+const IPFS = require('ipfs')
 const cid = await NPP.addNewPiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ")
-const content = await NPP.node.dag.get(IPFS.asCID(cid))
+cid = new IPFS.CID(cid)
+const content = await NPP.node.dag.get(cid)
 console.log(content.value.payload)
 ```
 
