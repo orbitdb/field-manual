@@ -84,7 +84,7 @@ We can then see how it's possible that a CRDT may have more than one head entry 
 
 A CRDT of any size can be stored in IPFS. However, When performing computations on the data, it needs to be loaded into an "input array" (i.e. subset of the log) that exists in a finite memory space. The tails of such a log point to entries that are not in the input array.
 
-For our example, let's imagine a log with hundreds of millions of entries. You don't have access to a supercomputing center so tt's not feasible to load the log into memory. Thus, we use a partial traversal of the log, the tails of which contain the pointers to the next records to be traversed, if we so choose.
+For our example, let's imagine a log with hundreds of millions of entries. You don't have access to a supercomputing center so it's not feasible to load the log into memory. Thus, we use a partial traversal of the log, the tails of which contain the pointers to the next records to be traversed, if we so choose.
 
 This concept is visualized below, with the dim entries signifying non-traversed, and the orange entries signifying tails.
 
