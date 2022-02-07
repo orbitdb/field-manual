@@ -264,12 +264,12 @@ You will see some activity inside your project's `orbitdb/` folder. This is good
 
 ```bash
 $ ls orbitdb/
-QmNrPunxswb2Chmv295GeCvK9FDusWaTr1ZrYhvWV9AtGM/  zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/
+12D3KooWNZa53tfgFUmUCw6fALEmkfCoubSyHwZpzkuQtwrMVg6L/
 
-$ ls orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/
-pieces/
+$ ls orbitdb/12D3KooWNZa53tfgFUmUCw6fALEmkfCoubSyHwZpzkuQtwrMVg6L/
+cache/  keystore/
 
-$ ls orbitdb/zdpuB3VvBJHqYCocN4utQrpBseHou88mq2DLh7bUkWviBQSE3/pieces/
+$ ls orbitdb/12D3KooWNZa53tfgFUmUCw6fALEmkfCoubSyHwZpzkuQtwrMVg6L/keystore/
 000003.log  CURRENT  LOCK  LOG  MANIFEST-000002
 ```
 
