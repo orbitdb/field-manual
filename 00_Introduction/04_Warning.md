@@ -1,6 +1,6 @@
 ## A Warning
 
-OrbitDB, and the underlying IPFS layer, are currently _alpha software_. There have already been high-severity bugs, API-breaking changes, and security disclosures, and there are more ahead. This is generally transparently communicated, yet these warnings have not stoped large organizations from using these tools in production.
+OrbitDB, and the underlying IPFS layer, are currently _alpha software_. There have already been high-severity bugs, API-breaking changes, and security disclosures, and there are more ahead. This is generally transparently communicated, yet these warnings have not stopped large organizations from using these tools in production.
 
 If that sounds bad, don't worry. It gets worse.
 
