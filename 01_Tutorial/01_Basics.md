@@ -147,7 +147,7 @@ This allows you to run something like the following in your application code:
 
 ```JavaScript
 NPP.onready = () => {
-   console.log(NPP.orbitdb.id)
+   console.log(NPP.orbitdb.identity.id)
 }
 
 NPP.create()
