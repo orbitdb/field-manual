@@ -170,9 +170,6 @@ folder later.
 - `config: { Bootstrap: [], Addresses: { Swarm: [] }}` sets both our bootstrap peers list (peers that are loaded on
 instantiation) and swarm peers list (peers that can connect and disconnect at any time to empty. We will populate these
 later.
-- `node.on("error", (e) => { throw new Error(e) })` implements extremely basic error handling if something happens
-during the creation of the IPFS node.
-- `node.on("ready", (e) => { orbitdb = new OrbitDB(node) })` instantiates OrbitDB on top of the IPFS node when it is ready.
 
 By running the code above, you have created a new IPFS node that works locally and is not connected to any peers.
 You have also loaded a new `orbitdb` object into memory, ready to create databases and manage data.
