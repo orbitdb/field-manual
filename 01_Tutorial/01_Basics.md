@@ -208,7 +208,7 @@ We recommend creating robust backup mechanisms at the application layer
 
 Your users will want to create a catalog of musical pieces to practice. You will now create this database, and ensure that *only that user* can write to it.
 
-Expand of your `_init` function to the following:
+Expand your `_init` function to the following:
 
 ```diff
   async _init () {
@@ -218,6 +218,7 @@ Expand of your `_init` function to the following:
 +     indexBy: 'hash',
 +   }
 +   this.pieces = await this.orbitdb.docstore('pieces', docStoreOptions)
+    if (this.onready) this.onready();
   }
 ```
 
