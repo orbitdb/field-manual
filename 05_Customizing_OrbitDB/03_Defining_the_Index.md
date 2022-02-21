@@ -7,8 +7,8 @@ could define our
 
 I settled us on a
 Tree data structure,
-where each notes piece
-are a root and the comments
+where each notes piece 
+is a root and the comments
 would be children of that
 root.
 
@@ -65,7 +65,7 @@ the `TreeNode`.
 
 Now, let's get to our third and final `get` functions: `getComments`,
 but now with an argument: `flat = true`.
-The purpose of this function is, to if the `flat` argument
+The purpose of this function is to, if the `flat` argument
 is true, flatten the comments into a neat chronological
 list, that can be easily displayed.
 To do this, we first gather all of the comments into an array
@@ -224,7 +224,7 @@ case "ADDCOMMENT":
     node = this._index[item.payload.key].addChild(node)
 
   } else if(this._comments[item.payload.key] !== undefined){
-    node = this._index[item.payload.key].addChild(node)
+    node = this._comments[item.payload.key].addChild(node)
   } else {
     break;
   }
@@ -286,7 +286,7 @@ how you can add data to the database.
 And in the chapters about the
 Access Controller we will at the end
 of this Tutorial discuss, how
-you can control, how can change what
+you can control, how to change what
 in your databases.
 
 **Next: [Defining the Store](04_Defining_the_Store.md)**

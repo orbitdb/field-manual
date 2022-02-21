@@ -8,7 +8,7 @@ Through the `Store`.
 
 The Store, as we know,
 actually does not store
-the state of the Database,
+the state of the Database
 because this is the
 job of the `Index`.
 
@@ -36,8 +36,8 @@ and call it `NotesStore.js`.
 
 #### Isomorphic Bookends
 
-For the third time in this Manual:
-Let's define an isomorphic bookend:
+For the third time in this Manual, 
+let's define an isomorphic bookend:
 
 ```js
 function notesStore(IPFS, OrbitDB, NotesIndex) {
@@ -96,7 +96,7 @@ It is the `Index` class, used by the database.
 
 In the first line of the `constructor`
 the `Index` option is set to `NotesIndex`, unless
-the options already has an `Index` specified.
+the options already have an `Index` specified.
 
 Besides this, all stores have to have a `type` property,
 to uniquely identify the `NotesStore`.
@@ -170,10 +170,10 @@ value: {
 
 But we can still do more for the user
 in this store.
-`addNotesByCID` adds a notes file by it' CID.
+`addNotesByCID` adds a notes file by it's CID.
 But this expects the notes file to have been
 added to IPFS, something that we can
-do automatically, since we stored the
+do automatically since we stored the
 IPFS Node in the `this._ipfs` variable.
 
 ```js
@@ -235,7 +235,7 @@ but you might want to do this in the index instead.
 By the way, all operations are signed by
 your OrbitDB Identity on creation and
 we thus don't need to add any further
-information about the auther.
+information about the author.
 See the [Implementing `ADDCOMMENT` handling](03_Defining_the_Index.md#Implementing-ADDCOMMENT-handling)
 section of the previous chapter.
 

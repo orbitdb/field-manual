@@ -27,7 +27,7 @@ a `Store` class.
 
 The `Store` class does not
 manage the current state,
-but use the `Index`
+but uses the `Index`
 to create an easy to use
 API for a User, who just
 wants to use the Database

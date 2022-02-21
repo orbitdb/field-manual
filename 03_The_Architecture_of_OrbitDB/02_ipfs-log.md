@@ -15,7 +15,7 @@
 
 In the [previous chapter](../01_IPFS_Firmament.md) we discussed how we can use IPFS's _directted acyclic graph_ (DAG) functionality to create linked data structures. OrbitDB utilizes this by building logs wherein each entry is linked to the previous one. To share state reliably between users, and to prevent the system from being confused as to how to parse these logs deterministically, a specific type of data structure called a _Conflict-Free Replicated Data Type_, or CRDT is used.
 
-A CRDT is a type of log that solves the problem of locally storing and ultimately merging distributed data sets to other distributed data sets<sup>1</sup>. CRDTs allows users to perform operations on local databases with the intent of merging or joining those data with the data stored on the devices of other peers in the network.
+A CRDT is a type of log that solves the problem of locally storing and ultimately merging distributed data sets to other distributed data sets<sup>1</sup>. CRDTs allow users to perform operations on local databases with the intent of merging or joining that data with the data stored on the devices of other peers in the network.
 
 The [`ipfs-log`](https://github.com/orbitdb/ipfs-log) package specifically uses a G-Set CRDT, which in practice means append-only with no deletion.
 
@@ -152,9 +152,9 @@ What follows is sort of a "minimum viable example" of such a log. Below the exam
 * **hash**: the hash of the entry, in cidv1 format (this will switch to base32 soon)
 * **id**: the user-supplied ID of the log
 * **payload**: the actual content of the log entry, can be any JSON-serializable object
-* **next**: an array of hashes that point to previous log entries from the _head_ of the log.
+* **next**: an array of hashes that point to previous log entries from the _head_ of the log
 * **v**: the version of the log schema. Typically for internal tracking only and migration purposes
-* **clock** the lamport clock values. explained above
+* **clock** the lamport clock values, explained previously in this chapter
 * **key** the orbitdb-generated public key for verification purposes
 * **identity** the identity object. defaults to the standard OrbitDB identity but can be customized
 * **sig** the signaure of the entry, signed by the orbitdb private key, for verification purposes
