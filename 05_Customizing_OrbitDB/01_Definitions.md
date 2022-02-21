@@ -48,7 +48,7 @@ that you have the right to do so.
 
 It is setup when you create a database
 and stored in the Manifest of the database.
-(The multihash `zdpuAmQhKvDytoSn6NapRYZYTAWgqQpbJBfPLmUiSRBYgN7ah`in is refering to the
+(The multihash `zdpuAmQhKvDytoSn6NapRYZYTAWgqQpbJBfPLmUiSRBYgN7ah` is refering to the
 Manifest file.`/orbitdb/zdpuAmQhKvDytoSn6NapRYZYTAWgqQpbJBfPLmUiSRBYgN7ah/example`)
 
 Anyone, who supports this type of access

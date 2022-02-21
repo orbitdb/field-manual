@@ -23,7 +23,7 @@ The simplest data structure that could fulfill these
 requirements would be a collection of trees.
 Each tree's root would be the Notes pieces and the
 children of that root would be the comments,
-the comments comments and so on and so on.
+the comments' comments and so on and so on.
 
 ### Generating the Trees from the `ipfs-log`
 
@@ -60,7 +60,7 @@ Let's start by adding a new file to your project folder (if you haven't yet crea
 ### Isomorphic Bookends.
 
 You know the drill, before starting with the actual implementation
-of the Index, we have to define the bookends, that make our code
+of the Index, we have to define the bookends that make our code
 work in the browser and in NodeJS:
 
 ```js
@@ -74,7 +74,7 @@ try {
 ```
 
 Not that complicated, really.
-Because an Index does not actually depend
+Because an Index does not actually depend on 
 libraries from OrbitDB.
 
 It is using duck typing, instead of inheritance.
