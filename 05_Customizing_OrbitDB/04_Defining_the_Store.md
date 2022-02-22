@@ -36,7 +36,7 @@ and call it `NotesStore.js`.
 
 #### Isomorphic Bookends
 
-For the third time in this Manual, 
+For the third time in this Manual,
 let's define an isomorphic bookend:
 
 ```js

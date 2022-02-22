@@ -74,7 +74,7 @@ try {
 ```
 
 Not that complicated, really.
-Because an Index does not actually depend on 
+Because an Index does not actually depend on
 libraries from OrbitDB.
 
 It is using duck typing, instead of inheritance.
