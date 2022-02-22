@@ -7,7 +7,7 @@ could define our
 
 I settled us on a
 Tree data structure,
-where each notes piece 
+where each notes piece
 is a root and the comments
 would be children of that
 root.
