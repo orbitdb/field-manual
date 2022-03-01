@@ -238,6 +238,17 @@ const content = await NPP.node.dag.get(IPFS.asCID(cid))
 console.log(content.value.payload)
 ```
 
+In browser.
+
+```JavaScript
+const cid = await NPP.updatePieceByHash("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ", "Harpsichord")
+// do stuff with the cid as above
+
+const cid = await NPP.deletePieceByHash("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ")
+const content = await NPP.node.dag.get(new NPP.Ipfs.CID(cid))
+console.log(content.value.payload)
+```
+
 While the opcode for PUT will be the same, the opcode for `deletePieceByHash` is not:
 
 ```json
