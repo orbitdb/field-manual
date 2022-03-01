@@ -50,6 +50,14 @@ const content = await NPP.node.dag.get(cid)
 console.log(content.value.payload.value)
 ```
 
+In browser:
+
+```JavaScript
+const cid = await NPP.addNewPiece('QmdzDacgJ9EQF9Z8G3L1fzFwiEu255Nm5WiCey9ntrDPSL', 'Piano')
+const content = await NPP.node.dag.get(new NPP.Ipfs.CID(cid))
+console.log(content.value.payload.value)
+```
+
 Which will then output something like:
 
 ```json
