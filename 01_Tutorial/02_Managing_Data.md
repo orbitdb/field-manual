@@ -182,7 +182,7 @@ In your application code, you can use these functions like so:
 pieces = NPP.getAllPieces()
 pieces.forEach((piece) => { /* do something */ })
 
-piece = NPP.getPieceByHash('QmNR2n4zywCV61MeMLB6JwPueAPqtheqpfiA4fLPMxouEmQ')
+piece = NPP.getPieceByHash('QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ')
 console.log(piece)
 ```
 
