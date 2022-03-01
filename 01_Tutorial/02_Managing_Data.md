@@ -68,12 +68,21 @@ Add a function called `addNewPiece` function now, with some commented out functi
 
 We have uploaded and pinned a few piano scores to IPFS, and will provide the hashes. You can add these hashes to your database by fleshing out and using the `addNewPiece` function.
 
-In your application code, Node.js or browser, you can use this function like so, utilizing the default value for the `instrument` argument.
+In your application code, Node.js, you can use this function like so, utilizing the default value for the `instrument` argument.
 
 ```JavaScript
 const IPFS = require('ipfs')
 const cid = await NPP.addNewPiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ")
 cid = new IPFS.CID(cid)
+const content = await NPP.node.dag.get(cid)
+console.log(content.value.payload)
+```
+
+In browser, you can use this function like so.
+
+```JavaScript
+let cid = await NPP.addNewPiece("QmNR2n4zywCV61MeMLB6JwPueAPqheqpfiA4fLPMxouEmQ")
+cid = new NPP.Ipfs.CID(cid)
 const content = await NPP.node.dag.get(cid)
 console.log(content.value.payload)
 ```
