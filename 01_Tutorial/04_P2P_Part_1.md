@@ -150,8 +150,8 @@ Create the `getIpfsPeers` function inside of the `NewPiecePlease` class.
 
 ```diff
 + async getIpfsPeers() {
-+   const peers = await this.node.swarm.peers()
-+   return peers
++   const peerIds = (await this.node.swarm.peers()).map(peer => peer.peer)
++   return peerIds
 + }
 ```
 
