@@ -1,3 +1,5 @@
+### Notice: The field manual is outdated. Code examples may show use of deprecated api's and result in errors. Consult the current documentation of the packages being used.
+
 # The OrbitDB Field Manual
 
 > An end-to-end tutorial, an in-depth look at OrbitDB's architecture, and even some philosophical musings about decentralization and the distributed industry. From the creators of OrbitDB.
