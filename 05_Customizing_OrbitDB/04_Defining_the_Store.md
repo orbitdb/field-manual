@@ -49,7 +49,7 @@ try {
   const OrbitDB = require("orbit-db")
   const NotesIndex = require("./NotesIndex")
 
-  module.exports = notesStore(IPFS, OrbitDB)
+  module.exports = notesStore(IPFS, OrbitDB, NotesIndex)
 } catch (e) {
   console.log(e)
   window.NoteStore = notesStore(window.Ipfs, window.OrbitDB, window.NotesIndex)
